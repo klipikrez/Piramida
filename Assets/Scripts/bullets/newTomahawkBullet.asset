@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9f99aa86a5c5a6448f4559245dc5c86, type: 3}
+  m_Name: newTomahawkBullet
+  m_EditorClassIdentifier: 
+  bulletLife: 1.9876544e+27
+  hitRadious: {x: 0.055, y: 0.4525, z: 0.185}
+  damage: 25
+  speed: 20
+  mesh: {fileID: 4825836531149651790, guid: 01e15b7bc27f48244bd3df6f0a13030b, type: 3}
+  meshScale: 5
+  materials:
+  - {fileID: 2100000, guid: 8f854eb84212e0d46acc5e81d2fdc2f1, type: 2}
+  - {fileID: 2100000, guid: 564e342a8bd11af4591ab1005f909f77, type: 2}
+  rotateSpeed: 1825
+  HitTomahawkPrefab: {fileID: 1711241335650796605, guid: 56b910a971630eb42843f97fbbe904e7,
+    type: 3}
+  returnToSender: 0
+  startingVelocityAdd: {x: 0, y: 15, z: 0}
+  notHitEnemy: 1

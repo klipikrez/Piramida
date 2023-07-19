@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class Bullet : MonoBehaviour
@@ -21,6 +22,7 @@ public class Bullet : MonoBehaviour
     }
     void Update()
     {
+
         bulletBase.Move(this);
         bulletBase.DetectHit(this);
         timeAlive += Time.deltaTime;
@@ -28,6 +30,8 @@ public class Bullet : MonoBehaviour
             BulletManager.Instance.ReurnBulletToPool(this);
         previousLocation = transform.position;
     }
+
+
 
     /* public void Initiate()
      {

@@ -14,7 +14,7 @@ TagManager:
   - Hitbox
   - EnemyHitbox
   - Bullet
-  - 
+  - EnemyCollider
   - 
   - 
   - 

@@ -45,7 +45,7 @@ public class Side : BaseEnemy
     }
     public override void Damage(float damage)
     {
-        Debug.Log(currentHealth);
+        //        Debug.Log(currentHealth);
 
         if (currentHealth - damage > 0)
         {

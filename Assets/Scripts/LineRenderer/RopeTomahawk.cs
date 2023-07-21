@@ -40,12 +40,10 @@ public class RopeTomahawk : MonoBehaviour
         {
             if (hit)
             {
-                //ClearPath();
                 HitWithPath();
             }
             else
             {
-
                 SpinWithPath();
                 airTime += Time.deltaTime;
             }
@@ -53,29 +51,10 @@ public class RopeTomahawk : MonoBehaviour
         else
         {
             HitWithPath();
+            PullPlayerTowardsHitPoint();
         }
     }
-    public void Spin()
-    {
-        if (T1 != null && T2 != null)
-        {
-            lineRenderer.SetPosition(0, T1.position + T1Offset);
-            lineRenderer.SetPosition(lineRenderer.positionCount - 1, T2.position);
-            for (int i = 1; i < lineRenderer.positionCount - 1; i++)
-            {
-                Vector3 dir = (T2.position - T1.position + T1Offset).normalized;
-                Vector3 offset = Quaternion.LookRotation(dir) * new Vector3(Mathf.Sin((i + Time.timeSinceLevelLoad * spinSpeed) / 4f), Mathf.Cos((i + Time.timeSinceLevelLoad * spinSpeed) / 4f), 0);
 
-                lineRenderer.SetPosition(i,
-                PointAtRatio(T1.position + T1Offset, T2.position, i, lineRenderer.positionCount - (i)) + (offset/*new Vector3(
-                    Mathf.Sin((i + Time.timeSinceLevelLoad * spinSpeed) / 4f),
-                     Mathf.Cos((i + Time.timeSinceLevelLoad * spinSpeed) / 4f),
-                      0)*/
-                      * Mathf.Min(((lineRenderer.positionCount - 1) / 2f - Mathf.Abs(i - (lineRenderer.positionCount - 1) / 2f)) / 19f, 1)));
-                // Mathf.Min(Mathf.Max((((lineRenderer.positionCount - 1)/2 - Mathf.Abs(i-(lineRenderer.positionCount - 1)/2))-5),0),1)
-            }
-        }
-    }
     public void SpinWithPath()
     {
         if (T1 != null && T2 != null)
@@ -94,24 +73,25 @@ public class RopeTomahawk : MonoBehaviour
             {
                 for (int i = 0; i < path.Count; i++)
                 {
-                    /*ovo ti je za distancu izmedju tacaka*/
-                    float prviLerpTempVerdnost = (/*(1f / (i + 1f)) **/ (1f / (i + 1f)) / 7f) * (Mathf.Min((Mathf.Max(Vector3.Distance(path[i], i == 0 ? T1.position : path[i - 1]) - pathDistances[i], 0)) / (pathDistances[i] / 2f), 1));
+                    //prvo mu lepo setuj pozicije na LineRenderer pa ih onda razdrkaj ko covek
                     lineRenderer.SetPosition(i + 1, path[i]);
-                    path[i] =
-                    Vector3.Lerp(
-                         Vector3.Lerp(path[i], T1.position, 1 - Mathf.Pow(1 - (prviLerpTempVerdnost), Time.deltaTime * 60))
-                         , PointAtRatio(T1.position + T1Offset, T2.position, i + 1, lineRenderer.positionCount - (i + 1)),
-                          1 - Mathf.Pow(1 - 0.01f, Time.deltaTime * 60))
 
+                    //ovde gi grkas
+                    //ovo ti je za distancu izmedju tacaka, da se medjusobno vucu, ako se odalje previse. to ti je onaj efekat kao da te uze prati || imas ovu kormulu na desmos-u ako ne razumes klipice
+                    float LerpPointCohesion = (/*(1f / (i + 1f)) **/ (1f / (i + 1f)) / 7f) * (Mathf.Min((Mathf.Max(Vector3.Distance(path[i], i == 0 ? T1.position : path[i - 1]) - pathDistances[i], 0)) / (pathDistances[i] / 2f), 1));
 
-                    ;
-                    //ebug.Log(i + "   ---   " + (Mathf.Min((Mathf.Max(Vector3.Distance(path[i], i == 0 ? T1.position : path[i - 1]) - pathDistances[i], 0)) / (pathDistances[i] / 2f), 1)));
-
+                    Vector3 tempPathPoint = Vector3.Lerp(path[i], T1.position, DeltaTimeLerp(LerpPointCohesion));
+                    //ovo sluzi da ispravlja tacke. da izgleda kao da uze pada na dol, i da na njega deluje gravitacija
+                    tempPathPoint = Vector3.Lerp(tempPathPoint, PointAtRatio(T1.position + T1Offset, T2.position, i + 1, lineRenderer.positionCount - (i + 1)), DeltaTimeLerp(0.01f));
+                    path[i] = tempPathPoint;
                 }
             }
+            //ovo postavi pozicije prvoj i poslednjoj tacki u LineRender
             lineRenderer.SetPosition(0, T1.position + T1Offset);
             lineRenderer.SetPosition(lineRenderer.positionCount - 1, T2.position);
 
+            //prodjemo jos jednom kroz sve tacke kako bi dodali onaj efekat kao da uze viori i okrece u vazduhu
+            //imas funkcije u desmos ako nes ne razumes klipice
             for (int i = 1; i < lineRenderer.positionCount - 1; i++)
             {
                 Vector3 dir = (T2.position - T1.position + T1Offset).normalized;
@@ -123,6 +103,11 @@ public class RopeTomahawk : MonoBehaviour
 
             }
         }
+    }
+
+    public void PullPlayerTowardsHitPoint()
+    {
+        //"GrappleTowards"
     }
     public void HitWithPath()
     {
@@ -143,28 +128,103 @@ public class RopeTomahawk : MonoBehaviour
                     Vector3 dir = (T2.position - T1.position + T1Offset).normalized;
                     Vector3 offset = Quaternion.LookRotation(dir) * new Vector3(Mathf.Sin((i + Time.timeSinceLevelLoad * spinSpeed) / 4f), Mathf.Cos((i + Time.timeSinceLevelLoad * spinSpeed) / 4f), 0);
 
+                    //ispravlja sve tacke u pravu liniju
+                    path[i] = Vector3.Lerp(path[i], PointAtRatio(T1.position + T1Offset, T2.position, i + 1, lineRenderer.positionCount - (i + 1)), DeltaTimeLerp(Mathf.Min(hitTime * 3, 1)));
 
-                    path[i] = Vector3.Lerp(path[i], PointAtRatio(T1.position + T1Offset, T2.position, i + 1, lineRenderer.positionCount - (i + 1)), 1 - Mathf.Pow(1 - Mathf.Min(hitTime * 3, 1), Time.deltaTime * 60));
-
-                    /*ovo ti je za distancu izmedju tacaka*/
+                    //kako se uze trese kad pogodi nesto
                     lineRenderer.SetPosition(i + 1, path[i] + (offset
-                                                             * Mathf.Min(((lineRenderer.positionCount - 1) / 2f - Mathf.Abs(i - (lineRenderer.positionCount - 1) / 2f)) / 19f, 1)
+                                                             * Mathf.Min(((lineRenderer.positionCount - 1) / 2f - Mathf.Abs(i - (lineRenderer.positionCount - 1) / 2f)) / 19f, 1)//imas u desmos pa glidi tamo
                                                              * Mathf.Cos(hitTime * 55/*interval oscilacije*/)
-                                                             * kurva.Evaluate(hitTime)
+                                                             * kurva.Evaluate(hitTime)//kurva
                                                              * multiplyShakeWhenhit)
-                                                             * Mathf.Clamp01(1.5f - hitTime));
-
-                    //ebug.Log(i + "   ---   " + (Mathf.Min((Mathf.Max(Vector3.Distance(path[i], i == 0 ? T1.position : path[i - 1]) - pathDistances[i], 0)) / (pathDistances[i] / 2f), 1)));
-
+                                                             * Mathf.Clamp01(1.5f - hitTime));//posle 1.5s nema nis da se pomera
                 }
             }
+            //ovo postavi pozicije prvoj i poslednjoj tacki u LineRender
             lineRenderer.SetPosition(0, T1.position + T1Offset);
             lineRenderer.SetPosition(lineRenderer.positionCount - 1, T2.position);
             hitTime += Time.deltaTime;
         }
     }
 
-    public void Hit()
+    public void AddPathLink(Vector3 point)
+    {
+        path.Add(point);
+        if (path.Count != 1)
+        {
+            pathDistances.Add(Vector3.Distance(path[path.Count - 2], path[path.Count - 1]));
+        }
+        else
+        {
+            pathDistances.Add(Vector3.Distance(path[path.Count - 1], T1.transform.position + new Vector3(0, 1f, 0)));
+        }
+    }
+
+    public void RemovePathLink()
+    {
+
+    }
+
+    public void ClearPath()
+    {
+        path.Clear();
+        pathDistances.Clear();
+    }
+
+    public Vector3 PointAtRatio(Vector3 p1, Vector3 p2, float r1, float r2)
+    {//ovo, ovo, ovo ti sluzi da rasporedi tacku izmedju de tacke u odredjenor razmeri r1:r2
+        return new Vector3(
+        (r1 * p2.x + r2 * p1.x) / (r1 + r2),
+        (r1 * p2.y + r2 * p1.y) / (r1 + r2),
+        (r1 * p2.z + r2 * p1.z) / (r1 + r2));
+
+    }
+
+    public float DeltaTimeLerp(float value)
+    {
+        //ovo ti radi stvar, tako da lerp zavisi od vremena, a ne da vraca samo fiksnu vrednost svakog frejma
+        return 1 - Mathf.Pow(1 - value, Time.deltaTime * 60);
+    }
+
+    void OnDrawGizmosSelected()
+    {
+        if (T1 != null && T2 != null)
+        {
+            Gizmos.color = Color.yellow;
+            if (path.Count != 0)
+            {
+                for (int i = 0; i < path.Count; i++)
+                {
+                    Gizmos.DrawSphere(path[i], 1);
+                }
+            }
+        }
+        // Draw a yellow sphere at the transform's position
+    }
+
+    public void Spin()//OLD
+    {
+        if (T1 != null && T2 != null)
+        {
+            lineRenderer.SetPosition(0, T1.position + T1Offset);
+            lineRenderer.SetPosition(lineRenderer.positionCount - 1, T2.position);
+            for (int i = 1; i < lineRenderer.positionCount - 1; i++)
+            {
+                Vector3 dir = (T2.position - T1.position + T1Offset).normalized;
+                Vector3 offset = Quaternion.LookRotation(dir) * new Vector3(Mathf.Sin((i + Time.timeSinceLevelLoad * spinSpeed) / 4f), Mathf.Cos((i + Time.timeSinceLevelLoad * spinSpeed) / 4f), 0);
+
+                lineRenderer.SetPosition(i,
+                PointAtRatio(T1.position + T1Offset, T2.position, i, lineRenderer.positionCount - (i)) + (offset/*new Vector3(
+                    Mathf.Sin((i + Time.timeSinceLevelLoad * spinSpeed) / 4f),
+                     Mathf.Cos((i + Time.timeSinceLevelLoad * spinSpeed) / 4f),
+                      0)*/
+                      * Mathf.Min(((lineRenderer.positionCount - 1) / 2f - Mathf.Abs(i - (lineRenderer.positionCount - 1) / 2f)) / 19f, 1)));
+                // Mathf.Min(Mathf.Max((((lineRenderer.positionCount - 1)/2 - Mathf.Abs(i-(lineRenderer.positionCount - 1)/2))-5),0),1)
+            }
+        }
+    }
+
+    public void Hit()//OLD
     {
         if (T1 != null && T2 != null)
         {
@@ -187,74 +247,5 @@ public class RopeTomahawk : MonoBehaviour
             }
             hitTime += Time.deltaTime;
         }
-    }
-
-    public void AddPathLink(Vector3 point)
-    {
-        path.Add(point);
-        if (path.Count != 1)
-        {
-            pathDistances.Add(Vector3.Distance(path[path.Count - 2], path[path.Count - 1]));
-        }
-        else
-        {
-            pathDistances.Add(Vector3.Distance(path[path.Count - 1], T1.transform.position + new Vector3(0, 1f, 0)));
-            //athDistances.Add(0.2f);
-        }
-    }
-    public void RemovePathLink()
-    {
-
-    }
-    public void ClearPath()
-    {
-        path.Clear();
-        pathDistances.Clear();
-    }
-    public Vector3 PointAtRatio(Vector3 p1, Vector3 p2, float r1, float r2)
-    {
-        //if (r1 != r2)
-        //{
-        return new Vector3(
-        (r1 * p2.x + r2 * p1.x) / (r1 + r2),
-        (r1 * p2.y + r2 * p1.y) / (r1 + r2),
-        (r1 * p2.z + r2 * p1.z) / (r1 + r2));
-        //}
-        //else
-        //{
-        //    return new Vector3(
-        //        (p1.x + p2.x) / 2,
-        //       (p1.y + p2.y) / 2,
-        //        (p1.z + p2.z) / 2
-        //88    );
-        // }
-    }
-
-    void OnDrawGizmosSelected()
-    {
-
-
-        if (T1 != null && T2 != null)
-        {
-
-
-
-            Gizmos.color = Color.yellow;
-
-
-            if (path.Count != 0)
-            {
-                for (int i = 0; i < path.Count; i++)
-                {
-
-                    Gizmos.DrawSphere(path[i], 1);
-
-                }
-            }
-
-        }
-
-        // Draw a yellow sphere at the transform's position
-
     }
 }

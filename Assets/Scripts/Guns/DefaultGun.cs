@@ -23,7 +23,6 @@ public class DefaultGun : BaseGun
         bullet.timeAlive = 0f;
         bullet.gameObject.SetActive(true);
 
-        //bullet.Initiate();
     }
 
 }

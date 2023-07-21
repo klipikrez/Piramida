@@ -23,7 +23,6 @@ public class Bullet : MonoBehaviour
     }
     void Update()
     {
-
         bulletBase.Move(this);
         bulletBase.DetectHit(this);
         timeAlive += Time.deltaTime;
@@ -31,22 +30,4 @@ public class Bullet : MonoBehaviour
             BulletManager.Instance.ReurnBulletToPool(this);
         previousLocation = transform.position;
     }
-
-
-
-    /* public void Initiate()
-     {
-         bulletLifeCorutine = StartCoroutine(die());
-     }
-
-     IEnumerator die()
-     {
-
-
-         yield return new WaitForSeconds(bulletBase.bulletLife);
-         if (this.isActiveAndEnabled)
-
-
-
-     }*/
 }

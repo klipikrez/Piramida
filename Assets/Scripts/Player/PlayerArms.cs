@@ -11,7 +11,7 @@ public class PlayerArms : MonoBehaviour
 
     public List<BaseGun> guns;
     public int selectedGun = 0;
-    // [System.NonSerialized]
+    [System.NonSerialized]
     public bool reloading = false;
     [System.NonSerialized]
     public Camera cam;
@@ -19,12 +19,11 @@ public class PlayerArms : MonoBehaviour
     public Coroutine fireCorutine;
     [System.NonSerialized]
     public Coroutine reloadCorutine;
-    //[System.NonSerialized]
+    [System.NonSerialized]
     public bool shooting = false;
     public float[] ammoPerArm;
     public float reloadTimer;
 
-    // Start is called before the first frame update
     void Start()
     {
         if (cam == null)
@@ -49,17 +48,14 @@ public class PlayerArms : MonoBehaviour
         input.Player.Reload.performed += Reload;
 
     }
-    private void Update()
-    {
-        Debug.Log(fireCorutine + " -- " + reloadCorutine);
-    }
+
     private void Reload(InputAction.CallbackContext context)
     {
         if (ammoPerArm[selectedGun] != guns[selectedGun].maxAmmo)
         {
             reloading = true;
             guns[selectedGun].Reload(this);
-            if (fireCorutine != null /*&& reloading*/)
+            if (fireCorutine != null)
                 StopCoroutine(fireCorutine);
 
 
@@ -71,7 +67,6 @@ public class PlayerArms : MonoBehaviour
     private void StopShoot(InputAction.CallbackContext context)
     {
         shooting = false;
-        //StopCoroutine(fireCorutine);
     }
 
     private void Shoot(InputAction.CallbackContext context)
@@ -79,7 +74,6 @@ public class PlayerArms : MonoBehaviour
         shooting = true;
         if (!reloading && ammoPerArm[selectedGun] != 0)
         {
-
             fireCorutine = StartCoroutine(Fire_c());
         }
     }
@@ -97,18 +91,9 @@ public class PlayerArms : MonoBehaviour
     {
         while (shooting && !reloading && ammoPerArm[selectedGun] != 0)
         {
-
             guns[selectedGun].Shoot(this);
             yield return new WaitForSeconds(1 / guns[selectedGun].BPS);
-
         }
         fireCorutine = null;
-        //fireCorutine = null;
     }
-
-    public void EndFire()
-    {
-
-    }
-
 }

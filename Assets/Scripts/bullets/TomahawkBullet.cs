@@ -174,12 +174,12 @@ public class TomahawkBullet : BulletBase
             bullet.transform.LookAt(bullet.employer.transform.position);
 
             bullet.velocity += (bullet.employer.transform.position - bullet.transform.position).normalized * bullet.employer.guns[bullet.employer.selectedGun].reloadTime * Time.deltaTime;
-            if (Vector3.Distance(bullet.transform.position, bullet.employer.transform.position) < Vector3.Distance(bullet.transform.position + bullet.velocity * Time.deltaTime, bullet.employer.transform.position))
-            {
-                bullet.velocity = Quaternion.AngleAxis(0, bullet.transform.right) * (bullet.employer.transform.position - bullet.transform.position).normalized * bullet.velocity.magnitude;
+            //if (Vector3.Distance(bullet.transform.position, bullet.employer.transform.position) < Vector3.Distance(bullet.transform.position + bullet.velocity * Time.deltaTime, bullet.employer.transform.position))
+            //{
+            bullet.velocity = Quaternion.AngleAxis(0, bullet.transform.right) * (bullet.employer.transform.position - bullet.transform.position).normalized * bullet.velocity.magnitude;
 
 
-            }
+            //}
             bullet.transform.position += bullet.velocity * Time.deltaTime; //Vector3.Lerp(bullet.transform.position, bullet.employer.transform.position, 1 - Mathf.Pow(1 - (Mathf.Min(bullet.employer.reloadTimer / bullet.employer.guns[bullet.employer.selectedGun].reloadTime, 1f)), Time.deltaTime * 60));
 
             //bullet.velocity += new Vector3(0, -10f, 0) * Time.deltaTime;

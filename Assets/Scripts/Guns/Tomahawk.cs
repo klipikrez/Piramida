@@ -16,8 +16,6 @@ public class Tomahawk : BaseGun
                 Bullet bullet = BulletManager.Instance.Get();
 
                 bullet.bulletBase = bulletBase;
-                //bullet.velocity = Vector3.zero;
-                //bullet.gameObject.transform.rotation = player.cam.transform.rotation;
                 bullet.gameObject.transform.position = RopeTomahawk.Instance.T2.position;
                 bullet.speed = bulletBase.speed;
                 bullet.timeAlive = 0f;
@@ -26,7 +24,6 @@ public class Tomahawk : BaseGun
                 Material[] materTiJebem = { bulletBase.materials[0], bulletBase.materials[1] };
                 bullet.meshRenderer.materials = materTiJebem;
                 bullet.employer = player;
-                //GameObject destroy = RopeTomahawk.Instance.T2.gameObject;
                 Destroy(RopeTomahawk.Instance.T2.gameObject);
                 bullet.gameObject.SetActive(true);
                 bullet.Initiate();
@@ -48,7 +45,6 @@ public class Tomahawk : BaseGun
             Bullet bullet = BulletManager.Instance.Get();
 
             bullet.bulletBase = bulletBase;
-            //bullet.velocity = Vector3.zero;
             bullet.gameObject.transform.rotation = player.cam.transform.rotation;
             bullet.gameObject.transform.position = player.cam.transform.position + bullet.gameObject.transform.TransformDirection(spawnLocation);
             bullet.speed = bulletBase.speed;

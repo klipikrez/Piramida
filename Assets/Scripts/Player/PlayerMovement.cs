@@ -16,12 +16,12 @@ public class PlayerMovement : MonoBehaviour
     public Camera PlayerCamera;
     public float mouseSensetivity = 1f;
     public float moveSpeed = 1f;
-    //[System.NonSerialized]
+    [System.NonSerialized]
     public bool grounded = true;
-    //  [System.NonSerialized]
+    [System.NonSerialized]
     public bool jump = false;
     [System.NonSerialized]
-    public bool initiatedJumpByPlayer = false;
+    public bool initiatedJumpByPlayer = false;//ovo ti je kad skocis i pustis dugme za skakanje, da program zna da josuvek nisi zavrsio skok
     public float jumpForce = 1f;
     public float jumpPush = 20f;
     public float jumpSpeedBoostMultiply = 2f;
@@ -35,7 +35,6 @@ public class PlayerMovement : MonoBehaviour
     public PhysicMaterial footFo;
     public LayerMask excludePlayer;
 
-    // Start is called before the first frame update
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
@@ -61,38 +60,31 @@ public class PlayerMovement : MonoBehaviour
 
     private void StopMove(InputAction.CallbackContext context)
     {
-
+        //ovo ti je kad ides ides ides na uzbrdo, i ond stanes odjednom, da ne poskocis malo na gore zbog ubrzanja, ovo ti podeli ubrzanje da stanes odma.
         if (grounded && body.velocity.y > 0)
         {
             RaycastHit hit;
             if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.down), out hit, 1f))
             {
-                // move = new Vector3(hit.normal.x * move.x, hit.normal.y * move.y, hit.normal.z * move.z);
-
-
-                body.velocity = body.velocity * ((1 - (Vector3.Angle(hit.normal, Vector3.down) - 90) / 90))  /*new Vector3(0, 0, 0)*/;
+                body.velocity = body.velocity * ((1 - (Vector3.Angle(hit.normal, Vector3.down) - 90) / 90));
+                Debug.Log(((1 - (Vector3.Angle(hit.normal, Vector3.down) - 90) / 90)));
             }
-
-
         }
-
     }
 
     private void JumpStart(InputAction.CallbackContext context)
     {
-
-        //        Debug.Log("jump");
+        //ako bi tvoji drugari skocili u dunav, dal bi i ti?
         jump = true;
         if (grounded)
         {
-
             body.velocity = new Vector3(body.velocity.x * jumpSpeedBoostMultiply, body.velocity.y, body.velocity.z * jumpSpeedBoostMultiply);
         }
     }
 
     private void JumpEnd(InputAction.CallbackContext context)
     {
-        //Debug.Log("ENDjump");
+        //a sto si skocio u dunav breee :(
         jump = false;
         if (body.velocity.y > 0)
         {
@@ -100,19 +92,12 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-
-    //int frame = 0;
-    // Update is called once per frame
     void Update()
     {
-        //Debug.Log(frame++ + ":  velovicty:   " + velocity.y);
         Vector3 move = new Vector3(input.Player.Move.ReadValue<Vector2>().x, 0, input.Player.Move.ReadValue<Vector2>().y);
         Vector2 look = input.Player.Look.ReadValue<Vector2>();
 
-
-        //grounded = Physics.Raycast(new Vector3(transform.position.x, transform.position.y + 0.05f, transform.position.z), Vector3.down, 0.1f);
         grounded = Physics.CheckSphere(transform.position + new Vector3(0, 0.3f - 0.02f, 0), 0.3f, ~excludePlayer);
-
 
         if (jump)
         {
@@ -128,26 +113,24 @@ public class PlayerMovement : MonoBehaviour
                 }
                 if (velocity.y > 0)
                 {
-                    //Debug.Log("gor: " + transform.position);
                     body.velocity = new Vector3(body.velocity.x, velocity.y + jumpForce * jumpMultiplyer, body.velocity.z);
                 }
                 else
                 {
-                    //Debug.Log("dol: " + transform.position);
                     body.velocity = new Vector3(body.velocity.x, jumpForce * jumpMultiplyer, body.velocity.z);
 
                 }
 
                 initiatedJumpByPlayer = true;
                 grounded = false;
-                //Debug.Log("VELOCITY:     " + velocity.y);
+
                 transform.position += new Vector3(0, 0.14f, 0);// nemam pojma zasto, al ako ovo maknes sve se pokvari....
             }
             else
             {
                 if (velocity.y > 0)
                 {
-                    /// body.AddForce(0, jumpPush, 0, ForceMode.Force);
+
                 }
                 else
                 {
@@ -159,42 +142,28 @@ public class PlayerMovement : MonoBehaviour
         {
             if (grounded)
             {
-                //body.add(new Vector3(0, strickToTheGroudForce, 0), ForceMode.Acceleration);
                 if (initiatedJumpByPlayer)
                 {
                     initiatedJumpByPlayer = false;
                 }
-                //body.velocity = new Vector3(body.velocity.x, jumpForce, body.velocity.z);
             }
             else
             {
-                //body.velocity = new Vector3(body.velocity.x, body.velocity.x / 1.5f, body.velocity.z);
-                //body.AddForce(new Vector3(0, -1, 0), ForceMode.VelocityChange);
+
             }
-            //verticalVelocity += gravity * Time.deltaTime;
-
         }
-        /*
-
-                if ((initiatedJumpByPlayer && grounded) && !jump)
-                {
-                    initiatedJumpByPlayer = false;
-                }*/
 
 
-        //(new Vector3(body.velocity.x * body.drag, body.velocity.y, body.velocity.z * body.drag))
         if (move != Vector3.zero)
         {
+            // orijentise move vektor u pravcu ge gleda igrac
             move = Quaternion.Euler(0, PlayerCamera.transform.eulerAngles.y, 0) * new Vector3(move.x * moveSpeed * Time.deltaTime, 0, move.z * moveSpeed * Time.deltaTime);
 
+            //gleda koliki je ugao zemlje na kojoj stojis
             RaycastHit hit;
-            if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.down), out hit, 1f))
+            if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.down), out hit, 1f) && grounded)
             {
-                // move = new Vector3(hit.normal.x * move.x, hit.normal.y * move.y, hit.normal.z * move.z);
-
-
                 float dot = Vector3.Dot(move, hit.normal);
-                //Debug.Log(Vector3.Angle(hit.normal, Vector3.up));
                 float angle = (Vector3.Angle(hit.normal, Vector3.up));
 
                 if (dot > 0f)
@@ -202,28 +171,21 @@ public class PlayerMovement : MonoBehaviour
 
                     //add velocitty in direction of slope normal
                     move = (move - hit.normal * dot);
-
-
                 }
                 else
                 {
                     //if slope too steep, dont add velocity
                     move *= 1 - ((Mathf.Max(Mathf.Min(angle, maxWalkAngle), normalWalkAngle) - normalWalkAngle) / (maxWalkAngle - normalWalkAngle));
                 }
-
-
             }
-            //moveV = move;
-            body.velocity += move;
-            //moveV = move;
-            Vector3 tempVelocity = new Vector3(body.velocity.x, 0, body.velocity.z);
+
+            Vector3 tempVelocity = new Vector3(body.velocity.x + move.x, 0, body.velocity.z + move.z);
+
 
             if (grounded)
             {
-
                 if (tempVelocity.magnitude > maxSpeed)
                 {
-
                     body.velocity = (tempVelocity.normalized * maxSpeed) + new Vector3(0, body.velocity.y, 0);
                 }
             }
@@ -246,6 +208,7 @@ public class PlayerMovement : MonoBehaviour
                     }
                 }
             }
+            body.velocity += move;
         }
         else
         {
@@ -253,7 +216,6 @@ public class PlayerMovement : MonoBehaviour
         }
 
         look *= Time.deltaTime * mouseSensetivity;
-        //body.velocity = (new Vector3(velocity.x, /*verticalVelocity*/body.velocity.y, velocity.z));
 
         camRotationX -= look.y;
         camRotationX = Mathf.Clamp(camRotationX, -90f, 90f);
@@ -265,9 +227,7 @@ public class PlayerMovement : MonoBehaviour
 
 
         transform.Rotate(new Vector3(0, look.x, 0));
-        //PlayerCamera.gameObject.transform.Rotate(new Vector3(-look.y, 0, 0));
         velocity = body.velocity;
-        //moveM = body.velocity;
     }
     /* public Vector3 moveV = Vector3.zero;
      public Vector3 moveM = Vector3.zero;
@@ -296,40 +256,6 @@ public class PlayerMovement : MonoBehaviour
          Handles.ArrowHandleCap(0, position2, Quaternion.LookRotation(velocity2), arrowLength * 2, EventType.Repaint);
      }
  */
-    /* void OnCollisionStay(Collision collisionInfo)
-     {
-
-
-
-
-
-
-
-     }
-
-     void OnCollisionEnter(Collision col)
-     {
-         Debug.Log("==============");
-         // Debug-draw all contact points and normals
-         foreach (ContactPoint contact in col.contacts)
-         {
-
-             Debug.Log(contact.thisCollider.material);
-             Debug.Log(contact.otherCollider.material);
-
-             if (contact.thisCollider.material = footFo)
-             {
-                 grounded = true;
-             }
-         }
-         Debug.Log("==============");
-     }
-
-     void OnCollisionExit(Collision col)
-     {
-         grounded = false;
-     }*/
-
 
     void OnDrawGizmosSelected()
     {

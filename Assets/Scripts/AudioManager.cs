@@ -6,12 +6,10 @@ using UnityEngine.SceneManagement;
 
 public class AudioManager : MonoBehaviour
 {
-    // public AudioClip[] audioClips;
     [System.NonSerialized]
     public Dictionary<string, AudioClip> audioDictionary = new Dictionary<string, AudioClip>();
     public GameObject DDDSoundPrefab;
     public AudioMixerGroup DD;
-    // Start is called before the first frame update
     public static AudioManager Instance { get; private set; }
 
     private void Awake()
@@ -23,15 +21,11 @@ public class AudioManager : MonoBehaviour
         {
             audioDictionary.Add(clip.name, clip);
         }
-
     }
-    /* private void Start()
-     {
-         if (SceneManager.GetActiveScene().buildIndex == 0)
-         {
-             PlayAudioClip(6);
-         }
-     }*/
+    /********************************************************/
+    /*mozes da dodas da mozes da mu prosleds vise stringova,*/
+    /*i on da odaberte jedan random string iz datih ponuda  */
+    /********************************************************/
     public void PlayAudioClip(string audioClipName, float volume)
     {
 
@@ -45,27 +39,13 @@ public class AudioManager : MonoBehaviour
         StartCoroutine(PlayDDDSynamic(audioDictionary[audioClipName], follow, volume));
 
     }
+
     public void PlayAudioDDDClipStatic(string audioClipName, Vector3 position, float volume)
     {
 
         StartCoroutine(PlayDDDStatic(audioDictionary[audioClipName], position, volume));
 
     }
-    /*   public void PlaySendSound()
-       {
-           StartCoroutine(Play(send[Random.Range(0, send.Length - 1)]));
-       }*/
-    /*  public void PlayBattleSound(Vector3 position)
-      {
-          vfxManager.Instance.Play(position, 0);
-          StartCoroutine(PlayDDD(battle[Random.Range(0, battle.Length - 1)], position));
-
-      }
-  */
-    /* public void PlayTowerSound(Vector3 position)
-     {
-         StartCoroutine(PlayDDD(tower[Random.Range(0, tower.Length - 1)], position));
-     }*/
 
     IEnumerator PlayDDDStatic(AudioClip audio, Vector3 position, float volume)
     {
@@ -74,10 +54,11 @@ public class AudioManager : MonoBehaviour
         audioSource.clip = audio;
         audioSource.volume = volume;
         audioSource.Play();
-        yield return new WaitForSeconds(audio.length); //cekaj
+        yield return new WaitForSeconds(audio.length);
         audioSource.Stop();
         Destroy(gameobj);
     }
+
     IEnumerator PlayDDDSynamic(AudioClip audio, Transform follow, float volume)
     {
         GameObject gameobj = Instantiate(DDDSoundPrefab, follow.position, Quaternion.identity, gameObject.transform);
@@ -88,14 +69,13 @@ public class AudioManager : MonoBehaviour
         audioSource.Play();
         while (follow.gameObject != null && follow.gameObject.activeSelf)
         {
-            yield return new WaitForEndOfFrame(); //cekaj
-                                                  //            Debug.Log(audio.name);
+            yield return new WaitForEndOfFrame();
             gameobj.transform.position = follow.position;
-
         }
         audioSource.Stop();
         Destroy(gameobj);
     }
+
     IEnumerator Play(AudioClip audio, float volume)
     {
         AudioSource audioSource = gameObject.AddComponent<AudioSource>();
@@ -103,7 +83,7 @@ public class AudioManager : MonoBehaviour
         audioSource.clip = audio;
         audioSource.volume = volume;
         audioSource.Play();
-        yield return new WaitForSeconds(audio.length); //cekaj
+        yield return new WaitForSeconds(audio.length);
         audioSource.Stop();
         Destroy(audioSource);
     }

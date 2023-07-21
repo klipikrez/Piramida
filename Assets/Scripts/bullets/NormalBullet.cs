@@ -9,6 +9,7 @@ public class NormalBullet : BulletBase
 
     public override void DetectHit(Bullet bullet)
     {
+        //a nemoo mazdu :(
         if (Physics.CheckBox(bullet.transform.position, bullet.bulletBase.hitRadious, bullet.transform.rotation, ~LayerMask.GetMask("Hitbox", "Player", "Ford", "Mazda")))
         {
 

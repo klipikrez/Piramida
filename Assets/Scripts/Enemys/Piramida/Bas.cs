@@ -8,6 +8,4 @@ public class Bas : BaseEnemy
     {
         throw new System.NotImplementedException();
     }
-
-
 }

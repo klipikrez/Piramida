@@ -6,16 +6,12 @@ public class BulletManager : MonoBehaviour
 {
     public Bullet bulletPrefab;
     [SerializeField] private Queue<Bullet> bulletQueue = new Queue<Bullet>();
-
     public static BulletManager Instance { get; private set; }
-
     int number = 0;
-
     private void Awake()
     {
         Instance = this;
     }
-
 
     public Bullet Get()
     {
@@ -23,7 +19,6 @@ public class BulletManager : MonoBehaviour
         {
             AddBulletToQueue(1);
         }
-
         return bulletQueue.Dequeue();
     }
 

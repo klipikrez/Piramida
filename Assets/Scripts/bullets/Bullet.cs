@@ -15,9 +15,10 @@ public class Bullet : MonoBehaviour
     public PlayerArms employer;
     public Vector3 velocity = Vector3.zero;
     public Vector3 previousLocation = Vector3.zero;
+    public List<Collider> hitColliders; //ne smes da dvaput dilujes damage istom hitbox-u
     public void Initiate()
     {
-
+        hitColliders.Clear();
         bulletBase.Initiate(this);
     }
     void Update()

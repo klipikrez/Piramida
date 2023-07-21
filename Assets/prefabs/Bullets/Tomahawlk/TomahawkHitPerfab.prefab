@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1994592115085988719}
-  - component: {fileID: 1174859002527355281}
   m_Layer: 0
   m_Name: TomahawkHitPerfab
   m_TagString: Untagged
@@ -31,20 +30,8 @@ Transform:
   m_Children:
   - {fileID: 6555469093949368895}
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1174859002527355281
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1711241335650796605}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 87d08371117413c4aa27d33ff1f99e90, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &2928341003340076400
 GameObject:
   m_ObjectHideFlags: 0

@@ -25,5 +25,4 @@ MonoBehaviour:
   HitTomahawkPrefab: {fileID: 1711241335650796605, guid: 56b910a971630eb42843f97fbbe904e7,
     type: 3}
   returnToSender: 0
-  startingVelocityAdd: {x: 0, y: 15, z: 0}
-  notHitEnemy: 1
+  startingVelocityAdd: {x: 0, y: 7.5, z: 0}

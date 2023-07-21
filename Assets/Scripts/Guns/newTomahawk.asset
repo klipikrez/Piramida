@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: newTomahawk
   m_EditorClassIdentifier: 
   maxBullets: 1
-  reloadTime: 1
-  BPS: 1
+  BPS: 9999
   bulletLife: 5.2525253e+27
+  maxAmmo: 1
+  reloadTime: 100
   bulletBase: {fileID: 11400000, guid: b17ea777fd705f645b7f778495836bbd, type: 2}
   spawnLocation: {x: 0.5, y: 0, z: 0}

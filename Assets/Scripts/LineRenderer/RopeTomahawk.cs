@@ -14,9 +14,11 @@ public class RopeTomahawk : MonoBehaviour
     public static RopeTomahawk Instance;
     public float spinSpeed = 52f;
     public bool hit = false;
+    public bool reloading = false;
     public float hitTime = 0;
     public List<Vector3> path = new List<Vector3>();
     public List<float> pathDistances = new List<float>();
+    public float distance;
     public float pathInterval = 0.2f;
     public float pathT1Influence = 10f; //0 je min brzina priblizavanja ka igracu, zanci ne menja se
     public float airTime = 0;
@@ -34,17 +36,23 @@ public class RopeTomahawk : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-        if (hit)
+        if (!reloading)
         {
-            //ClearPath();
-            HitWithPath();
+            if (hit)
+            {
+                //ClearPath();
+                HitWithPath();
+            }
+            else
+            {
+
+                SpinWithPath();
+                airTime += Time.deltaTime;
+            }
         }
         else
         {
-
-            SpinWithPath();
-            airTime += Time.deltaTime;
+            HitWithPath();
         }
     }
     public void Spin()

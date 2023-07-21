@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: newDefaultGun
   m_EditorClassIdentifier: 
   maxBullets: 52
-  reloadTime: 0.5
   BPS: 10
   bulletLife: 5
+  maxAmmo: 52
+  reloadTime: 0.5
   bulletBase: {fileID: 11400000, guid: f2c6ddd4cfa6e164ea45a805e55cf440, type: 2}
   spawnLocation: {x: 1, y: 0, z: 0}

@@ -11,14 +11,18 @@ public class PlayerArms : MonoBehaviour
 
     public List<BaseGun> guns;
     public int selectedGun = 0;
-    [System.NonSerialized]
+    // [System.NonSerialized]
     public bool reloading = false;
     [System.NonSerialized]
     public Camera cam;
-
-    private Coroutine fireCorutine;
+    [System.NonSerialized]
+    public Coroutine fireCorutine;
+    [System.NonSerialized]
+    public Coroutine reloadCorutine;
     //[System.NonSerialized]
     public bool shooting = false;
+    public float[] ammoPerArm;
+    public float reloadTimer;
 
     // Start is called before the first frame update
     void Start()
@@ -33,18 +37,35 @@ public class PlayerArms : MonoBehaviour
             input.Player.Enable();
         }
 
+        ammoPerArm = new float[guns.Count];
+        for (int i = 0; i < ammoPerArm.Length; i++)
+        {
+            ammoPerArm[i] = guns[i].maxAmmo;
+        }
+
         input.Player.Fire.performed += Shoot;
         input.Player.Fire.canceled += StopShoot;
 
         input.Player.Reload.performed += Reload;
 
     }
-
+    private void Update()
+    {
+        Debug.Log(fireCorutine + " -- " + reloadCorutine);
+    }
     private void Reload(InputAction.CallbackContext context)
     {
-        reloading = true;
-        StopCoroutine(fireCorutine);
-        fireCorutine = StartCoroutine(Fire());
+        if (ammoPerArm[selectedGun] != guns[selectedGun].maxAmmo)
+        {
+            reloading = true;
+            guns[selectedGun].Reload(this);
+            if (fireCorutine != null /*&& reloading*/)
+                StopCoroutine(fireCorutine);
+
+
+            reloadCorutine = StartCoroutine(Reload_c());
+
+        }
     }
 
     private void StopShoot(InputAction.CallbackContext context)
@@ -56,16 +77,25 @@ public class PlayerArms : MonoBehaviour
     private void Shoot(InputAction.CallbackContext context)
     {
         shooting = true;
-        if (fireCorutine == null && !reloading)
+        if (!reloading && ammoPerArm[selectedGun] != 0)
         {
-            fireCorutine = StartCoroutine(Fire());
+
+            fireCorutine = StartCoroutine(Fire_c());
         }
     }
 
-
-    IEnumerator Fire()
+    IEnumerator Reload_c()
     {
-        while (shooting)
+        while (reloading)
+        {
+            reloadTimer += Time.deltaTime;
+            yield return new WaitForEndOfFrame();
+        }
+        reloadCorutine = null;
+    }
+    IEnumerator Fire_c()
+    {
+        while (shooting && !reloading && ammoPerArm[selectedGun] != 0)
         {
 
             guns[selectedGun].Shoot(this);
@@ -73,14 +103,7 @@ public class PlayerArms : MonoBehaviour
 
         }
         fireCorutine = null;
-    }
-
-    IEnumerator Reload()
-    {
-
-        yield return new WaitUntil(() => guns[selectedGun].lockAndLoaded);
-        reloading = false;
-
+        //fireCorutine = null;
     }
 
     public void EndFire()

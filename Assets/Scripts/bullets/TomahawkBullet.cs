@@ -83,7 +83,12 @@ public class TomahawkBullet : BulletBase
 
 
                             //                        Debug.Log(bullet.velocity);
+                            float angle = Vector3.Angle(bullet.velocity.normalized, hit.normal);
+                            //imas ovo u desmos, idi tqamo pa gledaj
+                            float loss = (1f - (angle - 90f) / 90f) / 2 + 0.5f;
+
                             bullet.velocity = Vector3.Reflect(bullet.velocity.normalized, hit.normal) * Vector3.Magnitude(bullet.velocity);
+                            bullet.velocity *= loss;
                             // Debug.DrawRay(hit.point, bullet.velocity.normalized, Color.red, 10f);
                             // Debug.Log(bullet.velocity);
                             //bullet.transform.LookAt(bullet.transform.position + bullet.velocity);
@@ -141,11 +146,11 @@ public class TomahawkBullet : BulletBase
             {
                 Debug.Log("NASO SAM TE PICKO");
                 bullet.employer.ammoPerArm[bullet.employer.selectedGun] = 1;
+                bullet.employer.movement.grapple = false;
                 bullet.employer.reloading = false;
                 //bullet.employer.EndAllCorutines();
                 RopeTomahawk.Instance.reloading = false;
-                RopeTomahawk.Instance.T1 = null;
-                RopeTomahawk.Instance.T2 = null;
+                RopeTomahawk.Instance.ReleaseT();
                 RopeTomahawk.Instance.lineRenderer.positionCount = 0;
                 AudioManager.Instance.PlayAudioClip("grabTomahawk", 0.5f);
                 BulletManager.Instance.ReurnBulletToPool(bullet);
@@ -193,9 +198,7 @@ public class TomahawkBullet : BulletBase
         RopeTomahawk.Instance.hitTime = 0;
         RopeTomahawk.Instance.hit = false;
         bullet.velocity = bullet.transform.forward * bullet.speed + startingVelocityAdd + bullet.employer.gameObject.GetComponent<PlayerMovement>().velocity / 2f;
-        RopeTomahawk.Instance.T1 = bullet.employer.transform;
-        RopeTomahawk.Instance.T2 = bullet.transform;
-
+        RopeTomahawk.Instance.SetT(bullet.employer.transform, bullet.transform);
     }
 
     public void ReturnToSender()

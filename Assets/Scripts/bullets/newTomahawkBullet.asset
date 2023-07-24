@@ -15,7 +15,7 @@ MonoBehaviour:
   bulletLife: 1.9876544e+27
   hitRadious: {x: 0.055, y: 0.4525, z: 0.185}
   damage: 25
-  speed: 20
+  speed: 40
   mesh: {fileID: 4825836531149651790, guid: 01e15b7bc27f48244bd3df6f0a13030b, type: 3}
   meshScale: 5
   materials:
@@ -24,5 +24,4 @@ MonoBehaviour:
   rotateSpeed: 1825
   HitTomahawkPrefab: {fileID: 1711241335650796605, guid: 56b910a971630eb42843f97fbbe904e7,
     type: 3}
-  returnToSender: 0
   startingVelocityAdd: {x: 0, y: 7.5, z: 0}

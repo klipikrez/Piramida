@@ -24,6 +24,9 @@ public class RopeTomahawk : MonoBehaviour
     public float airTime = 0;
     public AnimationCurve kurva;
     public float multiplyShakeWhenhit = 6f;
+    [System.NonSerialized]
+    public PlayerInput input;
+
     void Awake()
     {
         Instance = this;
@@ -31,9 +34,8 @@ public class RopeTomahawk : MonoBehaviour
     private void Start()
     {
         lineRenderer = gameObject.GetComponent<LineRenderer>();
-        //InvokeRepeating("UpdateRope", 0f, 1f / 60f);
     }
-    // Update is called once per frame
+
     void Update()
     {
         if (!reloading)
@@ -51,7 +53,7 @@ public class RopeTomahawk : MonoBehaviour
         else
         {
             HitWithPath();
-            PullPlayerTowardsHitPoint();
+            //PullPlayerTowardsHitPoint();
         }
     }
 
@@ -107,7 +109,17 @@ public class RopeTomahawk : MonoBehaviour
 
     public void PullPlayerTowardsHitPoint()
     {
-        //"GrappleTowards"
+
+    }
+
+    IEnumerator c_Pull()
+    {
+        while (reloading)
+        {
+            // reloadTimer += Time.deltaTime;
+            yield return new WaitForEndOfFrame();
+        }
+        //reloadCorutine = null;
     }
     public void HitWithPath()
     {
@@ -156,7 +168,7 @@ public class RopeTomahawk : MonoBehaviour
         }
         else
         {
-            pathDistances.Add(Vector3.Distance(path[path.Count - 1], T1.transform.position + new Vector3(0, 1f, 0)));
+            pathDistances.Add(Vector3.Distance(path[path.Count - 1], T1.transform.position + new Vector3(0, 0.4f, 0)));
         }
     }
 
@@ -184,6 +196,27 @@ public class RopeTomahawk : MonoBehaviour
     {
         //ovo ti radi stvar, tako da lerp zavisi od vremena, a ne da vraca samo fiksnu vrednost svakog frejma
         return 1 - Mathf.Pow(1 - value, Time.deltaTime * 60);
+    }
+    public void SetT(Transform T1, Transform T2)
+    {
+        this.T1 = T1;
+        this.T2 = T2;
+        /* input = T1.gameObject.GetComponent<PlayerInput>();
+
+         if (input == null)
+         {
+             input = new PlayerInput();
+             input.Player.Enable();
+         }
+         input.Player.GrappleTowards.performed += Reload;*/
+    }
+
+    public void ReleaseT()
+    {
+        T1 = null;
+        T2 = null;
+        //input.Player.GrappleTowards.performed -= Reload;
+        //input = null;
     }
 
     void OnDrawGizmosSelected()

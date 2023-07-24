@@ -8,7 +8,8 @@ public class PlayerArms : MonoBehaviour
 {
     [System.NonSerialized]
     public PlayerInput input;
-
+    [System.NonSerialized]
+    public PlayerMovement movement;
     public List<BaseGun> guns;
     public int selectedGun = 0;
     [System.NonSerialized]
@@ -23,6 +24,7 @@ public class PlayerArms : MonoBehaviour
     public bool shooting = false;
     public float[] ammoPerArm;
     public float reloadTimer;
+    public bool shiftPressed = false;
 
     void Start()
     {
@@ -35,6 +37,10 @@ public class PlayerArms : MonoBehaviour
             input = new PlayerInput();
             input.Player.Enable();
         }
+        if (movement == null)
+        {
+            movement = gameObject.GetComponent<PlayerMovement>();
+        }
 
         ammoPerArm = new float[guns.Count];
         for (int i = 0; i < ammoPerArm.Length; i++)
@@ -46,7 +52,28 @@ public class PlayerArms : MonoBehaviour
         input.Player.Fire.canceled += StopShoot;
 
         input.Player.Reload.performed += Reload;
+        input.Player.Reload.canceled += StopReload;
 
+        input.Player.Shift.performed += Shift;
+        input.Player.Shift.canceled += StopShift;
+
+    }
+
+    private void StopReload(InputAction.CallbackContext context)
+    {
+        guns[selectedGun].ReloadCancelled(this);
+    }
+
+    private void Shift(InputAction.CallbackContext context)
+    {
+        shiftPressed = true;
+        guns[selectedGun].Shift(this);
+    }
+
+    private void StopShift(InputAction.CallbackContext context)
+    {
+        shiftPressed = false;
+        guns[selectedGun].ShiftCancelled(this);
     }
 
     private void Reload(InputAction.CallbackContext context)
@@ -59,7 +86,7 @@ public class PlayerArms : MonoBehaviour
                 StopCoroutine(fireCorutine);
 
 
-            reloadCorutine = StartCoroutine(Reload_c());
+            reloadCorutine = StartCoroutine(c_Reload());
 
         }
     }
@@ -74,11 +101,11 @@ public class PlayerArms : MonoBehaviour
         shooting = true;
         if (!reloading && ammoPerArm[selectedGun] != 0)
         {
-            fireCorutine = StartCoroutine(Fire_c());
+            fireCorutine = StartCoroutine(c_Fire());
         }
     }
 
-    IEnumerator Reload_c()
+    IEnumerator c_Reload()
     {
         while (reloading)
         {
@@ -87,7 +114,7 @@ public class PlayerArms : MonoBehaviour
         }
         reloadCorutine = null;
     }
-    IEnumerator Fire_c()
+    IEnumerator c_Fire()
     {
         while (shooting && !reloading && ammoPerArm[selectedGun] != 0)
         {

@@ -31,7 +31,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 14
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5377661493418095309
 MonoBehaviour:
@@ -48,7 +48,7 @@ MonoBehaviour:
   T1: {fileID: 0}
   T1Offset: {x: 0, y: 0.2, z: 0}
   T2: {fileID: 0}
-  ropeResolution: 1
+  ropeResolution: 0.2
   spinSpeed: 104
   hit: 0
   reloading: 0

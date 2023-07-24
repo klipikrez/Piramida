@@ -6,10 +6,24 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "newDefaultGun", menuName = "GunnStuf/Gns/DefaultGinn")]
 public class DefaultGun : BaseGun
 {
-
     public override void Reload(PlayerArms player)
     {
-        throw new System.NotImplementedException();
+        // throw new System.NotImplementedException();
+    }
+
+    public override void ShiftCancelled(PlayerArms player)
+    {
+        // throw new System.NotImplementedException();
+    }
+
+    public override void ReloadCancelled(PlayerArms player)
+    {
+        // throw new System.NotImplementedException();
+    }
+
+    public override void Shift(PlayerArms player)
+    {
+        // throw new System.NotImplementedException();
     }
 
     public override void Shoot(PlayerArms player)
@@ -25,4 +39,8 @@ public class DefaultGun : BaseGun
 
     }
 
+    public override string ToString()
+    {
+        return base.ToString();
+    }
 }

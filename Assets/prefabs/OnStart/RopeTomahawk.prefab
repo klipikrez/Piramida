@@ -48,7 +48,6 @@ MonoBehaviour:
   T1: {fileID: 0}
   T1Offset: {x: 0, y: 0.2, z: 0}
   T2: {fileID: 0}
-  ropeResolution: 0.2
   spinSpeed: 104
   hit: 0
   reloading: 0
@@ -56,8 +55,7 @@ MonoBehaviour:
   path: []
   pathDistances: []
   distance: 0
-  pathInterval: 0.05
-  pathT1Influence: 10
+  pathInterval: 0.025
   airTime: 0
   kurva:
     serializedVersion: 2

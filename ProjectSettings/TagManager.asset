@@ -15,8 +15,8 @@ TagManager:
   - EnemyHitbox
   - Bullet
   - EnemyCollider
-  - 
-  - 
+  - Attack
+  - DeadZone
   - 
   - 
   - 

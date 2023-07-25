@@ -1,0 +1,118 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8666125bea3d6a4aab78f6cd12abaa7, type: 3}
+  m_Name: newShockvawe
+  m_EditorClassIdentifier: 
+  mesh: {fileID: -7052631652592221296, guid: 173c920a620a5944fa4247fe3155aae4, type: 3}
+  hitboxMeshes:
+  - {fileID: -80332546796568531, guid: af7445ba54d6be941a6993c09a97b125, type: 3}
+  - {fileID: -3444489476477009891, guid: af7445ba54d6be941a6993c09a97b125, type: 3}
+  - {fileID: -1290044017908655015, guid: af7445ba54d6be941a6993c09a97b125, type: 3}
+  - {fileID: 1136274213406534275, guid: af7445ba54d6be941a6993c09a97b125, type: 3}
+  - {fileID: 2118295568033389119, guid: af7445ba54d6be941a6993c09a97b125, type: 3}
+  - {fileID: 7229866821261227207, guid: af7445ba54d6be941a6993c09a97b125, type: 3}
+  - {fileID: 3784379989890020976, guid: af7445ba54d6be941a6993c09a97b125, type: 3}
+  - {fileID: 7643318435391536940, guid: af7445ba54d6be941a6993c09a97b125, type: 3}
+  - {fileID: -405801919054977380, guid: af7445ba54d6be941a6993c09a97b125, type: 3}
+  - {fileID: -1723506995681534921, guid: af7445ba54d6be941a6993c09a97b125, type: 3}
+  - {fileID: 8375751799834769302, guid: af7445ba54d6be941a6993c09a97b125, type: 3}
+  - {fileID: 8423356268392215372, guid: af7445ba54d6be941a6993c09a97b125, type: 3}
+  - {fileID: 5953317648963633453, guid: af7445ba54d6be941a6993c09a97b125, type: 3}
+  - {fileID: 4441397371807739291, guid: af7445ba54d6be941a6993c09a97b125, type: 3}
+  - {fileID: 6775840005334627546, guid: af7445ba54d6be941a6993c09a97b125, type: 3}
+  - {fileID: 7238255417795292714, guid: af7445ba54d6be941a6993c09a97b125, type: 3}
+  - {fileID: 4720158231335180217, guid: af7445ba54d6be941a6993c09a97b125, type: 3}
+  - {fileID: 449281447125326179, guid: af7445ba54d6be941a6993c09a97b125, type: 3}
+  - {fileID: 8481399347105336114, guid: af7445ba54d6be941a6993c09a97b125, type: 3}
+  - {fileID: -8550991314101981801, guid: af7445ba54d6be941a6993c09a97b125, type: 3}
+  - {fileID: 7905800817648032480, guid: af7445ba54d6be941a6993c09a97b125, type: 3}
+  - {fileID: -7448557963146367665, guid: af7445ba54d6be941a6993c09a97b125, type: 3}
+  - {fileID: 4073460393691568926, guid: af7445ba54d6be941a6993c09a97b125, type: 3}
+  - {fileID: 6948875892917704742, guid: af7445ba54d6be941a6993c09a97b125, type: 3}
+  - {fileID: 2176827138489172085, guid: af7445ba54d6be941a6993c09a97b125, type: 3}
+  - {fileID: -299777738462812255, guid: af7445ba54d6be941a6993c09a97b125, type: 3}
+  - {fileID: -5978664124652404767, guid: af7445ba54d6be941a6993c09a97b125, type: 3}
+  - {fileID: 2519358999962269316, guid: af7445ba54d6be941a6993c09a97b125, type: 3}
+  material: {fileID: 2100000, guid: 2bd49629bcedfcc428d5d83b942c602f, type: 2}
+  kurvaZaShockvawe:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: -0.023202598
+      inSlope: 11.028665
+      outSlope: 11.028665
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.06582437
+    - serializedVersion: 3
+      time: 1
+      value: -0.023202598
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  kurvaZaPiramidu:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0.06666667
+      inSlope: -0.08438527
+      outSlope: -0.08438527
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.36337024
+    - serializedVersion: 3
+      time: 0.9440581
+      value: 0.73066056
+      inSlope: -0.10500633
+      outSlope: -0.10500633
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.3376815
+      outWeight: 1
+    - serializedVersion: 3
+      time: 0.95249814
+      value: 0.7254109
+      inSlope: -1.3598857
+      outSlope: -1.3598857
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.5648517
+      outWeight: 0.09381138
+    - serializedVersion: 3
+      time: 0.99583334
+      value: 0.0023584906
+      inSlope: -22.372404
+      outSlope: -22.372404
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.020168535
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  multiplyKurvaShockvawe: 1
+  startingShockvaweScale: 10
+  multiplyKurvaPramida: 30
+  damage: 50
+  timeShockvawe: 2
+  timePiramida: 2
+  expandSpeed: 50

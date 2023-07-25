@@ -26,21 +26,41 @@ public class AudioManager : MonoBehaviour
     /*mozes da dodas da mozes da mu prosleds vise stringova,*/
     /*i on da odaberte jedan random string iz datih ponuda  */
     /********************************************************/
-    public void PlayAudioClip(string audioClipName, float volume)
+    private void Start()
+    {
+        StartCoroutine("delay");
+    }
+    IEnumerator delay()
+    {
+        yield return new WaitForSeconds(2f);
+        PlayAudioClipLooping("AshAndBone", 0.3f);
+    }
+    public void PlayAudioClip(string audioClipName, float volume = 1)
     {
 
         StartCoroutine(Play(audioDictionary[audioClipName], volume));
 
     }
 
-    public void PlayAudioDDDClipDynamic(string audioClipName, Transform follow, float volume)
+    public void PlayAudioClipLooping(string audioClipName, float volume = 1)
+    {
+        AudioSource audioSource = gameObject.AddComponent<AudioSource>();
+        audioSource.outputAudioMixerGroup = DD;
+        audioSource.clip = audioDictionary[audioClipName];
+        audioSource.volume = volume;
+        audioSource.loop = true;
+        audioSource.Play();
+
+    }
+
+    public void PlayAudioDDDClipDynamic(string audioClipName, Transform follow, float volume = 1)
     {
 
         StartCoroutine(PlayDDDSynamic(audioDictionary[audioClipName], follow, volume));
 
     }
 
-    public void PlayAudioDDDClipStatic(string audioClipName, Vector3 position, float volume)
+    public void PlayAudioDDDClipStatic(string audioClipName, Vector3 position, float volume = 1)
     {
 
         StartCoroutine(PlayDDDStatic(audioDictionary[audioClipName], position, volume));

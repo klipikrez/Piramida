@@ -334,6 +334,7 @@ GameObject:
   - component: {fileID: 1775916574}
   - component: {fileID: 1386706610}
   - component: {fileID: 2201362363164584704}
+  - component: {fileID: 7773331152236242806}
   m_Layer: 3
   m_Name: Player
   m_TagString: Player
@@ -371,23 +372,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c70f6978ed8cf8f488b21c9d3135bd24, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mouseSensetivity: 25
+  mouseSensetivity: 10
   moveSpeed: 200
-  grounded: 1
-  jump: 0
+  moveSpeedInGrapple: 20
   jumpForce: 11
   jumpPush: 60
   jumpSpeedBoostMultiply: 2
   velocity: {x: 0, y: 0, z: 0}
   maxSpeed: 7.54
-  maxSpeedInJump: 15
+  maxSpeedInJump: 17
+  maxSpeedInGrapple: 35
   stoppingDrag: 0.9
+  stoppingDragGrapple: 0.5
   normalWalkAngle: 45
-  maxWalkAngle: 60
-  footFo: {fileID: 13400000, guid: 84b23ca0248481142b9517094be42148, type: 2}
+  maxWalkAngle: 55
   excludePlayer:
     serializedVersion: 2
     m_Bits: 72
+  groundCheckRadious: 0.4
+  groundCheckoffset: 0.39
+  groundCheckoffsetForRaycast: 0.35
+  grappleForce: 100
+  upPushInGrapple: 18
 --- !u!114 &6019180570032052751
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -554,8 +560,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   guns:
-  - {fileID: 11400000, guid: f583ab149280dfb46b5578280e837a2f, type: 2}
+  - {fileID: 11400000, guid: dfe3af8c3a9c3894e802fdccb66a1485, type: 2}
   selectedGun: 0
+  ammoPerArm: []
+  reloadTimer: 0
+  shiftPressed: 0
 --- !u!114 &2201362363164584704
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -570,6 +579,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ScriptsBruh:
   - {fileID: 3370134736978855418, guid: 125066140909df241a2776f673b74506, type: 3}
+  - {fileID: 5377661493418095310, guid: 3a42d18a5e9e04b4aa1ed910a391635c, type: 3}
+  - {fileID: 3634348067889387276, guid: 3f7c228778295ed4283b989d8ca06e94, type: 3}
+--- !u!114 &7773331152236242806
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6019180570032052739}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a94fbcfe6bdb634ab260666e1102836, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 100
+  hitbox: {fileID: 6019180570214539028}
+  invincibilityTime: 1
+  canTakeDamage: 1
 --- !u!1 &6019180570214538986
 GameObject:
   m_ObjectHideFlags: 0

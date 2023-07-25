@@ -5,6 +5,7 @@ using System.Reflection;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using static Functions;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -17,6 +18,7 @@ public class PlayerMovement : MonoBehaviour
     public float mouseSensetivity = 1f;
     public float moveSpeed = 1f;
     public float moveSpeedInGrapple = 20f;
+    public float moveSpeedInGrappleAir = 10;
     [System.NonSerialized]
     public bool grounded = true;
     [System.NonSerialized]
@@ -89,7 +91,7 @@ public class PlayerMovement : MonoBehaviour
         //ovo ti je kad ides ides ides na uzbrdo, i ond stanes odjednom, da ne poskocis malo na gore zbog ubrzanja, ovo ti podeli ubrzanje da stanes odma.
         if (grounded && body.velocity.y > 0)
         {
-            RaycastHit hit = ReturnClosestNormalVector();
+            RaycastHit hit = ReturnClosestHit(transform.position + Vector3.up * groundCheckoffsetForRaycast, groundCheckRadious);
             if (hit.distance != float.MaxValue)
             {
                 body.velocity = body.velocity * ((1 - (Vector3.Angle(hit.normal, Vector3.down) - 90) / 90));
@@ -139,7 +141,7 @@ public class PlayerMovement : MonoBehaviour
             Move();
             Jump();
         }
-        Debug.Log(grappleTimer);
+        //        Debug.Log(grappleTimer);
         Look();
 
         velocity = body.velocity;
@@ -166,8 +168,10 @@ public class PlayerMovement : MonoBehaviour
         }
         else
         {*/
+
         body.velocity = body.velocity + direction * (grappleForce * timeMultiplyer) * Time.deltaTime + Vector3.up * upPushInGrapple * Time.deltaTime;
-        body.velocity *= 1 - stoppingDragGrapple * Time.deltaTime;
+
+        body.velocity -= body.velocity * stoppingDragGrapple * Time.deltaTime;
         //}
     }
 
@@ -178,12 +182,12 @@ public class PlayerMovement : MonoBehaviour
         if (move != Vector3.zero)
         {
             // orijentise move vektor u pravcu ge gleda igrac
-            float velocityChange = wasGrappling ? moveSpeedInGrapple : moveSpeed;
+            float velocityChange = wasGrappling ? moveSpeedInGrappleAir : moveSpeed;
             move = Quaternion.Euler(0, PlayerCamera.transform.eulerAngles.y, 0) * new Vector3(move.x * velocityChange * Time.deltaTime, 0, move.z * velocityChange * Time.deltaTime);
             if (!wasGrappling)
             {
                 //gleda koliki je ugao zemlje na kojoj stojis
-                RaycastHit hit = ReturnClosestNormalVector();
+                RaycastHit hit = ReturnClosestHit(transform.position + Vector3.up * groundCheckoffsetForRaycast, groundCheckRadious);
                 if (hit.distance != float.MaxValue && grounded)
                 {
                     float dot = Vector3.Dot(move, hit.normal);
@@ -249,7 +253,7 @@ public class PlayerMovement : MonoBehaviour
             }
             else
             {
-                body.velocity *= 1 - stoppingDragGrapple * Time.deltaTime;
+                body.velocity -= body.velocity * stoppingDragGrapple * Time.deltaTime;
             }
         }
     }
@@ -260,7 +264,7 @@ public class PlayerMovement : MonoBehaviour
         {
             if (grounded)
             {
-                RaycastHit hit = ReturnClosestNormalVector();
+                RaycastHit hit = ReturnClosestHit(transform.position + Vector3.up * groundCheckoffsetForRaycast, groundCheckRadious);
                 float jumpMultiplyer = 1;// ako je strmo previse, nema skaces bre
                 if (hit.distance != float.MaxValue)
                 {
@@ -334,68 +338,6 @@ public class PlayerMovement : MonoBehaviour
 
 
         transform.Rotate(new Vector3(0, look.x, 0));
-    }
-
-    public RaycastHit ReturnClosestNormalVector()
-    {
-
-
-        float closestPointDistance = float.MaxValue;
-        Vector3 closestColliderPoint = Vector3.zero;
-
-        RaycastHit hit = new RaycastHit();
-
-        bool completed = false;
-        Collider[] colliders = Physics.OverlapSphere(transform.position + Vector3.up * groundCheckoffsetForRaycast, groundCheckRadious, ~LayerMask.GetMask("Hitbox", "Player", "Bullet", "Ford", "Mazda"));
-        foreach (Collider col in colliders)
-        {
-            ///                    Debug.Log(col);
-            float distance = Vector3.Distance(col.ClosestPoint(transform.position + Vector3.up * groundCheckoffsetForRaycast), transform.position + Vector3.up * groundCheckoffsetForRaycast);
-            if (distance < closestPointDistance)
-            {
-                closestPointDistance = distance;
-
-                closestColliderPoint = col.ClosestPoint(transform.position + Vector3.up * groundCheckoffsetForRaycast);
-            }
-            completed = true;
-
-        }
-        if (completed)
-        {
-
-            if (Physics.Raycast(transform.position + Vector3.up * groundCheckoffsetForRaycast, (closestColliderPoint - (transform.position + Vector3.up * groundCheckoffsetForRaycast)).normalized, out hit, 10f))
-            {
-                return hit;
-                /*
-                                //hit.normal = Quaternion.AngleAxis(45, bullet.transform.right) * (bullet.employer.transform.position - bullet.transform.position).normalized
-                                //                Debug.Log(Vector3.Angle(hit.normal, Vector3.down));
-                                if (Vector3.Angle(hit.normal, Vector3.down) > 90f && Vector3.Angle(hit.normal, Vector3.down) < 270f)
-                                {
-                                    return hit;
-                                }
-                                else
-                                {
-                                    if (Vector3.Angle(hit.normal, Vector3.down) < 90f)
-                                    {
-                                        //Debug.Log(Quaternion.AngleAxis(90, transform.right) * (hit.normal) + "   +/////////////////////////////////////////////////");
-                                        //return Quaternion.AngleAxis(90, transform.right) * (hit.normal);
-                                    }
-                                    else
-                                    {
-                                        if (Vector3.Angle(hit.normal, Vector3.down) > 270f)
-                                        {
-                                            Vector3 temp = hit.normal - Vector3.up * hit.normal.y;
-                                            Debug.Log(temp.normalized + "   /////////////////////////////////////////////////");
-                                            return temp.normalized;
-                                        }
-                                    }
-                                }*/
-            }
-
-        }
-        //        Debug.Log("nis nes pogodeo");
-        hit.distance = float.MaxValue;
-        return hit; //Vector3.negativeInfinity;
     }
 
 

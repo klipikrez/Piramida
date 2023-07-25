@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static Functions;
 
 public class RopeTomahawk : MonoBehaviour
 {
@@ -9,8 +10,6 @@ public class RopeTomahawk : MonoBehaviour
     public Transform T2;
     [System.NonSerialized]
     public LineRenderer lineRenderer;
-    public float ropeResolution = 1f;
-    // Start is called before the first frame update
     public static RopeTomahawk Instance;
     public float spinSpeed = 52f;
     public bool hit = false;
@@ -20,7 +19,6 @@ public class RopeTomahawk : MonoBehaviour
     public List<float> pathDistances = new List<float>();
     public float distance;
     public float pathInterval = 0.2f;
-    public float pathT1Influence = 10f; //0 je min brzina priblizavanja ka igracu, zanci ne menja se
     public float airTime = 0;
     public AnimationCurve kurva;
     public float multiplyShakeWhenhit = 6f;
@@ -191,12 +189,12 @@ public class RopeTomahawk : MonoBehaviour
         (r1 * p2.z + r2 * p1.z) / (r1 + r2));
 
     }
-
-    public float DeltaTimeLerp(float value)
-    {
-        //ovo ti radi stvar, tako da lerp zavisi od vremena, a ne da vraca samo fiksnu vrednost svakog frejma
-        return 1 - Mathf.Pow(1 - value, Time.deltaTime * 60);
-    }
+    /*
+        public float DeltaTimeLerp(float value)
+        {
+            //ovo ti radi stvar, tako da lerp zavisi od vremena, a ne da vraca samo fiksnu vrednost svakog frejma
+            return 1 - Mathf.Pow(1 - value, Time.deltaTime * 60);
+        }*/
     public void SetT(Transform T1, Transform T2)
     {
         this.T1 = T1;

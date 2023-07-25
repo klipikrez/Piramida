@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using static Functions;
 
 
 [CreateAssetMenu(fileName = "newTomahawkBullet", menuName = "GunnStuf/Bullet/TomahawkBullet")]
@@ -16,6 +17,11 @@ public class TomahawkBullet : BulletBase
     {
         if (!bullet.employer.reloading)
         {
+
+            /**************************************/
+            /*namesti pre svega da cekira DeadZone*/
+            /**************************************/
+
             bool notHitEnemy = true;
             if (Physics.CheckBox(bullet.transform.position, bullet.bulletBase.hitRadious, bullet.transform.rotation, ~LayerMask.GetMask("Hitbox", "Bullet", "Player", "Ford", "Mazda")))
             {
@@ -24,23 +30,26 @@ public class TomahawkBullet : BulletBase
                 Vector3 closestColliderPoint = Vector3.zero;
                 foreach (Collider col in Physics.OverlapBox(bullet.transform.position, bullet.bulletBase.hitRadious, bullet.transform.rotation, LayerMask.GetMask("EnemyHitbox")))
                 {
-                    if (!bullet.hitColliders.Contains(col))
+                    if (!col.isTrigger)
                     {
-                        bullet.hitColliders.Add(col);
-                        col.gameObject.GetComponentInParent<BaseEnemy>().Damage(bullet.bulletBase.damage);
-                        notHitEnemy = false;
-                        //bullet.employer.guns[bullet.employer.selectedGun].Reload(bullet.employer);
-
-                        RaycastHit hit;
-
-                        if (!Physics.Raycast(bullet.transform.position, (closestColliderPoint - bullet.transform.position).normalized, out hit))
+                        if (!bullet.hitColliders.Contains(col))
                         {
-                            Physics.Raycast(bullet.previousLocation, (closestColliderPoint - bullet.previousLocation).normalized, out hit);
+                            bullet.hitColliders.Add(col);
+                            col.gameObject.GetComponentInParent<BaseEnemy>().Damage(bullet.bulletBase.damage);
+                            notHitEnemy = false;
+                            //bullet.employer.guns[bullet.employer.selectedGun].Reload(bullet.employer);
+
+                            RaycastHit hit;
+
+                            if (!Physics.Raycast(bullet.transform.position, (closestColliderPoint - bullet.transform.position).normalized, out hit))
+                            {
+                                Physics.Raycast(bullet.previousLocation, (closestColliderPoint - bullet.previousLocation).normalized, out hit);
+                            }
+                            //Instantiate(HitTomahawkPrefab, closestColliderPoint, Quaternion.FromToRotation(bullet.transform.up, hit.normal) * bullet.transform.rotation);
+                            bullet.velocity = Vector3.Lerp(Vector3.Reflect(bullet.velocity.normalized, hit.normal), Quaternion.AngleAxis(45, bullet.transform.right) * (bullet.employer.transform.position - bullet.transform.position).normalized, 0.7f) * Vector3.Magnitude(bullet.velocity);
+                            bullet.transform.LookAt(bullet.transform.position + bullet.velocity);
+                            AudioManager.Instance.PlayAudioClip("hitEnemy", 0.2f);
                         }
-                        //Instantiate(HitTomahawkPrefab, closestColliderPoint, Quaternion.FromToRotation(bullet.transform.up, hit.normal) * bullet.transform.rotation);
-                        bullet.velocity = Vector3.Lerp(Vector3.Reflect(bullet.velocity.normalized, hit.normal), Quaternion.AngleAxis(45, bullet.transform.right) * (bullet.employer.transform.position - bullet.transform.position).normalized, 0.7f) * Vector3.Magnitude(bullet.velocity);
-                        bullet.transform.LookAt(bullet.transform.position + bullet.velocity);
-                        AudioManager.Instance.PlayAudioClip("hitEnemy", 0.2f);
                     }
                 }
                 //ovo moz brises
@@ -51,48 +60,50 @@ public class TomahawkBullet : BulletBase
                     RaycastHit hit;
                     foreach (Collider col in Physics.OverlapBox(bullet.transform.position, bullet.bulletBase.hitRadious, bullet.transform.rotation, LayerMask.GetMask("EnemyCollider")))
                     {
-
-                        if (!bullet.hitColliders.Contains(col))
+                        if (!col.isTrigger)
                         {
-                            bullet.hitColliders.Add(col);
-
-                            //                        Debug.Log(col.name);
-                            notHitEnemyCollider = false;
-                            //bullet.employer.guns[bullet.employer.selectedGun].Reload(bullet.employer);
-
-                            ///                    Debug.Log(col);
-                            float distance = Vector3.Distance(col.ClosestPoint(bullet.transform.position), bullet.transform.position);
-                            if (distance < closestPointDistance)
+                            if (!bullet.hitColliders.Contains(col))
                             {
-                                closestPointDistance = distance;
-                                closestCollider = col;
-                                closestColliderPoint = col.ClosestPoint(bullet.transform.position);
+                                bullet.hitColliders.Add(col);
+
+                                //                        Debug.Log(col.name);
+                                notHitEnemyCollider = false;
+                                //bullet.employer.guns[bullet.employer.selectedGun].Reload(bullet.employer);
+
+                                ///                    Debug.Log(col);
+                                float distance = Vector3.Distance(col.ClosestPoint(bullet.transform.position), bullet.transform.position);
+                                if (distance < closestPointDistance)
+                                {
+                                    closestPointDistance = distance;
+                                    closestCollider = col;
+                                    closestColliderPoint = col.ClosestPoint(bullet.transform.position);
+                                }
+
+
+
+                                if (!Physics.Raycast(bullet.transform.position, (closestColliderPoint - bullet.transform.position).normalized, out hit))
+                                {
+                                    Physics.Raycast(bullet.previousLocation, (closestColliderPoint - bullet.previousLocation).normalized, out hit);
+                                }
+                                //Instantiate(HitTomahawkPrefab, closestColliderPoint, Quaternion.FromToRotation(bullet.transform.up, hit.normal) * bullet.transform.rotation);
+
+                                //  Debug.DrawRay(bullet.transform.position, (closestColliderPoint - bullet.transform.position).normalized, Color.black, 10f);
+                                //  Debug.DrawRay(bullet.transform.position, Vector3.left, Color.black, 10f);
+                                //  Debug.DrawRay(bullet.transform.position, bullet.velocity.normalized, Color.green, 10f);
+
+
+                                //                        Debug.Log(bullet.velocity);
+                                float angle = Vector3.Angle(bullet.velocity.normalized, hit.normal);
+                                //imas ovo u desmos, idi tqamo pa gledaj
+                                float loss = (1f - (angle - 90f) / 90f) / 2 + 0.5f;
+
+                                bullet.velocity = Vector3.Reflect(bullet.velocity.normalized, hit.normal) * Vector3.Magnitude(bullet.velocity);
+                                bullet.velocity *= loss;
+                                // Debug.DrawRay(hit.point, bullet.velocity.normalized, Color.red, 10f);
+                                // Debug.Log(bullet.velocity);
+                                //bullet.transform.LookAt(bullet.transform.position + bullet.velocity);
+                                AudioManager.Instance.PlayAudioClip("hitEnemyCollider", 0.3f);
                             }
-
-
-
-                            if (!Physics.Raycast(bullet.transform.position, (closestColliderPoint - bullet.transform.position).normalized, out hit))
-                            {
-                                Physics.Raycast(bullet.previousLocation, (closestColliderPoint - bullet.previousLocation).normalized, out hit);
-                            }
-                            //Instantiate(HitTomahawkPrefab, closestColliderPoint, Quaternion.FromToRotation(bullet.transform.up, hit.normal) * bullet.transform.rotation);
-
-                            //  Debug.DrawRay(bullet.transform.position, (closestColliderPoint - bullet.transform.position).normalized, Color.black, 10f);
-                            //  Debug.DrawRay(bullet.transform.position, Vector3.left, Color.black, 10f);
-                            //  Debug.DrawRay(bullet.transform.position, bullet.velocity.normalized, Color.green, 10f);
-
-
-                            //                        Debug.Log(bullet.velocity);
-                            float angle = Vector3.Angle(bullet.velocity.normalized, hit.normal);
-                            //imas ovo u desmos, idi tqamo pa gledaj
-                            float loss = (1f - (angle - 90f) / 90f) / 2 + 0.5f;
-
-                            bullet.velocity = Vector3.Reflect(bullet.velocity.normalized, hit.normal) * Vector3.Magnitude(bullet.velocity);
-                            bullet.velocity *= loss;
-                            // Debug.DrawRay(hit.point, bullet.velocity.normalized, Color.red, 10f);
-                            // Debug.Log(bullet.velocity);
-                            //bullet.transform.LookAt(bullet.transform.position + bullet.velocity);
-                            AudioManager.Instance.PlayAudioClip("hitEnemyCollider", 0.3f);
                         }
                     }
 
@@ -102,17 +113,20 @@ public class TomahawkBullet : BulletBase
                         Collider[] colliders = Physics.OverlapBox(bullet.transform.position, bullet.bulletBase.hitRadious, bullet.transform.rotation, ~LayerMask.GetMask("Hitbox", "Player", "Bullet", "EnemyHitbox", "EnemyCollider", "Ford", "Mazda"));
                         foreach (Collider col in colliders)
                         {
-                            if (!bullet.hitColliders.Contains(col))
+                            if (!col.isTrigger)
                             {
-                                ///                    Debug.Log(col);
-                                float distance = Vector3.Distance(col.ClosestPoint(bullet.transform.position), bullet.transform.position);
-                                if (distance < closestPointDistance)
+                                if (!bullet.hitColliders.Contains(col))
                                 {
-                                    closestPointDistance = distance;
-                                    closestCollider = col;
-                                    closestColliderPoint = col.ClosestPoint(bullet.transform.position);
+                                    ///                    Debug.Log(col);
+                                    float distance = Vector3.Distance(col.ClosestPoint(bullet.transform.position), bullet.transform.position);
+                                    if (distance < closestPointDistance)
+                                    {
+                                        closestPointDistance = distance;
+                                        closestCollider = col;
+                                        closestColliderPoint = col.ClosestPoint(bullet.transform.position);
+                                    }
+                                    completed = true;
                                 }
-                                completed = true;
                             }
                         }
 

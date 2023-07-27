@@ -27,7 +27,7 @@ public class Shockvawe : BaseAttack
 
     public override void EndAttack(Bas boss)
     {
-        Debug.Log("gotovo");
+        //        Debug.Log("gotovo");
         Destroy(ShockvaweObject);
         boss.ChooseNewRandomState();
     }

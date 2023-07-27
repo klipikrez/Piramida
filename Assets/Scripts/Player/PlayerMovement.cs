@@ -95,7 +95,7 @@ public class PlayerMovement : MonoBehaviour
             if (hit.distance != float.MaxValue)
             {
                 body.velocity = body.velocity * ((1 - (Vector3.Angle(hit.normal, Vector3.down) - 90) / 90));
-                Debug.Log(((1 - (Vector3.Angle(hit.normal, Vector3.down) - 90) / 90)));
+                //                Debug.Log(((1 - (Vector3.Angle(hit.normal, Vector3.down) - 90) / 90)));
             }
         }
     }

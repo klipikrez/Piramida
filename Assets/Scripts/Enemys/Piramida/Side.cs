@@ -10,30 +10,38 @@ public class Side : BaseEnemy
     public List<EyeHealthBar> healthBars;
     public GameObject eye;
     [System.NonSerialized]
-    public GameObject lookAt;
+    public GameObject player;
+    public Vector3 playerOffset = Vector3.zero;
     public MeshRenderer shield;
     public SkinnedMeshRenderer kapak;
     private float angle;
+    public float rotSpeed = 1f;
+    public Quaternion offset;
+    Transform defaultRotation;
+    Quaternion lookAtRotation;
 
     private void Start()
     {
+        defaultRotation = eye.transform;
         currentHealth = startingHealth;
-        lookAt = GameObject.FindGameObjectWithTag("Player");
+        player = GameObject.FindGameObjectWithTag("Player");
     }
     private void Update()
     {
-        angle = Vector3.Angle((lookAt.transform.position - new Vector3(0, lookAt.transform.position.y, 0)) - transform.position, transform.forward /*- new Vector3(0, transform.forward.y, 0)*/);
-        LookAt(lookAt.transform);
+        Vector3 lookAt = player.transform.position + playerOffset;
+
+        angle = Vector3.Angle((new Vector3(lookAt.x, 0, lookAt.z)) - new Vector3(transform.position.x, 0, transform.position.z), transform.forward);
+        // Debug.Log(angle);
+        LookAt(lookAt, Mathf.Min(Mathf.Max(180 - angle - 110, 0) * 1.8f, 100) / 100);
         kapak.SetBlendShapeWeight(0, Mathf.Min(Mathf.Max(180 - angle - 100, 0) * 1.8f, 100));//trepuce
     }
-    public float rotSpeed = 1f;
-    public Quaternion offset;
-    Quaternion lookAtRotation;
-    public void LookAt(Transform lookAt)
+
+    public void LookAt(Vector3 lookAt, float weight)
     {
-        Vector3 targetDirection = (lookAt.transform.position - eye.transform.position).normalized;
-        lookAtRotation = Quaternion.LookRotation(targetDirection) * offset;
-        eye.transform.rotation = Quaternion.Lerp(lookAtRotation, eye.transform.rotation, 0.8f);
+        //Debug.Log(weight);
+        Vector3 targetDirection = (lookAt - eye.transform.position).normalized;
+        lookAtRotation = Quaternion.Lerp(transform.rotation * offset, Quaternion.LookRotation(targetDirection) * offset, weight);
+        eye.transform.rotation = lookAtRotation/*Quaternion.Lerp(lookAtRotation, eye.transform.localRotation, 0.8f)*/;
     }
     public override void Damage(float damage)
     {

@@ -15,11 +15,14 @@ public class Bas : BaseEnemy
     public PlayerStats player;
     public float normalFloatHeight = 2f;
     public bool returnToNormalFloatHeight = true;
+    public int attackRepeted = 0;
 
     private void Start()
     {
         mainObject.transform.position = new Vector3(transform.position.x, normalFloatHeight, transform.position.z);
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStats>();
+
+        currentAttackState = attackStates[0];
         ChooseNewRandomState();
     }
 
@@ -38,15 +41,29 @@ public class Bas : BaseEnemy
 
     public void ChooseNewRandomState()
     {
-        /*avalibeAttacks = CalculateAvalibeAttacks(selectedAttack);
-        int i = Random.Range(0, attackStates.Length);
-        //        Debug.Log(i);
-        selectedAttack = avalibeAttacks[i];
-        currentAttackState = attackStates[selectedAttack];*/
-        //currentAttackState.transform.position = transform.position;
-        currentAttackState = attackStates[0];
-        timeSinceAttakStarted = 0;
-        currentAttackState.StartAttack(this);
+        if (currentAttackState.repeatAttack > attackRepeted)
+        {
+            attackRepeted++;
+            timeSinceAttakStarted = 0;
+            currentAttackState.StartAttack(this);
+        }
+        else
+        {
+            avalibeAttacks = CalculateAvalibeAttacks(selectedAttack);
+            foreach (int m in avalibeAttacks)
+            {
+                Debug.Log(m);
+            }
+            int i = Random.Range(0, attackStates.Length - 1);
+            Debug.Log("--0- " + i);
+            //        Debug.Log(i);
+            selectedAttack = avalibeAttacks[i];
+            currentAttackState = attackStates[selectedAttack];
+            //currentAttackState.transform.position = transform.position;
+            //currentAttackState = attackStates[0];
+            timeSinceAttakStarted = 0;
+            currentAttackState.StartAttack(this);
+        }
     }
 
     public int[] CalculateAvalibeAttacks(int n)

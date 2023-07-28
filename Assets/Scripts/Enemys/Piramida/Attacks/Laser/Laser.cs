@@ -15,6 +15,7 @@ public class Laser : BaseAttack
     public Vector3 laserStartOffset = new Vector3(0, 30f, 0);
     public Material laserMaterial;
     public float laserDrag = 3.05f;
+    [System.NonSerialized]
     public Vector3 laserVelocity = Vector3.zero;
     [System.NonSerialized]
     public Vector3 taretPos = Vector3.zero;
@@ -43,6 +44,7 @@ public class Laser : BaseAttack
 
     public override void StartAttack(Bas boss)
     {
+        laserVelocity = Vector3.zero;
         Distance = float.MaxValue;
         laserFollowPlayerTimer = 0;
         playSound = true;

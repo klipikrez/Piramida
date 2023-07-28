@@ -53,44 +53,46 @@ public class AudioManager : MonoBehaviour
 
     }
 
-    public void PlayAudioDDDClipDynamic(string audioClipName, Transform follow, float volume = 1)
+    public void PlayAudioDDDClipDynamic(string audioClipName, Transform follow, float dddPercent = 1, float volume = 1)
     {
 
-        StartCoroutine(PlayDDDSynamic(audioDictionary[audioClipName], follow, volume));
+        StartCoroutine(PlayDDDSynamic(audioDictionary[audioClipName], follow, dddPercent, volume));
 
     }
 
-    public void PlayAudioDDDClipStatic(string audioClipName, Vector3 position, float volume = 1)
+    public void PlayAudioDDDClipStatic(string audioClipName, Vector3 position, float dddPercent = 1, float volume = 1)
     {
 
-        StartCoroutine(PlayDDDStatic(audioDictionary[audioClipName], position, volume));
+        StartCoroutine(PlayDDDStatic(audioDictionary[audioClipName], position, dddPercent, volume));
 
     }
 
-    IEnumerator PlayDDDStatic(AudioClip audio, Vector3 position, float volume)
+    IEnumerator PlayDDDStatic(AudioClip audio, Vector3 position, float dddPercent, float volume)
     {
         GameObject gameobj = Instantiate(DDDSoundPrefab, position, Quaternion.identity, gameObject.transform);
         AudioSource audioSource = gameobj.GetComponent<AudioSource>();
         audioSource.clip = audio;
         audioSource.volume = volume;
+        audioSource.spatialBlend = dddPercent;
         audioSource.Play();
         yield return new WaitForSeconds(audio.length);
         audioSource.Stop();
         Destroy(gameobj);
     }
 
-    IEnumerator PlayDDDSynamic(AudioClip audio, Transform follow, float volume)
+    IEnumerator PlayDDDSynamic(AudioClip audio, Transform follow, float dddPercent, float volume)
     {
         GameObject gameobj = Instantiate(DDDSoundPrefab, follow.position, Quaternion.identity, gameObject.transform);
         AudioSource audioSource = gameobj.GetComponent<AudioSource>();
         audioSource.clip = audio;
         audioSource.loop = true;
         audioSource.volume = volume;
+        audioSource.spatialBlend = dddPercent;
         audioSource.Play();
-        while (follow.gameObject != null && follow.gameObject.activeSelf)
+        while (follow != null && follow.gameObject.activeSelf)
         {
-            yield return new WaitForEndOfFrame();
             gameobj.transform.position = follow.position;
+            yield return new WaitForEndOfFrame();
         }
         audioSource.Stop();
         Destroy(gameobj);

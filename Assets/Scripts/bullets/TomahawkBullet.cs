@@ -247,7 +247,7 @@ public class TomahawkBullet : BulletBase
         dead = false;
         RopeTomahawk.Instance.hitTime = 0;
         RopeTomahawk.Instance.hit = false;
-        bullet.velocity = bullet.transform.forward * bullet.speed + startingVelocityAdd + bullet.employer.gameObject.GetComponent<PlayerMovement>().velocity / 2f;
+        bullet.velocity = bullet.transform.forward * bullet.speed + startingVelocityAdd + bullet.employer.gameObject.GetComponent<PlayerMovement>().velocity;
         RopeTomahawk.Instance.SetT(bullet.employer.transform, bullet.transform);
     }
 

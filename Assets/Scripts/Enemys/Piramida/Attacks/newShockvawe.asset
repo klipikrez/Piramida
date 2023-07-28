@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8666125bea3d6a4aab78f6cd12abaa7, type: 3}
   m_Name: newShockvawe
   m_EditorClassIdentifier: 
-  repeatAttack: 0
+  repeatAttack: 2
   mesh: {fileID: -7052631652592221296, guid: 173c920a620a5944fa4247fe3155aae4, type: 3}
   hitboxMeshes:
   - {fileID: -80332546796568531, guid: af7445ba54d6be941a6993c09a97b125, type: 3}

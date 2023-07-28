@@ -53,7 +53,7 @@ public class Shockvawe : BaseAttack
         ShockvaweObject.AddComponent<MeshRenderer>().material = material;
 
         Keyframe[] tmp = kurvaZaPiramidu.keys;
-        tmp[0].value = boss.normalFloatHeight / multiplyKurvaPramida;
+        tmp[0].value = (boss.normalFloatHeight + boss.heightOffset) / multiplyKurvaPramida;
         //kurvaZaPiramidu.keys[0].value = boss.normalFloatHeight / multiplyKurvaPramida;
 
         kurvaZaPiramidu.keys = tmp;

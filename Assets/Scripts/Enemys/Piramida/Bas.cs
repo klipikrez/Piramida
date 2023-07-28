@@ -16,6 +16,10 @@ public class Bas : BaseEnemy
     public float normalFloatHeight = 2f;
     public bool returnToNormalFloatHeight = true;
     public int attackRepeted = 0;
+    public float floatAmplitude = 3f;
+    public float floatFrequency = 0.5f;
+    [System.NonSerialized]
+    public float heightOffset;
 
     private void Start()
     {
@@ -35,7 +39,11 @@ public class Bas : BaseEnemy
         }
         if (returnToNormalFloatHeight)
         {
-            mainObject.transform.position = Vector3.Lerp(mainObject.transform.position, new Vector3(mainObject.transform.position.x, normalFloatHeight, mainObject.transform.position.z), DeltaTimeLerp(0.14f));
+            heightOffset = (Mathf.Sin(timeSinceAttakStarted * floatFrequency) + 1) * floatAmplitude;
+            mainObject.transform.position = Vector3.Lerp(
+                                                        mainObject.transform.position,
+                                                        new Vector3(mainObject.transform.position.x, normalFloatHeight + heightOffset, mainObject.transform.position.z),
+                                                        DeltaTimeLerp(0.14f));
         }
     }
 
@@ -49,13 +57,9 @@ public class Bas : BaseEnemy
         }
         else
         {
+            attackRepeted = 0;
             avalibeAttacks = CalculateAvalibeAttacks(selectedAttack);
-            foreach (int m in avalibeAttacks)
-            {
-                Debug.Log(m);
-            }
             int i = Random.Range(0, attackStates.Length - 1);
-            Debug.Log("--0- " + i);
             //        Debug.Log(i);
             selectedAttack = avalibeAttacks[i];
             currentAttackState = attackStates[selectedAttack];

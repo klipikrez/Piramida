@@ -14,8 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   repeatAttack: 0
   laserWarmupTime: 1
-  laserFireTime: 8
+  laserFireTime: 12
+  damage: 50
+  laserWidth: 4
   laserStartOffset: {x: 0, y: 30, z: 0}
   laserMaterial: {fileID: 2100000, guid: 493774b74b3fb6045a4db4956d8954a6, type: 2}
-  laserLerpValue: 0.035
-  lerpPostitionToPlayer: {x: -0.2631555, y: 0, z: -30.721272}
+  laserDrag: 5.505
+  laserVelocity: {x: 0, y: 0, z: 0}
+  laserSpeed: 25
+  laserHitPointMesh: {fileID: 0}

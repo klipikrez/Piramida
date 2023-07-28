@@ -20,7 +20,7 @@ public static class Functions
         RaycastHit hit = new RaycastHit();
 
         bool completed = false;
-        Collider[] colliders = Physics.OverlapSphere(origin, groundCheckRadious, ~LayerMask.GetMask("Hitbox", "Player", "Bullet", "Ford", "Mazda"));
+        Collider[] colliders = Physics.OverlapSphere(origin, groundCheckRadious, ~LayerMask.GetMask("Hitbox", "Player", "Attack", "Bullet", "Ford", "Mazda"));
         foreach (Collider col in colliders)
         {
             if (!col.isTrigger)
@@ -32,7 +32,6 @@ public static class Functions
                 }
                 else
                 {
-                    ///                    Debug.Log(col);
                     float distance = Vector3.Distance(col.ClosestPoint(origin), origin);
                     if (distance < closestPointDistance)
                     {
@@ -108,7 +107,6 @@ public static class Functions
                 }
                 else
                 {
-                    ///                    Debug.Log(col);
                     float distance = Vector3.Distance(col.ClosestPoint(origin), origin);
                     if (distance < closestPointDistance)
                     {

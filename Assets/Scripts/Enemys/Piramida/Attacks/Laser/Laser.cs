@@ -29,6 +29,11 @@ public class Laser : BaseAttack
     GameObject hitObj;
     [System.NonSerialized]
     bool playSound = true;
+    public LayerMask laserCanPassTrough;
+    public Vector3 addRotation;
+    public GameObject fire;
+    public float fireSpawnTime = 0.1f;
+    public float fireTimer = 0;
     public override void EndAttack(Bas boss)
     {
         Destroy(line);
@@ -80,6 +85,7 @@ public class Laser : BaseAttack
         }
         else
         {
+            Vector3 start = boss.mainObject.transform.position + laserStartOffset;
             if (playSound)
             {
                 playSound = false;
@@ -87,7 +93,7 @@ public class Laser : BaseAttack
             }
             if (boss.timeSinceAttakStarted - laserFireTime < laserFireTime)
             {
-                Vector3 player = new Vector3(boss.player.transform.position.x, 0, boss.player.transform.position.z);
+                Vector3 player = boss.player.transform.position;
                 Distance = Vector3.Distance(taretPos, player);
                 laserFollowPlayerTimer += Time.deltaTime;
                 float timeScaledSpeed = laserSpeed * ((Mathf.Pow(9, laserFollowPlayerTimer) - 1f) / 8f) + 0.1f;//funkcija u desmosu imas
@@ -100,10 +106,41 @@ public class Laser : BaseAttack
 
                 }
                 taretPos += laserVelocity * Time.deltaTime;
-                line.SetPosition(line.positionCount - 1, taretPos);
-                hitObj.transform.position = taretPos;
-                hitObj.transform.rotation = Quaternion.LookRotation((line.GetPosition(0) - taretPos).normalized) * Quaternion.Euler(90, 0, 0);
-                hitObj.transform.localScale = new Vector3(hitObj.transform.localScale.x, Vector3.Distance(line.GetPosition(0), hitObj.transform.position), hitObj.transform.localScale.z);
+                //taretPos = new Vector3(taretPos.x, boss.player.transform.position.y, taretPos.z);
+                RaycastHit hit;
+                float distance = 152f;
+
+                fireTimer += Time.deltaTime;
+
+                if (Physics.Raycast(boss.mainObject.transform.position + laserStartOffset, (taretPos - start).normalized, out hit, 152f, laserCanPassTrough))
+                {
+                    distance = Vector3.Distance((boss.mainObject.transform.position + laserStartOffset), hit.point);
+                    line.SetPosition(line.positionCount - 1, hit.point);
+
+                    if (fireTimer > fireSpawnTime)
+                    {
+                        fireTimer = 0;
+                        Instantiate(fire, hit.point + hit.normal * 0.3f, Quaternion.LookRotation(hit.normal) * Quaternion.Euler(90, 0, 0));
+                    }
+
+                }
+                else
+                {
+                    line.SetPosition(line.positionCount - 1, (taretPos - start).normalized * 152f + start);
+                }
+
+                Debug.DrawRay(boss.mainObject.transform.position + laserStartOffset,
+                 distance * (taretPos - start).normalized,
+                  Color.black,
+                   0.1f);
+
+                //hitObj.transform.position = (taretPos - (boss.mainObject.transform.position + laserStartOffset)) / 2 + (boss.mainObject.transform.position + laserStartOffset);
+                hitObj.transform.position = boss.mainObject.transform.position + laserStartOffset;
+                hitObj.transform.rotation = Quaternion.LookRotation((start - taretPos).normalized) * Quaternion.Euler(addRotation);
+                hitObj.transform.localScale = new Vector3(hitObj.transform.localScale.x, distance + 4f, hitObj.transform.localScale.z);
+
+
+
 
             }
             else

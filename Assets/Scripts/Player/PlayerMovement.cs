@@ -104,7 +104,7 @@ public class PlayerMovement : MonoBehaviour
     {
         //ako bi tvoji drugari skocili u dunav, dal bi i ti?
         jump = true;
-        if (grounded)
+        if (grounded && !grapple)
         {
             body.velocity = new Vector3(body.velocity.x * jumpSpeedBoostMultiply, body.velocity.y, body.velocity.z * jumpSpeedBoostMultiply);
         }
@@ -114,7 +114,7 @@ public class PlayerMovement : MonoBehaviour
     {
         //a sto si skocio u dunav breee :(
         jump = false;
-        if (body.velocity.y > 0)
+        if (body.velocity.y > 0 && !grapple)
         {
             body.velocity = new Vector3(body.velocity.x, body.velocity.y / 1.8f, body.velocity.z);
         }

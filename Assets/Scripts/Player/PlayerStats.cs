@@ -21,7 +21,7 @@ public class PlayerStats : MonoBehaviour
     public void ContinuousDamage(float damage)
     {
         health -= damage * Time.deltaTime;
-        AudioManager.Instance.PlayAudioClip("uoh", 0.4f);
+        AudioManager.Instance.PlayAudioClip("uoh", 0.4f, 256);
         //AudioManager.Instance.PlayAudioClip("uoh", 1f);
         //StartCoroutine("c_InvincibilityFrames");
     }

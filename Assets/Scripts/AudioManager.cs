@@ -35,10 +35,10 @@ public class AudioManager : MonoBehaviour
         yield return new WaitForSeconds(2f);
         PlayAudioClipLooping("AshAndBone", 0.3f);
     }
-    public void PlayAudioClip(string audioClipName, float volume = 1)
+    public void PlayAudioClip(string audioClipName, float volume = 1, int priority = 128)
     {
 
-        StartCoroutine(Play(audioDictionary[audioClipName], volume));
+        StartCoroutine(Play(audioDictionary[audioClipName], volume, priority));
 
     }
 
@@ -53,34 +53,35 @@ public class AudioManager : MonoBehaviour
 
     }
 
-    public void PlayAudioDDDClipDynamic(string audioClipName, Transform follow, float dddPercent = 1, float volume = 1)
+    public void PlayAudioDDDClipDynamic(string audioClipName, Transform follow, float dddPercent = 1, float volume = 1, int priority = 128)
     {
 
-        StartCoroutine(PlayDDDSynamic(audioDictionary[audioClipName], follow, dddPercent, volume));
+        StartCoroutine(PlayDDDSynamic(audioDictionary[audioClipName], follow, dddPercent, volume, priority));
 
     }
 
-    public void PlayAudioDDDClipStatic(string audioClipName, Vector3 position, float dddPercent = 1, float volume = 1)
+    public void PlayAudioDDDClipStatic(string audioClipName, Vector3 position, float dddPercent = 1, float volume = 1, int priority = 128)
     {
 
-        StartCoroutine(PlayDDDStatic(audioDictionary[audioClipName], position, dddPercent, volume));
+        StartCoroutine(PlayDDDStatic(audioDictionary[audioClipName], position, dddPercent, volume, priority));
 
     }
 
-    IEnumerator PlayDDDStatic(AudioClip audio, Vector3 position, float dddPercent, float volume)
+    IEnumerator PlayDDDStatic(AudioClip audio, Vector3 position, float dddPercent, float volume, int priority)
     {
         GameObject gameobj = Instantiate(DDDSoundPrefab, position, Quaternion.identity, gameObject.transform);
         AudioSource audioSource = gameobj.GetComponent<AudioSource>();
         audioSource.clip = audio;
         audioSource.volume = volume;
         audioSource.spatialBlend = dddPercent;
+        audioSource.priority = priority;
         audioSource.Play();
         yield return new WaitForSeconds(audio.length);
         audioSource.Stop();
         Destroy(gameobj);
     }
 
-    IEnumerator PlayDDDSynamic(AudioClip audio, Transform follow, float dddPercent, float volume)
+    IEnumerator PlayDDDSynamic(AudioClip audio, Transform follow, float dddPercent, float volume, int priority)
     {
         GameObject gameobj = Instantiate(DDDSoundPrefab, follow.position, Quaternion.identity, gameObject.transform);
         AudioSource audioSource = gameobj.GetComponent<AudioSource>();
@@ -88,6 +89,7 @@ public class AudioManager : MonoBehaviour
         audioSource.loop = true;
         audioSource.volume = volume;
         audioSource.spatialBlend = dddPercent;
+        audioSource.priority = priority;
         audioSource.Play();
         while (follow != null && follow.gameObject.activeSelf)
         {
@@ -98,12 +100,13 @@ public class AudioManager : MonoBehaviour
         Destroy(gameobj);
     }
 
-    IEnumerator Play(AudioClip audio, float volume)
+    IEnumerator Play(AudioClip audio, float volume, int priority)
     {
         AudioSource audioSource = gameObject.AddComponent<AudioSource>();
         audioSource.outputAudioMixerGroup = DD;
         audioSource.clip = audio;
         audioSource.volume = volume;
+        audioSource.priority = priority;
         audioSource.Play();
         yield return new WaitForSeconds(audio.length);
         audioSource.Stop();

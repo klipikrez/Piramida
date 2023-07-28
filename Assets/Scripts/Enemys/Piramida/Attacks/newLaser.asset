@@ -20,6 +20,14 @@ MonoBehaviour:
   laserStartOffset: {x: 0, y: 30, z: 0}
   laserMaterial: {fileID: 2100000, guid: 493774b74b3fb6045a4db4956d8954a6, type: 2}
   laserDrag: 5.505
-  laserVelocity: {x: 0, y: 0, z: 0}
+  laserVelocity: {x: 0.9154022, y: 1.2524271, z: -2.5547955}
   laserSpeed: 25
-  laserHitPointMesh: {fileID: 0}
+  laserHitPointMesh: {fileID: -8937424248046968402, guid: 9777ab49b58ed3940b6e1ec2e9ef6fe2,
+    type: 3}
+  laserCanPassTrough:
+    serializedVersion: 2
+    m_Bits: 1
+  addRotation: {x: -90, y: 0, z: 0}
+  fire: {fileID: 3056823006020791685, guid: 68aa8138e17209d4aaaa8c47016cec2a, type: 3}
+  fireSpawnTime: 0.025
+  fireTimer: 0.0175713

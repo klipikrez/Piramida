@@ -27,7 +27,7 @@ public class FireOnGround : MonoBehaviour
             if (doneDamage)
             {
                 doneDamage = false;
-                Debug.Log("===============");
+                //Debug.Log("===============");
             }
         }
     }
@@ -36,7 +36,7 @@ public class FireOnGround : MonoBehaviour
     {
         if (!doneDamage && other.gameObject.layer == LayerMask.NameToLayer("Player"))
         {
-            Debug.Log("DAMAGE");
+            //Debug.Log("DAMAGE");
             other.gameObject.GetComponent<PlayerStats>().ContinuousDamage(damage);
             if (!doneDamage)
                 doneDamage = true;

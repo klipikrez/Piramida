@@ -33,7 +33,7 @@ public class AudioManager : MonoBehaviour
     IEnumerator delay()
     {
         yield return new WaitForSeconds(2f);
-        PlayAudioClipLooping("AshAndBone", 0.3f);
+        PlayAudioClipLooping("AshAndBone", 0.15f);
     }
     public void PlayAudioClip(string audioClipName, float volume = 1, int priority = 128)
     {

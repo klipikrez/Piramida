@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.VFX;
 using static Functions;
 
 [CreateAssetMenu(fileName = "newLaser", menuName = "Bosses/Piramida/Laser")]
@@ -29,14 +30,22 @@ public class Laser : BaseAttack
     [System.NonSerialized]
     GameObject hitObj;
     [System.NonSerialized]
-    bool playSound = true;
+    bool attackStart = true;
     public LayerMask laserCanPassTrough;
     public Vector3 addRotation;
     public GameObject fire;
     public float fireSpawnTime = 0.1f;
     public float fireTimer = 0;
+    public VisualEffectAsset lightning;
+    public VisualEffectAsset energyOrbes;
+    [System.NonSerialized]
+    public VisualEffect energyOrbesObj;
+    [System.NonSerialized]
+    public VisualEffect lightningObj;
     public override void EndAttack(Bas boss)
     {
+        Destroy(lightningObj.gameObject);
+
         Destroy(line);
         Destroy(hitObj);
         boss.ChooseNewRandomState();
@@ -47,7 +56,7 @@ public class Laser : BaseAttack
         laserVelocity = Vector3.zero;
         Distance = float.MaxValue;
         laserFollowPlayerTimer = 0;
-        playSound = true;
+        attackStart = true;
         line = boss.gameObject.AddComponent<LineRenderer>();
         line.startWidth = laserWidth;
         line.endWidth = laserWidth;
@@ -60,7 +69,7 @@ public class Laser : BaseAttack
 
         hitObj = new GameObject("LaserHitPoint");
 
-        hitObj.transform.localScale = Vector3.one * laserWidth;
+        hitObj.transform.localScale = Vector3.zero;
 
         hitObj.layer = LayerMask.NameToLayer("Attack");
 
@@ -76,6 +85,15 @@ public class Laser : BaseAttack
 
         hitObj.AddComponent<MeshFilter>().mesh = laserHitPointMesh;
         hitObj.AddComponent<MeshRenderer>().material = laserMaterial;
+
+        AudioManager.Instance.PlayAudioClip("LaserWarmup", 0.6f);
+
+
+        energyOrbesObj = new GameObject("LaserEnergyOrbes").AddComponent<VisualEffect>();
+        energyOrbesObj.visualEffectAsset = energyOrbes;
+        energyOrbesObj.transform.position = boss.mainObject.transform.position + laserStartOffset;
+        energyOrbesObj.Play();
+
     }
 
     public override void UpdateAttack(Bas boss)
@@ -84,14 +102,21 @@ public class Laser : BaseAttack
         if (boss.timeSinceAttakStarted < laserWarmupTime)
         {
             line.SetPosition(line.positionCount - 1, boss.mainObject.transform.position + laserStartOffset);
+            energyOrbesObj.transform.LookAt(boss.player.transform.position);
         }
         else
         {
             Vector3 start = boss.mainObject.transform.position + laserStartOffset;
-            if (playSound)
+            if (attackStart)
             {
-                playSound = false;
-                AudioManager.Instance.PlayAudioDDDClipDynamic("laser", hitObj.transform, 0.4f);
+                attackStart = false;
+                AudioManager.Instance.PlayAudioDDDClipDynamic("laser", hitObj.transform, 0.7f);
+                lightningObj = new GameObject("LaserLightning").AddComponent<VisualEffect>();
+                lightningObj.visualEffectAsset = lightning;
+                lightningObj.transform.position = boss.mainObject.transform.position + laserStartOffset;
+                lightningObj.Play();
+                Destroy(energyOrbesObj.gameObject);
+
             }
             if (boss.timeSinceAttakStarted - laserFireTime < laserFireTime)
             {
@@ -139,7 +164,7 @@ public class Laser : BaseAttack
                 //hitObj.transform.position = (taretPos - (boss.mainObject.transform.position + laserStartOffset)) / 2 + (boss.mainObject.transform.position + laserStartOffset);
                 hitObj.transform.position = boss.mainObject.transform.position + laserStartOffset;
                 hitObj.transform.rotation = Quaternion.LookRotation((start - taretPos).normalized) * Quaternion.Euler(addRotation);
-                hitObj.transform.localScale = new Vector3(hitObj.transform.localScale.x, distance + 4f, hitObj.transform.localScale.z);
+                hitObj.transform.localScale = new Vector3(laserWidth, distance + 4f, laserWidth);
 
 
 

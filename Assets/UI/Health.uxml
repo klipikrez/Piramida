@@ -1,0 +1,6 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/classes/Healthbar.uss?fileID=7433441132597879392&amp;guid=14766d7d082385545b3b7bbbda84497f&amp;type=3#Healthbar" />
+    <ui:VisualElement>
+        <ui:Slider picking-mode="Ignore" label="HeLTH" value="42" high-value="100" direction="Horizontal" name="Healthbar" style="flex-direction: row; transform-origin: center; top: auto; bottom: auto; opacity: 1; overflow: visible; height: 17px; width: auto; left: auto; background-image: none;" />
+    </ui:VisualElement>
+</ui:UXML>

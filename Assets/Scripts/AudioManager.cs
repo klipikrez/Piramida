@@ -10,6 +10,7 @@ public class AudioManager : MonoBehaviour
     public Dictionary<string, AudioClip> audioDictionary = new Dictionary<string, AudioClip>();
     public GameObject DDDSoundPrefab;
     public AudioMixerGroup DD;
+
     public static AudioManager Instance { get; private set; }
 
     private void Awake()
@@ -28,6 +29,7 @@ public class AudioManager : MonoBehaviour
     /********************************************************/
     private void Start()
     {
+        transform.position = new Vector3(0, 0, 0);
         StartCoroutine("delay");
     }
     IEnumerator delay()

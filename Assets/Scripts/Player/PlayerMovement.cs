@@ -91,8 +91,8 @@ public class PlayerMovement : MonoBehaviour
         //ovo ti je kad ides ides ides na uzbrdo, i ond stanes odjednom, da ne poskocis malo na gore zbog ubrzanja, ovo ti podeli ubrzanje da stanes odma.
         if (grounded && body.velocity.y > 0)
         {
-            RaycastHit hit = ReturnClosestHit(transform.position + Vector3.up * groundCheckoffsetForRaycast, groundCheckRadious);
-            if (hit.distance != float.MaxValue)
+            Hit hit = ReturnClosestHitSphere(transform.position + Vector3.up * groundCheckoffsetForRaycast, groundCheckRadious, ~excludePlayer);
+            if (hit.hit)
             {
                 body.velocity = body.velocity * ((1 - (Vector3.Angle(hit.normal, Vector3.down) - 90) / 90));
                 //                Debug.Log(((1 - (Vector3.Angle(hit.normal, Vector3.down) - 90) / 90)));
@@ -141,6 +141,7 @@ public class PlayerMovement : MonoBehaviour
             Move();
             Jump();
         }
+
         //        Debug.Log(grappleTimer);
         Look();
 
@@ -187,8 +188,8 @@ public class PlayerMovement : MonoBehaviour
             if (!wasGrappling)
             {
                 //gleda koliki je ugao zemlje na kojoj stojis
-                RaycastHit hit = ReturnClosestHit(transform.position + Vector3.up * groundCheckoffsetForRaycast, groundCheckRadious);
-                if (hit.distance != float.MaxValue && grounded)
+                Hit hit = ReturnClosestHitSphere(transform.position + Vector3.up * groundCheckoffsetForRaycast, groundCheckRadious, ~excludePlayer);
+                if (hit.hit && grounded)
                 {
                     float dot = Vector3.Dot(move, hit.normal);
                     float angle = (Vector3.Angle(hit.normal, Vector3.up));
@@ -249,11 +250,17 @@ public class PlayerMovement : MonoBehaviour
         {
             if (!wasGrappling)
             {
-                body.velocity = (new Vector3(body.velocity.x * stoppingDrag, body.velocity.y, body.velocity.z * stoppingDrag));
+                Vector3 velocityTMP = body.velocity;
+                velocityTMP -= velocityTMP * stoppingDrag * Time.deltaTime;
+                body.velocity = new Vector3(velocityTMP.x, body.velocity.y, velocityTMP.z);
+                //body.velocity = (new Vector3(body.velocity.x * stoppingDrag, body.velocity.y, body.velocity.z * stoppingDrag));
             }
             else
             {
-                body.velocity -= body.velocity * stoppingDragGrapple * Time.deltaTime;
+                Vector3 velocityTMP = body.velocity;
+                velocityTMP -= velocityTMP * stoppingDragGrapple * Time.deltaTime;
+                body.velocity = new Vector3(velocityTMP.x, body.velocity.y, velocityTMP.z);
+                //body.velocity -= body.velocity * stoppingDragGrapple * Time.deltaTime;
             }
         }
     }
@@ -264,9 +271,9 @@ public class PlayerMovement : MonoBehaviour
         {
             if (grounded)
             {
-                RaycastHit hit = ReturnClosestHit(transform.position + Vector3.up * groundCheckoffsetForRaycast, groundCheckRadious);
+                Hit hit = ReturnClosestHitSphere(transform.position + Vector3.up * groundCheckoffsetForRaycast, groundCheckRadious, ~excludePlayer);
                 float jumpMultiplyer = 1;// ako je strmo previse, nema skaces bre
-                if (hit.distance != float.MaxValue)
+                if (hit.hit)
                 {
                     float angle = (Vector3.Angle(hit.normal, Vector3.up));
                     //Debug.Log(angle);

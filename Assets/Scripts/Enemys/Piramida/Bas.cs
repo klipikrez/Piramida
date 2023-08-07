@@ -28,6 +28,7 @@ public class Bas : BaseEnemy
 
         currentAttackState = attackStates[0];
         ChooseNewRandomState();
+        AudioManager.Instance.StartCorutineBre();
     }
 
     private void Update()

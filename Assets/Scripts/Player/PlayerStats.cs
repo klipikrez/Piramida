@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerStats : MonoBehaviour
 {
@@ -8,6 +9,10 @@ public class PlayerStats : MonoBehaviour
     public Collider hitbox;
     public float invincibilityTime = 1f;
     public bool canTakeDamage = true;
+    public Slider slider;
+    public float regen = 25f;
+    public int diedTimes = 0;
+    public Text text;
     public void Damage(float damage)
     {
         if (canTakeDamage)
@@ -18,6 +23,24 @@ public class PlayerStats : MonoBehaviour
         }
     }
 
+    private void Update()
+    {
+        float updatedHealth = health + regen * Time.deltaTime;
+        if (updatedHealth > 100 || updatedHealth < 0)
+        {
+            if (updatedHealth < 0)
+            {
+                diedTimes++;
+                text.text = diedTimes.ToString();
+            }
+            health = 100;
+        }
+        else
+        {
+            health = updatedHealth;
+        }
+        slider.value = health / 100f;
+    }
     public void ContinuousDamage(float damage)
     {
         health -= damage * Time.deltaTime;

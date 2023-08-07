@@ -15,7 +15,7 @@ MonoBehaviour:
   repeatAttack: 0
   laserWarmupTime: 1
   laserFireTime: 12
-  damage: 50
+  damage: 250
   laserWidth: 4
   laserStartOffset: {x: 0, y: 30, z: 0}
   laserMaterial: {fileID: 2100000, guid: 493774b74b3fb6045a4db4956d8954a6, type: 2}
@@ -29,7 +29,7 @@ MonoBehaviour:
   addRotation: {x: -90, y: 0, z: 0}
   fire: {fileID: 3056823006020791685, guid: 68aa8138e17209d4aaaa8c47016cec2a, type: 3}
   fireSpawnTime: 0.025
-  fireTimer: 0.0120781
+  fireTimer: 0
   lightning: {fileID: 8926484042661614526, guid: 94aeb8949d77ff347b09e37b38e21978,
     type: 3}
   energyOrbes: {fileID: 8926484042661614526, guid: b2e583d7ad72a914eaf2c68555454f52,

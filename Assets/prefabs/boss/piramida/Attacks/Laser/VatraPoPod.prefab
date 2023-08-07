@@ -33,7 +33,7 @@ Transform:
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 25
+  m_RootOrder: 21
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &3056823006020791680
 MeshFilter:
@@ -114,4 +114,4 @@ MonoBehaviour:
   time: 9
   timer: 0
   size: 6
-  damage: 20
+  damage: 40

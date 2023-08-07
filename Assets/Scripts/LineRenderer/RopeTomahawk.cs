@@ -216,22 +216,22 @@ public class RopeTomahawk : MonoBehaviour
         //input.Player.GrappleTowards.performed -= Reload;
         //input = null;
     }
-
-    void OnDrawGizmosSelected()
-    {
-        if (T1 != null && T2 != null)
+    /*
+        void OnDrawGizmosSelected()
         {
-            Gizmos.color = Color.yellow;
-            if (path.Count != 0)
+            if (T1 != null && T2 != null)
             {
-                for (int i = 0; i < path.Count; i++)
+                Gizmos.color = Color.yellow;
+                if (path.Count != 0)
                 {
-                    Gizmos.DrawSphere(path[i], 1);
+                    for (int i = 0; i < path.Count; i++)
+                    {
+                        Gizmos.DrawSphere(path[i], 1);
+                    }
                 }
             }
-        }
-        // Draw a yellow sphere at the transform's position
-    }
+            // Draw a yellow sphere at the transform's position
+        }*/
 
     public void Spin()//OLD
     {

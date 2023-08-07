@@ -29,7 +29,11 @@ public class AudioManager : MonoBehaviour
     /********************************************************/
     private void Start()
     {
-        transform.position = new Vector3(0, 0, 0);
+        transform.position = Vector3.zero;
+
+    }
+    public void StartCorutineBre()
+    {
         StartCoroutine("delay");
     }
     IEnumerator delay()

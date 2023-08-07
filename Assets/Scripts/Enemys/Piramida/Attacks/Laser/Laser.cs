@@ -35,13 +35,14 @@ public class Laser : BaseAttack
     public Vector3 addRotation;
     public GameObject fire;
     public float fireSpawnTime = 0.1f;
-    public float fireTimer = 0;
+    private float fireTimer = 0;
     public VisualEffectAsset lightning;
     public VisualEffectAsset energyOrbes;
     [System.NonSerialized]
     public VisualEffect energyOrbesObj;
     [System.NonSerialized]
     public VisualEffect lightningObj;
+    public float maxHitDistance = 252f;
     public override void EndAttack(Bas boss)
     {
         Destroy(lightningObj.gameObject);
@@ -135,11 +136,11 @@ public class Laser : BaseAttack
                 taretPos += laserVelocity * Time.deltaTime;
                 //taretPos = new Vector3(taretPos.x, boss.player.transform.position.y, taretPos.z);
                 RaycastHit hit;
-                float distance = 152f;
+                float distance = maxHitDistance;
 
                 fireTimer += Time.deltaTime;
 
-                if (Physics.Raycast(boss.mainObject.transform.position + laserStartOffset, (taretPos - start).normalized, out hit, 152f, laserCanPassTrough))
+                if (Physics.Raycast(boss.mainObject.transform.position + laserStartOffset, (taretPos - start).normalized, out hit, maxHitDistance, laserCanPassTrough))
                 {
                     distance = Vector3.Distance((boss.mainObject.transform.position + laserStartOffset), hit.point);
                     line.SetPosition(line.positionCount - 1, hit.point);
@@ -153,7 +154,7 @@ public class Laser : BaseAttack
                 }
                 else
                 {
-                    line.SetPosition(line.positionCount - 1, (taretPos - start).normalized * 152f + start);
+                    line.SetPosition(line.positionCount - 1, (taretPos - start).normalized * maxHitDistance + start);
                 }
 
                 Debug.DrawRay(boss.mainObject.transform.position + laserStartOffset,

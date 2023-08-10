@@ -75,6 +75,7 @@ public class Shockvawe : BaseAttack
             if (boss.returnToNormalFloatHeight == false)
             {
                 AudioManager.Instance.PlayAudioClip("shockvaweHit", 1f);
+                boss.player.Screenshake(0.2f, 7f, 45f);
             }
             boss.returnToNormalFloatHeight = true;
             if (boss.timeSinceAttakStarted - timePiramida < timeShockvawe)

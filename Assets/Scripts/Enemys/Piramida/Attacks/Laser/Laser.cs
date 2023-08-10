@@ -43,10 +43,12 @@ public class Laser : BaseAttack
     [System.NonSerialized]
     public VisualEffect lightningObj;
     public float maxHitDistance = 252f;
+    [System.NonSerialized]
+    public Transform hitPoint;
     public override void EndAttack(Bas boss)
     {
         Destroy(lightningObj.gameObject);
-
+        Destroy(hitPoint.gameObject);
         Destroy(line);
         Destroy(hitObj);
         boss.ChooseNewRandomState();
@@ -68,7 +70,9 @@ public class Laser : BaseAttack
         taretPos = new Vector3(boss.player.transform.position.x, 0, boss.player.transform.position.z);
 
 
-        hitObj = new GameObject("LaserHitPoint");
+        hitObj = new GameObject("Laser");
+        hitPoint = new GameObject("LaserHitPoint").transform;
+        hitPoint.position = taretPos;
 
         hitObj.transform.localScale = Vector3.zero;
 
@@ -110,6 +114,7 @@ public class Laser : BaseAttack
             Vector3 start = boss.mainObject.transform.position + laserStartOffset;
             if (attackStart)
             {
+                boss.player.ScreenshakeSource(3f, 65f, hitPoint, 5f);
                 attackStart = false;
                 AudioManager.Instance.PlayAudioDDDClipDynamic("laser", hitObj.transform, 0.7f);
                 lightningObj = new GameObject("LaserLightning").AddComponent<VisualEffect>();
@@ -144,6 +149,7 @@ public class Laser : BaseAttack
                 {
                     distance = Vector3.Distance((boss.mainObject.transform.position + laserStartOffset), hit.point);
                     line.SetPosition(line.positionCount - 1, hit.point);
+                    hitPoint.position = hit.point;
 
                     if (fireTimer > fireSpawnTime)
                     {
@@ -155,6 +161,7 @@ public class Laser : BaseAttack
                 else
                 {
                     line.SetPosition(line.positionCount - 1, (taretPos - start).normalized * maxHitDistance + start);
+                    hitPoint.position = (taretPos - start).normalized * maxHitDistance + start;
                 }
 
                 Debug.DrawRay(boss.mainObject.transform.position + laserStartOffset,

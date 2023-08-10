@@ -10,11 +10,12 @@ public class Bas : BaseEnemy
     public GameObject mainObject;
     public BaseAttack[] attackStates;
     public float timeSinceAttakStarted = 0;
-    int selectedAttack = -1;
+    int selectedAttack = 0;
     int[] avalibeAttacks;
     public PlayerStats player;
     public float normalFloatHeight = 2f;
     public bool returnToNormalFloatHeight = true;
+    [System.NonSerialized]
     public int attackRepeted = 0;
     public float floatAmplitude = 3f;
     public float floatFrequency = 0.5f;
@@ -27,7 +28,10 @@ public class Bas : BaseEnemy
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStats>();
 
         currentAttackState = attackStates[0];
-        ChooseNewRandomState();
+        attackRepeted++;
+        timeSinceAttakStarted = 0;
+        currentAttackState.StartAttack(this);
+
         AudioManager.Instance.StartCorutineBre();
     }
 

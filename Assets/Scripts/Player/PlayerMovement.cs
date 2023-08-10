@@ -32,7 +32,7 @@ public class PlayerMovement : MonoBehaviour
     public float maxSpeed = 2;
     public float maxSpeedInJump = 2;
     public float maxSpeedInGrapple = 10f;
-    private float camRotationX = 0;
+    //private float camRotationX = 0;
     public float stoppingDrag = 0.8f;
     public float stoppingDragGrapple = 0.9f;
     public float normalWalkAngle = 45f;
@@ -334,6 +334,8 @@ public class PlayerMovement : MonoBehaviour
     {
         Vector2 look = input.Player.Look.ReadValue<Vector2>();
         look *= Time.deltaTime * mouseSensetivity;
+
+        float camRotationX = PlayerCamera.transform.rotation.eulerAngles.x >= 270 ? PlayerCamera.transform.rotation.eulerAngles.x - 360f : PlayerCamera.transform.rotation.eulerAngles.x;
 
         camRotationX -= look.y;
         camRotationX = Mathf.Clamp(camRotationX, -90f, 90f);

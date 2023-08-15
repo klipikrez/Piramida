@@ -48,22 +48,31 @@ MonoBehaviour:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
-      time: 0
-      value: -0.023202598
-      inSlope: 11.028665
-      outSlope: 11.028665
+      time: -0.004166667
+      value: 0.17888251
+      inSlope: 1.0936928
+      outSlope: 1.0936928
       tangentMode: 0
       weightedMode: 0
       inWeight: 0
-      outWeight: 0.06582437
+      outWeight: 0.1560991
+    - serializedVersion: 3
+      time: 0.66592485
+      value: 1.1565502
+      inSlope: 0.68057406
+      outSlope: 0.68057406
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.12584496
+      outWeight: 0.38631374
     - serializedVersion: 3
       time: 1
       value: -0.023202598
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 34
+      inSlope: -12.316797
+      outSlope: -12.316797
+      tangentMode: 0
       weightedMode: 0
-      inWeight: 0.33333334
+      inWeight: 0.037572455
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
@@ -73,7 +82,7 @@ MonoBehaviour:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0.06666667
+      value: 0.13597141
       inSlope: -0.08438527
       outSlope: -0.08438527
       tangentMode: 0
@@ -110,7 +119,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  multiplyKurvaShockvawe: 1
+  multiplyKurvaShockvawe: 5
   startingShockvaweScale: 10
   multiplyKurvaPramida: 30
   damage: 50

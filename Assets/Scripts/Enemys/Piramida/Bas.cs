@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,6 +15,8 @@ public class Bas : BaseEnemy
     int[] avalibeAttacks;
     public PlayerStats player;
     public float normalFloatHeight = 2f;
+    [System.NonSerialized]
+    public float GroundOffset = 0f;
     public bool returnToNormalFloatHeight = true;
     [System.NonSerialized]
     public int attackRepeted = 0;
@@ -24,6 +27,7 @@ public class Bas : BaseEnemy
 
     private void Start()
     {
+        GroundOffset = GetGroundHeihtOffset();
         mainObject.transform.position = new Vector3(transform.position.x, normalFloatHeight, transform.position.z);
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStats>();
 
@@ -47,7 +51,7 @@ public class Bas : BaseEnemy
             heightOffset = (Mathf.Sin(timeSinceAttakStarted * floatFrequency) + 1) * floatAmplitude;
             mainObject.transform.position = Vector3.Lerp(
                                                         mainObject.transform.position,
-                                                        new Vector3(mainObject.transform.position.x, normalFloatHeight + heightOffset, mainObject.transform.position.z),
+                                                        new Vector3(mainObject.transform.position.x, normalFloatHeight + heightOffset - GroundOffset, mainObject.transform.position.z),
                                                         DeltaTimeLerp(0.14f));
         }
     }
@@ -64,7 +68,7 @@ public class Bas : BaseEnemy
         {
             attackRepeted = 0;
             avalibeAttacks = CalculateAvalibeAttacks(selectedAttack);
-            int i = Random.Range(0, attackStates.Length - 1);
+            int i = UnityEngine.Random.Range(0, attackStates.Length - 1);
             //        Debug.Log(i);
             selectedAttack = avalibeAttacks[i];
             currentAttackState = attackStates[selectedAttack];
@@ -87,6 +91,29 @@ public class Bas : BaseEnemy
         }
         return tmp.ToArray();
     }
+
+    /**public float LocalFloatHeightToWorld(float floatHeiht)
+    {
+        RaycastHit hit;
+        if (Physics.Raycast(transform.position + Vector3.up * 5f, Vector3.down, out hit, LayerMask.GetMask("Ground")))
+        {
+            return hit.point.y + floatHeiht - 5f;
+        }
+        return floatHeiht;
+    }*/
+
+    public float GetGroundHeihtOffset()
+    {
+        RaycastHit hit;
+        if (Physics.Raycast(new Vector3(transform.position.x, 52f, transform.position.z), Vector3.down, out hit, 52f * 2f, LayerMask.GetMask("Ground")))
+        {
+            Debug.Log(-hit.point.y);
+            return -hit.point.y;
+        }
+        return 0;
+
+    }
+
 
     public override void Damage(float damage)
     {

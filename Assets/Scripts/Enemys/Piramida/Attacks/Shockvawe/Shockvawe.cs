@@ -66,7 +66,7 @@ public class Shockvawe : BaseAttack
         {
             boss.returnToNormalFloatHeight = false;
             boss.mainObject.transform.position = /*Vector3.Lerp(*/new Vector3(boss.mainObject.transform.position.x,
-                                                             kurvaZaPiramidu.Evaluate(boss.timeSinceAttakStarted / timePiramida) * multiplyKurvaPramida,
+                                                             kurvaZaPiramidu.Evaluate(boss.timeSinceAttakStarted / timePiramida) * multiplyKurvaPramida - boss.GroundOffset,
                                                              boss.mainObject.transform.position.z)/*,
                                                              boss.mainObject.transform.position, DeltaTimeLerp(0.95f))*/;
         }
@@ -81,7 +81,7 @@ public class Shockvawe : BaseAttack
             if (boss.timeSinceAttakStarted - timePiramida < timeShockvawe)
             {
                 ShockvaweObject.transform.position = new Vector3(ShockvaweObject.transform.position.x,
-                                                                 multiplyKurvaShockvawe * kurvaZaShockvawe.Evaluate((boss.timeSinceAttakStarted - timePiramida) / timeShockvawe),
+                                                                 multiplyKurvaShockvawe * kurvaZaShockvawe.Evaluate((boss.timeSinceAttakStarted - timePiramida) / timeShockvawe) - boss.GroundOffset,
                                                                  ShockvaweObject.transform.position.z);
 
                 ShockvaweObject.transform.localScale = Vector3.one * (boss.timeSinceAttakStarted - timePiramida) * expandSpeed + Vector3.one * startingShockvaweScale;

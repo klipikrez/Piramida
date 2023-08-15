@@ -94,7 +94,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Mask:
-        m_Texture: {fileID: 2800000, guid: 6e436ecec636c3b478ed996dff071677, type: 3}
+        m_Texture: {fileID: 2800000, guid: 389565ba163992448976477663ebe48b, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Mask1:
@@ -159,7 +159,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _AddDetailsHeight: -17.1
+    - _AddDetailsHeight: -13.41
     - _AlphaClip: 0
     - _Blend: 0
     - _BlendModePreserveSpecular: 1
@@ -187,8 +187,8 @@ Material:
     - _HeightmapHeight_1: 5
     - _HeihtmapDetailBlend: 0.001
     - _Metallic: 0
-    - _MultiplyDetails: 3.24
-    - _MultiplyHeight: 50.2
+    - _MultiplyDetails: 7.46
+    - _MultiplyHeight: 24
     - _NormalIntensety: 1
     - _NormalStrenth: 3
     - _NormalStrenth_1: 0.42

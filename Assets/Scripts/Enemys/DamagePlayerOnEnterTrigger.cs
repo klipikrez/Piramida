@@ -9,7 +9,7 @@ public class DamagePlayerOnEnterTrigger : MonoBehaviour
     {
         if (other.gameObject.layer == LayerMask.NameToLayer("Hitbox"))
         {
-            other.attachedRigidbody.gameObject.GetComponent<PlayerStats>().Damage(damage);
+            other.attachedRigidbody.gameObject.GetComponent<PlayerStats>().Damage(damage, gameObject);
         }
     }
 }

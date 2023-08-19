@@ -34,10 +34,10 @@ public class FireOnGround : MonoBehaviour
 
     public void OnTriggerStay(Collider other)
     {
-        if (!doneDamage && other.gameObject.layer == LayerMask.NameToLayer("Player"))
+        if (!doneDamage && other.gameObject.layer == LayerMask.NameToLayer("Hitbox"))
         {
             //Debug.Log("DAMAGE");
-            other.gameObject.GetComponent<PlayerStats>().ContinuousDamage(damage);
+            other.gameObject.GetComponentInParent<PlayerStats>().ContinuousDamage(damage);
             if (!doneDamage)
                 doneDamage = true;
         }

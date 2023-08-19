@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static Functions;
 
 public class Side : BaseEnemy
 {
@@ -19,7 +20,9 @@ public class Side : BaseEnemy
     public Quaternion offset;
     Transform defaultRotation;
     Quaternion lookAtRotation;
-
+    public bool lookAtPlayer = true;
+    public Vector3 lookAtPoint = Vector3.zero;
+    public float blinkState = 0;
     private void Start()
     {
         defaultRotation = eye.transform;
@@ -28,12 +31,21 @@ public class Side : BaseEnemy
     }
     private void Update()
     {
-        Vector3 lookAt = player.transform.position + playerOffset;
+        Vector3 lookAt = player.transform.position;
 
         angle = Vector3.Angle((new Vector3(lookAt.x, 0, lookAt.z)) - new Vector3(transform.position.x, 0, transform.position.z), transform.forward);
-        // Debug.Log(angle);
-        LookAt(lookAt, Mathf.Min(Mathf.Max(180 - angle - 110, 0) * 1.8f, 100) / 100);
-        kapak.SetBlendShapeWeight(0, Mathf.Min(Mathf.Max(180 - angle - 100, 0) * 1.8f, 100));//trepuce
+        if (lookAtPlayer)
+        {
+            LookAt(lookAt, Mathf.Min(Mathf.Max(180 - angle - 110, 0) * 1.8f, 100) / 100);
+            Blink(Mathf.Min(Mathf.Max(180 - angle - 100, 0) * 1.8f, 100));//trepuce
+        }
+        else
+        {
+            LookAt(lookAtPoint, 1f);
+            Blink(blinkState * 100f);
+        }
+
+
     }
 
     public void LookAt(Vector3 lookAt, float weight)
@@ -41,7 +53,12 @@ public class Side : BaseEnemy
         //Debug.Log(weight);
         Vector3 targetDirection = (lookAt - eye.transform.position).normalized;
         lookAtRotation = Quaternion.Lerp(transform.rotation * offset, Quaternion.LookRotation(targetDirection) * offset, weight);
-        eye.transform.rotation = lookAtRotation/*Quaternion.Lerp(lookAtRotation, eye.transform.localRotation, 0.8f)*/;
+        eye.transform.rotation = Quaternion.Lerp(eye.transform.rotation, lookAtRotation, DeltaTimeLerp(0.1f));
+    }
+
+    public void Blink(float value)
+    {
+        kapak.SetBlendShapeWeight(0, Mathf.Lerp(value, kapak.GetBlendShapeWeight(0), DeltaTimeLerp(0.8f)));
     }
     public override void Damage(float damage)
     {

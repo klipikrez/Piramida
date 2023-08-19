@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics.Tracing;
 using UnityEngine;
 using static Functions;
 
@@ -53,7 +54,7 @@ public class Shockvawe : BaseAttack
         ShockvaweObject.AddComponent<MeshRenderer>().material = material;
 
         Keyframe[] tmp = kurvaZaPiramidu.keys;
-        tmp[0].value = (boss.normalFloatHeight + boss.heightOffset) / multiplyKurvaPramida;
+        tmp[0].value = (/*boss.normalFloatHeight +*/ boss.GroundOffset + boss.mainObject.transform.localPosition.y) / multiplyKurvaPramida;
         //kurvaZaPiramidu.keys[0].value = boss.normalFloatHeight / multiplyKurvaPramida;
 
         kurvaZaPiramidu.keys = tmp;
@@ -76,6 +77,11 @@ public class Shockvawe : BaseAttack
             {
                 AudioManager.Instance.PlayAudioClip("shockvaweHit", 1f);
                 boss.player.Screenshake(0.2f, 7f, 45f);
+                boss.mainObject.transform.position = new Vector3(
+                    boss.mainObject.transform.position.x,
+                    -boss.GroundOffset,
+                    boss.mainObject.transform.position.z
+                );
             }
             boss.returnToNormalFloatHeight = true;
             if (boss.timeSinceAttakStarted - timePiramida < timeShockvawe)
@@ -93,14 +99,14 @@ public class Shockvawe : BaseAttack
             }
         }
     }
-
-    public void DamagePlayer(Collider coll)
-    {
-        PlayerStats player = coll.gameObject.GetComponent<PlayerStats>();
-        if (player != null)
+    /*
+        public void DamagePlayer(Collider coll)
         {
-            player.Damage(damage);
-        }
-    }
+            PlayerStats player = coll.gameObject.GetComponent<PlayerStats>();
+            if (player != null)
+            {
+                player.Damage(damage,ga);
+            }
+        }*/
 
 }

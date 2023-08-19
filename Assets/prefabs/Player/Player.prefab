@@ -855,7 +855,7 @@ Transform:
   - {fileID: 162530288}
   - {fileID: 5496757478362259451}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &6019180570032052738
 MonoBehaviour:
@@ -1094,9 +1094,10 @@ MonoBehaviour:
   health: 100
   hitbox: {fileID: 6019180570214539028}
   invincibilityTime: 1
-  canTakeDamage: 1
   slider: {fileID: 679548250}
   regen: 2.325
+  diedTimes: 0
+  text: {fileID: 0}
 --- !u!1 &6019180570214538986
 GameObject:
   m_ObjectHideFlags: 0
@@ -1139,7 +1140,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
-  m_Radius: 0.2
+  m_Radius: 0.38
   m_Height: 1
   m_Direction: 1
   m_Center: {x: 0, y: 0.5, z: 0}

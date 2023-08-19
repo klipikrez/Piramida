@@ -1,7 +1,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.Rendering;
 using static Functions;
 
 public class Bas : BaseEnemy
@@ -9,6 +11,7 @@ public class Bas : BaseEnemy
     [System.NonSerialized]
     public BaseAttack currentAttackState;
     public GameObject mainObject;
+    public Side[] pyramidSides;
     public BaseAttack[] attackStates;
     public float timeSinceAttakStarted = 0;
     int selectedAttack = 0;
@@ -18,41 +21,61 @@ public class Bas : BaseEnemy
     [System.NonSerialized]
     public float GroundOffset = 0f;
     public bool returnToNormalFloatHeight = true;
+    public bool returnToNormalRotation = true;
     [System.NonSerialized]
     public int attackRepeted = 0;
     public float floatAmplitude = 3f;
     public float floatFrequency = 0.5f;
     [System.NonSerialized]
     public float heightOffset;
+    public bool active = true;
+    [NonSerialized]
+    public Coroutine sjebiOsvetljenjeCorutine = null;
+    public Volume NormalVolume;
+    public Volume FlashVolume;
+    public float rotateSpeed = 2;
+    //public float rotateStrenth = 2f;
+    private int seed = 0;
+    public float minRotateValue = 0;
+    public float maxRotateValue = 1;
 
     private void Start()
     {
         GroundOffset = GetGroundHeihtOffset();
-        mainObject.transform.position = new Vector3(transform.position.x, normalFloatHeight, transform.position.z);
+        //mainObject.transform.position = new Vector3(transform.position.x, normalFloatHeight, transform.position.z);
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStats>();
 
         currentAttackState = attackStates[0];
         attackRepeted++;
         timeSinceAttakStarted = 0;
         currentAttackState.StartAttack(this);
+        seed = UnityEngine.Random.Range(0, 152);
 
         AudioManager.Instance.StartCorutineBre();
     }
 
     private void Update()
     {
-        if (currentAttackState != null)
+        if (active)
         {
-            currentAttackState.UpdateAttack(this);
-            timeSinceAttakStarted += Time.deltaTime;
-        }
-        if (returnToNormalFloatHeight)
-        {
-            heightOffset = (Mathf.Sin(timeSinceAttakStarted * floatFrequency) + 1) * floatAmplitude;
-            mainObject.transform.position = Vector3.Lerp(
-                                                        mainObject.transform.position,
-                                                        new Vector3(mainObject.transform.position.x, normalFloatHeight + heightOffset - GroundOffset, mainObject.transform.position.z),
-                                                        DeltaTimeLerp(0.14f));
+            if (currentAttackState != null)
+            {
+                currentAttackState.UpdateAttack(this);
+                timeSinceAttakStarted += Time.deltaTime;
+            }
+            if (returnToNormalFloatHeight)
+            {
+                heightOffset = (Mathf.Sin(timeSinceAttakStarted * floatFrequency) + 1) * floatAmplitude;
+                mainObject.transform.position = Vector3.Lerp(
+                                                            new Vector3(mainObject.transform.position.x, mainObject.transform.position.y, mainObject.transform.position.z),
+                                                            new Vector3(transform.position.x, normalFloatHeight + heightOffset - GroundOffset, transform.position.z),
+                                                            DeltaTimeLerp(0.09f));
+            }
+            if (returnToNormalRotation)
+            {
+                mainObject.transform.Rotate(new Vector3(0, Functions.Remap(1f - Mathf.PerlinNoise(seed, Time.time * rotateSpeed), 0, 1, minRotateValue, maxRotateValue) * Time.deltaTime * 60f, 0));
+                mainObject.transform.rotation = Quaternion.Slerp(mainObject.transform.rotation, Quaternion.Euler(0f, mainObject.transform.eulerAngles.y, 0f), DeltaTimeLerp(0.1f));
+            }
         }
     }
 
@@ -107,7 +130,6 @@ public class Bas : BaseEnemy
         RaycastHit hit;
         if (Physics.Raycast(new Vector3(transform.position.x, 52f, transform.position.z), Vector3.down, out hit, 52f * 2f, LayerMask.GetMask("Ground")))
         {
-            Debug.Log(-hit.point.y);
             return -hit.point.y;
         }
         return 0;
@@ -115,6 +137,65 @@ public class Bas : BaseEnemy
     }
 
 
+    public void SjebiOsvetljenje(float time = 0)
+    {
+        if (NormalVolume != null && FlashVolume != null)
+        {
+            if (sjebiOsvetljenjeCorutine == null)
+                sjebiOsvetljenjeCorutine = StartCoroutine(c_SjebiOsvetljenje(time));
+        }
+    }
+
+    public IEnumerator c_SjebiOsvetljenje(float time = 0)
+    {
+        NormalVolume.enabled = false;
+        FlashVolume.enabled = true;
+
+        yield return new WaitForEndOfFrame();
+
+        yield return new WaitForSeconds(time);
+
+        NormalVolume.enabled = true;
+        FlashVolume.enabled = false;
+        sjebiOsvetljenjeCorutine = null;
+    }
+
+
+    public void SjebiOsvetljenjeFlicker(float time = 0, float sineSpeed = 1)
+    {
+        if (NormalVolume != null && FlashVolume != null)
+        {
+            if (sjebiOsvetljenjeCorutine == null)
+                sjebiOsvetljenjeCorutine = StartCoroutine(c_SjebiOsvetljenjeFlicker(time, sineSpeed));
+        }
+    }
+
+    public IEnumerator c_SjebiOsvetljenjeFlicker(float time = 0, float sineSpeed = 1)
+    {
+        float timer = 0;
+        while (time > timer)
+        {
+            if (Mathf.Sin(timer * sineSpeed) > 0)
+            {
+                NormalVolume.enabled = false;
+                FlashVolume.enabled = true;
+            }
+            else
+            {
+                NormalVolume.enabled = true;
+                FlashVolume.enabled = false;
+            }
+
+            yield return new WaitForEndOfFrame();
+            timer += Time.deltaTime;
+        }
+
+
+
+        NormalVolume.enabled = true;
+        FlashVolume.enabled = false;
+        sjebiOsvetljenjeCorutine = null;
+    }
     public override void Damage(float damage)
     {
         throw new System.NotImplementedException();

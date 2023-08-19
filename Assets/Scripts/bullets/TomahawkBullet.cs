@@ -63,7 +63,9 @@ public class TomahawkBullet : BulletBase
                     bullet.velocity = Vector3.Lerp(Vector3.Reflect(bullet.velocity.normalized, hit.normal), Quaternion.AngleAxis(45, bullet.transform.right) * (bullet.employer.transform.position - bullet.transform.position).normalized, 0.7f) * Vector3.Magnitude(bullet.velocity);
                     bullet.transform.LookAt(bullet.transform.position + bullet.velocity);
                     AudioManager.Instance.PlayAudioClip("hitEnemy", 0.2f);
-                    col.gameObject.GetComponentInParent<BaseEnemy>().Damage(bullet.bulletBase.damage);
+                    BaseEnemy enemySript = col.gameObject.GetComponentInParent<BaseEnemy>();
+                    if (enemySript != null)
+                        col.gameObject.GetComponentInParent<BaseEnemy>().Damage(bullet.bulletBase.damage);
                     bullet.hitColliders.Add(col);
                 }
             }
@@ -90,7 +92,7 @@ public class TomahawkBullet : BulletBase
             return;
         }
 
-        hit = ReturnClosestHitBoxExclude(bullet.transform.position, bullet.hitColliders, out checkedColliders, bullet.transform.rotation, bullet.bulletBase.hitRadious, ~LayerMask.GetMask("Hitbox", "Player", "Bullet", "EnemyHitbox", "EnemyCollider", "Ford", "Mazda"));
+        hit = ReturnClosestHitBoxExclude(bullet.transform.position, bullet.hitColliders, out checkedColliders, bullet.transform.rotation, bullet.bulletBase.hitRadious, ~LayerMask.GetMask("Hitbox", "Player", "Ignore Raycast", "Bullet", "EnemyHitbox", "EnemyCollider", "Attack", "Ford", "Mazda"));
         if (hit.hit)
         {
             RopeTomahawk.Instance.T2 = Instantiate(HitTomahawkPrefab, hit.point, Quaternion.FromToRotation(bullet.transform.up, hit.normal) * bullet.transform.rotation).transform;

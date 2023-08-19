@@ -83,7 +83,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     - _Heghtmap:
         m_Texture: {fileID: 2800000, guid: f7afff84448af954c93cf9a2415c1744, type: 3}
-        m_Scale: {x: 20, y: 20}
+        m_Scale: {x: 30, y: 30}
         m_Offset: {x: 0, y: 0}
     - _Heightmap_1:
         m_Texture: {fileID: 2800000, guid: dbdcf2693e90a784cb61c9dde633ba18, type: 3}
@@ -183,8 +183,8 @@ Material:
     - _Glossiness: 0
     - _GlossyReflections: 0
     - _HeightmapDetailAdd: -1
-    - _HeightmapHeight: 25
-    - _HeightmapHeight_1: 5
+    - _HeightmapHeight: 2
+    - _HeightmapHeight_1: 1
     - _HeihtmapDetailBlend: 0.001
     - _Metallic: 0
     - _MultiplyDetails: 7.46

@@ -13,15 +13,15 @@ MonoBehaviour:
   m_Name: newTomahawkBullet
   m_EditorClassIdentifier: 
   bulletLife: 1.9876544e+27
-  hitRadious: {x: 0.055, y: 0.4525, z: 0.185}
+  hitRadious: {x: 0.11, y: 0.5, z: 0.37}
   damage: 25
   speed: 40
   mesh: {fileID: 4825836531149651790, guid: 01e15b7bc27f48244bd3df6f0a13030b, type: 3}
-  meshScale: 5
+  meshScale: 10
   materials:
   - {fileID: 2100000, guid: 8f854eb84212e0d46acc5e81d2fdc2f1, type: 2}
   - {fileID: 2100000, guid: 564e342a8bd11af4591ab1005f909f77, type: 2}
   rotateSpeed: 1825
   HitTomahawkPrefab: {fileID: 1711241335650796605, guid: 56b910a971630eb42843f97fbbe904e7,
     type: 3}
-  startingVelocityAdd: {x: 0, y: 7.5, z: 0}
+  startingVelocityAdd: {x: 0, y: 7, z: 0}

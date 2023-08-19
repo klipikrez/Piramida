@@ -8,7 +8,7 @@ public class PlayerStats : MonoBehaviour
     public float health = 100f;
     public Collider hitbox;
     public float invincibilityTime = 1f;
-    public bool canTakeDamage = true;
+
     public Slider slider;
     public float regen = 25f;
     public int diedTimes = 0;
@@ -17,6 +17,7 @@ public class PlayerStats : MonoBehaviour
     float timeScreenShake = 0;
     Coroutine screenShakeCorutine;
     Coroutine screenShakeSourceCorutine;
+    Dictionary<GameObject, float> timeSinceLastAttack = new Dictionary<GameObject, float>();
     private void Start()
     {
         if (PlayerCamera == null)
@@ -24,14 +25,30 @@ public class PlayerStats : MonoBehaviour
             PlayerCamera = gameObject.GetComponentInChildren<Camera>();
         }
     }
-    public void Damage(float damage)
+    public bool Damage(float damage, GameObject sender)
     {
+        bool canTakeDamage = false;
+        if (timeSinceLastAttack.ContainsKey(sender))
+        {
+            if (timeSinceLastAttack[sender] < Time.time - invincibilityTime)
+            {
+                canTakeDamage = true;
+            }
+        }
+        else
+        {
+            canTakeDamage = true;
+            timeSinceLastAttack.Add(sender, Time.time);
+        }
+
         if (canTakeDamage)
         {
             health -= damage;
             AudioManager.Instance.PlayAudioClip("uoh", 1f);
-            StartCoroutine("c_InvincibilityFrames");
+            //StartCoroutine("c_InvincibilityFrames");
+            return true;
         }
+        return false;
     }
 
     private void Update()
@@ -97,6 +114,43 @@ public class PlayerStats : MonoBehaviour
         } while (true);
     }
 
+    public void ScreenshakeInverse(float duration, float strenth, float speed)
+    {
+        if (screenShakeCorutine != null)
+        {
+            StopCoroutine(screenShakeCorutine);
+            screenShakeCorutine = null;
+        }
+        timeScreenShake = 0;
+        screenShakeCorutine = StartCoroutine(c_ShakeScreenInverse(Random.Range(0f, 52f), duration, strenth, speed));
+    }
+
+    public IEnumerator c_ShakeScreenInverse(float seed, float duration, float strenth, float speed)
+    {
+        do
+        {
+            transform.Rotate(new Vector3(0, (0.4665f - Mathf.PerlinNoise(seed, timeScreenShake * speed)) * (timeScreenShake / duration) * strenth, 0));
+
+            float camRotationX = PlayerCamera.transform.rotation.eulerAngles.x >= 270 ? PlayerCamera.transform.rotation.eulerAngles.x - 360f : PlayerCamera.transform.rotation.eulerAngles.x;
+
+            camRotationX -= (0.4665f - Mathf.PerlinNoise(seed + 1f, timeScreenShake * speed)) * (1f - timeScreenShake / duration) * strenth;
+            camRotationX = Mathf.Clamp(camRotationX, -90f, 90f);
+
+            PlayerCamera.gameObject.transform.eulerAngles = new Vector3(
+                camRotationX,
+                PlayerCamera.gameObject.transform.eulerAngles.y,
+                PlayerCamera.gameObject.transform.eulerAngles.z);
+
+            timeScreenShake += Time.deltaTime;
+            if (timeScreenShake > duration)
+            {
+                StopCoroutine(screenShakeCorutine);
+                screenShakeCorutine = null;
+            }
+            yield return new WaitForEndOfFrame();
+        } while (true);
+    }
+
     public void ScreenshakeSource(float strenth, float speed, Transform source, float maxDistance)
     {
         if (screenShakeSourceCorutine != null)
@@ -114,15 +168,15 @@ public class PlayerStats : MonoBehaviour
         {
 
             float distance = Mathf.Min(Mathf.Max(maxDistance - Vector3.Distance(transform.position, source.position), 0), 1);
-            transform.Rotate(new Vector3(0, (0.4665f - Mathf.PerlinNoise(seed, timeScreenShake * speed)) * strenth * distance, 0));
+            transform.Rotate(60f * Time.deltaTime * new Vector3(0, (0.4665f - Mathf.PerlinNoise(seed, timeScreenShake * speed)) * strenth * distance, 0));
 
             float camRotationX = PlayerCamera.transform.rotation.eulerAngles.x >= 270 ? PlayerCamera.transform.rotation.eulerAngles.x - 360f : PlayerCamera.transform.rotation.eulerAngles.x;
 
-            camRotationX -= (0.4665f - Mathf.PerlinNoise(seed + 1f, timeScreenShake * speed)) * strenth * distance;
+            camRotationX -= 60f * Time.deltaTime * (0.4665f - Mathf.PerlinNoise(seed + 1f, timeScreenShake * speed)) * strenth * distance;
             camRotationX = Mathf.Clamp(camRotationX, -90f, 90f);
 
             PlayerCamera.gameObject.transform.eulerAngles = new Vector3(
-                camRotationX,
+                 camRotationX,
                 PlayerCamera.gameObject.transform.eulerAngles.y,
                 PlayerCamera.gameObject.transform.eulerAngles.z);
 
@@ -132,13 +186,13 @@ public class PlayerStats : MonoBehaviour
         }
         screenShakeSourceCorutine = null;
     }
-
-    public IEnumerator c_InvincibilityFrames()
-    {
-        canTakeDamage = false;
-        yield return new WaitForSeconds(invincibilityTime);
-        canTakeDamage = true;
-    }
+    /*
+        public IEnumerator c_InvincibilityFrames()
+        {
+            canTakeDamage = false;
+            yield return new WaitForSeconds(invincibilityTime);
+            canTakeDamage = true;
+        }*/
 
 
 }

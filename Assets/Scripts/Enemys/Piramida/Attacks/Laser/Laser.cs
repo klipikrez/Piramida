@@ -122,6 +122,7 @@ public class Laser : BaseAttack
                 lightningObj.transform.position = boss.mainObject.transform.position + laserStartOffset;
                 lightningObj.Play();
                 Destroy(energyOrbesObj.gameObject);
+                boss.SjebiOsvetljenjeFlicker(0.15f, 252f);
 
             }
             if (boss.timeSinceAttakStarted - laserFireTime < laserFireTime)
@@ -151,7 +152,7 @@ public class Laser : BaseAttack
                     line.SetPosition(line.positionCount - 1, hit.point);
                     hitPoint.position = hit.point;
 
-                    if (fireTimer > fireSpawnTime)
+                    if (fireTimer * laserVelocity.magnitude > fireSpawnTime)
                     {
                         fireTimer = 0;
                         Instantiate(fire, hit.point + hit.normal * 0.3f, Quaternion.LookRotation(hit.normal) * Quaternion.Euler(90, 0, 0));

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Hit
 {
+    public Collider collider;
     public Vector3 point = Vector3.zero;
     public Vector3 normal = Vector3.zero;
     public float distance = float.MaxValue;
@@ -39,10 +40,11 @@ public static class Functions
         Collider[] colliders = Physics.OverlapSphere(origin, CheckRadious, mask);
         foreach (Collider col in colliders)
         {
-            if (!col.isTrigger)
-            {
+            //if (!col.isTrigger)
+            //{
 
-                CheckSphereExtra(col, origin, CheckRadious, out Vector3 point, out Vector3 normal);
+            if (CheckSphereExtra(col, origin, CheckRadious, out Vector3 point, out Vector3 normal))
+            {
                 float distance = Vector3.Distance(point, origin);
 
                 if (distance < hit.distance)
@@ -51,11 +53,13 @@ public static class Functions
 
                     hit.point = point;
                     hit.normal = normal;
+                    hit.collider = col;
                 }
 
                 hit.hit = true;
                 /*skaj*/
             }
+            // }
         }
         return hit;
     }
@@ -69,11 +73,12 @@ public static class Functions
         Collider[] colliders = Physics.OverlapBox(origin, CheckBounds, rotation, mask);
         foreach (Collider col in colliders)
         {
-            if (!col.isTrigger)
+            //if (!col.isTrigger)
+            //{
+            if (!collidersToExclude.Contains(col))
             {
-                if (!collidersToExclude.Contains(col))
+                if (CheckSphereExtra(col, origin, CheckBounds.magnitude, out Vector3 point, out Vector3 normal))
                 {
-                    CheckSphereExtra(col, origin, CheckBounds.magnitude, out Vector3 point, out Vector3 normal);
                     float distance = Vector3.Distance(point, origin);
 
                     if (distance < hit.distance)
@@ -83,12 +88,15 @@ public static class Functions
                         hit.point = point;
                         hit.normal = normal;
                         checkedColliders.Add(col);
+                        hit.collider = col;
                     }
 
                     hit.hit = true;
                     /*skaj*/
                 }
+
             }
+            //}
         }
         return hit;
     }
@@ -163,4 +171,11 @@ public static class Functions
 
         return false;
     }
+
+    public static float Remap(this float value, float from1, float to1, float from2, float to2)
+    {
+        return (value - from1) / (to1 - from1) * (to2 - from2) + from2;
+    }
+
+
 }

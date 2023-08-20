@@ -8,8 +8,8 @@ using static Functions;
 
 public class MiniPiramida : BaseEnemy
 {
-    public static int activeAgents = 0;
-
+    public static List<MiniPiramida> activeAgents = new List<MiniPiramida>();
+    public int agentID = 0;
 
     [NonSerialized]
     public float rotationTimer = 0f;
@@ -27,33 +27,67 @@ public class MiniPiramida : BaseEnemy
     public float maxDamage = 52.0025052f;
     public Rigidbody rigidBody;
     public float pushbackForce = 95f;
+    int seed = 0;
+    public float sektaDistanceFromPlayer = 7f;
+    public float sektaFloatHeight = 7f;
 
     // Start is called before the first frame update
     void Start()
     {
         if (player == null)
         {
-            player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>();
+            Debug.LogError("NENENENENEENENENENENEENNENENNNNNNNNNNNNNNNEEEEEEEEEEENENENENENENENENENENENENENENENENENENENENENENENENENENENENENENENENENENENENENENENENENENENENENENENENENENENENENENENENENENENENENENENEN");
+            //player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>();
         }
         if (rigidBody == null)
         {
             rigidBody = GetComponent<Rigidbody>();
         }
+        seed = UnityEngine.Random.Range(0, 152);
+        UpdateAgentIDs(true);
     }
 
 
 
     private void FixedUpdate()
     {
-        MoveTowardsPalyer();
+        if (activeAgents.Count <= 2)
+        {
+            MoveTowardsPalyer();
 
-        MagicanRotacija(UnityEngine.Random.Range(0, 152));
+            MagicanRotacija(seed);
+        }
+        else
+        {
+            //MoveTowardsPalyer();
+
+            //MagicanRotacija(seed);
+            SektaMovement();
+        }
     }
 
     public override void Damage(float damage)
     {
+        UpdateAgentIDs(false);
         Destroy(gameObject);
     }
+    public void UpdateAgentIDs(bool addNewAgent)
+    {
+        if (addNewAgent)
+        {
+            agentID = activeAgents.Count;
+            activeAgents.Add(this);
+        }
+        else
+        {
+            activeAgents.RemoveAt(agentID);
+            for (int i = agentID; i < activeAgents.Count; i++)
+            {
+                activeAgents[i].agentID = i;
+            }
+        }
+    }
+
     public void TriggerEnter(Collider other)
     {
 
@@ -77,15 +111,28 @@ public class MiniPiramida : BaseEnemy
 
     public void MoveTowardsPalyer()
     {
-        if (true)
-        {
-            Vector3 tmpVelocity = (player.gameObject.transform.position - transform.position).normalized * Time.deltaTime * moveSpeed;
 
-            rigidBody.velocity += tmpVelocity;
-            rigidBody.velocity -= velocity * drag * Time.deltaTime;
-        }
+        Vector3 tmpVelocity = (player.gameObject.transform.position - transform.position).normalized * Time.deltaTime * moveSpeed;
+
+        rigidBody.velocity += tmpVelocity;
+        rigidBody.velocity -= velocity * drag * Time.deltaTime;
+
     }
+    public void SektaMovement()
+    {
+        float angle = agentID * (360f / activeAgents.Count) * Mathf.Deg2Rad;
+        Vector3 offset = new Vector3(Mathf.Cos(angle), 0, Mathf.Sin(angle)) * sektaDistanceFromPlayer + Vector3.up * sektaFloatHeight;
 
+
+
+        Vector3 targetPosition = player.gameObject.transform.position + offset;
+
+
+        Vector3 tmpVelocity = (targetPosition - transform.position).normalized * Time.deltaTime * moveSpeed;
+
+        rigidBody.velocity += tmpVelocity;
+        rigidBody.velocity -= velocity * drag * Time.deltaTime;
+    }
 
     private const float magicConstant = 0.75f/* 0.4665f */;
     public void MagicanRotacija(int seed)

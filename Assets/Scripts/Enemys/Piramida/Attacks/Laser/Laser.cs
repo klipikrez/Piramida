@@ -108,6 +108,7 @@ public class Laser : BaseAttack
         {
             line.SetPosition(line.positionCount - 1, boss.mainObject.transform.position + laserStartOffset);
             energyOrbesObj.transform.LookAt(boss.player.transform.position);
+            energyOrbesObj.transform.position = boss.mainObject.transform.position + laserStartOffset;
         }
         else
         {

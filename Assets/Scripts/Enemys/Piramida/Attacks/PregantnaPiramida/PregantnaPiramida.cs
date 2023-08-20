@@ -76,6 +76,7 @@ public class PregantnaPiramida : BaseAttack
                     {
                         MiniPiramida instanceMini = Instantiate(miniPiramidaPrefab, boss.mainObject.transform.position, Quaternion.identity).GetComponent<MiniPiramida>();
                         instanceMini.rigidBody.velocity += Vector3.down * 100f;
+                        instanceMini.player = boss.player.gameObject.GetComponent<PlayerMovement>();
                     }
                     boss.player.Screenshake(0.5f, playerScreenShakeStrenth * 4, playerScreenShakeSpeed * 4);
 
@@ -106,11 +107,11 @@ public class PregantnaPiramida : BaseAttack
 
     void Shake(Bas boss, float seed, float strenth, float speed)
     {
-        boss.mainObject.transform.Rotate(new Vector3(
+        boss.mainObject.transform.Rotate(Time.deltaTime * 200f * new Vector3(
             (0.4665f - Mathf.PerlinNoise(seed, boss.timeSinceAttakStarted * speed)) * strenth,
             (0.4665f - Mathf.PerlinNoise(seed + 52, boss.timeSinceAttakStarted * speed)) * strenth,
             (0.4665f - Mathf.PerlinNoise(seed + 152, boss.timeSinceAttakStarted * speed)) * strenth));
-        boss.mainObject.transform.position += (new Vector3(
+        boss.mainObject.transform.position += (Time.deltaTime * 200f * new Vector3(
         (0.4665f - Mathf.PerlinNoise(seed, boss.timeSinceAttakStarted * speed)) * strenth,
         (0.4665f - Mathf.PerlinNoise(seed + 52, boss.timeSinceAttakStarted * speed)) * strenth,
         (0.4665f - Mathf.PerlinNoise(seed + 152, boss.timeSinceAttakStarted * speed)) * strenth));

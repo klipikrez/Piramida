@@ -47,7 +47,7 @@ public class Shockvawe : BaseAttack
         }
         DamagePlayerOnEnterTrigger trigger = ShockvaweObject.AddComponent<DamagePlayerOnEnterTrigger>();
         trigger.damage = damage;
-        ShockvaweObject.transform.position = boss.transform.position;
+        ShockvaweObject.transform.position = boss.transform.position + Vector3.down * 552f;
         ShockvaweObject.transform.rotation = boss.transform.rotation;
         //ShockvaweCollider = Instantiate(new GameObject(), boss.transform.position, boss.transform.rotation).AddComponent<MeshCollider>();
         ShockvaweObject.AddComponent<MeshFilter>().mesh = mesh;

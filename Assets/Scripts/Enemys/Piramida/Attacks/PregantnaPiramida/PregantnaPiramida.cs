@@ -74,7 +74,7 @@ public class PregantnaPiramida : BaseAttack
                     AudioManager.Instance.PlayAudioClip("Fart", 0.8f);
                     for (int i = 0; i < spawnNumber; i++)
                     {
-                        MiniPiramida instanceMini = Instantiate(miniPiramidaPrefab, boss.mainObject.transform.position, Quaternion.identity).GetComponent<MiniPiramida>();
+                        MiniPiramida instanceMini = Instantiate(miniPiramidaPrefab, boss.mainObject.transform.position + Vector3.one * Random.Range(-1f, 1f), Quaternion.identity).GetComponent<MiniPiramida>();
                         instanceMini.rigidBody.velocity += Vector3.down * 100f;
                         instanceMini.player = boss.player.gameObject.GetComponent<PlayerMovement>();
                     }

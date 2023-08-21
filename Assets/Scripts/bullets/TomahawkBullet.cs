@@ -73,7 +73,7 @@ public class TomahawkBullet : BulletBase
         }
 
 
-        hit = ReturnClosestHitBoxExclude(bullet.transform.position, bullet.hitColliders, out checkedColliders, bullet.transform.rotation, bullet.bulletBase.hitRadious, LayerMask.GetMask("EnemyCollider"));
+        hit = ReturnClosestHitBoxExclude(bullet.transform.position, bullet.hitColliders, out checkedColliders, bullet.transform.rotation, bullet.bulletBase.hitRadious, LayerMask.GetMask("EnemyCollider", "ReflectBullet"));
         if (hit.hit)
         {
             foreach (Collider col in checkedColliders)

@@ -105,6 +105,23 @@ public class MiniPiramida : BaseEnemy
                 }
             }
         }
+        else
+        {
+            if (other.gameObject.layer == LayerMask.NameToLayer("Player"))
+            {
+
+                PlayerStats playerStats = other.gameObject.GetComponentInParent<PlayerStats>();
+                PlayerMovement playerMove = other.gameObject.GetComponentInParent<PlayerMovement>();
+                if (playerStats != null && playerMove != null)
+                {
+                    if (playerStats.Damage(Mathf.Min(Mathf.Abs(playerMove.velocity.magnitude - velocity.magnitude) + rigidBody.angularVelocity.magnitude, maxDamage), gameObject))
+                    {
+                        rigidBody.velocity =/* rigidBody.velocity.magnitude*/  (/*(transform.position - playerStats.transform.position).normalized +*/ player.transform.forward).normalized * pushbackForce;
+                        rigidBody.angularVelocity = Vector3.zero;
+                    }
+                }
+            }
+        }
     }
 
 

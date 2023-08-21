@@ -2,13 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
-
+[ExecuteInEditMode]
 public class DynamicMeshGenerator : MonoBehaviour
 {
     public MeshCollider col;
     public MeshRenderer rend;
     public MeshFilter filter;
     public Material material;
+    public float attackTime = 0.5f;
+    public float attackDelay = 5f;
+    public bool debug = false;
+    public Vector3[] pointsssdfdfs = new Vector3[4];
+    public float tilingU = 1f;
+    public float tilingV = 1f;
 
     private void Start()
     {
@@ -24,35 +30,49 @@ public class DynamicMeshGenerator : MonoBehaviour
 
     private void Update()
     {
-        //Mesh mesh;
-        if (MiniPiramida.activeAgents.Count >= 3)
+        if (!debug)
+        {
+            //Mesh mesh;
+            if (MiniPiramida.activeAgents.Count >= 3)
+            {
+                List<Vector3> PiramidPoints = new List<Vector3>();
+                MiniPiramida[] liniPiraideArr = MiniPiramida.activeAgents.ToArray();
+                foreach (var agent in liniPiraideArr)
+                {
+
+                    if (agent != null)
+                        PiramidPoints.Add(new Vector3(agent.transform.position.x, -52, agent.transform.position.z));
+                }
+                Vector3[] convxPoints = GetConvexHull(PiramidPoints).ToArray();
+                Mesh dynamicMesh = GenerateMesh(convxPoints);
+                col.sharedMesh = dynamicMesh;
+                filter.mesh = dynamicMesh;/**/
+                material.SetVector("_Point", RopeTomahawk.Instance != null ? (RopeTomahawk.Instance.T2 != null ? RopeTomahawk.Instance.T2.position : Vector3.one * float.MaxValue) : Vector3.one * float.MaxValue);
+            }
+            else
+            {
+                if (filter.mesh != new Mesh() || col.sharedMesh != new Mesh())
+                {
+                    filter.mesh = new Mesh();
+                    col.sharedMesh = new Mesh();
+                }
+            }
+            //else
+            //{
+            //    mesh = GenerateMesh(pits);
+            //}
+            //col.sharedMesh = dynamicMesh;
+            //filter.mesh = dynamicMesh;/**/
+        }
+        else
         {
             List<Vector3> PiramidPoints = new List<Vector3>();
-            MiniPiramida[] liniPiraideArr = MiniPiramida.activeAgents.ToArray();
-            foreach (var agent in liniPiraideArr)
-            {
-
-                PiramidPoints.Add(new Vector3(agent.transform.position.x, -52, agent.transform.position.z));
-            }
+            PiramidPoints.AddRange(pointsssdfdfs);
             Vector3[] convxPoints = GetConvexHull(PiramidPoints).ToArray();
             Mesh dynamicMesh = GenerateMesh(convxPoints);
             col.sharedMesh = dynamicMesh;
             filter.mesh = dynamicMesh;/**/
         }
-        else
-        {
-            if (filter.mesh != new Mesh() || col.sharedMesh != new Mesh())
-            {
-                filter.mesh = new Mesh();
-                col.sharedMesh = new Mesh();
-            }
-        }
-        //else
-        //{
-        //    mesh = GenerateMesh(pits);
-        //}
-        //col.sharedMesh = dynamicMesh;
-        //filter.mesh = dynamicMesh;/**/
     }
 
     public void OnTriggerEnter(Collider other)
@@ -129,6 +149,7 @@ public class DynamicMeshGenerator : MonoBehaviour
 
         generatedMesh.uv = CalcUVPerFace(generatedMesh.vertices);
         generatedMesh.uv2 = CalcUVAllStreach(generatedMesh.vertices);
+        generatedMesh.uv3 = CalcUVAllTile(generatedMesh.vertices);
         generatedMesh.RecalculateBounds();
         return generatedMesh;
         //
@@ -143,8 +164,8 @@ public class DynamicMeshGenerator : MonoBehaviour
         for (int i = 0; i < verts.Length / 4; i++)
         {
             uvs[i * 4] = new Vector2(0, 0);
-            uvs[i * 4 + 1] = new Vector2(1, 0);
-            uvs[i * 4 + 2] = new Vector2(0, 1);
+            uvs[i * 4 + 1] = new Vector2(0, 1);
+            uvs[i * 4 + 2] = new Vector2(1, 0);
             uvs[i * 4 + 3] = new Vector2(1, 1);
         }
         return uvs;
@@ -161,6 +182,28 @@ public class DynamicMeshGenerator : MonoBehaviour
             uvs[i * 4 + 1] = new Vector2(i / (float)numOfFaces, 1);
             uvs[i * 4 + 2] = new Vector2((i + 1) / (float)numOfFaces, 0);
             uvs[i * 4 + 3] = new Vector2((i + 1) / (float)numOfFaces, 1);
+            //            Debug.Log(i / (float)numOfFaces + " ==:::== " + (i + 1) / (float)numOfFaces);
+        }
+        return uvs;
+    }
+
+    public Vector2[] CalcUVAllTile(Vector3[] verts)
+    {
+        Vector2[] uvs = new Vector2[verts.Length];
+        int numOfFaces = verts.Length / 4;
+        Vector3 firstPoint = verts[0];
+        float distanceFromStart = 0;
+
+        //      Debug.Log("=========" + numOfFaces);
+        for (int i = 0; i < numOfFaces; i++)
+        {
+            float faceWidth = Vector3.Distance(verts[i * 4], verts[i * 4 + 2]);
+
+            uvs[i * 4] = new Vector2(distanceFromStart * tilingV / 52, firstPoint.y * tilingU / 52);
+            uvs[i * 4 + 1] = new Vector2(distanceFromStart * tilingV / 52, (firstPoint.y - verts[i * 4 + 1].y) * tilingU / 52);
+            uvs[i * 4 + 2] = new Vector2((distanceFromStart + faceWidth) * tilingV / 52, firstPoint.y * tilingU / 52);
+            uvs[i * 4 + 3] = new Vector2((distanceFromStart + faceWidth) * tilingV / 52, (firstPoint.y - verts[i * 4 + 1].y) * tilingU / 52);
+            distanceFromStart += faceWidth;
             //            Debug.Log(i / (float)numOfFaces + " ==:::== " + (i + 1) / (float)numOfFaces);
         }
         return uvs;

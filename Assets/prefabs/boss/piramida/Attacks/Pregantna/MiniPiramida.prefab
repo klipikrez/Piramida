@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 7870287256692028085}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 50.9, y: 15.65, z: 1.3747716}
-  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 7688306413511328070}
@@ -58,7 +58,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 5009
   velocity: {x: 0, y: 0, z: 0}
-  moveSpeed: 55
+  moveSpeed: 45
   drag: 1
   speedDamageMultier: 1
   RotationDamageMultiplier: 0.01
@@ -75,7 +75,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7870287256692028085}
   serializedVersion: 2
-  m_Mass: 3
+  m_Mass: 1
   m_Drag: 1
   m_AngularDrag: 1
   m_UseGravity: 1
@@ -183,7 +183,7 @@ Transform:
   m_GameObject: {fileID: 7870287257411139047}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 3, y: 3, z: 3}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 7870287256692028043}

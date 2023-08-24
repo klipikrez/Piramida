@@ -10,6 +10,7 @@ public class Side : BaseEnemy
     public float currentHealth;
     public List<EyeHealthBar> healthBars;
     public GameObject eye;
+    public Renderer eyeRenderer;
     [System.NonSerialized]
     public GameObject player;
     public Vector3 playerOffset = Vector3.zero;
@@ -48,17 +49,25 @@ public class Side : BaseEnemy
 
     }
 
+    public void SetCrazyEyeMode(bool value)
+    {
+        eyeRenderer.material.SetFloat("_CARZYMODE", value ? 1 : 0);
+
+    }
+
     public void LookAt(Vector3 lookAt, float weight)
     {
         //Debug.Log(weight);
         Vector3 targetDirection = (lookAt - eye.transform.position).normalized;
         lookAtRotation = Quaternion.Lerp(transform.rotation * offset, Quaternion.LookRotation(targetDirection) * offset, weight);
-        eye.transform.rotation = Quaternion.Lerp(eye.transform.rotation, lookAtRotation, DeltaTimeLerp(0.1f));
+        eye.transform.rotation = Quaternion.Lerp(eye.transform.rotation, lookAtRotation, DeltaTimeLerp(0.2f));
     }
 
     public void Blink(float value)
     {
         kapak.SetBlendShapeWeight(0, Mathf.Lerp(value, kapak.GetBlendShapeWeight(0), DeltaTimeLerp(0.8f)));
+        kapak.SetBlendShapeWeight(1, Mathf.Lerp(value, kapak.GetBlendShapeWeight(0), DeltaTimeLerp(0.8f)));
+
     }
     public override void Damage(float damage)
     {

@@ -51,6 +51,10 @@ public class Laser : BaseAttack
         Destroy(hitPoint.gameObject);
         Destroy(line);
         Destroy(hitObj);
+        foreach (Side side in boss.pyramidSides)
+        {
+            side.SetCrazyEyeMode(false);
+        }
         boss.ChooseNewRandomState();
     }
 
@@ -115,6 +119,10 @@ public class Laser : BaseAttack
             Vector3 start = boss.mainObject.transform.position + laserStartOffset;
             if (attackStart)
             {
+                foreach (Side side in boss.pyramidSides)
+                {
+                    side.SetCrazyEyeMode(true);
+                }
                 boss.player.ScreenshakeSource(3f, 65f, hitPoint, 5f);
                 attackStart = false;
                 AudioManager.Instance.PlayAudioDDDClipDynamic("laser", hitObj.transform, 0.7f);

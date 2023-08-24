@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-7182972682354774331
+--- !u!114 &-8235780702316060793
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
@@ -20,26 +20,26 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Eyeris Variant
-  m_Shader: {fileID: 4800000, guid: 933532a4fcc9baf4fa0491de14d08ed7, type: 3}
-  m_Parent: {fileID: 2100000, guid: c11077e05abba9047b20f5854e4f700d, type: 2}
+  m_Name: EyeHealthbar Variant 3
+  m_Shader: {fileID: -6465566751694194690, guid: dfad0757e43297342bfc3b5794c6eba1,
+    type: 3}
+  m_Parent: {fileID: 2100000, guid: f1b2f5b36ba63e74780f11c5ac0a9cbd, type: 2}
   m_ModifiedSerializedProperties: 0
-  m_ValidKeywords:
+  m_ValidKeywords: []
+  m_InvalidKeywords:
   - _EMISSION
-  m_InvalidKeywords: []
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
-  stringTagMap:
-    RenderType: Opaque
+  stringTagMap: {}
   disabledShaderPasses: []
   m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs: []
     m_Ints: []
-    m_Floats: []
-    m_Colors:
-    - _EmissionColor: {r: 2.1483395, g: 1.0648197, b: 8.47419, a: 1}
+    m_Floats:
+    - _Offset: 1.1428572
+    m_Colors: []
   m_BuildTextureStacks: []

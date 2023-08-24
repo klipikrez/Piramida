@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using UnityEditor;
 using UnityEngine;
 [ExecuteInEditMode]
 public class DynamicMeshGenerator : MonoBehaviour
@@ -11,7 +12,6 @@ public class DynamicMeshGenerator : MonoBehaviour
     public Material material;
     public float attackTime = 0.5f;
     public float attackDelay = 5f;
-    public bool debug = false;
     public Vector3[] pointsssdfdfs = new Vector3[4];
     public float tilingU = 1f;
     public float tilingV = 1f;
@@ -30,7 +30,7 @@ public class DynamicMeshGenerator : MonoBehaviour
 
     private void Update()
     {
-        if (!debug)
+        if (EditorApplication.isPlaying)
         {
             //Mesh mesh;
             if (MiniPiramida.activeAgents.Count >= 3)
@@ -67,7 +67,11 @@ public class DynamicMeshGenerator : MonoBehaviour
         else
         {
             List<Vector3> PiramidPoints = new List<Vector3>();
-            PiramidPoints.AddRange(pointsssdfdfs);
+            foreach (Vector3 point in pointsssdfdfs)
+            {
+                PiramidPoints.Add(new Vector3(point.x, -52, point.z));
+            }
+            //PiramidPoints.AddRange(pointsssdfdfs);
             Vector3[] convxPoints = GetConvexHull(PiramidPoints).ToArray();
             Mesh dynamicMesh = GenerateMesh(convxPoints);
             col.sharedMesh = dynamicMesh;

@@ -1081,11 +1081,17 @@ PrefabInstance:
         type: 3}
       propertyPath: attackStates.Array.data[0]
       value: 
-      objectReference: {fileID: 11400000, guid: 5df6a359457ffd74d85f46e1ad7c8cae,
+      objectReference: {fileID: 11400000, guid: 678b1c8f7de3cda4fab0773794f4250f,
         type: 2}
     - target: {fileID: 7910335330499376895, guid: 4b2eca9dbe0c01642a71b1df9219072e,
         type: 3}
       propertyPath: attackStates.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: 5df6a359457ffd74d85f46e1ad7c8cae,
+        type: 2}
+    - target: {fileID: 7910335330499376895, guid: 4b2eca9dbe0c01642a71b1df9219072e,
+        type: 3}
+      propertyPath: attackStates.Array.data[2]
       value: 
       objectReference: {fileID: 11400000, guid: 6efaa2122ede0d94cba63561bcc46f6e,
         type: 2}
@@ -1141,7 +1147,7 @@ Transform:
   m_Father: {fileID: 1575982882}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!43 &922864516
+--- !u!43 &840669939
 Mesh:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3453,7 +3459,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2142460130}
-  m_Mesh: {fileID: 922864516}
+  m_Mesh: {fileID: 840669939}
 --- !u!23 &2142460134
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -3509,7 +3515,7 @@ MeshCollider:
   serializedVersion: 4
   m_Convex: 0
   m_CookingOptions: 30
-  m_Mesh: {fileID: 922864516}
+  m_Mesh: {fileID: 840669939}
 --- !u!33 &5059900802861041755
 MeshFilter:
   m_ObjectHideFlags: 0

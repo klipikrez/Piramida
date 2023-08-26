@@ -39,6 +39,7 @@ public class Bas : BaseEnemy
     private int seed = 0;
     public float minRotateValue = 0;
     public float maxRotateValue = 1;
+    Coroutine shakeCorutine;
 
     private void Start()
     {
@@ -90,7 +91,7 @@ public class Bas : BaseEnemy
         }
         else
         {
-            attackRepeted = 0;
+            attackRepeted = 1;
             avalibeAttacks = CalculateAvalibeAttacks(selectedAttack);
             int i = UnityEngine.Random.Range(0, attackStates.Length - 1);
             //        Debug.Log(i);
@@ -205,10 +206,42 @@ public class Bas : BaseEnemy
         FlashVolume.enabled = false;
         sjebiOsvetljenjeCorutine = null;
     }
+    public void ShakeCorutine(float seed, float strenth, float speed, float duration)
+    {
+        if (shakeCorutine != null)
+        {
+            StopCoroutine(shakeCorutine);
+        }
+        StartCoroutine(c_Shake(seed, strenth, speed, duration));
+    }
+
+    IEnumerator c_Shake(float seed, float strenth, float speed, float duration)
+    {
+        float timer = 0;
+        while (timer < duration)
+        {
+            Shake(seed, strenth, speed);
+            timer += Time.deltaTime;
+            yield return new WaitForEndOfFrame();
+        }
+    }
+
+    public void Shake(float seed, float strenth, float speed)
+    {
+        mainObject.transform.Rotate(Time.deltaTime * 200f * new Vector3(
+            (0.4665f - Mathf.PerlinNoise(seed, timeSinceAttakStarted * speed)) * strenth,
+            (0.4665f - Mathf.PerlinNoise(seed + 52, timeSinceAttakStarted * speed)) * strenth,
+            (0.4665f - Mathf.PerlinNoise(seed + 152, timeSinceAttakStarted * speed)) * strenth));
+        mainObject.transform.position += (Time.deltaTime * 200f * new Vector3(
+        (0.4665f - Mathf.PerlinNoise(seed, timeSinceAttakStarted * speed)) * strenth,
+        (0.4665f - Mathf.PerlinNoise(seed + 52, timeSinceAttakStarted * speed)) * strenth,
+        (0.4665f - Mathf.PerlinNoise(seed + 152, timeSinceAttakStarted * speed)) * strenth));
+    }
+
     public override void Damage(float damage)
     {
         health -= damage;
-        AudioManager.Instance.PlayAudioClip("PiramidaHurt");
+        AudioManager.Instance.PlayVoiceLine("PiramidaHurt");
         currentAttackState.EndAttack(this);
         foreach (Side side in pyramidSides)
         {

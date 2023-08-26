@@ -10,6 +10,8 @@ public class AudioManager : MonoBehaviour
     public Dictionary<string, AudioClip> audioDictionary = new Dictionary<string, AudioClip>();
     public GameObject DDDSoundPrefab;
     public AudioMixerGroup DD;
+    Coroutine voiceCorutine;
+    AudioSource VoiceLineSource;
 
     public static AudioManager Instance { get; private set; }
 
@@ -46,6 +48,20 @@ public class AudioManager : MonoBehaviour
 
         StartCoroutine(Play(audioDictionary[audioClipName], volume, priority));
 
+    }
+    public void PlayVoiceLine(string audioClipName, float volume = 1, int priority = 128)
+    {
+        if (voiceCorutine != null)
+        {
+            StopCoroutine(voiceCorutine);
+            if (VoiceLineSource != null)
+            {
+                VoiceLineSource.Stop();
+                Destroy(VoiceLineSource);
+            }
+        }
+        VoiceLineSource = gameObject.AddComponent<AudioSource>();
+        voiceCorutine = StartCoroutine(Play(audioDictionary[audioClipName], volume, priority, VoiceLineSource));
     }
 
     public void PlayAudioClipLooping(string audioClipName, float volume = 1)
@@ -109,6 +125,19 @@ public class AudioManager : MonoBehaviour
     IEnumerator Play(AudioClip audio, float volume, int priority)
     {
         AudioSource audioSource = gameObject.AddComponent<AudioSource>();
+        audioSource.outputAudioMixerGroup = DD;
+        audioSource.clip = audio;
+        audioSource.volume = volume;
+        audioSource.priority = priority;
+        audioSource.Play();
+        yield return new WaitForSeconds(audio.length);
+        audioSource.Stop();
+        Destroy(audioSource);
+    }
+
+    IEnumerator Play(AudioClip audio, float volume, int priority, AudioSource audioSource)
+    {
+
         audioSource.outputAudioMixerGroup = DD;
         audioSource.clip = audio;
         audioSource.volume = volume;

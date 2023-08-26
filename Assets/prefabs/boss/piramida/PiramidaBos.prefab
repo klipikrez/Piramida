@@ -523,6 +523,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5150799246469020774, guid: e362e449169ae5241af989987906c14c,
+        type: 3}
+      propertyPath: boss
+      value: 
+      objectReference: {fileID: 7910335330499376895}
     - target: {fileID: 7982152009286985633, guid: e362e449169ae5241af989987906c14c,
         type: 3}
       propertyPath: m_Name
@@ -626,6 +631,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5150799246469020774, guid: e362e449169ae5241af989987906c14c,
+        type: 3}
+      propertyPath: boss
+      value: 
+      objectReference: {fileID: 7910335330499376895}
+    - target: {fileID: 5150799246469020774, guid: e362e449169ae5241af989987906c14c,
+        type: 3}
+      propertyPath: shakeTime
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 6175008792017159136, guid: e362e449169ae5241af989987906c14c,
         type: 3}
@@ -741,6 +756,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5150799246469020774, guid: e362e449169ae5241af989987906c14c,
+        type: 3}
+      propertyPath: boss
+      value: 
+      objectReference: {fileID: 7910335330499376895}
     - target: {fileID: 6175008792017159136, guid: e362e449169ae5241af989987906c14c,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -855,6 +875,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5150799246469020774, guid: e362e449169ae5241af989987906c14c,
+        type: 3}
+      propertyPath: boss
+      value: 
+      objectReference: {fileID: 7910335330499376895}
     - target: {fileID: 6175008792017159136, guid: e362e449169ae5241af989987906c14c,
         type: 3}
       propertyPath: m_Materials.Array.data[0]

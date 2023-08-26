@@ -23,7 +23,7 @@ public class PregantnaPiramida : BaseAttack
     public float fartShakeStrenth = 52f;
     bool resting = false;
     int seed = 0;
-    bool laugh = false;
+
 
     public override void EndAttack(Bas boss)
     {
@@ -41,7 +41,7 @@ public class PregantnaPiramida : BaseAttack
 
     public override void StartAttack(Bas boss)
     {
-        laugh = false;
+
         resting = false;
         foreach (Side side in boss.pyramidSides)
         {
@@ -61,7 +61,7 @@ public class PregantnaPiramida : BaseAttack
     {
         if (boss.timeSinceAttakStarted < shakeTime)
         {
-            Shake(boss, seed, shakeStrenth, shakeSpeed);
+            boss.Shake(seed, shakeStrenth, shakeSpeed);
             boss.mainObject.transform.position += Vector3.up * Time.deltaTime * 5f;
             foreach (Side side in boss.pyramidSides)
             {
@@ -98,16 +98,9 @@ public class PregantnaPiramida : BaseAttack
                 {
                     if (boss.timeSinceAttakStarted - shakeTime < fartInRestTime)
                     {
-                        Shake(boss, seed + 5, fartShakeStrenth * (1f - (boss.timeSinceAttakStarted - shakeTime) / (restTime / 2 + 0.001f)), fartShakeSpeed);
+                        boss.Shake(seed + 5, fartShakeStrenth * (1f - (boss.timeSinceAttakStarted - shakeTime) / (restTime / 2 + 0.001f)), fartShakeSpeed);
                     }
-                    else
-                    {
-                        if (!laugh)
-                        {
-                            AudioManager.Instance.PlayAudioClip("PiramidaLaugh");
-                            laugh = true;
-                        }
-                    }
+
 
                 }
             }
@@ -118,17 +111,7 @@ public class PregantnaPiramida : BaseAttack
         }
     }
 
-    void Shake(Bas boss, float seed, float strenth, float speed)
-    {
-        boss.mainObject.transform.Rotate(Time.deltaTime * 200f * new Vector3(
-            (0.4665f - Mathf.PerlinNoise(seed, boss.timeSinceAttakStarted * speed)) * strenth,
-            (0.4665f - Mathf.PerlinNoise(seed + 52, boss.timeSinceAttakStarted * speed)) * strenth,
-            (0.4665f - Mathf.PerlinNoise(seed + 152, boss.timeSinceAttakStarted * speed)) * strenth));
-        boss.mainObject.transform.position += (Time.deltaTime * 200f * new Vector3(
-        (0.4665f - Mathf.PerlinNoise(seed, boss.timeSinceAttakStarted * speed)) * strenth,
-        (0.4665f - Mathf.PerlinNoise(seed + 52, boss.timeSinceAttakStarted * speed)) * strenth,
-        (0.4665f - Mathf.PerlinNoise(seed + 152, boss.timeSinceAttakStarted * speed)) * strenth));
-    }
+
 
 
 

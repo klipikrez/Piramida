@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.VFX;
 using static Functions;
 
 public class Side : BaseEnemy
@@ -29,6 +30,16 @@ public class Side : BaseEnemy
     public Transform SIMSshield;
     public float SIMSshieldMaxRotation = 60f;
     public Coroutine SimsCorutine;
+    public Bas boss;
+    public float ShakeStrenth = 10f;
+    public float ShakeSpeed = 50f;
+    public float shakeTime = 1f;
+    public float ShakeStrenthKill = 10f;
+    public float ShakeSpeedKill = 50f;
+    public float shakeTimeKill = 1f;
+    public VisualEffect gougeEyeVFX;
+    public GameObject sjebanoOko;
+    public GameObject pushBack;
     private void Start()
     {
         defaultRotation = eye.transform;
@@ -37,20 +48,22 @@ public class Side : BaseEnemy
     }
     private void Update()
     {
-        Vector3 lookAt = player.transform.position;
-
-        angle = Vector3.Angle((new Vector3(lookAt.x, 0, lookAt.z)) - new Vector3(transform.position.x, 0, transform.position.z), transform.forward);
-        if (lookAtPlayer)
+        if (currentHealth != 0)
         {
-            LookAt(lookAt, Mathf.Min(Mathf.Max(180 - angle - 110, 0) * 1.8f, 100) / 100);
-            Blink(Mathf.Min(Mathf.Max(180 - angle - 100, 0) * 1.8f, 100));//trepuce
-        }
-        else
-        {
-            LookAt(lookAtPoint, 1f);
-            Blink(blinkState * 100f);
-        }
+            Vector3 lookAt = player.transform.position;
 
+            angle = Vector3.Angle((new Vector3(lookAt.x, 0, lookAt.z)) - new Vector3(transform.position.x, 0, transform.position.z), transform.forward);
+            if (lookAtPlayer)
+            {
+                LookAt(lookAt, Mathf.Min(Mathf.Max(180 - angle - 110, 0) * 1.8f, 100) / 100);
+                Blink(Mathf.Min(Mathf.Max(180 - angle - 100, 0) * 1.8f, 100));//trepuce
+            }
+            else
+            {
+                LookAt(lookAtPoint, 1f);
+                Blink(blinkState * 100f);
+            }
+        }
 
     }
 
@@ -80,16 +93,26 @@ public class Side : BaseEnemy
         {
             currentHealth -= damage;
             UpdateHealthbar();
+            boss.ShakeCorutine(UnityEngine.Random.Range(0f, 52f), ShakeStrenth, ShakeSpeed, shakeTime);
         }
         else
         {
             if (currentHealth != 0)
             {
+                boss.SjebiOsvetljenjeFlicker(0.2f, 252f);
+                boss.ShakeCorutine(UnityEngine.Random.Range(0f, 52f), ShakeStrenthKill, ShakeSpeedKill, shakeTimeKill);
                 currentHealth = 0;
                 UpdateHealthbar();
-                AudioManager.Instance.PlayAudioClip("PiramidaEyeLoss");
+                AudioManager.Instance.PlayVoiceLine("PiramidaEyeLoss");
+                AudioManager.Instance.PlayAudioClip("OdeMuOko");
+                gougeEyeVFX.SendEvent("Start");
+                eye.SetActive(false);
+                kapak.gameObject.SetActive(false);
                 EyeHitbox.SetActive(false);
                 shield.gameObject.SetActive(false);
+                pushBack.SetActive(false);
+
+                sjebanoOko.SetActive(true);
             }
         }
     }

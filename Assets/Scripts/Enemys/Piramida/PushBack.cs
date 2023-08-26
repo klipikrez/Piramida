@@ -8,7 +8,7 @@ public class PushBack : MonoBehaviour
     public float upForce = 21f;
     void OnTriggerEnter(Collider other)
     {
-        Debug.Log(other.gameObject.name);
+        //        Debug.Log(other.gameObject.name);
         if (other.gameObject.layer == LayerMask.NameToLayer("Hitbox"))
         {
 

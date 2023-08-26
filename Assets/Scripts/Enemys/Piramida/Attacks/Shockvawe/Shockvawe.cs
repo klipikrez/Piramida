@@ -38,9 +38,9 @@ public class Shockvawe : BaseAttack
     {
         ShockvaweObject = new GameObject("Shockvawe");
 
-        if (playAudio != "")
+        if (playAudio != "" && boss.attackRepeted == 1)
         {
-            AudioManager.Instance.PlayAudioClip(playAudio);
+            AudioManager.Instance.PlayVoiceLine(playAudio);
         }
 
         ShockvaweObject.layer = LayerMask.NameToLayer("Attack");

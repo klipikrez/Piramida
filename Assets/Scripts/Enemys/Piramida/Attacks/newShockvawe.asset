@@ -82,7 +82,7 @@ MonoBehaviour:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0.06666667
+      value: 0.35892114
       inSlope: 0.0033663646
       outSlope: 0.0033663646
       tangentMode: 0
@@ -126,3 +126,4 @@ MonoBehaviour:
   timeShockvawe: 2
   timePiramida: 2
   expandSpeed: 50
+  playAudio: PiramidaLaugh

@@ -31,6 +31,7 @@ public class PlayerMovement : MonoBehaviour
     public Vector3 velocity = Vector3.zero;
     public float maxSpeed = 2;
     public float maxSpeedInJump = 2;
+    public float maxSpeedDampenArea = 1;
     public float maxSpeedInGrapple = 10f;
     //private float camRotationX = 0;
     public float stoppingDrag = 0.8f;
@@ -52,6 +53,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Start()
     {
+
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
 
@@ -76,6 +78,7 @@ public class PlayerMovement : MonoBehaviour
         input.Player.Shift.canceled += StopShift;
     }
 
+
     private void Shift(InputAction.CallbackContext context)
     {
 
@@ -94,7 +97,7 @@ public class PlayerMovement : MonoBehaviour
             Hit hit = ReturnClosestHitSphere(transform.position + Vector3.up * groundCheckoffsetForRaycast, groundCheckRadious, ~excludePlayer);
             if (hit.hit)
             {
-                body.velocity = body.velocity * ((1 - (Vector3.Angle(hit.normal, Vector3.down) - 90) / 90));
+                body.velocity = new Vector3(body.velocity.x, 0, body.velocity.z);//body.velocity * ((1 - (Vector3.Angle(hit.normal, Vector3.down) - 90) / 90));
                 //                Debug.Log(((1 - (Vector3.Angle(hit.normal, Vector3.down) - 90) / 90)));
             }
         }
@@ -104,7 +107,7 @@ public class PlayerMovement : MonoBehaviour
     {
         //ako bi tvoji drugari skocili u dunav, dal bi i ti?
         jump = true;
-        if (grounded && !grapple)
+        if (grounded && !grapple && body.velocity.magnitude < maxSpeed)
         {
             body.velocity = new Vector3(body.velocity.x * jumpSpeedBoostMultiply, body.velocity.y, body.velocity.z * jumpSpeedBoostMultiply);
         }
@@ -128,6 +131,7 @@ public class PlayerMovement : MonoBehaviour
         {
             wasGrappling = false;
         }
+
         if (grapple)
         {
             wasGrappling = true;
@@ -141,6 +145,7 @@ public class PlayerMovement : MonoBehaviour
             Move();
             Jump();
         }
+
 
         //        Debug.Log(grappleTimer);
         Look();
@@ -185,6 +190,7 @@ public class PlayerMovement : MonoBehaviour
             // orijentise move vektor u pravcu ge gleda igrac
             float velocityChange = wasGrappling ? moveSpeedInGrappleAir : moveSpeed;
             move = Quaternion.Euler(0, PlayerCamera.transform.eulerAngles.y, 0) * new Vector3(move.x * velocityChange * Time.deltaTime, 0, move.z * velocityChange * Time.deltaTime);
+            bool adjustedSpeed = false;
             if (!wasGrappling)
             {
                 //gleda koliki je ugao zemlje na kojoj stojis
@@ -206,15 +212,41 @@ public class PlayerMovement : MonoBehaviour
                         move *= 1 - ((Mathf.Max(Mathf.Min(angle, maxWalkAngle), normalWalkAngle) - normalWalkAngle) / (maxWalkAngle - normalWalkAngle));
                     }
                 }
-
+                float magnitude = new Vector3(body.velocity.x, 0, body.velocity.z).magnitude;
                 Vector3 tempVelocity = new Vector3(body.velocity.x + move.x, 0, body.velocity.z + move.z);
+                Vector3 tmpMove = new Vector3(move.x, 0, move.z);
 
+                float dampen = (Mathf.Max(Mathf.Min(tempVelocity.magnitude, maxSpeed + maxSpeedDampenArea), maxSpeed) - maxSpeed) / maxSpeedDampenArea;
+
+                Vector3 velocityTMP = body.velocity;
+                velocityTMP -= velocityTMP * stoppingDrag * Time.deltaTime;
+                body.velocity = new Vector3(velocityTMP.x, body.velocity.y, velocityTMP.z);
 
                 if (grounded)
                 {
                     if (tempVelocity.magnitude > maxSpeed)
                     {
-                        body.velocity = (tempVelocity.normalized * maxSpeed) + new Vector3(0, body.velocity.y, 0);
+                        if (magnitude > maxSpeed)
+                        {
+                            //tempVelocity -= tempVelocity * stoppingDrag * Time.deltaTime;
+                            if (tempVelocity.magnitude < maxSpeed)
+                                tempVelocity = tempVelocity.normalized * maxSpeed;
+                            if (tempVelocity.magnitude > magnitude)
+                            {
+                                body.velocity = (tempVelocity).normalized * magnitude + new Vector3(0, body.velocity.y, 0);
+
+                            }
+                            else
+                            {
+                                body.velocity = tempVelocity + new Vector3(0, body.velocity.y, 0);
+                            }
+
+                        }
+                        else
+                        {
+                            body.velocity = tempVelocity.normalized * maxSpeed + new Vector3(0, body.velocity.y, 0);
+                        }
+                        adjustedSpeed = true;
                     }
                 }
                 else
@@ -223,21 +255,60 @@ public class PlayerMovement : MonoBehaviour
                     {
                         if (tempVelocity.magnitude > maxSpeedInJump)
                         {
+                            if (magnitude > maxSpeedInJump)
+                            {
+                                //tempVelocity -= tempVelocity * stoppingDrag * Time.deltaTime;
+                                if (tempVelocity.magnitude < maxSpeedInJump)
+                                    tempVelocity = tempVelocity.normalized * maxSpeedInJump;
+                                if (tempVelocity.magnitude > magnitude)
+                                {
+                                    body.velocity = (tempVelocity).normalized * magnitude + new Vector3(0, body.velocity.y, 0);
+                                }
+                                else
+                                {
+                                    body.velocity = tempVelocity + new Vector3(0, body.velocity.y, 0);
+                                }
 
-                            body.velocity = (tempVelocity.normalized * maxSpeedInJump) + new Vector3(0, body.velocity.y, 0);
+                            }
+                            else
+                            {
+                                body.velocity = tempVelocity.normalized * maxSpeedInJump + new Vector3(0, body.velocity.y, 0);
+                            }
+                            adjustedSpeed = true;
                         }
+
                     }
                     else
                     {
                         if (tempVelocity.magnitude > maxSpeed)
                         {
+                            if (magnitude > maxSpeed)
+                            {
+                                //tempVelocity -= tempVelocity * stoppingDrag * Time.deltaTime;
+                                if (tempVelocity.magnitude < maxSpeed)
+                                    tempVelocity = tempVelocity.normalized * maxSpeed;
+                                if (tempVelocity.magnitude > magnitude)
+                                {
+                                    body.velocity = (tempVelocity).normalized * magnitude + new Vector3(0, body.velocity.y, 0);
+                                }
+                                else
+                                {
+                                    body.velocity = tempVelocity + new Vector3(0, body.velocity.y, 0);
+                                }
 
-                            body.velocity = (tempVelocity.normalized * maxSpeed) + new Vector3(0, body.velocity.y, 0);
+                            }
+                            else
+                            {
+                                body.velocity = tempVelocity.normalized * maxSpeed + new Vector3(0, body.velocity.y, 0);
+                            }
+                            adjustedSpeed = true;
                         }
                     }
                 }
             }
-            body.velocity += move;
+
+            if (!adjustedSpeed)
+                body.velocity += move;
 
 
 

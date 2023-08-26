@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
 using static Functions;
 
@@ -15,6 +16,7 @@ public class Side : BaseEnemy
     public GameObject player;
     public Vector3 playerOffset = Vector3.zero;
     public MeshRenderer shield;
+    public GameObject EyeHitbox;
     public SkinnedMeshRenderer kapak;
     private float angle;
     public float rotSpeed = 1f;
@@ -24,6 +26,9 @@ public class Side : BaseEnemy
     public bool lookAtPlayer = true;
     public Vector3 lookAtPoint = Vector3.zero;
     public float blinkState = 0;
+    public Transform SIMSshield;
+    public float SIMSshieldMaxRotation = 60f;
+    public Coroutine SimsCorutine;
     private void Start()
     {
         defaultRotation = eye.transform;
@@ -78,9 +83,14 @@ public class Side : BaseEnemy
         }
         else
         {
-            currentHealth = 0;
-            UpdateHealthbar();
-            shield.gameObject.SetActive(false);
+            if (currentHealth != 0)
+            {
+                currentHealth = 0;
+                UpdateHealthbar();
+                AudioManager.Instance.PlayAudioClip("PiramidaEyeLoss");
+                EyeHitbox.SetActive(false);
+                shield.gameObject.SetActive(false);
+            }
         }
     }
 
@@ -99,5 +109,25 @@ public class Side : BaseEnemy
                 bar.SetHealth(false);
             }
         }
+    }
+
+    public void SetSimsState(bool value)
+    {
+        if (SimsCorutine != null)
+        {
+            StopCoroutine(SimsCorutine);
+        }
+        SimsCorutine = StartCoroutine(c_Sims(value ? SIMSshieldMaxRotation : 0));
+    }
+
+    IEnumerator c_Sims(float targetRotation)
+    {
+
+        while (Mathf.Abs(SIMSshield.localRotation.eulerAngles.x - targetRotation) > 1f)
+        {
+            SIMSshield.localRotation = Quaternion.Lerp(SIMSshield.localRotation, Quaternion.Euler(Vector3.right * targetRotation), DeltaTimeLerp(0.025f));
+            yield return new WaitForEndOfFrame();
+        }
+        SIMSshield.transform.localRotation = Quaternion.Euler(Vector3.right * targetRotation);
     }
 }

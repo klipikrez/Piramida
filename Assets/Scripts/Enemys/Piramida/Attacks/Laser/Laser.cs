@@ -51,6 +51,7 @@ public class Laser : BaseAttack
         Destroy(hitPoint.gameObject);
         Destroy(line);
         Destroy(hitObj);
+        boss.SetHeadOpen(false);
         foreach (Side side in boss.pyramidSides)
         {
             side.SetCrazyEyeMode(false);
@@ -60,6 +61,7 @@ public class Laser : BaseAttack
 
     public override void StartAttack(Bas boss)
     {
+        boss.SetHeadOpen(true);
         laserVelocity = Vector3.zero;
         Distance = float.MaxValue;
         laserFollowPlayerTimer = 0;
@@ -102,6 +104,7 @@ public class Laser : BaseAttack
         energyOrbesObj.visualEffectAsset = energyOrbes;
         energyOrbesObj.transform.position = boss.mainObject.transform.position + laserStartOffset;
         energyOrbesObj.Play();
+
 
     }
 

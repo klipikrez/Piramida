@@ -25,6 +25,7 @@ public class Shockvawe : BaseAttack
     public float expandSpeed = 10f;
     [System.NonSerialized]
     public GameObject ShockvaweObject;
+    public string playAudio = "";
 
     public override void EndAttack(Bas boss)
     {
@@ -36,6 +37,11 @@ public class Shockvawe : BaseAttack
     public override void StartAttack(Bas boss)
     {
         ShockvaweObject = new GameObject("Shockvawe");
+
+        if (playAudio != "")
+        {
+            AudioManager.Instance.PlayAudioClip(playAudio);
+        }
 
         ShockvaweObject.layer = LayerMask.NameToLayer("Attack");
         foreach (Mesh mesh in hitboxMeshes)

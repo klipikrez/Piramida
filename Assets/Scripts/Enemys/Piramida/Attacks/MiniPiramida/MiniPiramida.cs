@@ -30,8 +30,11 @@ public class MiniPiramida : BaseEnemy
     int seed = 0;
     public float sektaDistanceFromPlayer = 7f;
     public float sektaFloatHeight = 7f;
+    public LayerMask mask;
+
 
     // Start is called before the first frame update
+
     void Start()
     {
         if (player == null)
@@ -51,6 +54,18 @@ public class MiniPiramida : BaseEnemy
 
     private void FixedUpdate()
     {
+        RaycastHit hit;
+        Debug.DrawRay(transform.position, Vector3.down * 9999f, Color.red);
+        if (!Physics.Raycast(transform.position, Vector3.down, out hit, 9999f, mask))
+        {
+            Debug.Log("AAA");
+            rigidBody.velocity += Vector3.up * 522 * Time.deltaTime;
+        }
+        else
+        {
+            Debug.Log(hit.collider.gameObject.name);
+        }
+
         if (activeAgents.Count <= 2)
         {
             MoveTowardsPalyer();
@@ -66,9 +81,10 @@ public class MiniPiramida : BaseEnemy
         }
     }
 
+
     public override void Damage(float damage)
     {
-        UpdateAgentIDs(false);
+
         Destroy(gameObject);
     }
     public void UpdateAgentIDs(bool addNewAgent)
@@ -162,5 +178,9 @@ public class MiniPiramida : BaseEnemy
         rotationTimer += Time.deltaTime;
     }
 
+    private void OnDestroy()
+    {
+        UpdateAgentIDs(false);
+    }
 
 }

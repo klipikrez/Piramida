@@ -15,12 +15,15 @@ public class PregantnaPiramida : BaseAttack
     public float playerScreenShakeSpeed = 2f;
     public float playerScreenShakeStrenth = 2f;
     public int spawnNumber = 4;
+    public int numberAfterWitchWeSubtract = 3;
+    public int NumberSubtract = 2;
     public float restTime = 1f;
     public float fartInRestTime = 0.1f;
     public float fartShakeSpeed = 2f;
     public float fartShakeStrenth = 52f;
     bool resting = false;
     int seed = 0;
+    bool laugh = false;
 
     public override void EndAttack(Bas boss)
     {
@@ -38,6 +41,7 @@ public class PregantnaPiramida : BaseAttack
 
     public override void StartAttack(Bas boss)
     {
+        laugh = false;
         resting = false;
         foreach (Side side in boss.pyramidSides)
         {
@@ -72,7 +76,8 @@ public class PregantnaPiramida : BaseAttack
                 if (!resting)
                 {
                     AudioManager.Instance.PlayAudioClip("Fart", 0.8f);
-                    for (int i = 0; i < spawnNumber; i++)
+
+                    for (int i = 0; i < spawnNumber - ((MiniPiramida.activeAgents.Count > numberAfterWitchWeSubtract) ? NumberSubtract : 0); i++)
                     {
                         MiniPiramida instanceMini = Instantiate(miniPiramidaPrefab, boss.mainObject.transform.position + Vector3.one * Random.Range(-1f, 1f), Quaternion.identity).GetComponent<MiniPiramida>();
                         instanceMini.rigidBody.velocity += Vector3.down * 100f;
@@ -94,6 +99,14 @@ public class PregantnaPiramida : BaseAttack
                     if (boss.timeSinceAttakStarted - shakeTime < fartInRestTime)
                     {
                         Shake(boss, seed + 5, fartShakeStrenth * (1f - (boss.timeSinceAttakStarted - shakeTime) / (restTime / 2 + 0.001f)), fartShakeSpeed);
+                    }
+                    else
+                    {
+                        if (!laugh)
+                        {
+                            AudioManager.Instance.PlayAudioClip("PiramidaLaugh");
+                            laugh = true;
+                        }
                     }
 
                 }

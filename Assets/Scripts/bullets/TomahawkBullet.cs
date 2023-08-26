@@ -65,7 +65,20 @@ public class TomahawkBullet : BulletBase
                     AudioManager.Instance.PlayAudioClip("hitEnemy", 0.2f);
                     BaseEnemy enemySript = col.gameObject.GetComponentInParent<BaseEnemy>();
                     if (enemySript != null)
+                    {
                         col.gameObject.GetComponentInParent<BaseEnemy>().Damage(bullet.bulletBase.damage);
+                    }
+                    else
+                    {
+                        if (col.gameObject.transform.parent.transform.parent != null)
+                        {
+                            enemySript = col.gameObject.transform.parent.GetComponentInParent<BaseEnemy>();
+                            if (enemySript != null)
+                            {
+                                col.gameObject.GetComponentInParent<BaseEnemy>().Damage(bullet.bulletBase.damage);
+                            }
+                        }
+                    }
                     bullet.hitColliders.Add(col);
                 }
             }

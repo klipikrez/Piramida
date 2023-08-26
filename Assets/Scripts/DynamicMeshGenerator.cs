@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
-[ExecuteInEditMode]
+
 public class DynamicMeshGenerator : MonoBehaviour
 {
     public MeshCollider col;
@@ -30,41 +30,40 @@ public class DynamicMeshGenerator : MonoBehaviour
 
     private void Update()
     {
-        if (EditorApplication.isPlaying)
-        {
-            //Mesh mesh;
-            if (MiniPiramida.activeAgents.Count >= 3)
-            {
-                List<Vector3> PiramidPoints = new List<Vector3>();
-                MiniPiramida[] liniPiraideArr = MiniPiramida.activeAgents.ToArray();
-                foreach (var agent in liniPiraideArr)
-                {
 
-                    if (agent != null)
-                        PiramidPoints.Add(new Vector3(agent.transform.position.x, -52, agent.transform.position.z));
-                }
-                Vector3[] convxPoints = GetConvexHull(PiramidPoints).ToArray();
-                Mesh dynamicMesh = GenerateMesh(convxPoints);
-                col.sharedMesh = dynamicMesh;
-                filter.mesh = dynamicMesh;/**/
-                material.SetVector("_Point", RopeTomahawk.Instance != null ? (RopeTomahawk.Instance.T2 != null ? RopeTomahawk.Instance.T2.position : Vector3.one * float.MaxValue) : Vector3.one * float.MaxValue);
-            }
-            else
+        //Mesh mesh;
+        if (MiniPiramida.activeAgents.Count >= 3)
+        {
+            List<Vector3> PiramidPoints = new List<Vector3>();
+            MiniPiramida[] liniPiraideArr = MiniPiramida.activeAgents.ToArray();
+            foreach (var agent in liniPiraideArr)
             {
-                if (filter.mesh != new Mesh() || col.sharedMesh != new Mesh())
-                {
-                    filter.mesh = new Mesh();
-                    col.sharedMesh = new Mesh();
-                }
+
+                if (agent != null)
+                    PiramidPoints.Add(new Vector3(agent.transform.position.x, -52, agent.transform.position.z));
             }
-            //else
-            //{
-            //    mesh = GenerateMesh(pits);
-            //}
-            //col.sharedMesh = dynamicMesh;
-            //filter.mesh = dynamicMesh;/**/
+            Vector3[] convxPoints = GetConvexHull(PiramidPoints).ToArray();
+            Mesh dynamicMesh = GenerateMesh(convxPoints);
+            col.sharedMesh = dynamicMesh;
+            filter.mesh = dynamicMesh;/**/
+            material.SetVector("_Point", RopeTomahawk.Instance != null ? (RopeTomahawk.Instance.T2 != null ? RopeTomahawk.Instance.T2.position : Vector3.one * float.MaxValue) : Vector3.one * float.MaxValue);
         }
         else
+        {
+            if (filter.mesh != new Mesh() || col.sharedMesh != new Mesh())
+            {
+                filter.mesh = new Mesh();
+                col.sharedMesh = new Mesh();
+            }
+        }
+        //else
+        //{
+        //    mesh = GenerateMesh(pits);
+        //}
+        //col.sharedMesh = dynamicMesh;
+        //filter.mesh = dynamicMesh;/**/
+
+        /*else
         {
             List<Vector3> PiramidPoints = new List<Vector3>();
             foreach (Vector3 point in pointsssdfdfs)
@@ -75,8 +74,8 @@ public class DynamicMeshGenerator : MonoBehaviour
             Vector3[] convxPoints = GetConvexHull(PiramidPoints).ToArray();
             Mesh dynamicMesh = GenerateMesh(convxPoints);
             col.sharedMesh = dynamicMesh;
-            filter.mesh = dynamicMesh;/**/
-        }
+            filter.mesh = dynamicMesh;
+        }*/
     }
 
     public void OnTriggerEnter(Collider other)

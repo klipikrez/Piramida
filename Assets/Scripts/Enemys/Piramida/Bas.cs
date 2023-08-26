@@ -8,6 +8,7 @@ using static Functions;
 
 public class Bas : BaseEnemy
 {
+    public float health = 520;
     [System.NonSerialized]
     public BaseAttack currentAttackState;
     public GameObject mainObject;
@@ -125,6 +126,14 @@ public class Bas : BaseEnemy
         return floatHeiht;
     }*/
 
+    public void SetHeadOpen(bool value)
+    {
+        foreach (Side side in pyramidSides)
+        {
+            side.SetSimsState(value);
+        }
+    }
+
     public float GetGroundHeihtOffset()
     {
         RaycastHit hit;
@@ -198,6 +207,12 @@ public class Bas : BaseEnemy
     }
     public override void Damage(float damage)
     {
-        throw new System.NotImplementedException();
+        health -= damage;
+        AudioManager.Instance.PlayAudioClip("PiramidaHurt");
+        currentAttackState.EndAttack(this);
+        foreach (Side side in pyramidSides)
+        {
+            side.Damage(52f);
+        }
     }
 }

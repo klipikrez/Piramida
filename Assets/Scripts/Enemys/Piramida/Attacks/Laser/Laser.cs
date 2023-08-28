@@ -164,6 +164,8 @@ public class Laser : BaseAttack
                     line.SetPosition(line.positionCount - 1, hit.point);
                     hitPoint.position = hit.point;
 
+                    Debug.Log(hit.collider.gameObject);
+                    boss.SetTrailPoint(hit.collider.gameObject, hit.textureCoord);
                     if (fireTimer * laserVelocity.magnitude > fireSpawnTime)
                     {
                         fireTimer = 0;

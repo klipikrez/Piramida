@@ -40,6 +40,7 @@ public class Bas : BaseEnemy
     public float minRotateValue = 0;
     public float maxRotateValue = 1;
     Coroutine shakeCorutine;
+    public LaserTrail[] LaserTrailScripts;
 
     private void Start()
     {
@@ -236,6 +237,17 @@ public class Bas : BaseEnemy
         (0.4665f - Mathf.PerlinNoise(seed, timeSinceAttakStarted * speed)) * strenth,
         (0.4665f - Mathf.PerlinNoise(seed + 52, timeSinceAttakStarted * speed)) * strenth,
         (0.4665f - Mathf.PerlinNoise(seed + 152, timeSinceAttakStarted * speed)) * strenth));
+    }
+
+    public void SetTrailPoint(GameObject obj, Vector2 uvPoint)
+    {
+        foreach (LaserTrail trail in LaserTrailScripts)
+        {
+            if (obj == trail.gameObject)
+            {
+                trail.AddTrailAtPoint(uvPoint);
+            }
+        }
     }
 
     public override void Damage(float damage)

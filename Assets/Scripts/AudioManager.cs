@@ -9,11 +9,13 @@ public class AudioManager : MonoBehaviour
     [System.Serializable]
     public class AudioAudi
     {
+        public string name;
         public AudioSource source;
         public GameObject obj;
         public Coroutine coroutine;
-        public AudioAudi(AudioSource source, GameObject obj, Coroutine coroutine)
+        public AudioAudi(AudioSource source, GameObject obj, Coroutine coroutine, string name)
         {
+            this.name = name;
             this.source = source;
             this.obj = obj;
             this.coroutine = coroutine;
@@ -35,9 +37,10 @@ public class AudioManager : MonoBehaviour
     [UDictionary.Split(50, 50)]
     public UDictionary2 PlayingAudio;
     [System.Serializable]
-    public class UDictionary2 : UDictionary<string, AudioAudi> { }
+    public class UDictionary2 : UDictionary<System.Guid, AudioAudi> { }
 
     public static AudioManager Instance { get; private set; }
+
 
     private void Awake()
     {
@@ -65,17 +68,20 @@ public class AudioManager : MonoBehaviour
     IEnumerator delay()
     {
         yield return new WaitForSeconds(2f);
-        PlayAudioClipLooping("AshAndBone", 0.25f);
+        PlayAudioClipLooping("AshAndBone", 0.15f);
     }
-    public void PlayAudioClip(string audioClipName, float volume = 1, int priority = 128)
+    public System.Guid PlayAudioClip(string audioClipName, float volume = 1, int priority = 128)
     {
-        PlayingAudio.Add(audioClipName, new AudioAudi());
-        PlayingAudio[audioClipName].coroutine = StartCoroutine(Play(audioDictionary[audioClipName], volume, priority));
+        System.Guid id = System.Guid.NewGuid();
+        PlayingAudio.Add(id, new AudioAudi());
+        PlayingAudio[id].name = audioClipName;
+        PlayingAudio[id].coroutine = StartCoroutine(Play(audioDictionary[audioClipName], volume, priority, id));
+        return id;
     }
 
-    public void StopAudio(string name)
+    public void StopAudio(System.Guid name)
     {
-        foreach (KeyValuePair<string, AudioAudi> emmiter in PlayingAudio)
+        foreach (KeyValuePair<System.Guid, AudioAudi> emmiter in PlayingAudio)
         {
             if (name == emmiter.Key)
             {
@@ -96,8 +102,9 @@ public class AudioManager : MonoBehaviour
             }
         }
     }
-    public void PlayVoiceLine(string audioClipName, float volume = 1, int priority = 128)
+    public System.Guid PlayVoiceLine(string audioClipName, float volume = 1, int priority = 128)
     {
+
         if (voiceCorutine != null)
         {
             StopCoroutine(voiceCorutine);
@@ -108,13 +115,16 @@ public class AudioManager : MonoBehaviour
             }
         }
         VoiceLineSource = gameObject.AddComponent<AudioSource>();
-        PlayingAudio.Add(audioClipName, new AudioAudi());
-        voiceCorutine = StartCoroutine(Play(audioDictionary[audioClipName], volume, priority, VoiceLineSource));
-        PlayingAudio[audioClipName].coroutine = voiceCorutine;
+        System.Guid id = System.Guid.NewGuid();
+        PlayingAudio.Add(id, new AudioAudi());
+        voiceCorutine = StartCoroutine(Play(audioDictionary[audioClipName], volume, priority, VoiceLineSource, id));
+        PlayingAudio[id].coroutine = voiceCorutine;
+        PlayingAudio[id].name = audioClipName;
+        return id;
 
     }
 
-    public void PlayAudioClipLooping(string audioClipName, float volume = 1)
+    public System.Guid PlayAudioClipLooping(string audioClipName, float volume = 1)
     {
         AudioSource audioSource = gameObject.AddComponent<AudioSource>();
         audioSource.outputAudioMixerGroup = DD;
@@ -122,24 +132,31 @@ public class AudioManager : MonoBehaviour
         audioSource.volume = volume;
         audioSource.loop = true;
         audioSource.Play();
-        PlayingAudio.Add(audioClipName, new AudioAudi(audioSource, null, null));
-
+        System.Guid id = System.Guid.NewGuid();
+        PlayingAudio.Add(id, new AudioAudi(audioSource, null, null, audioClipName));
+        return id;
     }
 
-    public void PlayAudioDDDClipDynamic(string audioClipName, Transform follow, float dddPercent = 1, float volume = 1, int priority = 128)
+    public System.Guid PlayAudioDDDClipDynamic(string audioClipName, Transform follow, float dddPercent = 1, float volume = 1, int priority = 128)
     {
+        System.Guid id = System.Guid.NewGuid();
+        PlayingAudio.Add(id, new AudioAudi());
+        PlayingAudio[id].name = audioClipName;
+        PlayingAudio[id].coroutine = StartCoroutine(PlayDDDSynamic(audioDictionary[audioClipName], follow, dddPercent, volume, priority, id));
 
-        PlayingAudio.Add(audioClipName, new AudioAudi());
-        PlayingAudio[audioClipName].coroutine = StartCoroutine(PlayDDDSynamic(audioDictionary[audioClipName], follow, dddPercent, volume, priority));
+        return id;
     }
 
-    public void PlayAudioDDDClipStatic(string audioClipName, Vector3 position, float dddPercent = 1, float volume = 1, int priority = 128)
+    public System.Guid PlayAudioDDDClipStatic(string audioClipName, Vector3 position, float dddPercent = 1, float volume = 1, int priority = 128)
     {
-        PlayingAudio.Add(audioClipName, new AudioAudi());
-        PlayingAudio[audioClipName].coroutine = StartCoroutine(PlayDDDStatic(audioDictionary[audioClipName], position, dddPercent, volume, priority));
+        System.Guid id = System.Guid.NewGuid();
+        PlayingAudio.Add(id, new AudioAudi());
+        PlayingAudio[id].name = audioClipName;
+        PlayingAudio[id].coroutine = StartCoroutine(PlayDDDStatic(audioDictionary[audioClipName], position, dddPercent, volume, priority, id));
+        return id;
     }
 
-    IEnumerator PlayDDDStatic(AudioClip audio, Vector3 position, float dddPercent, float volume, int priority)
+    IEnumerator PlayDDDStatic(AudioClip audio, Vector3 position, float dddPercent, float volume, int priority, System.Guid id)
     {
         GameObject gameobj = Instantiate(DDDSoundPrefab, position, Quaternion.identity, gameObject.transform);
         AudioSource audioSource = gameobj.GetComponent<AudioSource>();
@@ -148,15 +165,15 @@ public class AudioManager : MonoBehaviour
         audioSource.spatialBlend = dddPercent;
         audioSource.priority = priority;
         audioSource.Play();
-        PlayingAudio[audio.name].obj = gameobj;
-        PlayingAudio[audio.name].source = audioSource;
+        PlayingAudio[id].obj = gameobj;
+        PlayingAudio[id].source = audioSource;
         yield return new WaitForSeconds(audio.length);
         audioSource.Stop();
         Destroy(gameobj);
-        PlayingAudio.Remove(audio.name);
+        PlayingAudio.Remove(id);
     }
 
-    public void PlayAudioDDDClipStaticLooping(string audioClipName, Vector3 position, float dddPercent = 1, float volume = 1, int priority = 128)
+    public System.Guid PlayAudioDDDClipStaticLooping(string audioClipName, Vector3 position, float dddPercent = 1, float volume = 1, int priority = 128)
     {
 
         //StartCoroutine(PlayDDDStaticLooping(audioDictionary[audioClipName], position, dddPercent, volume, priority));
@@ -168,14 +185,15 @@ public class AudioManager : MonoBehaviour
         audioSource.spatialBlend = dddPercent;
         audioSource.priority = priority;
         audioSource.loop = true;
-        PlayingAudio.Add(audioClipName, new AudioAudi(audioSource, gameobj, null));
+        System.Guid id = System.Guid.NewGuid();
+        PlayingAudio.Add(id, new AudioAudi(audioSource, gameobj, null, audioClipName));
         audioSource.Play();
-
+        return id;
     }
 
 
 
-    IEnumerator PlayDDDSynamic(AudioClip audio, Transform follow, float dddPercent, float volume, int priority)
+    IEnumerator PlayDDDSynamic(AudioClip audio, Transform follow, float dddPercent, float volume, int priority, System.Guid id)
     {
         GameObject gameobj = Instantiate(DDDSoundPrefab, follow.position, Quaternion.identity, gameObject.transform);
         AudioSource audioSource = gameobj.GetComponent<AudioSource>();
@@ -184,8 +202,8 @@ public class AudioManager : MonoBehaviour
         audioSource.volume = volume;
         audioSource.spatialBlend = dddPercent;
         audioSource.priority = priority;
-        PlayingAudio[audio.name].obj = gameobj;
-        PlayingAudio[audio.name].source = audioSource;
+        PlayingAudio[id].obj = gameobj;
+        PlayingAudio[id].source = audioSource;
         audioSource.Play();
         while (follow != null && follow.gameObject.activeSelf)
         {
@@ -194,36 +212,36 @@ public class AudioManager : MonoBehaviour
         }
         audioSource.Stop();
         Destroy(gameobj);
-        PlayingAudio.Remove(audio.name);
+        PlayingAudio.Remove(id);
     }
 
-    IEnumerator Play(AudioClip audio, float volume, int priority)
+    IEnumerator Play(AudioClip audio, float volume, int priority, System.Guid id)
     {
         AudioSource audioSource = gameObject.AddComponent<AudioSource>();
         audioSource.outputAudioMixerGroup = DD;
         audioSource.clip = audio;
         audioSource.volume = volume;
         audioSource.priority = priority;
-        PlayingAudio[audio.name].source = audioSource;
+        PlayingAudio[id].source = audioSource;
         audioSource.Play();
         yield return new WaitForSeconds(audio.length);
         audioSource.Stop();
         Destroy(audioSource);
-        PlayingAudio.Remove(audio.name);
+        PlayingAudio.Remove(id);
     }
 
-    IEnumerator Play(AudioClip audio, float volume, int priority, AudioSource audioSource)
+    IEnumerator Play(AudioClip audio, float volume, int priority, AudioSource audioSource, System.Guid id)
     {
 
         audioSource.outputAudioMixerGroup = DD;
         audioSource.clip = audio;
         audioSource.volume = volume;
         audioSource.priority = priority;
-        PlayingAudio[audio.name].source = audioSource;
+        PlayingAudio[id].source = audioSource;
         audioSource.Play();
         yield return new WaitForSeconds(audio.length);
         audioSource.Stop();
         Destroy(audioSource);
-        PlayingAudio.Remove(audio.name);
+        PlayingAudio.Remove(id);
     }
 }

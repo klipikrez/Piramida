@@ -17,4 +17,4 @@ MonoBehaviour:
     type: 3}
   attackAmount: 52
   chargeUpTime: 2
-  timeBetweenAttacks: 0.5
+  timeBetweenAttacks: 1

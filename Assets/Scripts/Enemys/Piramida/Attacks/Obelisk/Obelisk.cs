@@ -15,7 +15,8 @@ public class Obelisk : BaseAttack
     int obeliskAttackCounter = 0;
     public override void EndAttack(Bas boss)
     {
-        throw new System.NotImplementedException();
+
+        boss.ChooseNewRandomState();
     }
 
     public override void StartAttack(Bas boss)
@@ -37,6 +38,7 @@ public class Obelisk : BaseAttack
 
         if (boss.timeSinceAttakStarted - chargeUpTime > timeBetweenAttacks * obeliskAttackCounter)
         {
+            Debug.Log(obeliskAttackCounter);
             obeliskAttackCounter++;
             RaycastHit hit;
             if (Physics.Raycast(boss.player.transform.position, Vector3.down, out hit, float.MaxValue, LayerMask.GetMask("Ground")))

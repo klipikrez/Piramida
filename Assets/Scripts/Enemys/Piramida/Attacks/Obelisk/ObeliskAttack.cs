@@ -11,7 +11,8 @@ public class ObeliskAttack : MonoBehaviour
     public float returnTime = 1f;
     public float height = 20f;
     public Transform obj;
-    public Material heptagramMaterial;
+    public MeshRenderer heptahram;
+    Material heptagramMaterial;
     float timer = 0f;
     public AnimationCurve kurvaZaObelisk;
     public AnimationCurve kurvaZaObeliskReturn;
@@ -19,13 +20,15 @@ public class ObeliskAttack : MonoBehaviour
     public VisualEffect heptagramParticles;
     public VisualEffect obeliskShock;
     public GameObject attackCollider;
+    System.Guid septagramTesteraAudioId;
     private void Start()
     {
-        heptagramMaterial.SetFloat("_Fade", 1 - (timer / chillAroundTime));
+        heptagramMaterial = heptahram.material;
+        heptagramMaterial.SetFloat("_Fade", 1);
         laserHeptagramAnimation.enabled = true;
         timer = 0;
         obeliskShock.gameObject.SetActive(false);
-        AudioManager.Instance.PlayAudioDDDClipStatic("ObeliskTesters", transform.position, 0.75f);
+        septagramTesteraAudioId = AudioManager.Instance.PlayAudioDDDClipStatic("ObeliskTesters", transform.position, 0.95f, 0.75f);
         obj.localPosition = new Vector3(obj.localPosition.x, -height, obj.localPosition.z);
         laserHeptagramAnimation.speed = 1 / attackDelay;
         attackCollider.SetActive(false);
@@ -37,10 +40,10 @@ public class ObeliskAttack : MonoBehaviour
         yield return new WaitForSeconds(attackDelay);
         heptagramParticles.SendEvent("Stop");
         attackCollider.SetActive(true);
-        AudioManager.Instance.PlayAudioClip("PiramidaObelisk");
+        AudioManager.Instance.PlayAudioClip("PiramidaObelisk", 0.5f);
         obeliskShock.gameObject.SetActive(true);
         obeliskShock.SendEvent("Start");
-        AudioManager.Instance.StopAudio("ObeliskTesters");
+        AudioManager.Instance.StopAudio(septagramTesteraAudioId);
         while (timer < attackTime)
         {
             obj.localPosition = new Vector3(0, -(1 - kurvaZaObelisk.Evaluate(timer / attackTime)) * height, 0);

@@ -40,7 +40,7 @@ public class Shockvawe : BaseAttack
 
         if (playAudio != "" && boss.attackRepeted == 1)
         {
-            AudioManager.Instance.PlayVoiceLine(playAudio);
+            AudioManager.Instance.PlayVoiceLine(playAudio, 0.5f);
         }
 
         ShockvaweObject.layer = LayerMask.NameToLayer("Attack");

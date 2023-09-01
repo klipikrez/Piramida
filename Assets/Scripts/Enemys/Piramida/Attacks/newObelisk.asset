@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88dc2d502fbb668458b390dd2a70d61e, type: 3}
+  m_Name: newObelisk
+  m_EditorClassIdentifier: 
+  repeatAttack: 1
+  obeliskPrefab: {fileID: 4779414099708980761, guid: 5d82e90ddd2b7e24c90c94a7b13d65d2,
+    type: 3}
+  attackAmount: 52
+  chargeUpTime: 2
+  timeBetweenAttacks: 0.5

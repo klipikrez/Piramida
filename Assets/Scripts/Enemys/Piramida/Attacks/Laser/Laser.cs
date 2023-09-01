@@ -165,7 +165,11 @@ public class Laser : BaseAttack
                     hitPoint.position = hit.point;
 
                     Debug.Log(hit.collider.gameObject);
+
+                    //Ovo ne radi inace :(
                     boss.SetTrailPoint(hit.collider.gameObject, hit.textureCoord);
+
+
                     if (fireTimer * laserVelocity.magnitude > fireSpawnTime)
                     {
                         fireTimer = 0;

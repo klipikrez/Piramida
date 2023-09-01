@@ -241,13 +241,14 @@ public class Bas : BaseEnemy
 
     public void SetTrailPoint(GameObject obj, Vector2 uvPoint)
     {
-        foreach (LaserTrail trail in LaserTrailScripts)
+        //Ovo ne radi, zato sto imam shit graficku :(
+        /*foreach (LaserTrail trail in LaserTrailScripts)
         {
             if (obj == trail.gameObject)
             {
                 trail.AddTrailAtPoint(uvPoint);
             }
-        }
+        }*/
     }
 
     public override void Damage(float damage)

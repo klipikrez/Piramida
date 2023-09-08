@@ -1263,13 +1263,13 @@ PrefabInstance:
         type: 3}
       propertyPath: attackStates.Array.data[0]
       value: 
-      objectReference: {fileID: 11400000, guid: 822e888f942c9274e8c64a1c83e04904,
+      objectReference: {fileID: 11400000, guid: 678b1c8f7de3cda4fab0773794f4250f,
         type: 2}
     - target: {fileID: 7910335330499376895, guid: 4b2eca9dbe0c01642a71b1df9219072e,
         type: 3}
       propertyPath: attackStates.Array.data[1]
       value: 
-      objectReference: {fileID: 11400000, guid: 678b1c8f7de3cda4fab0773794f4250f,
+      objectReference: {fileID: 11400000, guid: 822e888f942c9274e8c64a1c83e04904,
         type: 2}
     - target: {fileID: 7910335330499376895, guid: 4b2eca9dbe0c01642a71b1df9219072e,
         type: 3}
@@ -4101,12 +4101,12 @@ PrefabInstance:
     - target: {fileID: 1386706610, guid: 8a08b4d539c771446a86df33f60dad32, type: 3}
       propertyPath: guns.Array.data[0]
       value: 
-      objectReference: {fileID: 11400000, guid: f583ab149280dfb46b5578280e837a2f,
+      objectReference: {fileID: 11400000, guid: dfe3af8c3a9c3894e802fdccb66a1485,
         type: 2}
     - target: {fileID: 1386706610, guid: 8a08b4d539c771446a86df33f60dad32, type: 3}
       propertyPath: guns.Array.data[1]
       value: 
-      objectReference: {fileID: 11400000, guid: dfe3af8c3a9c3894e802fdccb66a1485,
+      objectReference: {fileID: 11400000, guid: f583ab149280dfb46b5578280e837a2f,
         type: 2}
     - target: {fileID: 1820959525, guid: 8a08b4d539c771446a86df33f60dad32, type: 3}
       propertyPath: m_AnchorMax.x

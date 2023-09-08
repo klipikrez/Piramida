@@ -15,7 +15,7 @@ MonoBehaviour:
   bulletLife: 1.9876544e+27
   hitRadious: {x: 0.11, y: 0.5, z: 0.5}
   damage: 25
-  speed: 40
+  speed: 60
   mesh: {fileID: 4825836531149651790, guid: 01e15b7bc27f48244bd3df6f0a13030b, type: 3}
   meshScale: 10
   materials:

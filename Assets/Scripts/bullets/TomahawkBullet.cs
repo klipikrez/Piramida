@@ -20,10 +20,10 @@ public class TomahawkBullet : BulletBase
         {
             CheckIfDeadZone(bullet);
 
-            if (!dead)
-            {
-                CheckHit(bullet);
-            }
+            //if (!dead)
+            //{
+            CheckHit(bullet);
+            //}
         }
         else
         {
@@ -39,7 +39,7 @@ public class TomahawkBullet : BulletBase
             {
                 if (col.isTrigger)
                 {
-                    bullet.velocity = Vector3.down * 155f;
+                    bullet.velocity = Vector3.down * 80f;
                     dead = true;
                     if (!bullet.hitColliders.Contains(col))
                     {
@@ -54,7 +54,7 @@ public class TomahawkBullet : BulletBase
     private void CheckHit(Bullet bullet)
     {
         Hit hit = ReturnClosestHitBoxExclude(bullet.transform.position, bullet.hitColliders, out List<Collider> checkedColliders, bullet.transform.rotation, bullet.bulletBase.hitRadious, LayerMask.GetMask("EnemyHitbox"));
-        if (hit.hit)
+        if (hit.hit && !dead)
         {
             foreach (Collider col in checkedColliders)
             {
@@ -160,6 +160,7 @@ public class TomahawkBullet : BulletBase
             RopeTomahawk.Instance.ClearPath();
         dead = false;
         RopeTomahawk.Instance.hitTime = 0;
+        RopeTomahawk.Instance.bounceTime = 0;
         RopeTomahawk.Instance.hit = false;
         bullet.velocity = bullet.transform.forward * bullet.speed + startingVelocityAdd + bullet.employer.gameObject.GetComponent<PlayerMovement>().velocity;
         RopeTomahawk.Instance.SetTransformsToFollow(bullet.employer.transform, bullet.transform);

@@ -21,7 +21,7 @@ public class Bullet : MonoBehaviour
         hitColliders.Clear();
         bulletBase.Initiate(this);
     }
-    void Update()
+    void FixedUpdate()
     {
         bulletBase.Move(this);
         bulletBase.DetectHit(this);

@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: newPregantnaPiramada
   m_EditorClassIdentifier: 
   repeatAttack: 0
+  chillTimeBeforAttackStarts: 2
+  chillTimeAftrAttackEnds: 1
   shakeTime: 2
   shakeSpeed: 52
   shakeStrenth: 0.73
@@ -24,6 +26,8 @@ MonoBehaviour:
   playerScreenShakeSpeed: 52
   playerScreenShakeStrenth: 1
   spawnNumber: 4
+  numberAfterWitchWeSubtract: 3
+  NumberSubtract: 2
   restTime: 1
   fartInRestTime: 0.5
   fartShakeSpeed: 50

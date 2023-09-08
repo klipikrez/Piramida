@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: newShockvawe
   m_EditorClassIdentifier: 
   repeatAttack: 3
+  chillTimeBeforAttackStarts: 1
+  chillTimeAftrAttackEnds: 1
   mesh: {fileID: -7052631652592221296, guid: 173c920a620a5944fa4247fe3155aae4, type: 3}
   hitboxMeshes:
   - {fileID: -80332546796568531, guid: af7445ba54d6be941a6993c09a97b125, type: 3}
@@ -82,7 +84,7 @@ MonoBehaviour:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0.35892114
+      value: 0.1884428
       inSlope: 0.0033663646
       outSlope: 0.0033663646
       tangentMode: 0

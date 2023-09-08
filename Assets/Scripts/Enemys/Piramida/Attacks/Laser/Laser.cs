@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.VFX;
 using static Functions;
@@ -164,7 +165,6 @@ public class Laser : BaseAttack
                     line.SetPosition(line.positionCount - 1, hit.point);
                     hitPoint.position = hit.point;
 
-                    Debug.Log(hit.collider.gameObject);
 
                     //Ovo ne radi inace :(
                     boss.SetTrailPoint(hit.collider.gameObject, hit.textureCoord);
@@ -172,8 +172,11 @@ public class Laser : BaseAttack
 
                     if (fireTimer * laserVelocity.magnitude > fireSpawnTime)
                     {
-                        fireTimer = 0;
-                        Instantiate(fire, hit.point + hit.normal * 0.3f, Quaternion.LookRotation(hit.normal) * Quaternion.Euler(90, 0, 0));
+                        if (!hit.collider.gameObject.CompareTag("DontLeaveLaserTrail"))
+                        {
+                            fireTimer = 0;
+                            Instantiate(fire, hit.point + hit.normal * 0.3f, Quaternion.LookRotation(hit.normal) * Quaternion.Euler(90, 0, 0));
+                        }
                     }
 
                 }

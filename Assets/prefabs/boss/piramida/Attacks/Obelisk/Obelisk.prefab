@@ -234,7 +234,7 @@ GameObject:
   - component: {fileID: 4779414099516946094}
   m_Layer: 10
   m_Name: AttackCollider
-  m_TagString: Untagged
+  m_TagString: DontLeaveLaserTrail
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -281,7 +281,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   force: 0
-  upForce: 252
+  upForce: 152
 --- !u!114 &4779414099516946094
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -307,7 +307,7 @@ GameObject:
   - component: {fileID: 4779414099708980760}
   m_Layer: 0
   m_Name: Obelisk
-  m_TagString: Untagged
+  m_TagString: DontLeaveLaserTrail
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -341,9 +341,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 654851b48c69bdf4e943e337422bfb27, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackDelay: 1
+  attackDelay: 1.35
   attackTime: 0.5
-  chillAroundTime: 5
+  chillAroundTime: 15
   returnTime: 1
   height: 70
   obj: {fileID: 4779414100048564315}
@@ -423,7 +423,7 @@ GameObject:
   - component: {fileID: 4779414100048564311}
   m_Layer: 0
   m_Name: Object
-  m_TagString: Untagged
+  m_TagString: DontLeaveLaserTrail
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -615,6 +615,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 8d7e828a79589e94890ae44caff9b0e3,
+        type: 3}
+      propertyPath: m_TagString
+      value: DontLeaveLaserTrail
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects:

@@ -18,6 +18,7 @@ public class Bas : BaseEnemy
     int selectedAttack = 0;
     int[] avalibeAttacks;
     public PlayerStats player;
+    public PlayerMovement playerMovment;
     public float normalFloatHeight = 2f;
     [System.NonSerialized]
     public float GroundOffset = 0f;
@@ -29,7 +30,6 @@ public class Bas : BaseEnemy
     public float floatFrequency = 0.5f;
     [System.NonSerialized]
     public float heightOffset;
-    public bool active = true;
     [NonSerialized]
     public Coroutine sjebiOsvetljenjeCorutine = null;
     public Volume NormalVolume;
@@ -40,6 +40,7 @@ public class Bas : BaseEnemy
     public float minRotateValue = 0;
     public float maxRotateValue = 1;
     Coroutine shakeCorutine;
+    Coroutine waitBetweenAttackCorutine;
     public LaserTrail[] LaserTrailScripts;
 
     private void Start()
@@ -47,7 +48,7 @@ public class Bas : BaseEnemy
         GroundOffset = GetGroundHeihtOffset();
         //mainObject.transform.position = new Vector3(transform.position.x, normalFloatHeight, transform.position.z);
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStats>();
-
+        playerMovment = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>();
         currentAttackState = attackStates[0];
         attackRepeted++;
         timeSinceAttakStarted = 0;
@@ -59,31 +60,34 @@ public class Bas : BaseEnemy
 
     private void Update()
     {
-        if (active)
+        if (currentAttackState != null)
         {
-            if (currentAttackState != null)
-            {
-                currentAttackState.UpdateAttack(this);
-                timeSinceAttakStarted += Time.deltaTime;
-            }
-            if (returnToNormalFloatHeight)
-            {
-                heightOffset = (Mathf.Sin(timeSinceAttakStarted * floatFrequency) + 1) * floatAmplitude;
-                mainObject.transform.position = Vector3.Lerp(
-                                                            new Vector3(mainObject.transform.position.x, mainObject.transform.position.y, mainObject.transform.position.z),
-                                                            new Vector3(transform.position.x, normalFloatHeight + heightOffset - GroundOffset, transform.position.z),
-                                                            DeltaTimeLerp(0.09f));
-            }
-            if (returnToNormalRotation)
-            {
-                mainObject.transform.Rotate(new Vector3(0, Functions.Remap(1f - Mathf.PerlinNoise(seed, Time.time * rotateSpeed), 0, 1, minRotateValue, maxRotateValue) * Time.deltaTime * 60f, 0));
-                mainObject.transform.rotation = Quaternion.Slerp(mainObject.transform.rotation, Quaternion.Euler(0f, mainObject.transform.eulerAngles.y, 0f), DeltaTimeLerp(0.1f));
-            }
+            currentAttackState.UpdateAttack(this);
+            timeSinceAttakStarted += Time.deltaTime;
         }
+        if (returnToNormalFloatHeight)
+        {
+            heightOffset = (Mathf.Sin(timeSinceAttakStarted * floatFrequency) + 1) * floatAmplitude;
+            mainObject.transform.position = Vector3.Lerp(
+                                                        new Vector3(mainObject.transform.position.x, mainObject.transform.position.y, mainObject.transform.position.z),
+                                                        new Vector3(transform.position.x, normalFloatHeight + heightOffset - GroundOffset, transform.position.z),
+                                                        DeltaTimeLerp(0.09f));
+        }
+        if (returnToNormalRotation)
+        {
+            mainObject.transform.Rotate(new Vector3(0, Functions.Remap(1f - Mathf.PerlinNoise(seed, Time.time * rotateSpeed), 0, 1, minRotateValue, maxRotateValue) * Time.deltaTime * 60f, 0));
+            mainObject.transform.rotation = Quaternion.Slerp(mainObject.transform.rotation, Quaternion.Euler(0f, mainObject.transform.eulerAngles.y, 0f), DeltaTimeLerp(0.1f));
+        }
+
     }
 
     public void ChooseNewRandomState()
     {
+        if (waitBetweenAttackCorutine != null)
+        {
+            StopCoroutine(waitBetweenAttackCorutine);
+        }
+
         if (currentAttackState.repeatAttack > attackRepeted)
         {
             attackRepeted++;
@@ -92,17 +96,28 @@ public class Bas : BaseEnemy
         }
         else
         {
-            attackRepeted = 1;
-            avalibeAttacks = CalculateAvalibeAttacks(selectedAttack);
-            int i = UnityEngine.Random.Range(0, attackStates.Length - 1);
-            //        Debug.Log(i);
-            selectedAttack = avalibeAttacks[i];
-            currentAttackState = attackStates[selectedAttack];
-            //currentAttackState.transform.position = transform.position;
-            //currentAttackState = attackStates[0];
-            timeSinceAttakStarted = 0;
-            currentAttackState.StartAttack(this);
+            BaseAttack previousAttack = currentAttackState;
+            currentAttackState = null;
+            waitBetweenAttackCorutine = StartCoroutine(c_ChooseNewState(previousAttack));
+
         }
+    }
+
+    IEnumerator c_ChooseNewState(BaseAttack previousAttack)
+    {
+        attackRepeted = 1;
+        avalibeAttacks = CalculateAvalibeAttacks(selectedAttack);
+        int i = UnityEngine.Random.Range(0, attackStates.Length - 1);
+        selectedAttack = avalibeAttacks[i];
+        yield return new WaitForSeconds(previousAttack.chillTimeBeforAttackStarts + attackStates[selectedAttack].chillTimeAftrAttackEnds);
+
+        //        Debug.Log(i);
+
+        currentAttackState = attackStates[selectedAttack];
+        //currentAttackState.transform.position = transform.position;
+        //currentAttackState = attackStates[0];
+        timeSinceAttakStarted = 0;
+        currentAttackState.StartAttack(this);
     }
 
     public int[] CalculateAvalibeAttacks(int n)
@@ -253,12 +268,15 @@ public class Bas : BaseEnemy
 
     public override void Damage(float damage)
     {
-        health -= damage;
-        AudioManager.Instance.PlayVoiceLine("PiramidaHurt");
-        currentAttackState.EndAttack(this);
-        foreach (Side side in pyramidSides)
+        if (currentAttackState != null && pyramidSides[0].headOpen)
         {
-            side.Damage(52f);
+            health -= damage;
+            AudioManager.Instance.PlayVoiceLine("PiramidaHurt");
+            currentAttackState.EndAttack(this);
+            foreach (Side side in pyramidSides)
+            {
+                side.Damage(25f);
+            }
         }
     }
 }

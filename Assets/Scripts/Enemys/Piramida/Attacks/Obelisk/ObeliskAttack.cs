@@ -28,7 +28,7 @@ public class ObeliskAttack : MonoBehaviour
         laserHeptagramAnimation.enabled = true;
         timer = 0;
         obeliskShock.gameObject.SetActive(false);
-        septagramTesteraAudioId = AudioManager.Instance.PlayAudioDDDClipStatic("ObeliskTesters", transform.position, 0.95f, 0.75f);
+        septagramTesteraAudioId = AudioManager.Instance.PlayAudioDDDClipStatic("ObeliskTesters", transform.position, 0.95f, 0.65f);
         obj.localPosition = new Vector3(obj.localPosition.x, -height, obj.localPosition.z);
         laserHeptagramAnimation.speed = 1 / attackDelay;
         attackCollider.SetActive(false);

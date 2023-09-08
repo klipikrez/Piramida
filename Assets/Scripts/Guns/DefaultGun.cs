@@ -34,8 +34,14 @@ public class DefaultGun : BaseGun
         bullet.gameObject.transform.rotation = player.cam.transform.rotation;
         bullet.gameObject.transform.position = player.transform.position + bullet.gameObject.transform.TransformDirection(spawnLocation);
         bullet.speed = bulletBase.speed;
-        bullet.timeAlive = 0f;
+        bullet.timeAlive = 0;
+        bullet.meshFilter.mesh = bulletBase.mesh;
+        bullet.meshFilter.gameObject.transform.localScale = Vector3.one * bulletBase.meshScale;
+        bullet.employer = player;
+        bullet.meshRenderer.material = bulletBase.materials[0];
         bullet.gameObject.SetActive(true);
+        bullet.Initiate();
+
 
     }
 

@@ -13,8 +13,19 @@ MonoBehaviour:
   m_Name: newObelisk
   m_EditorClassIdentifier: 
   repeatAttack: 1
+  chillTimeBeforAttackStarts: 1
+  chillTimeAftrAttackEnds: 3
   obeliskPrefab: {fileID: 4779414099708980761, guid: 5d82e90ddd2b7e24c90c94a7b13d65d2,
     type: 3}
-  attackAmount: 52
-  chargeUpTime: 2
-  timeBetweenAttacks: 1
+  onoGovnoIznadGlavePrefab: {fileID: 8779159124968385021, guid: 965c8505e878dbd4bad91e53b3b1a73b,
+    type: 3}
+  SummonDone: {fileID: 8926484042661614526, guid: 89d1a8f2edfff7b44a0a4e8b338171b5,
+    type: 3}
+  Summon: {fileID: 8926484042661614526, guid: f193167d4b773264ba7b68725f9a9a32, type: 3}
+  attackAmount: 26
+  chargeUpTime: 1
+  followAttackTime: 2.67
+  predictAttackTime: 1.53
+  randomAttackTime: 2.85
+  randomAttackRadious: 20
+  HeptagramSummonOffset: {x: 0, y: 30, z: 0}

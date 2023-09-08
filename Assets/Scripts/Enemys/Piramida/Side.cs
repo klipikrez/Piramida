@@ -40,6 +40,7 @@ public class Side : BaseEnemy
     public VisualEffect gougeEyeVFX;
     public GameObject sjebanoOko;
     public GameObject pushBack;
+    public bool headOpen = false;
     private void Start()
     {
         defaultRotation = eye.transform;
@@ -136,6 +137,7 @@ public class Side : BaseEnemy
 
     public void SetSimsState(bool value)
     {
+        headOpen = value;
         if (SimsCorutine != null)
         {
             StopCoroutine(SimsCorutine);

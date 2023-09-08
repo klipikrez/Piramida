@@ -10,12 +10,13 @@ public class NormalBullet : BulletBase
     public override void DetectHit(Bullet bullet)
     {
         //a nemoo mazdu :(
-        if (Physics.CheckBox(bullet.transform.position, bullet.bulletBase.hitRadious, bullet.transform.rotation, ~LayerMask.GetMask("Hitbox", "Player", "Ford", "Mazda")))
+        if (Physics.CheckBox(bullet.transform.position, bullet.bulletBase.hitRadious, bullet.transform.rotation, ~LayerMask.GetMask("Hitbox", "Player", "Ignore Raycast", "Bullet", "EnemyHitbox", "EnemyCollider", "Attack", "Ford", "Mazda")))
         {
 
             foreach (Collider col in Physics.OverlapBox(bullet.transform.position, bullet.bulletBase.hitRadious, bullet.transform.rotation, LayerMask.GetMask("EnemyHitbox")))
             {
                 col.gameObject.GetComponentInParent<BaseEnemy>().Damage(bullet.bulletBase.damage);
+                AudioManager.Instance.PlayAudioClip("hitEnemy", 0.2f);
             }
 
 

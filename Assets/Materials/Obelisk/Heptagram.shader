@@ -33,12 +33,11 @@ Shader "Heptagram"
             }
         
         // Render State
-        Cull Back
+        Cull Off
         Blend SrcAlpha OneMinusSrcAlpha, One OneMinusSrcAlpha
         ZTest LEqual
-                Offset -22, -22
         ZWrite Off
-        
+        Offset -22, -22
         // Debug
         // <None>
         
@@ -472,7 +471,7 @@ Shader "Heptagram"
             }
         
         // Render State
-        Cull Back
+        Cull Off
         ZTest LEqual
         ZWrite On
         
@@ -835,7 +834,7 @@ Shader "Heptagram"
             }
         
         // Render State
-        Cull Back
+        Cull Off
         ZTest LEqual
         ZWrite On
         ColorMask 0
@@ -1541,7 +1540,7 @@ Shader "Heptagram"
             }
         
         // Render State
-        Cull Back
+        Cull Off
         
         // Debug
         // <None>
@@ -1890,7 +1889,7 @@ Shader "Heptagram"
             }
         
         // Render State
-        Cull Back
+        Cull Off
         ZTest LEqual
         ZWrite On
         
@@ -2259,7 +2258,7 @@ Shader "Heptagram"
             }
         
         // Render State
-        Cull Back
+        Cull Off
         Blend SrcAlpha OneMinusSrcAlpha, One OneMinusSrcAlpha
         ZTest LEqual
         ZWrite Off
@@ -2696,7 +2695,7 @@ Shader "Heptagram"
             }
         
         // Render State
-        Cull Back
+        Cull Off
         ZTest LEqual
         ZWrite On
         
@@ -3058,7 +3057,7 @@ Shader "Heptagram"
             }
         
         // Render State
-        Cull Back
+        Cull Off
         ZTest LEqual
         ZWrite On
         ColorMask 0
@@ -3764,7 +3763,7 @@ Shader "Heptagram"
             }
         
         // Render State
-        Cull Back
+        Cull Off
         
         // Debug
         // <None>
@@ -4114,7 +4113,7 @@ Shader "Heptagram"
             }
         
         // Render State
-        Cull Back
+        Cull Off
         ZTest LEqual
         ZWrite On
         

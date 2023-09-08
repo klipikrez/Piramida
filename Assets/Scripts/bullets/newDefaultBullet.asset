@@ -13,9 +13,10 @@ MonoBehaviour:
   m_Name: newDefaultBullet
   m_EditorClassIdentifier: 
   bulletLife: 3
-  hitRadious: {x: 1, y: 1, z: 1}
+  hitRadious: {x: 0.3, y: 0.3, z: 0.3}
   damage: 2
   speed: 30
   mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
-  meshScale: 1
-  materials: []
+  meshScale: 0.3
+  materials:
+  - {fileID: 2100000, guid: c60aeffa998eb0d4e86401e59e4d9a31, type: 2}

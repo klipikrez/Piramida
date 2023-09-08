@@ -108,7 +108,11 @@ public class TomahawkBullet : BulletBase
         hit = ReturnClosestHitBoxExclude(bullet.transform.position, bullet.hitColliders, out checkedColliders, bullet.transform.rotation, bullet.bulletBase.hitRadious, ~LayerMask.GetMask("Hitbox", "Player", "Ignore Raycast", "Bullet", "EnemyHitbox", "EnemyCollider", "Attack", "Ford", "Mazda"));
         if (hit.hit)
         {
-            RopeTomahawk.Instance.T2 = Instantiate(HitTomahawkPrefab, hit.point, Quaternion.FromToRotation(bullet.transform.up, hit.normal) * bullet.transform.rotation).transform;
+            //kad se sekira lupi u zid
+            RopeTomahawk.Instance.SetTransformsToFollow(
+                bullet.employer.transform,
+                Instantiate(HitTomahawkPrefab, hit.point, Quaternion.FromToRotation(bullet.transform.up, hit.normal) * bullet.transform.rotation).transform);
+
             AudioManager.Instance.PlayAudioClip("hitGround", 0.34f);
             RopeTomahawk.Instance.hit = true;
             BulletManager.Instance.ReurnBulletToPool(bullet);
@@ -124,7 +128,7 @@ public class TomahawkBullet : BulletBase
             bullet.employer.movement.grapple = false;
             bullet.employer.reloading = false;
             RopeTomahawk.Instance.reloading = false;
-            RopeTomahawk.Instance.ReleaseT();
+            RopeTomahawk.Instance.ReleaseTransformsToFollow();
             RopeTomahawk.Instance.lineRenderer.positionCount = 0;
             AudioManager.Instance.PlayAudioClip("grabTomahawk", 0.5f);
             BulletManager.Instance.ReurnBulletToPool(bullet);
@@ -158,6 +162,6 @@ public class TomahawkBullet : BulletBase
         RopeTomahawk.Instance.hitTime = 0;
         RopeTomahawk.Instance.hit = false;
         bullet.velocity = bullet.transform.forward * bullet.speed + startingVelocityAdd + bullet.employer.gameObject.GetComponent<PlayerMovement>().velocity;
-        RopeTomahawk.Instance.SetT(bullet.employer.transform, bullet.transform);
+        RopeTomahawk.Instance.SetTransformsToFollow(bullet.employer.transform, bullet.transform);
     }
 }

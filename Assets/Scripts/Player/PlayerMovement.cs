@@ -45,6 +45,8 @@ public class PlayerMovement : MonoBehaviour
     [System.NonSerialized]
     public bool grapple = false;
     [System.NonSerialized]
+    public bool hitRigidbody = false;
+    [System.NonSerialized]
     public bool wasGrappling = false;
     public float grappleForce = 10f;
     public float upPushInGrapple = 18f;
@@ -132,7 +134,7 @@ public class PlayerMovement : MonoBehaviour
             wasGrappling = false;
         }
 
-        if (grapple)
+        if (grapple && !hitRigidbody)
         {
             wasGrappling = true;
             Grapple();

@@ -108,6 +108,7 @@ public class Tomahawk : BaseGun
     {
         if (!player.reloading)
         {
+            player.gameObject.GetComponent<PlayerMovement>().hitRigidbody = false;
             player.ammoPerArm[player.selectedGun] = 0;
             Bullet bullet = BulletManager.Instance.Get();
 

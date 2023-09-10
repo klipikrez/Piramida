@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.Networking;
 using static Functions;
 
 [CreateAssetMenu(fileName = "newTomahawkBullet", menuName = "GunnStuf/Bullet/TomahawkBullet")]
@@ -108,10 +109,26 @@ public class TomahawkBullet : BulletBase
         hit = ReturnClosestHitBoxExclude(bullet.transform.position, bullet.hitColliders, out checkedColliders, bullet.transform.rotation, bullet.bulletBase.hitRadious, ~LayerMask.GetMask("Hitbox", "Player", "Ignore Raycast", "Bullet", "EnemyHitbox", "EnemyCollider", "Attack", "Ford", "Mazda"));
         if (hit.hit)
         {
-            //kad se sekira lupi u zid
-            RopeTomahawk.Instance.SetTransformsToFollow(
+            //kad se sekira lupi u zid 
+            if (hit.collider.gameObject.CompareTag("RigidbodyInteractable"))
+            {
+                bullet.employer.gameObject.GetComponent<PlayerMovement>().hitRigidbody = true;
+                GameObject instance = Instantiate(HitTomahawkPrefab, hit.point, Quaternion.FromToRotation(bullet.transform.up, hit.normal) * bullet.transform.rotation);
+                Rigidbody rigidBody = hit.collider.gameObject.GetComponent<Rigidbody>();
+                RopeTomahawk.Instance.SetTransformsToFollow(
+                bullet.employer.transform,
+                instance.transform);
+                instance.transform.SetParent(hit.collider.gameObject.transform);
+                rigidBody.AddForceAtPosition(bullet.GetComponent<Bullet>().velocity, hit.point);
+            }
+            else
+            {
+                bullet.employer.gameObject.GetComponent<PlayerMovement>().hitRigidbody = false;
+                RopeTomahawk.Instance.SetTransformsToFollow(
                 bullet.employer.transform,
                 Instantiate(HitTomahawkPrefab, hit.point, Quaternion.FromToRotation(bullet.transform.up, hit.normal) * bullet.transform.rotation).transform);
+            }
+
 
             AudioManager.Instance.PlayAudioClip("hitGround", 0.34f);
             RopeTomahawk.Instance.hit = true;

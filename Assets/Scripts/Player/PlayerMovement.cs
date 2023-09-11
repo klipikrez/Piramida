@@ -159,7 +159,7 @@ public class PlayerMovement : MonoBehaviour
     {
         Vector3 direction = (RopeTomahawk.Instance.T2.position - transform.position).normalized;
 
-        float timeMultiplyer = Mathf.Max((Mathf.Log(4, grappleTimer + 1.4f)) / 4f, 0.25f);
+        float timeMultiplyer = Mathf.Max((Mathf.Log(4, grappleTimer + 1.4f)) / 4f, 0.7f);
         // Debug.Log(timeMultiplyer);
         //body.velocity = body.velocity + direction * (grappleForce * timeMultiplyer) * Time.deltaTime + Vector3.up * upPushInGrapple * Time.deltaTime;
         Vector3 move = new Vector3(input.Player.Move.ReadValue<Vector2>().x, 0, input.Player.Move.ReadValue<Vector2>().y);

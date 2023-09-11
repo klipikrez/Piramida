@@ -6,6 +6,7 @@ using static Functions;
 public class RopeTomahawk : MonoBehaviour
 {
     public Transform T1;
+    PlayerMovement movement;
     public Vector3 T1Offset;
     public Transform T2;
     [System.NonSerialized]
@@ -264,6 +265,16 @@ public class RopeTomahawk : MonoBehaviour
         //ovo postavi pozicije prvoj i poslednjoj tacki u LineRender
         lineRenderer.SetPosition(0, T1.position + T1Offset);
         lineRenderer.SetPosition(lineRenderer.positionCount - 1, T2.position);
+
+        if (hit && movement != null)
+        {
+            if (Vector3.Distance(movement.transform.position, T2.position) > maxRopeLenth
+            && Vector3.Distance(movement.transform.position, T2.position) < Vector3.Distance(movement.transform.position + movement.velocity, T2.position))
+            {
+                movement.transform.position = (movement.transform.position - T2.position).normalized * maxRopeLenth + T2.position;
+            }
+        }
+
         hitTime += Time.deltaTime;
     }
 
@@ -329,10 +340,16 @@ public class RopeTomahawk : MonoBehaviour
     {
         this.T1 = T1;
         this.T2 = T2;
+        PlayerMovement mTmp = T1.gameObject.GetComponent<PlayerMovement>();
+        if (mTmp != null)
+        {
+            movement = mTmp;
+        }
     }
 
     public void ReleaseTransformsToFollow()
     {
+        movement = null;
         T1 = null;
         T2 = null;
     }

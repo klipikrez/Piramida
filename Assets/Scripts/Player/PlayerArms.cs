@@ -48,6 +48,12 @@ public class PlayerArms : MonoBehaviour
             ammoPerArm[i] = guns[i].maxAmmo;
         }
 
+        SubscribeButtonPressFunctions();
+
+    }
+
+    void SubscribeButtonPressFunctions()
+    {
         input.Player.Fire.performed += Shoot;
         input.Player.Fire.canceled += StopShoot;
 
@@ -56,52 +62,80 @@ public class PlayerArms : MonoBehaviour
 
         input.Player.Shift.performed += Shift;
         input.Player.Shift.canceled += StopShift;
+    }
+    public void UnsubscribeButtonPressFunctions()
+    {
+        input.Player.Fire.performed -= Shoot;
+        input.Player.Fire.canceled -= StopShoot;
 
+        input.Player.Reload.performed -= Reload;
+        input.Player.Reload.canceled -= StopReload;
+
+        input.Player.Shift.performed -= Shift;
+        input.Player.Shift.canceled -= StopShift;
     }
 
     private void StopReload(InputAction.CallbackContext context)
     {
-        guns[selectedGun].ReloadCancelled(this);
+        if (!GameMenu.Instance.paused)
+        {
+            guns[selectedGun].ReloadCancelled(this);
+        }
     }
 
     private void Shift(InputAction.CallbackContext context)
     {
-        shiftPressed = true;
-        guns[selectedGun].Shift(this);
+        if (!GameMenu.Instance.paused)
+        {
+            shiftPressed = true;
+            guns[selectedGun].Shift(this);
+        }
     }
 
     private void StopShift(InputAction.CallbackContext context)
     {
-        shiftPressed = false;
-        guns[selectedGun].ShiftCancelled(this);
+        if (!GameMenu.Instance.paused)
+        {
+            shiftPressed = false;
+            guns[selectedGun].ShiftCancelled(this);
+        }
     }
 
     private void Reload(InputAction.CallbackContext context)
     {
-        if (ammoPerArm[selectedGun] != guns[selectedGun].maxAmmo)
+        if (!GameMenu.Instance.paused)
         {
-            reloading = true;
-            guns[selectedGun].Reload(this);
-            if (fireCorutine != null)
-                StopCoroutine(fireCorutine);
+            if (ammoPerArm[selectedGun] != guns[selectedGun].maxAmmo)
+            {
+                reloading = true;
+                guns[selectedGun].Reload(this);
+                if (fireCorutine != null)
+                    StopCoroutine(fireCorutine);
 
 
-            reloadCorutine = StartCoroutine(c_Reload());
+                reloadCorutine = StartCoroutine(c_Reload());
 
+            }
         }
     }
 
     private void StopShoot(InputAction.CallbackContext context)
     {
-        shooting = false;
+        if (!GameMenu.Instance.paused)
+        {
+            shooting = false;
+        }
     }
 
     private void Shoot(InputAction.CallbackContext context)
     {
-        shooting = true;
-        if (!reloading && ammoPerArm[selectedGun] != 0)
+        if (!GameMenu.Instance.paused)
         {
-            fireCorutine = StartCoroutine(c_Fire());
+            shooting = true;
+            if (!reloading && ammoPerArm[selectedGun] != 0)
+            {
+                fireCorutine = StartCoroutine(c_Fire());
+            }
         }
     }
 
@@ -109,8 +143,11 @@ public class PlayerArms : MonoBehaviour
     {
         while (reloading)
         {
-            reloadTimer += Time.deltaTime;
-            yield return new WaitForEndOfFrame();
+            if (!GameMenu.Instance.paused)
+            {
+                reloadTimer += Time.deltaTime;
+                yield return new WaitForEndOfFrame();
+            }
         }
         reloadCorutine = null;
     }
@@ -118,8 +155,11 @@ public class PlayerArms : MonoBehaviour
     {
         while (shooting && !reloading && ammoPerArm[selectedGun] != 0)
         {
-            guns[selectedGun].Shoot(this);
-            yield return new WaitForSeconds(1 / guns[selectedGun].BPS);
+            if (!GameMenu.Instance.paused)
+            {
+                guns[selectedGun].Shoot(this);
+                yield return new WaitForSeconds(1 / guns[selectedGun].BPS);
+            }
         }
         fireCorutine = null;
     }

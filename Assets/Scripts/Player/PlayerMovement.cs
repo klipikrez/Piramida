@@ -53,11 +53,11 @@ public class PlayerMovement : MonoBehaviour
     [System.NonSerialized]
     public float grappleTimer = 0f;
 
+
     void Start()
     {
 
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+
 
         if (body == null)
         {
@@ -72,6 +72,11 @@ public class PlayerMovement : MonoBehaviour
         {
             PlayerCamera = gameObject.GetComponentInChildren<Camera>();
         }
+        SubscribeButtonPressFunctions();
+    }
+
+    void SubscribeButtonPressFunctions()
+    {
         input.Player.Jump.performed += JumpStart;
         input.Player.Jump.canceled += JumpEnd;
         input.Player.Move.canceled += StopMove;
@@ -79,8 +84,15 @@ public class PlayerMovement : MonoBehaviour
         input.Player.Shift.performed += Shift;
         input.Player.Shift.canceled += StopShift;
     }
+    public void UnsubscribeButtonPressFunctions()
+    {
+        input.Player.Jump.performed -= JumpStart;
+        input.Player.Jump.canceled -= JumpEnd;
+        input.Player.Move.canceled -= StopMove;
 
-
+        input.Player.Shift.performed -= Shift;
+        input.Player.Shift.canceled -= StopShift;
+    }
     private void Shift(InputAction.CallbackContext context)
     {
 
@@ -159,7 +171,7 @@ public class PlayerMovement : MonoBehaviour
     {
         Vector3 direction = (RopeTomahawk.Instance.T2.position - transform.position).normalized;
 
-        float timeMultiplyer = Mathf.Max((Mathf.Log(4, grappleTimer + 1.4f)) / 4f, 0.7f);
+        float timeMultiplyer = Mathf.Max((Mathf.Log(4, grappleTimer + 1.4f)) / 4f, 0.5f);
         // Debug.Log(timeMultiplyer);
         //body.velocity = body.velocity + direction * (grappleForce * timeMultiplyer) * Time.deltaTime + Vector3.up * upPushInGrapple * Time.deltaTime;
         Vector3 move = new Vector3(input.Player.Move.ReadValue<Vector2>().x, 0, input.Player.Move.ReadValue<Vector2>().y);
@@ -421,6 +433,7 @@ public class PlayerMovement : MonoBehaviour
 
         transform.Rotate(new Vector3(0, look.x, 0));
     }
+
 
 
     /* public Vector3 moveV = Vector3.zero;

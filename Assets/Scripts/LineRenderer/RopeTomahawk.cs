@@ -6,7 +6,7 @@ using static Functions;
 public class RopeTomahawk : MonoBehaviour
 {
     public Transform T1;
-    PlayerMovement movement;
+    public PlayerMovement movement;
     public Vector3 T1Offset;
     public Transform T2;
     [System.NonSerialized]
@@ -52,7 +52,7 @@ public class RopeTomahawk : MonoBehaviour
                 }
                 else
                 {
-                    Debug.Log("Max: " + maxRopeLenth + " -- Calculated: " + combinedLenth + " -- Points: " + Vector3.Distance(T1.position, T2.position));
+                    //                    Debug.Log("Max: " + maxRopeLenth + " -- Calculated: " + combinedLenth + " -- Points: " + Vector3.Distance(T1.position, T2.position));
 
                     if (reachedMaxRopeLenth)
                     {
@@ -271,7 +271,8 @@ public class RopeTomahawk : MonoBehaviour
             if (Vector3.Distance(movement.transform.position, T2.position) > maxRopeLenth
             && Vector3.Distance(movement.transform.position, T2.position) < Vector3.Distance(movement.transform.position + movement.velocity, T2.position))
             {
-                movement.transform.position = (movement.transform.position - T2.position).normalized * maxRopeLenth + T2.position;
+                Vector3 limitedPosition = (movement.transform.position - T2.position).normalized * maxRopeLenth + T2.position;
+                movement.body.position = limitedPosition;
             }
         }
 
@@ -372,21 +373,21 @@ public class RopeTomahawk : MonoBehaviour
         // Check if the angle is less than or equal to 60 degrees
         return angleDegrees <= 60f;
     }
-
-    void OnDrawGizmos()
-    {
-        if (T1 != null && T2 != null)
+    /*
+        void OnDrawGizmos()
         {
-            Gizmos.color = Color.yellow;
-            if (path.Count != 0)
+            if (T1 != null && T2 != null)
             {
-                for (int i = 0; i < path.Count; i++)
+                Gizmos.color = Color.yellow;
+                if (path.Count != 0)
                 {
-                    Gizmos.DrawSphere(path[i], 1);
+                    for (int i = 0; i < path.Count; i++)
+                    {
+                        Gizmos.DrawSphere(path[i], 1);
+                    }
                 }
             }
-        }
-        // Draw a yellow sphere at the transform's position
-    }
+            // Draw a yellow sphere at the transform's position
+        }*/
 
 }

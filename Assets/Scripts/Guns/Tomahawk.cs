@@ -30,6 +30,7 @@ public class Tomahawk : BaseGun
                     bullet.Initiate();
                     AudioManager.Instance.PlayAudioDDDClipDynamic("spiiin2", bullet.transform, 1f);
                     player.movement.grapple = false;
+                    //player.GetComponent<Rigidbody>().velocity = player.transform.position - RopeTomahawk.Instance.previousLocation;
                 }
                 else
                 {
@@ -68,11 +69,14 @@ public class Tomahawk : BaseGun
                 player.movement.grapple = true;
             }
             player.movement.grapple = false;
+            //player.GetComponent<Rigidbody>().velocity = player.transform.position - RopeTomahawk.Instance.previousLocation;
         }
         else
         {
             player.movement.grapple = false;
+
         }
+        //ResetVelocity(player);
     }
 
     public override void ShiftCancelled(PlayerArms player)
@@ -95,9 +99,12 @@ public class Tomahawk : BaseGun
             bullet.gameObject.SetActive(true);
             bullet.Initiate();
             AudioManager.Instance.PlayAudioDDDClipDynamic("spiiin2", bullet.transform, 1f);
-
+            //ResetVelocity(player);
+            //player.GetComponent<Rigidbody>().velocity = player.transform.position - RopeTomahawk.Instance.previousLocation;
         }
     }
+
+
 
     public override void Shift(PlayerArms player)
     {

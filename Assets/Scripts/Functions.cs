@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
 
 public class Hit
@@ -9,6 +10,13 @@ public class Hit
     public Vector3 normal = Vector3.zero;
     public float distance = float.MaxValue;
     public bool hit = false;
+}
+
+public class Box
+{
+    public Vector3 center;
+    public Vector3 bounds;
+    public quaternion rotation;
 }
 
 public static class Functions
@@ -24,6 +32,7 @@ public static class Functions
         sphereTMP.isTrigger = true;
 
         sphere = sphereTMP;
+        Object.DontDestroyOnLoad(sphere);
     }
     public static float DeltaTimeLerp(float value)
     {
@@ -101,6 +110,17 @@ public static class Functions
         return hit;
     }
 
+    public static Box CalculateBoxBounds(Vector3 currentPosition, Vector3 CalculatedPosition, Vector3 boxOriginalBounds)
+    {
+        Box box = new Box();
+
+        float DistanceAboutToBeTraveled = Vector3.Distance(currentPosition, CalculatedPosition);
+        box.rotation = Quaternion.LookRotation(CalculatedPosition - currentPosition);
+        box.bounds = new Vector3(boxOriginalBounds.x, boxOriginalBounds.y, DistanceAboutToBeTraveled);
+        box.center = currentPosition + new Vector3(0, 0, DistanceAboutToBeTraveled / 2);
+
+        return box;
+    }
     /*public static RaycastHit ReturnClosestHitOLD(Vector3 origin, SphereCollider sphere, float groundCheckRadious = 0.4f, int mask = 0)
     {
 
@@ -176,6 +196,8 @@ public static class Functions
     {
         return (value - from1) / (to1 - from1) * (to2 - from2) + from2;
     }
+
+
 
 
 }

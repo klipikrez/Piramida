@@ -6,8 +6,18 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/MainMenu.unity
+    guid: eb27edecbb1b8604eb49ce1cf9e59823
+  - enabled: 1
+    path: Assets/Scenes/Tutorial.unity
+    guid: 1a5c5c5ddbb011b4ebd8144e755cb515
+  - enabled: 1
     path: Assets/Scenes/Piramida.unity
     guid: 57eb48bc6851f23408d783eaeec9ec78
   m_configObjects:
+    com.unity.addressableassets: {fileID: 11400000, guid: fde7cf78490fa0949b7538fc07a25661,
+      type: 2}
     com.unity.input.settings: {fileID: 11400000, guid: 3d8feb908edff25418c9463f066954d0,
+      type: 2}
+    com.unity.localization.settings: {fileID: 11400000, guid: 95fb26ea5c000c248accc40b48014afd,
       type: 2}

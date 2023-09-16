@@ -54,7 +54,11 @@ public class TomahawkBullet : BulletBase
 
     private void CheckHit(Bullet bullet)
     {
-        Hit hit = ReturnClosestHitBoxExclude(bullet.transform.position, bullet.hitColliders, out List<Collider> checkedColliders, bullet.transform.rotation, bullet.bulletBase.hitRadious, LayerMask.GetMask("EnemyHitbox"));
+        Vector3 calculatedPosition = bullet.velocity * Time.deltaTime + bullet.transform.position;
+        Box box = CalculateBoxBounds(bullet.transform.position, calculatedPosition, bullet.bulletBase.hitRadious);
+
+        //Hit hit = ReturnClosestHitBoxExclude(bullet.transform.position, bullet.hitColliders, out List<Collider> checkedColliders, bullet.transform.rotation, bullet.bulletBase.hitRadious, LayerMask.GetMask("EnemyHitbox"));
+        Hit hit = ReturnClosestHitBoxExclude(box.center, bullet.hitColliders, out List<Collider> checkedColliders, box.rotation, box.bounds, LayerMask.GetMask("EnemyHitbox"));
         if (hit.hit && !dead)
         {
             foreach (Collider col in checkedColliders)
@@ -87,7 +91,7 @@ public class TomahawkBullet : BulletBase
         }
 
 
-        hit = ReturnClosestHitBoxExclude(bullet.transform.position, bullet.hitColliders, out checkedColliders, bullet.transform.rotation, bullet.bulletBase.hitRadious, LayerMask.GetMask("EnemyCollider", "ReflectBullet"));
+        hit = ReturnClosestHitBoxExclude(box.center, bullet.hitColliders, out checkedColliders, box.rotation, box.bounds, LayerMask.GetMask("EnemyCollider", "ReflectBullet"));
         if (hit.hit)
         {
             foreach (Collider col in checkedColliders)
@@ -106,7 +110,7 @@ public class TomahawkBullet : BulletBase
             return;
         }
 
-        hit = ReturnClosestHitBoxExclude(bullet.transform.position, bullet.hitColliders, out checkedColliders, bullet.transform.rotation, bullet.bulletBase.hitRadious, ~LayerMask.GetMask("Hitbox", "Player", "Ignore Raycast", "Bullet", "EnemyHitbox", "EnemyCollider", "Attack", "Ford", "Mazda"));
+        hit = ReturnClosestHitBoxExclude(box.center, bullet.hitColliders, out checkedColliders, box.rotation, box.bounds, ~LayerMask.GetMask("Hitbox", "Player", "Ignore Raycast", "Bullet", "EnemyHitbox", "EnemyCollider", "Attack", "Ford", "Mazda"));
         if (hit.hit)
         {
             //kad se sekira lupi u zid 
@@ -120,13 +124,17 @@ public class TomahawkBullet : BulletBase
                 instance.transform);
                 instance.transform.SetParent(hit.collider.gameObject.transform);
                 rigidBody.AddForceAtPosition(bullet.GetComponent<Bullet>().velocity, hit.point);
+                instance.transform.localScale = Vector3.one * meshScale;
             }
             else
             {
                 bullet.employer.gameObject.GetComponent<PlayerMovement>().hitRigidbody = false;
+                GameObject instance = Instantiate(HitTomahawkPrefab, hit.point, Quaternion.FromToRotation(bullet.transform.up, hit.normal) * bullet.transform.rotation);
                 RopeTomahawk.Instance.SetTransformsToFollow(
                 bullet.employer.transform,
-                Instantiate(HitTomahawkPrefab, hit.point, Quaternion.FromToRotation(bullet.transform.up, hit.normal) * bullet.transform.rotation).transform);
+                instance.transform
+                );
+                instance.transform.localScale = Vector3.one * meshScale;
             }
 
 
@@ -135,6 +143,7 @@ public class TomahawkBullet : BulletBase
             BulletManager.Instance.ReurnBulletToPool(bullet);
         }
     }
+
 
 
     private void CheckIfReturnedToPlayer(Bullet bullet)
@@ -157,6 +166,7 @@ public class TomahawkBullet : BulletBase
         if (!bullet.employer.reloading)
         {
             bullet.meshRenderer.gameObject.transform.Rotate(rotateSpeed * Time.deltaTime * Vector3.right);
+
             bullet.transform.position += bullet.velocity * Time.deltaTime;
             bullet.velocity += new Vector3(0, -10f, 0) * Time.deltaTime;
         }

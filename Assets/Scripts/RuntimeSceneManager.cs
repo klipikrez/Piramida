@@ -20,7 +20,10 @@ public class RuntimeSceneManager : MonoBehaviour
         Instance = this;
 
         DontDestroyOnLoad(gameObject);
-
+        if (SceneManager.GetActiveScene().buildIndex != 0 && GameObject.FindGameObjectWithTag("GameMenu") == null)
+        {
+            Instantiate(gameMenu);
+        }
 
     }
     private void Start()

@@ -1,0 +1,462 @@
+﻿title: Start
+tags:
+position: NaN,NaN
+---
+// sets background image to sprite called "bg_office"
+<<Scene france>>
+<<PlayAudio france 0.3 loop>>
+<<Act Narator_iz_sundjer_boba france 5 5 #777777>>
+Narator_iz_sundjer_boba: Jednog lepog i suncanog dan akada je teki trebao da zapocne put kada je trebao da se vrati kuci u beograd iz  francuske.
+
+Narator_iz_sundjer_boba: Stajao je na autobuskoj stanici, a u njegovoj ruci je bio pasoš.
+
+Narator_iz_sundjer_boba: Kada je ugledao autobus koji je trebao da ga odveze do aerodroma, uzeo je svoj pasoš i krenuo ka autobusu.
+
+Narator_iz_sundjer_boba: Autobus je krenuo, a on je sedeo u njemu i gledao kako se grad iz koga je upravo otišao, polako udaljava iza autobusa.
+
+
+
+Narator_iz_sundjer_boba: Svi su putnici u autobusu bili mirni i tiši, a on je bio u nekom drugom svetu, misleci na sve lepe trenutke koje je proveo u francuskoj.
+
+Narator_iz_sundjer_boba: Prolazili su kroz grad, a on je pokušavao da zapamti svaki deo koji je video, kako bi sve to mogao da prepriča kada se vrati kuci.
+
+Narator_iz_sundjer_boba: Ipak, kada je došao do aerodroma i ugledao svoj avion koji ga je čekao da ga odvede kuci, shvatio je da se vraća kuci u Beograd.
+
+Narator_iz_sundjer_boba: U tom trenutku, shvatio je da je sve što je doživeo u Francuskoj, bilo samo jedan kratak momenat u njegovom životu, ali da je to bilo dovoljno da ga promeni zauvek.
+
+Narator_iz_sundjer_boba: Sada je bio siguran da će se uvek rado secati svog puta u Francusku, i da će se uvek rado vraćati tamo, jer je to mesto gde je prvi put osetio da je život lep.
+
+Narator_iz_sundjer_boba: P.S.                         Za one koji ne znaju, Beograd je glavni grad Srbije.
+<<Act Teki france 5 5 #00FFFF>>
+<<Scene bus>>
+Teki: Au ala ej vrucina u ove autobuse, kao da nema klima uopste...
+
+Teki: Sreca pa sam konacno stigao na aerodrom.
+
+Teki: ...
+
+Teki: Prva klasa u odnosu na Beograd.
+<<Scene ulaz>>
+Narator_iz_sundjer_boba: Kada je stigao do aerodroma, ugledao je svoj avion koji ga je čekao da ga odvede kuci.
+
+Narator_iz_sundjer_boba: ALI tog trenutka iznenada je ugledao nekog lika kako dolazi punom brzinom ka njemu.
+
+<<Fade #FFFFFF 1 0 0.1>>
+[wave]TRAS![/wave]
+
+Narator_iz_sundjer_boba: Na podu teki se polako pokupio, obrisao prasinu koja ga je prekrivala i osvrnuo da vidi ko se tako nezgrapno sudario sa njim.
+
+Narator_iz_sundjer_boba: Nazalost nije uspeo da mu vidi lice ali je video da ima crni dzemper i beretku???
+
+Narator_iz_sundjer_boba: Usred Avgusta...
+
+Teki:...
+
+Narator_iz_sundjer_boba: Bez imalo razmisljanja nastavio je da gleda u prazno.
+
+Teki: Ok? Nastavljam do aviona onda.<br>*pomislio je teki*
+<<StopAudioAll>>
+<<Scene uaerodrom>>
+<<PlayAudio drom 0.5 loop>>
+<<Act De_Policajac policajac 0.5 bottom #2222FF>>
+
+De_Policajac: Stani malo, gde mislis da ideš?
+
+Teki: Pa, u avion.
+
+De_Policajac: Ne možeš tako da uđeš tek tako u avion, moraš da prođeš kroz kontrolu.
+
+Teki: A, treba da prođem kroz kontrolu?
+
+De_Policajac: Da, moraš.
+
+Teki: Kako da prođem kroz kontrolu?
+
+De_Policajac: Pa, moraš da se prijaviš kod kontrolera, da ti kaže gde je tvoje sedište, i da prođeš kroz detektor metala.
+
+Teki: Auuu, moram da prođem kroz detektor metala?
+
+De_Policajac: Da, moraš.
+
+Teki: A, šta je to detektor metala?
+
+De_Policajac: Pa, to ti je aparat koji detektuje metalne predmete.
+
+Teki: A, koji su metalni predmeti?
+
+De_Policajac: Pa, metalni predmeti su oni koji su napravljeni od metala, kao što je na primer nož ili droga.
+
+-> A, šta je to nož?
+	De_Policajac: Ajde ne smaraj vise i prolazi kroz detektor metala.
+	Teki: Auuu, pa ja sam tek pošao.
+	De_Policajac: Prođi kroz detektor metala ili ću te uhapsiti.
+	-> A sta je to "uhapsiti"?
+		De_Policajac: Evo sacu ti pokazem.
+		De_Policajac: *na voki tokiju nesto prica*
+		De_Policajac: Dodjite, ovo je onaj tip koji je pokušao da uđe u avion bez da prođe kroz kontrolu.
+		<<Scene policija>>
+		De_Policajac: Vodite ga u zatvor.
+		<<jump EndZatvor>>
+	-> Ajde da prođem kroz detektor metala.
+-> Ajde da prođem kroz detektor metala.
+De_Policajac: Hm, mislim da ne možeš tako lako da prođeš kroz detektor metala.
+Teki: A, zašto ne mogu da prođem kroz detektor metala?
+De_Policajac: Pa, zato što metalni predmeti mogu da ometaju rad detektora metala.
+Teki: A, šta se dešava ako metalni predmeti ometaju rad detektora metala?
+De_Policajac: Pa, onda detektor metala može da pokaže lažan rezultat, ili čak da se ugasi.
+Teki: A, šta se dešava ako detektor metala pokaže lažan rezultat?
+De_Policajac: Pa, onda se može desiti da neko uđe u avion sa nekim metalnim predmetom koji bi mogao da ošteti avion ili da ugrozi putnike.
+Teki: A, šta se dešava ako detektor metala se ugasi?
+De_Policajac: Pa, onda se avion ne može sigurno lansirati, jer se ne može isključiti mogućnost da se u njemu nalazi neki metalni predmet.
+Teki: A, šta se dešava ako se avion ne može sigurno lansirati?
+De_Policajac: Pa, onda se može desiti da avion nema dovoljno snage da se uzleti, ili da se u njemu desi neki tehnički problem.
+Teki: Ajde, molim te, dozvoli mi da prođem kroz detektor metala.
+De_Policajac: Hm, mislim da ne možeš.
+Narator_iz_sundjer_boba: Kada je video da policajac neće da ga pusti da prođe kroz detektor metala, shvatio je da se neće moći vratiti kuci u Beograd.
+Narator_iz_sundjer_boba: Sada je bio siguran da će morati da ostane u Francuskoj još neko vreme.
+Narator_iz_sundjer_boba: Ali, u tom trenutku shvatio je da mu je to i bila namera.
+Narator_iz_sundjer_boba: Shvatio je da je on samo trebao da bude tu, u Francuskoj, da bi nastavio svoj put.
+Narator_iz_sundjer_boba:  Dok je razmisljao kako mu se zelja da se vrati kuci u Beograd, u tom trenutku je ugledao nekoga kako dolazi ka njemu.
+Narator_iz_sundjer_boba: To je bio isti onaj lik sa crnim dzemperom i beretkom koji ga je sudario dok je izlazio iz autobusa.
+Narator_iz_sundjer_boba: Ovoga puta je bio siguran da je ugledao njegovo lice.
+Narator_iz_sundjer_boba: Bio je to onaj lik koji je uzeo njegov pasoš kada je izlazio iz autobusa.
+Narator_iz_sundjer_boba: Iz daljine je posmatrao kako se lik sa beretkom pozdravlja sa par naoruzanih ljudi.
+<<Scene gang>>
+<<PlayAudio gangsta 0.5 loop>>
+<<Hide De_Policajac>>
+Narator_iz_sundjer_boba: Čuo je veoma čudno ime „Šmrki, gde si brat moj.”
+Narator_iz_sundjer_boba: Zapitao se da li je moguce da se ovaj lik stvarno zove „Šmrki”?
+Narator_iz_sundjer_boba: Šmrki se okrenuo prema Tekiju i njegovim očima je izletelo da vidi da ga je Teki video.
+<<StopAudioAll>>
+<<PlayAudio knifer 1 nene>>
+Narator_iz_sundjer_boba: Šmrki je brzo uzeo svoj nož i bacio ga prema Tekiju.
+<<PlayAudio pucanj 1 nene>>
+<<Fade #000000 0 1 30>>
+<<PlayAudio tuznaMuzika 1 loop>>
+Narator_iz_sundjer_boba: Teki je brzo uzeo svoj pištolj i pucao u Šmrkija.
+Narator_iz_sundjer_boba: Šmrkijev nož je pogodio Tekija u grudi, a Tekijev metak je pogodio Šmrkija u glavu.
+Narator_iz_sundjer_boba: Oba su tela pala na pod, a iz njih je izlazila crna krv.
+Narator_iz_sundjer_boba: Svi su bili šokirani što se dogodilo, a policajci su krenuli da tragaju za Šmrkijevim saradnicima.
+Narator_iz_sundjer_boba: Ali, Šmrkijevi saradnici su već bili udaljeni od mesta događaja, i niko ih nije mogao da uhapsi.
+Narator_iz_sundjer_boba: Kada je shvatio da je Šmrki mrtav, Teki je pomislio da je sada kraj njegovom putu.
+Narator_iz_sundjer_boba: Ali, u tom trenutku, shvatio je da mu je Šmrkijev nož pogodio srce, i da je on blizu smrti.
+Narator_iz_sundjer_boba: Teki je pokušao da izađe iz aviona, ali je shvatio da je on već u letu.
+Narator_iz_sundjer_boba: Sada je bio siguran da će umreti, i da će se njegovo putovanje završiti ovde, u avionu.
+Narator_iz_sundjer_boba: Ali, u tom trenutku, shvatio je da mu je ovo bila sudbina, i da je on došao ovde da umre.
+Narator_iz_sundjer_boba: Šmrki i njegova banda su bili tajni agenti koji su trebali da unište avion i sve putnike u njemu.
+Narator_iz_sundjer_boba: Ali, zahvaljujući Tekiju, oni su uništeni, i avion je ostao siguran.
+Narator_iz_sundjer_boba: Teki je umro, ali je ostavio iza sebe veliki doprinos u borbi protiv terorizma.
+Narator_iz_sundjer_boba: Njegova smrt je bila velika žrtva, ali je ona bila potrebna da se avion i putnici u njemu spasu.
+Narator_iz_sundjer_boba: Teki je umro, ali je njegov život promenio svet.
+Narator_iz_sundjer_boba: Naravno nista od ovoga nije stvarno jer nasa prica tek pocinje ovde na ovom mestu
+<<Fade #000000 0 0 1>>
+<<Scene avion>>
+<<StopAudioAll>>
+<<PlayAudio avion 1 loop>>
+<<PlayAudio san 1 nene>>
+Teki: AAUU ala sam se lepo nadremao!
+Teki: Jos samo 1h.
+<<Scene steta2>>
+Teki: ...
+<<Scene steta>>
+Teki: Plasim se.
+<<Scene avion>>
+Teki: Bolje nego autom.
+<<PlayAudio ring 1 nene>>
+<<Act Telefon tel 0 0 #555555>>
+Teki: ...
+Teki: Ama čoveče ko me drka u ovo doba dana.
+<<StopAudio ring>>
+Teki: Alo ko zove?
+<<Act Lik_koji_zove tel 52 52 #000000>>
+Lik_koji_zove: Agente 052 imamo zadatak za vas.
+Lik_koji_zove: koji bi mogao da pomogne vašoj potrazi za Šmrkijem.
+Teki: Slušam vas.
+Lik_koji_zove: Imamo informaciju o povecanoj kriminalnoj aktivnosti koja je lokalizovana u regiji najpoznatijoj po njenim drogašima i najvecom stopom nasilja vatrenim oružijem u celoj Evropi.
+Lik_koji_zove: Jedan grad drzave Srbije, drugacije rečeno Beograd.
+Teki: I?
+Lik_koji_zove: Ono što želim da kazem je da Šmrki došao u Beograd.
+Lik_koji_zove: I namerava da uništi Beograd sa njegovom bandom.
+<<Move Telefon 0 -1 2>>
+<<StopAudioAll>>
+<<PlayAudio jame 1 loop>>
+<<Fade #000000 0 1 5>>
+Teki: <i>*Kada sam dobio tu informaciju, shvatio sam da moram da se vratim u Beograd* 
+Teki: <i>*Jer sam znao da ću se suočiti sa njim.*
+<<Fade #000000 0 0 1>>
+<<StopAudioAll>>
+<<Move Telefon 0 0 0.5>>
+<<PlayAudio scratch 1 nene>>
+Lik_koji_zove: H-halo?
+Lik_koji_zove: Agente zaboravili ste da preekinete vezu...
+Lik_koji_zove: Inace zasto pricas sam sa sobom to je kripi, znas?
+Telefon: Buraz slazem se.
+Lik_koji_zove: Brat mooo...
+Teki: DOSTA!
+Telefon: <i>*BIIIIP, veza prekinuta*</i>
+<<Hide Telefon>>
+<<Hide Lik_koji_zove>>
+<<PlayAudio jame 1 loop>>
+<<Scene darom>>
+<<Act Zena skem -1 0 #FF4444>>
+<<Move Zena 0 0 2>>
+<<Fade #000000 0 1 5>>
+Teki: <i>*Vratio sam se kuci u Beograd i shvatio sam da mi je život promenjen.*
+<<Fade #000000 0 0 1>>
+Zena: Izvinite gospodine, mogu li imati trenutak vaseg vremena?
+<<Fade #000000 0 1 5>>
+Teki: <i>*Shvatio sam da sam postao druga osoba, i da sam sada spreman da se suočim sa svim izazovima koji me očekuju.*
+<<Move Zena 2 0 5>>
+<<Fade #000000 0 0 1>>
+Zena: Halo gospodine gde zurite?
+<<Fade #000000 0 1 5>>
+Teki: <i>*Šmrkijeva banda veoma opasna, oni su spremni da naprave sve što je potrebno da bi uništili Beograd.*
+Teki: <i>*Neću se moći suprotstaviti njima sam, i moraću da tražim pomoć.*
+<<Hide Zena>>
+<<StopAudioAll>>
+<<Scene kuca>>
+<<PlayAudio otherside 1 loop>>
+<<Fade #000000 0.7 0.7 1>>
+Teki: <i>*Uzeo sam sve svoje stvari i krenuo u potragu za pomoću. Najpre sam otišao do svoga oca.*
+Teki: <i>*Znam da je on možda bio malo tvrdoglav, ali on je bio moj otac i mislio sam da će mi pomoći.*
+Teki: <i>*Otac je naravno odbio da mi pomogne i rekao mi kako sam jedan obicni balavac.*
+<<Fade #000000 1 1 1>>
+Teki: <i>*Čuvši to odlučio sam da se za pomoć obratim Šmrkiju lično.*
+Teki: <i>*Šmrkija nije bilo tako lako naći, ali sam uspeo da dođem do njega.*
+<<Scene ulica>>
+<<StopAudioAll>>
+<<PlayAudio tuznaMuzika 1 loop>>
+Teki: <i>*Naravno da sam ga pronasao u prvom lancanom sudaru na koji sam naleteo.*
+<<Fade #000000 0 0 1>>
+Teki: Šmrki si dobro?
+Teki: Javi se bre!
+Teki: Nema puls...
+Teki: Moram da ga odvedem do vrača, podhitno!!
+<<Scene klinika>>
+<<StopAudioAll>>
+Teki: 
+<<PlayAudio cave 1 nene>>
+<<PlayAudio skeleton 1 loop>>
+<<Act Vrač kosti 0.75 0.2 #FFFF22>>
+Teki: TREBA MI POMOC, COVEK UMIRE!!
+Vrač: Ne deri se!
+Vrač: EE Kurac ispade mi oko pacijena na pod.
+Vrač: *dune na oko* Kao novo!
+Vrač: *gurne oko pacijentu u glavu*
+Vrač: A sad pricaj sta treba?
+Teki: <i>*Odjednom su mi na um pali svi trenutci koje smo zajedno proveli u skoli i iza maksija.*
+<<Fade #FFFFFF 0 1 1>>
+Teki: <i>Ovo je naša priča. 
+<<Hide Vrač>>
+<<Scene BestSeller>>
+<<Fade #FFFFFF 1 0 1>>
+<<Hide Šmrki>>
+<<StopAudioAll>>
+<<PlayAudio book 1 loop>>
+Teki i Šmrki put do prijatelja popločan je drogom.
+
+Knjiga "Teki i Šmrki put do prijatelja popločan je drogom" je autobiografska priča o dva prijatelja. Knjiga prati njihov život od djetinjstva do odraslih godina.
+
+Mnogi je smatraju nastavkom Šmrkijevog Best Sellera "Šmrki, život kriminalca", ali je to samo priča o njihovom prijateljstvu.
+
+Teki i Šmrki su dva prijatelja koji su se upoznali u školi. Teki je bio novi u školi i nije imao mnogo prijatelja. Šmrki je bio popularan u školi i imao je mnogo prijatelja. 
+Teki je bio zaljubljen u Šmrkijevu prijateljicu, ali se nikada nije usudio reći joj to.
+
+Kad su Teki i Šmrki napunili 18 godina, počeli su koristiti drogu. Koristili su drogu da bi došli do više prijatelja i da bi se bolje osjećali. 
+Droga ih je dovela do gubitka prijatelja, ali i do novih prijatelja.
+
+U jednom trenutku, Teki i Šmrki su se razboleli od droge. Shvatili su da droga nije dobra za njih i da je trebaju prestati koristiti.
+
+Kako su se Teki i Šmrki nosili sa svojom zavisnošću? Kako su se suočili sa svojim strahovima? Šta je droga učinila s njihovim životima?
+
+Ova knjiga je o njihovim iskustvima s drogom i životu zavisnika.
+
+Od 29 Avgusta 2022. godine u prodaji je i audio verzija naše priče.
+
+Možete je naci u svakoj bolje snabdevenoj knjizari ili na sajtu www.tekiiskmrki.com
+<<StopAudioAll>>
+<<Scene klinika>>
+<<PlayAudio skeleton 1 loop>>
+<<Act Vrač kosti 0.75 0.2 #FFFF22>>
+Vrač: Dobro je, uspeli smo da ga spasemo.
+Vrač: Iako si kad sam te pitao sta mu nije uredu poceo da blejis u prazno...
+Vrač: Nemorras da mi zahvaljujes, ali...
+Vrač: Izvadio sam sve nepotrebne organe!
+Vrač: A ajde sad begajte, niste jedini pacijenti.
+<<Act Šmrki smrki 0.5 0 #222222>>
+<<StopAudioAll>>
+<<PlayAudio Business 1 loop>>
+<<Hide Vrač>>
+Šmrki: Pa dobro, šta želiš?
+Teki: <i>Rekao sam mu sve što se dogodilo i kako ne mogu da im se suprotstavim sam.
+Šmrki: Hmmm, pa dobro. Mislim da ti mogu pomoći.
+Teki: Kako?
+Šmrki: Idemo na moju farmu. Imam nešto što će ti pomoći.
+Teki: <i>Odmah sam otišao sa njim.
+<<Scene farma>>
+Šmrki: Ovde je.
+Teki: Šta je ovo?
+<<PlayAudio hors 1 nene>>
+<<Act Konj konj 0 0.5 #FF6666>>
+Šmrki: Ovo je moj najdraži konj.
+Konj: Niiiih!
+Teki: Ali šta će mi konj?
+Šmrki: Pa, konj je jako jak i moćan. Mislim da će ti pomoći da se izboriš sa onim što te čeka.
+Teki: Hvala ti Šmrki.
+Šmrki: Ne zahvaljuj mi. Idi i pokaži im ko je glavni.
+Teki: Nikad ti ovo necu zaboraviti.
+Teki: <i>Uzeo sam konja i krenuo natrag do sela.
+<<StopAudioAll>>
+<<Hide Šmrki>>
+<<Scene selo>>
+<<PlayAudio kasalj 1 nene>>
+Teki: <i>Kada sam došao do sela, shvatio sam da je sve bilo u haosu.
+<<Scene kafana>>
+<<Hide Konj>>
+<<Act Konobar_u_kafani konobar 0 0 #234578>>
+<<Act Gost_u_kafani gost 1 0.5 #237462>>
+<<PlayAudio jesen 1 loop>>
+Konobar_u_kafani: Šta se dešava?
+Gost_u_kafani: Ne znam. Neki ljudi su došli i počeli da razbijaju sve.
+Teki: <i>Shvatio sam da su oni došli.
+Konobar_u_kafani: Ti! Pomozi nam!
+Teki: Naravno.
+<<Fade #000000 0 1 5>>
+Teki: <i>Krenuo sam da im se suprotstavim.
+Teki: <i>Borba je bila teška, ali sam uspeo...
+Teki: <i>Uspeo sam da pronadjem autobus...
+<<Hide Konobar_u_kafani>>
+<<Hide Gost_u_kafani>>
+<<Scene bus2>>
+<<Fade #000000 1 0 1>>
+<<StopAudioAll>>
+Teki: <i>Iako je moja misija bila da se borim protiv njih, shvatio sam da je to bilo pogrešno.
+Teki: <i>Shvatio sam da je moj život u opasnosti.
+Teki: <i>Rešenje nasilju nije jos više nasilja.
+Teki: <i>Rešenje nasilju je ljubav.
+<<PlayAudio hrk 1 loop>>
+<<Act Baba baba 0 0 #FFFFFF>>
+Teki: ...
+Teki: <i>Ako svako za sebe bude mislio i delovao po principu ljubavi, svakako ćemo zajedno napredovati ka boljem svetu.
+Teki: <i>Na kraju, neću da se borim protiv njih.
+Teki: <i>Želim da im pomognem da shvate da je nasilje loše, i da je ljubav dobra.
+Teki: <i>Želim da pokažem da je ljubav jača od nasilja.
+Teki: <i>Uvek ću misliti na to.
+Teki: <i>Nasilje nikada nije rešenje.
+Teki: Zar nije tako konju?
+<<Act Konj konj 1 0.5 #FF6666>>
+<<PlayAudio hors 1 nene>>
+Konj: Niiiih?
+Teki: Nemaš ti pojma šta pričam.
+Teki: Ali to je dobro.
+Teki: Želim da budem dobar primer za tebe.
+<<PlayAudio bebe 1 loop>>
+<<Act Mama_sa_bebom amam 0.3 0.2 #FF0000>>
+Teki: ...
+Teki: Pomozi mi da to postignem, konju.
+<<PlayAudio hors 1 nene>>
+Konj: Niiiih!
+Teki: ?
+<<PlayAudio hors 1 nene>>
+Konj: Niiiih.
+Teki: Aha, pa što si onda?
+<<PlayAudio hors 1 nene>>
+Konj: Niiiih.
+Teki: Pa to je super!
+<<Act Drvoseča sekira1 0.7 0.2 #4d110c>>
+<<PlayAudio zsekira1 1 loop>>
+Drvoseča: Neće se upali.
+Teki: mhghhh...
+Teki: <i>Samo ih ignorisi Teki, nisu vredni tvog gneva.
+Teki: Zvuči kao da ćeš mi pomoći da postignem ono što želim.
+<<PlayAudio hors 1 nene>>
+Konj: Niiiih.
+<<PlayAudio hors 1 nene>>
+Konj: Niiiih.
+Teki: <i>Došao sam do konja i poljubio ga.
+Teki: Hvala ti, konju.
+Teki: <i>Rastao sam sa osećajem da sam na lošem putu.
+Teki: <i>Osećao sam se kao da sam na dobrom putu sa kon...
+<<Hide Drvoseča>>
+<<Act Drvoseča sekira2 0.7 0.2 #4d110c>>
+<<StopAudio zsekira1>>
+<<PlayAudio zsekira2 1 loop>>
+Teki: <i>...nje...
+Teki: <i>...m...
+Teki: Ama bre vise ljudi sta radite!!!
+Teki: Ne moze covek da zivi u miru!!!
+Teki: Znas šta, JA ĆU DA SE BORIM SA NJIMA!!!
+Teki: JOŠ BOLJE IMA I SVE VAS DA UBIJEM ISTO!!!
+<<StopAudio hrk>>
+Baba: Sta se deres, zar ne vidis da neki ovde oce da se odmore!?!
+Baba: Ceo dan sam bila na poslu, a sad mi treba mir i tišina.
+Baba: ALI NEEEEE, MORA DA SENAJDE NEKI MALI BALAVAC KOJI PO CEO DAN ZURI U TELEFON DA MI TO UNAKAZI!!!
+Baba: DECA SU DANAS SVI OVI MALI BALAVCI KOJI NE ZNAJU DA SE PONAŠAJU!!!
+Baba: A TI SI JEDAN OD NJIH!!!
+Mama_sa_bebom: Slazem se gospodjo, deca su danas sve ovi maloletni balavci koji ne znaju da se ponasaju.
+Mama_sa_bebom: A vidi sad si mi rasplakao bebu!
+Mama_sa_bebom: Ako ne prestanes da se deres, ja cu da te pretvorim u krompir!
+Drvoseča: ...
+Drvoseča: A ŠTA TEBI SMETA STO SECEM DRVA ZA ZIMU!!!
+Drvoseča: AKO OCES, JA BI RADO DA TI SECEŠ DRVO ZA ZIMU UMESTO MENE!!!
+Baba: Ajde da se udruzimo protiv njega!
+Drvoseča: DA!!!
+Mama_sa_bebom: DA, I DA GA PRETVORIMO U KROMPIR!!!
+Teki: ...
+Teki: <i>Upravo sam se našao u sredini velike borbe.
+Teki: <i>Ne znam šta da radim.
+Teki: <i>Ne znam šta da kažem.
+Teki: Izvinite?
+Baba: IZVINIIII,TO JE SVE ŠTO IMAŠ DA KAŽEŠ?
+Baba: O ALI JA NE MOGU TEK TAKO DA SE ZABORAVIM NA TAJ TVOJ PISKAVI GLAS KOJI MI JE NEPOZVANO UŠEĆAO U UHO!!!
+Teki: <size=20>...bežimo odavde konju...
+<<StopAudioAll>>
+<<Hide Baba>>
+<<Hide Mama_sa_bebom>>
+<<Hide Drvoseča>>
+<<Fade #000000 0 1 1>>
+Teki: Dobro je, uspeli smo da im pobegnemo.
+Teki: Šta ti kažes na ovu situaciju?
+Konj: ...
+Konj: Ima da Te roknem kopitom u jetru ako me jos jednom poljubiš.
+<<Fade #000000 1 0 1>>
+<<Scene skup>>
+<<Draw papir 0 0>>
+Teki: Tu sam.
+Teki: <i>Naravno, kako sam bio slep.
+Teki: <i>Uspeli su vec da se infiltriraju u vladu.
+Teki: <i>Znao sam da ako zelim da bostignem svoje ciljeve, moram da postanem jedan od njih.
+Teki: <i>Tako ću im se dovoljno približiti da ih mogu uništi iznutra.
+
+1. nahranii kera
+2. ubi 
+3. ?
+
+Teki: <i>Kada sam ih pobedio, shvatio sam da su oni samo bili laka meta.
+Teki: <i>Ovo je samo početak. Idem da se suprotstavim onima koji su stvarno krivi za sve ovo.
+Konobar_u_kafani: Hvala ti. Ne znam kako ćemo ti ikada moći da se zahvalimo.
+Teki: Ne treba mi zahvalnost. Ja samo želim da se ovo zaustavi.
+Teki: <i>Krenuo sam da tražim one koji su stvarno krivi za sve ovo.
+Teki: <i>Što sam više istraživao, shvatio sam da je sve bilo isplanirano.
+Teki: <i>Beograd i Francuska su bili u ratu, a neki ljudi su iskoristili to da bi došli do novca.
+Teki: <i>Razbio sam sve njihove planove i pobedio sam ih.
+Teki: <i>Nakon što sam uništio Francusku, shvatio sam da je sada moja odgovornost da vodim Srbiju.
+<<Scene pera>>
+
+<<StopAudioAll>>
+<<PlayAudio sistem 0.5 loop>>
+Teki: <i>Tako sam postao vođa i pokušao da napravim bolje mesto za život svima.
+<<Fade #000000 0 1 3>>
+Teki: <i>Ovo je moja priča. 
+Teki: <i>Moja priča o životu kriminalca.
+THE END.
+===
+title: EndZatvor
+tags: 
+position: 23,262
+---
+<<HideAll>>
+<<Scene zatvor>>
+->probaj ponovo?
+<<jump Start>>
+===

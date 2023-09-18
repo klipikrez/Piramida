@@ -29,7 +29,7 @@ AudioMixerGroupController:
   m_Send: 00000000000000000000000000000000
   m_Effects:
   - {fileID: -578651879917722659}
-  m_UserColorIndex: 0
+  m_UserColorIndex: 4
   m_Mute: 0
   m_Solo: 0
   m_BypassEffects: 0
@@ -48,7 +48,7 @@ AudioMixerGroupController:
   m_Send: 00000000000000000000000000000000
   m_Effects:
   - {fileID: -2497073243448216540}
-  m_UserColorIndex: 0
+  m_UserColorIndex: 2
   m_Mute: 0
   m_Solo: 0
   m_BypassEffects: 0
@@ -107,7 +107,15 @@ AudioMixerController:
   m_SuspendThreshold: -80
   m_EnableSuspend: 1
   m_UpdateMode: 0
-  m_ExposedParameters: []
+  m_ExposedParameters:
+  - guid: 05ac74a52a4800b46a1c7ab5600a4b3c
+    name: Master
+  - guid: fe0f61a498ae4d24388e91a3a4ce7a7c
+    name: music
+  - guid: f5f7016ebc27a27488460d496f6f3675
+    name: ddd
+  - guid: 0e6d82dad8e63ec43b3750af5640bc98
+    name: dd
   m_AudioMixerGroupViews:
   - guids:
     - 930cad27d07bbb841a2bdedf6d101303
@@ -135,7 +143,7 @@ AudioMixerGroupController:
   m_Send: 00000000000000000000000000000000
   m_Effects:
   - {fileID: 24400004}
-  m_UserColorIndex: 0
+  m_UserColorIndex: 3
   m_Mute: 0
   m_Solo: 0
   m_BypassEffects: 0
@@ -162,7 +170,8 @@ AudioMixerSnapshotController:
   m_Name: Snapshot
   m_AudioMixer: {fileID: 24100000}
   m_SnapshotID: be5cd5b9ac1f0254f90eeb7799e5acfc
-  m_FloatValues: {}
+  m_FloatValues:
+    05ac74a52a4800b46a1c7ab5600a4b3c: 20
   m_TransitionOverrides: {}
 --- !u!243 &5120258985966646600
 AudioMixerGroupController:
@@ -179,7 +188,7 @@ AudioMixerGroupController:
   m_Send: 00000000000000000000000000000000
   m_Effects:
   - {fileID: -8417341249175505805}
-  m_UserColorIndex: 0
+  m_UserColorIndex: 5
   m_Mute: 0
   m_Solo: 0
   m_BypassEffects: 0

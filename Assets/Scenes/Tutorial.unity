@@ -319,8 +319,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278190335
-  m_fontColor: {r: 1, g: 0, b: 0, a: 1}
+    rgba: 4278190080
+  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -1166,6 +1166,8 @@ MonoBehaviour:
   nameplateBG: {fileID: 1570084103}
   genericSprite: {fileID: 1937741012}
   genericAudioSource: {fileID: 1723282587}
+  onStartDialogue: 1
+  scriptToLoadOnStart: TutorialLMZSK1
 --- !u!4 &661434148
 Transform:
   m_ObjectHideFlags: 0
@@ -1409,6 +1411,7 @@ GameObject:
   - component: {fileID: 877679196}
   - component: {fileID: 877679195}
   - component: {fileID: 877679194}
+  - component: {fileID: 877679197}
   m_Layer: 0
   m_Name: Trkac
   m_TagString: Untagged
@@ -1523,9 +1526,9 @@ MonoBehaviour:
   - {fileID: 490333206}
   - {fileID: 597566678}
   startNode: Start
-  startAutomatically: 1
+  startAutomatically: 0
   runSelectedOptionAsLine: 0
-  lineProvider: {fileID: 0}
+  lineProvider: {fileID: 877679197}
   verboseLogging: 1
   onNodeStart:
     m_PersistentCalls:
@@ -1542,6 +1545,24 @@ MonoBehaviour:
   onCommand:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &877679197
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 877679192}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9c1f487b798d402db42bc11cee5b810, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stringsTable:
+    m_TableReference:
+      m_TableCollectionName: GUID:2f11e171e5132c448b2e2d9cf8310c75
+  assetTable:
+    m_TableReference:
+      m_TableCollectionName: 
 --- !u!1 &1056442243
 GameObject:
   m_ObjectHideFlags: 0
@@ -1799,7 +1820,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 0.3254902}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.3254902}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1871,8 +1892,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278190335
-  m_fontColor: {r: 1, g: 0, b: 0, a: 1}
+    rgba: 4278190080
+  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -2105,7 +2126,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: f8920755c651f8541988d594db0dad52,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 107.07
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f8920755c651f8541988d594db0dad52,
         type: 3}
@@ -2115,27 +2136,27 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: f8920755c651f8541988d594db0dad52,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -162.18
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f8920755c651f8541988d594db0dad52,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.02268737
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f8920755c651f8541988d594db0dad52,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f8920755c651f8541988d594db0dad52,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: -0.9997426
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f8920755c651f8541988d594db0dad52,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f8920755c651f8541988d594db0dad52,
         type: 3}
@@ -2145,7 +2166,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: f8920755c651f8541988d594db0dad52,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: -66.52
+      value: -177.4
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f8920755c651f8541988d594db0dad52,
         type: 3}
@@ -2702,6 +2723,31 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2417952306675834280, guid: 531aa65488c339e4987e18fb53189dde,
         type: 3}
+    - target: {fileID: 6019180568793553375, guid: 8a08b4d539c771446a86df33f60dad32,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 6019180568793553375, guid: 8a08b4d539c771446a86df33f60dad32,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 6019180568793553375, guid: 8a08b4d539c771446a86df33f60dad32,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6019180568793553375, guid: 8a08b4d539c771446a86df33f60dad32,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6019180568793553375, guid: 8a08b4d539c771446a86df33f60dad32,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -90
+      objectReference: {fileID: 0}
     - target: {fileID: 6019180570032052739, guid: 8a08b4d539c771446a86df33f60dad32,
         type: 3}
       propertyPath: m_Name

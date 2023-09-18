@@ -50,6 +50,26 @@ MonoBehaviour:
     m_Localized: Resume
     m_Metadata:
       m_Items: []
+  - m_Id: 835603616862476
+    m_Localized: 'Indian_Johnes: ...'
+    m_Metadata:
+      m_Items:
+      - rid: 3149554773216461127
+  - m_Id: 835603616862477
+    m_Localized: 'Crazy_cat_for_old_Houses: YOOOOOOOOOOOO, '
+    m_Metadata:
+      m_Items:
+      - rid: 3149554773216461128
   references:
     version: 2
-    RefIds: []
+    RefIds:
+    - rid: 3149554773216461127
+      type: {class: LineMetadata, ns: Yarn.Unity.UnityLocalization, asm: YarnSpinner.Unity}
+      data:
+        nodeName: TutorialLMZSK1
+        tags: []
+    - rid: 3149554773216461128
+      type: {class: LineMetadata, ns: Yarn.Unity.UnityLocalization, asm: YarnSpinner.Unity}
+      data:
+        nodeName: TutorialLMZSK1
+        tags: []

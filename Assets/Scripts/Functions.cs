@@ -19,6 +19,20 @@ public class Box
     public quaternion rotation;
 }
 
+public class Settings
+{
+    public bool fullScreen = true;
+    public int fps = 60;
+    public float[] volumes = { 1, 1, 1, 1 };
+    public bool vsync = false;
+    public string language = "bs";
+    /*public float volume0 = 1;
+    public float volume1 = 1;
+    public float volume2 = 1;
+    public float volume3 = 1;*/
+
+}
+
 public static class Functions
 {
     private static SphereCollider sphere;

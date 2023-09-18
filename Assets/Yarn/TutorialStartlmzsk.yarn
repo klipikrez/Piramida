@@ -1,0 +1,17 @@
+﻿title: TutorialLMZSK1
+tags:
+position: NaN,NaN
+---
+<<Scene black>>
+<<PlayAudio DarkEgyptianMusic 0.3 loop>>
+<<FOV  20>>
+Indijanac_Džons: ... #line:1002f4e3
+<<Act Ludi_mačor_za_stare_kuće lmzsk 0.5 -0.3 #eb38af>>
+<<LookAt lmzsk>>
+<<StopAudio DarkEgyptianMusic>>
+<<PlayAudio lmzskTheme 0.3 loop>>
+Ludi_mačor_za_stare_kuće: EEEEEEEEEEEE, desi druuuže!!! #line:f58b3383
+<<StopAudioAll>>
+<<HideAll>>
+<<stop>>
+===

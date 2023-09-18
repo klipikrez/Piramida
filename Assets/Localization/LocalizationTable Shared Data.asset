@@ -15,10 +15,6 @@ MonoBehaviour:
   m_TableCollectionName: LocalizationTable
   m_TableCollectionNameGuidString: 2f11e171e5132c448b2e2d9cf8310c75
   m_Entries:
-  - m_Id: 27476987904
-    m_Key: New Entry
-    m_Metadata:
-      m_Items: []
   - m_Id: 20027139002368
     m_Key: Loading
     m_Metadata:
@@ -49,6 +45,14 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 34950736875520
     m_Key: Resume
+    m_Metadata:
+      m_Items: []
+  - m_Id: 835603616862476
+    m_Key: line:1002f4e3
+    m_Metadata:
+      m_Items: []
+  - m_Id: 835603616862477
+    m_Key: line:f58b3383
     m_Metadata:
       m_Items: []
   m_Metadata:

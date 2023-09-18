@@ -5,6 +5,8 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 using UnityEngine.Audio;
+using static Functions;
+using System;
 
 public class Options : MonoBehaviour
 {
@@ -21,30 +23,37 @@ public class Options : MonoBehaviour
 
             JsonUtility.FromJsonOverwrite(json, settings);//pisi u klasu kao json string
     }*/
+    public MainMenu menu;
     public Toggle fullScreenToggle;
     public Slider Fps;
     public Slider[] VolumeSliders = new Slider[4];
-    public AudioMixer audioMixer;
+    public TMP_Dropdown lanhuage;
 
-    public class Settings
-    {
-        public bool fullScreen = true;
-        public int fps = 60;
-        public float[] volumes = { 1, 1, 1, 1 };
-        public bool vsync = false;
-        /*public float volume0 = 1;
-        public float volume1 = 1;
-        public float volume2 = 1;
-        public float volume3 = 1;*/
 
-    }
-    Settings settings;
+
     public static Options Instance { get; private set; }
 
-    private void Awake()
-    {//ptickixcce idu tut tut
-        settings = JsonUtility.FromJson<Settings>(File.ReadAllText(Application.dataPath + "/StreamingAssets/klipik.rez"));
-        Instance = this;
+    public void UpdateSettingsValues(Settings settings)
+    {
+        fullScreenToggle.isOn = settings.fullScreen;
+        Fps.value = settings.fps;
+        int languageIndex = 0;
+        for (int i = 0; i < lanhuage.options.Count; i++)
+        {
+            Debug.Log(lanhuage.options[i].image.name);
+            if (settings.language == lanhuage.options[i].image.name)
+            {
+                languageIndex = i;
+            }
+        }
+        lanhuage.value = languageIndex;
+        SetLanguage(languageIndex);
+
+        for (int i = 0; i < VolumeSliders.Length; i++)
+        {
+            VolumeSliders[i].value = settings.volumes[i] * 100;
+        }
+
     }
 
     void Start()
@@ -64,31 +73,18 @@ public class Options : MonoBehaviour
 
     public void FullScreenValue(bool value)
     {
-        if (settings != null)
-        {
-            settings.fullScreen = value;
-            UpdateSettings(value ? 1 : 0, settings.fps);
-        }
+        menu.FullScreenValue(value);
 
     }
 
     public void FpsValue(float value)
     {
-        if (settings != null)
-        {
-            settings.fps = (int)value;
-            VsyncValue(value <= 0.1f ? true : false);
-            UpdateSettings(settings.fullScreen ? 1 : 0, (int)value);
-        }
+        menu.FpsValue(value);
     }
 
     public void VsyncValue(bool value)
     {
-        if (settings != null)
-        {
-            settings.vsync = value;
-            QualitySettings.vSyncCount = value ? 1 : 0;
-        }
+        menu.VsyncValue(value);
     }
 
     public void Volume0Value(float value)
@@ -109,26 +105,14 @@ public class Options : MonoBehaviour
     }
     void VolumeValue(float value, int index)
     {
-        if (settings != null)
-        {
-            value /= 100;
-            settings.volumes[index] = value;
-            audioMixer.SetFloat(index.ToString(), (Mathf.Log10(value) * 20) != float.NegativeInfinity ? Mathf.Log10(value) * 20 : -52);
-        }
+        menu.VolumeValue(value, index);
     }
-
-    void UpdateSettings(int fullScreen = -1, int hz = -1)
+    public void SetLanguage(int value)
     {
-        Application.targetFrameRate = hz != -1 ? (hz) : Application.targetFrameRate;
-
-        Screen.SetResolution(
-            Screen.width,
-             Screen.height,
-              fullScreen != -1 ? (fullScreen == 1 ? true : false) : Screen.fullScreen,
-               hz != -1 ? (hz) : Application.targetFrameRate);
-
-        File.WriteAllText(Application.dataPath + "/StreamingAssets/klipik.rez", JsonUtility.ToJson(settings));//update setings json
+        Debug.Log("Change:" + value);
+        menu.SetLanguage(lanhuage.options[value].image.name);
     }
+
 
     /*
         public void FullScreen(bool value)

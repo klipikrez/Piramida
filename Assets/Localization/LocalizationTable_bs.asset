@@ -50,6 +50,26 @@ MonoBehaviour:
     m_Localized: Nastavi gejmingovanje
     m_Metadata:
       m_Items: []
+  - m_Id: 835603616862476
+    m_Localized: "Indijanac_D\u017Eons: ..."
+    m_Metadata:
+      m_Items:
+      - rid: 3149554773216461188
+  - m_Id: 835603616862477
+    m_Localized: "Ludi_ma\u010Dor_za_stare_ku\u0107e: EEEEEEEEEEEE, desi druuu\u017Ee!!!"
+    m_Metadata:
+      m_Items:
+      - rid: 3149554773216461189
   references:
     version: 2
-    RefIds: []
+    RefIds:
+    - rid: 3149554773216461188
+      type: {class: LineMetadata, ns: Yarn.Unity.UnityLocalization, asm: YarnSpinner.Unity}
+      data:
+        nodeName: TutorialLMZSK1
+        tags: []
+    - rid: 3149554773216461189
+      type: {class: LineMetadata, ns: Yarn.Unity.UnityLocalization, asm: YarnSpinner.Unity}
+      data:
+        nodeName: TutorialLMZSK1
+        tags: []

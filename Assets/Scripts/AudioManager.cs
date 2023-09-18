@@ -31,6 +31,7 @@ public class AudioManager : MonoBehaviour
     public GameObject DDDSoundPrefab;
     public AudioMixerGroup DD;
     Coroutine voiceCorutine;
+
     AudioSource VoiceLineSource;
     //public Dictionary<string, AudioAudi> PlayingAudio = new Dictionary<string, AudioAudi>();
 

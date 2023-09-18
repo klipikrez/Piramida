@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Yarn.Unity.Example;
 
 public class PlayerArms : MonoBehaviour
 {
@@ -25,6 +26,8 @@ public class PlayerArms : MonoBehaviour
     public float[] ammoPerArm;
     public float reloadTimer;
     public bool shiftPressed = false;
+    [System.NonSerialized]
+    public bool inDialogue = false;
 
     void Start()
     {
@@ -77,7 +80,7 @@ public class PlayerArms : MonoBehaviour
 
     private void StopReload(InputAction.CallbackContext context)
     {
-        if (!GameMenu.Instance.paused)
+        if (!GameMenu.Instance.paused && !inDialogue)
         {
             guns[selectedGun].ReloadCancelled(this);
         }
@@ -85,7 +88,7 @@ public class PlayerArms : MonoBehaviour
 
     private void Shift(InputAction.CallbackContext context)
     {
-        if (!GameMenu.Instance.paused)
+        if (!GameMenu.Instance.paused && !inDialogue)
         {
             shiftPressed = true;
             guns[selectedGun].Shift(this);
@@ -94,7 +97,7 @@ public class PlayerArms : MonoBehaviour
 
     private void StopShift(InputAction.CallbackContext context)
     {
-        if (!GameMenu.Instance.paused)
+        if (!GameMenu.Instance.paused && !inDialogue)
         {
             shiftPressed = false;
             guns[selectedGun].ShiftCancelled(this);
@@ -103,7 +106,7 @@ public class PlayerArms : MonoBehaviour
 
     private void Reload(InputAction.CallbackContext context)
     {
-        if (!GameMenu.Instance.paused)
+        if (!GameMenu.Instance.paused && !inDialogue)
         {
             if (ammoPerArm[selectedGun] != guns[selectedGun].maxAmmo)
             {
@@ -121,7 +124,7 @@ public class PlayerArms : MonoBehaviour
 
     private void StopShoot(InputAction.CallbackContext context)
     {
-        if (!GameMenu.Instance.paused)
+        if (!GameMenu.Instance.paused && !inDialogue)
         {
             shooting = false;
         }
@@ -129,7 +132,7 @@ public class PlayerArms : MonoBehaviour
 
     private void Shoot(InputAction.CallbackContext context)
     {
-        if (!GameMenu.Instance.paused)
+        if (!GameMenu.Instance.paused && !inDialogue)
         {
             shooting = true;
             if (!reloading && ammoPerArm[selectedGun] != 0)
@@ -143,7 +146,7 @@ public class PlayerArms : MonoBehaviour
     {
         while (reloading)
         {
-            if (!GameMenu.Instance.paused)
+            if (!GameMenu.Instance.paused && !inDialogue)
             {
                 reloadTimer += Time.deltaTime;
                 yield return new WaitForEndOfFrame();
@@ -155,7 +158,7 @@ public class PlayerArms : MonoBehaviour
     {
         while (shooting && !reloading && ammoPerArm[selectedGun] != 0)
         {
-            if (!GameMenu.Instance.paused)
+            if (!GameMenu.Instance.paused && !inDialogue)
             {
                 guns[selectedGun].Shoot(this);
                 yield return new WaitForSeconds(1 / guns[selectedGun].BPS);

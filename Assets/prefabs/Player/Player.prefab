@@ -1089,6 +1089,9 @@ MonoBehaviour:
   groundCheckoffsetForRaycast: 0.35
   grappleForce: 120
   upPushInGrapple: 15
+  inDialogue: 0
+  lookAt: {fileID: 0}
+  DefaultFOV: 70
 --- !u!114 &6019180570032052751
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1277,6 +1280,7 @@ MonoBehaviour:
   - {fileID: 3370134736978855418, guid: 125066140909df241a2776f673b74506, type: 3}
   - {fileID: 5377661493418095310, guid: 3a42d18a5e9e04b4aa1ed910a391635c, type: 3}
   - {fileID: 3634348067889387276, guid: 3f7c228778295ed4283b989d8ca06e94, type: 3}
+  runtimeSceneManager: {fileID: 0}
 --- !u!114 &7773331152236242806
 MonoBehaviour:
   m_ObjectHideFlags: 0

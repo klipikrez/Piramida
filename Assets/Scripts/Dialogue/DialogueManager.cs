@@ -5,21 +5,13 @@ using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using Yarn.Markup;
 using TMPro;
+using Yarn.Unity.Editor;
 
 namespace Yarn.Unity.Example
 {
-    /// <summary>
-    /// runs Yarn commands and manages sprites for the Visual Novel example
-    /// </summary>
     public class DialogueManager : DialogueViewBase
     {
-        /*
-                MarkupParseResult bre;
-                public string TextForAttribute(MarkupAttribute attribute)
-                {
-                    bre = MarkupParser.Parse(attribute.Value);
-                    return bre.ToString();
-                }*/
+
         public TextMeshProUGUI nameplateText;
         [SerializeField] DialogueRunner runner;
 
@@ -53,8 +45,31 @@ namespace Yarn.Unity.Example
 
         static Vector2 screenSize = new Vector2(1280f, 720f); // needed for position calcuations, e.g. what does "left" mean?
 
+        PlayerMovement playerMovement;
+        PlayerArms playerArms;
+        public static DialogueManager Instance;
+        public bool onStartDialogue = false;
+        public string scriptToLoadOnStart;
         void Awake()
         {
+            Instance = this;
+            playerMovement = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>();
+            playerArms = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerArms>();
+            // adds all Resources to internal lists / one big pile... it
+            // will scan inside all subfolders too! note: but when
+            // referencing sprites in the Yarn script, just use the file
+            // name and omit folder names
+
+            if (useResourcesFolders)
+            {
+
+                Sprite[] allSpritesInResources = Resources.LoadAll<Sprite>("");
+                loadSprites.AddRange(allSpritesInResources);
+                AudioClip[] allAudioInResources = Resources.LoadAll<AudioClip>("");
+                loadAudio.AddRange(allAudioInResources);
+
+            }
+
             // manually add all Yarn command handlers, so that we don't
             // have to type out game object names in Yarn scripts (also
             // gives us a performance increase by avoiding GameObject.Find)
@@ -77,19 +92,47 @@ namespace Yarn.Unity.Example
             runner.AddCommandHandler<string, float, float, float>("Fade", SetFade);
             runner.AddCommandHandler<float>("FadeIn", SetFadeIn);
             runner.AddCommandHandler<string, string, float>("CamOffset", SetCameraOffset);
-            // adds all Resources to internal lists / one big pile... it
-            // will scan inside all subfolders too! note: but when
-            // referencing sprites in the Yarn script, just use the file
-            // name and omit folder names
-            if (useResourcesFolders)
+
+            runner.AddCommandHandler<string>("LookAt", SetCameraLook);
+            runner.AddCommandHandler<float>("FOV", SetCameraFOV);
+
+            // runner.onDialogueComplete.AddListener(DialogueComplete);
+
+        }
+        private void Start()
+        {
+            if (onStartDialogue)
             {
-                var allSpritesInResources = Resources.LoadAll<Sprite>("");
-                loadSprites.AddRange(allSpritesInResources);
-                var allAudioInResources = Resources.LoadAll<AudioClip>("");
-                loadAudio.AddRange(allAudioInResources);
+                StartDialogue(scriptToLoadOnStart);
             }
         }
+        public void StartDialogue(string startNode)
+        {
+            // Load the program, along with all of its nodes. 
+            // The string table will be selected based on the 
+            // Dialogue Runner's text language variable.
+            runner.StartDialogue(startNode);
+            playerMovement.CustomFOV = playerMovement.DefaultFOV;
+            playerMovement.inDialogue = true;
+            playerArms.inDialogue = true;
+            spriteGroup.gameObject.SetActive(true);
+            bgImage.gameObject.SetActive(true);
+            fadeBG.gameObject.SetActive(true);
+            nameplateBG.gameObject.SetActive(true);
+            genericSprite.gameObject.SetActive(true);
+        }
 
+        public override void DialogueComplete()
+        {
+            //runner.Stop();
+            playerMovement.inDialogue = false;
+            playerArms.inDialogue = false;
+            spriteGroup.gameObject.SetActive(false);
+            bgImage.gameObject.SetActive(false);
+            fadeBG.gameObject.SetActive(false);
+            nameplateBG.gameObject.SetActive(false);
+            genericSprite.gameObject.SetActive(false);
+        }
         #region YarnCommands
 
         /// <summary>changes background image</summary>
@@ -432,6 +475,16 @@ namespace Yarn.Unity.Example
             StartCoroutine(MoveCoroutine(parent, newPos, moveTime));
         }
 
+        public void SetCameraLook(string name)
+        {
+            playerMovement.lookAt = GameObject.Find(name).transform;
+        }
+
+        public void SetCameraFOV(float value)
+        {
+            playerMovement.CustomFOV = value;
+        }
+
         #endregion
 
 
@@ -596,6 +649,7 @@ namespace Yarn.Unity.Example
                 CleanDestroy<AudioSource>(destroyThis.gameObject);
             }
         }
+
 
         // CleanDestroy also removes any references to the gameObject from
         // sprites or sounds

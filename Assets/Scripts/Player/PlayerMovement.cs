@@ -52,8 +52,11 @@ public class PlayerMovement : MonoBehaviour
     public float upPushInGrapple = 18f;
     [System.NonSerialized]
     public float grappleTimer = 0f;
-
-
+    public bool inDialogue = false;
+    public Transform lookAt;
+    public float DefaultFOV = 70f;
+    [System.NonSerialized]
+    public float CustomFOV = 52f;
     void Start()
     {
 
@@ -146,25 +149,38 @@ public class PlayerMovement : MonoBehaviour
             wasGrappling = false;
         }
 
-        if (grapple && !hitRigidbody)
+        if (!inDialogue)
         {
-            wasGrappling = true;
-            Grapple();
+            if (grapple && !hitRigidbody)
+            {
+                wasGrappling = true;
+                Grapple();
 
-            grappleTimer += Time.deltaTime;
+                grappleTimer += Time.deltaTime;
+            }
+            else
+            {
+                grappleTimer = 0;
+                Move();
+                Jump();
+            }
+
+
+            //        Debug.Log(grappleTimer);
+            Look();
         }
         else
         {
-            grappleTimer = 0;
-            Move();
-            Jump();
+            if (lookAt != null)
+                LookAt(lookAt);
         }
-
-
-        //        Debug.Log(grappleTimer);
-        Look();
-
+        SetFOV();
         velocity = body.velocity;
+    }
+
+    public void SetFOV()
+    {
+        PlayerCamera.fieldOfView = Mathf.Lerp(PlayerCamera.fieldOfView, !inDialogue ? DefaultFOV : CustomFOV, DeltaTimeLerp(0.5f));
     }
 
     public void Grapple()
@@ -434,7 +450,19 @@ public class PlayerMovement : MonoBehaviour
         transform.Rotate(new Vector3(0, look.x, 0));
     }
 
+    public void LookAt(Transform lookAt)
+    {
+        Vector3 center = lookAt.gameObject.GetComponent<Renderer>().bounds.center;
+        Vector3 targetDirectionY = (new Vector3(center.x, 0, center.z) - new Vector3(PlayerCamera.transform.position.x, 0, PlayerCamera.transform.position.z)).normalized;
+        Quaternion lookAtRotationY = Quaternion.LookRotation(targetDirectionY);
+        Vector3 targetDirection = (center - PlayerCamera.transform.position).normalized;
+        Quaternion lookAtRotation = Quaternion.LookRotation(targetDirection);
 
+        transform.rotation = Quaternion.Lerp(transform.rotation, lookAtRotationY, DeltaTimeLerp(0.05f));
+
+        PlayerCamera.gameObject.transform.rotation = Quaternion.Lerp(PlayerCamera.gameObject.transform.rotation, lookAtRotation, DeltaTimeLerp(0.05f));
+        PlayerCamera.transform.localEulerAngles = new Vector3(PlayerCamera.transform.localEulerAngles.x, 0, 0);
+    }
 
     /* public Vector3 moveV = Vector3.zero;
      public Vector3 moveM = Vector3.zero;

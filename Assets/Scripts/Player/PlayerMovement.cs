@@ -149,7 +149,7 @@ public class PlayerMovement : MonoBehaviour
             wasGrappling = false;
         }
 
-        if (!inDialogue)
+        if (!inDialogue && !GameMenu.Instance.paused)
         {
             if (grapple && !hitRigidbody)
             {
@@ -171,7 +171,7 @@ public class PlayerMovement : MonoBehaviour
         }
         else
         {
-            if (lookAt != null)
+            if (lookAt != null && !GameMenu.Instance.paused)
                 LookAt(lookAt);
         }
         SetFOV();
@@ -434,7 +434,7 @@ public class PlayerMovement : MonoBehaviour
     public void Look()
     {
         Vector2 look = input.Player.Look.ReadValue<Vector2>();
-        look *= Time.deltaTime * mouseSensetivity;
+        look *= mouseSensetivity;
 
         float camRotationX = PlayerCamera.transform.rotation.eulerAngles.x >= 270 ? PlayerCamera.transform.rotation.eulerAngles.x - 360f : PlayerCamera.transform.rotation.eulerAngles.x;
 

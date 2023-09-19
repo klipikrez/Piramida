@@ -2,15 +2,28 @@
 tags:
 position: NaN,NaN
 ---
-<<Scene black>>
-<<PlayAudio DarkEgyptianMusic 0.3 loop>>
+<<Scene black 0.85>>
+
 <<FOV  20>>
-Indijanac_Džons: ... #line:1002f4e3
-<<Act Ludi_mačor_za_stare_kuće lmzsk 0.5 -0.3 #eb38af>>
+Indijanac_Džons: ...
+Ludi_mačor_za_stare_kuće: *psst*
+Ludi_mačor_za_stare_kuće: Alo Druze!
+<<Act Ludi_mačor_za_stare_kuće lmzsk 0.75 -0.3 #eb38af>>
 <<LookAt lmzsk>>
-<<StopAudio DarkEgyptianMusic>>
 <<PlayAudio lmzskTheme 0.3 loop>>
-Ludi_mačor_za_stare_kuće: EEEEEEEEEEEE, desi druuuže!!! #line:f58b3383
+Ludi_mačor_za_stare_kuće: [normalWave]EEEEEEEEEEEE!!![/normalWave]
+Ludi_mačor_za_stare_kuće: Ovde dole bato!
+Ludi_mačor_za_stare_kuće: Ono kao drugar, šta radis u-u mojoj rupetini, aa?
+<<Hide lmzsk>>
+<<Act Ludi_mačor_za_stare_kuće lmyskChill 0.2 0.2 #eb38af>>
+Ludi_mačor_za_stare_kuće: Zr-Yar ne vidiš da radim ovde, Važan poso...
+<<Hide lmyskChill>>
+<<Act Ludi_mačor_za_stare_kuće lmzsk 0.75 -0.3 #eb38af>>
+Ludi_mačor_za_stare_kuće: Šta me gledaš ko tele u šarena vrata?
+<<Hide lmzsk>>
+<<Act Ludi_mačor_za_stare_kuće lmzskSajbatroniks 0.75 0.3 #eb38af>>
+Ludi_mačor_za_stare_kuće: Aaa, mačoru, el to proveravas moje mišice?
+Ludi_mačor_za_stare_kuće: Malo sam poceo da idem u trtanu, ako me kapiras!
 <<StopAudioAll>>
 <<HideAll>>
 <<stop>>

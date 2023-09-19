@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class GameMenu : MainMenu
+public class GameMenu : MonoBehaviour
 {
     public GameObject UI;
     [System.NonSerialized]
@@ -11,7 +11,7 @@ public class GameMenu : MainMenu
     public static float timeSinceStart = 0f;
     [System.NonSerialized]
     public static GameMenu Instance;
-
+    public MainMenu mainMenu;
     private void Awake()
     {
         Instance = this;
@@ -46,7 +46,7 @@ public class GameMenu : MainMenu
         Cursor.visible = true;
         UI.SetActive(true);
         Time.timeScale = 0.0f;
-        SetObjectsActive(0);
+        mainMenu.SetObjectsActive(0);
     }
     public void Resume()
     {
@@ -54,7 +54,7 @@ public class GameMenu : MainMenu
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         UI.SetActive(false);
-        SetObjectsActive(0);
+        mainMenu.SetObjectsActive(0);
         Time.timeScale = 1.0f;
     }
 

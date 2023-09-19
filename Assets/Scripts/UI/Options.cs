@@ -109,7 +109,7 @@ public class Options : MonoBehaviour
     }
     public void SetLanguage(int value)
     {
-        Debug.Log("Change:" + value);
+
         menu.SetLanguage(lanhuage.options[value].image.name);
     }
 

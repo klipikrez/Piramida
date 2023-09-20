@@ -295,7 +295,7 @@ public class RopeTomahawk : MonoBehaviour
                     * Mathf.Min(((lineRenderer.positionCount - 1) / 2f - Mathf.Abs(i - (lineRenderer.positionCount - 1) / 2f)) / 19f, 1)));
 
         }
-        Debug.Log(kurvaBounceBack.Evaluate(bounceTime));
+        //        Debug.Log(kurvaBounceBack.Evaluate(bounceTime));
         bounceTime += Time.deltaTime;
     }
 

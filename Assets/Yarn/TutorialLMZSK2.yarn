@@ -1,0 +1,57 @@
+﻿title: TutorialLMZSK2
+tags:
+position: NaN,NaN
+---
+<<Reset>>
+<<Scene black 0.85>>
+<<FOV 20>>
+<<Act Ludi_mačor_za_stare_kuće lmzsk 0.75 -0.3 #eb38af>>
+<<LookAt lmzsk>>
+<<PlayAudio lmzskTheme 0.3 loop>>
+Ludi_mačor_za_stare_kuće: Još si tu?
+Ludi_mačor_za_stare_kuće: Znaš batice, treba probaš malo ove mačije travice malenice, stvar UBIJA.~
+Ludi_mačor_za_stare_kuće: Bukvalno.
+-> Daj da probam.
+    Ludi_mačor_za_stare_kuće: Može brato, al ono kao...
+    Ludi_mačor_za_stare_kuće: Ne nudim ti moju, Ako hvataš moje frekvencije...
+    Ludi_mačor_za_stare_kuće: Al kad si već tu...
+    Ludi_mačor_za_stare_kuće: Imaš upaljač možda?
+    Ludi_mačor_za_stare_kuće: Moj se isprazni pa mora palim plugu sa fokusiranim zrakom svetlosti...
+    Ludi_mačor_za_stare_kuće: Znas kako je... (heh).
+    -> ne.
+    -> ne.
+    -> ne.
+    -> ne, nemam.
+    -> ne.
+    -> ne.
+-> ne.
+    Ludi_mačor_za_stare_kuće: HAahaha!
+    Ludi_mačor_za_stare_kuće: Mamino dete ne sme da proba.
+    Ludi_mačor_za_stare_kuće: Više za mene.
+Ludi_mačor_za_stare_kuće: Nema veze. 
+Ludi_mačor_za_stare_kuće: Šta treba tebra?
+<<jump Tutorial1lmzsk2Questions>>
+
+===
+
+title: Tutorial1lmzsk2Questions
+---
+-> Gde ti je krzno?
+    Ludi_mačor_za_stare_kuće: NEMA!
+    Ludi_mačor_za_stare_kuće: Bato... ova pustinjska klima je doprela do dubine mog postojanja...
+    Ludi_mačor_za_stare_kuće: Pa sam se malo obrijao.
+    Ludi_mačor_za_stare_kuće: Ja mislim da mi ovako bolje stoji.
+    Ludi_mačor_za_stare_kuće: Aaaa?
+    <<jump Tutorial1lmzsk2Questions>>
+-> Gde smo sad?
+    Ludi_mačor_za_stare_kuće: Mi kasa su kasa, jk. mrš napolje.
+    Ludi_mačor_za_stare_kuće: Inace, trenutno dangubiš u Dangubiškoj pustinji.
+    Ludi_mačor_za_stare_kuće: Čim sam čuo kako se zove, odma sam doleteo ovde.
+    Ludi_mačor_za_stare_kuće: I mora priznam...
+    Ludi_mačor_za_stare_kuće: Vruće je...
+    <<jump Tutorial1lmzsk2Questions>>
+-> Aj ćao.
+    <<StopAudioAll>>
+    <<Reset>>
+    <<stop>>
+===

@@ -111,36 +111,45 @@ public class TomahawkBullet : BulletBase
         }
 
         hit = ReturnClosestHitBoxExclude(box.center, bullet.hitColliders, out checkedColliders, box.rotation, box.bounds, ~LayerMask.GetMask("Hitbox", "Player", "Ignore Raycast", "Bullet", "EnemyHitbox", "EnemyCollider", "Attack", "Ford", "Mazda"));
+
         if (hit.hit)
         {
-            //kad se sekira lupi u zid 
-            if (hit.collider.gameObject.CompareTag("RigidbodyInteractable"))
+            Vector3 fromHit = hit.point - bullet.transform.position;
+            float dot = Vector3.Dot(bullet.velocity.normalized, fromHit.normalized);
+            Debug.Log(dot > 0 ? "ka" : "odaljava");
+            if (dot > -0.5f)
             {
-                bullet.employer.gameObject.GetComponent<PlayerMovement>().hitRigidbody = true;
-                GameObject instance = Instantiate(HitTomahawkPrefab, hit.point, Quaternion.FromToRotation(bullet.transform.up, hit.normal) * bullet.transform.rotation);
-                Rigidbody rigidBody = hit.collider.gameObject.GetComponent<Rigidbody>();
-                RopeTomahawk.Instance.SetTransformsToFollow(
-                bullet.employer.transform,
-                instance.transform);
-                instance.transform.SetParent(hit.collider.gameObject.transform);
-                rigidBody.AddForceAtPosition(bullet.GetComponent<Bullet>().velocity, hit.point);
-                instance.transform.localScale = Vector3.one * meshScale;
-            }
-            else
-            {
-                bullet.employer.gameObject.GetComponent<PlayerMovement>().hitRigidbody = false;
-                GameObject instance = Instantiate(HitTomahawkPrefab, hit.point, Quaternion.FromToRotation(bullet.transform.up, hit.normal) * bullet.transform.rotation);
-                RopeTomahawk.Instance.SetTransformsToFollow(
-                bullet.employer.transform,
-                instance.transform
-                );
-                instance.transform.localScale = Vector3.one * meshScale;
-            }
+                //kad se sekira lupi u zid 
+                if (hit.collider.gameObject.CompareTag("RigidbodyInteractable"))
+                {
+                    bullet.employer.gameObject.GetComponent<PlayerMovement>().hitRigidbody = true;
+                    GameObject instance = Instantiate(HitTomahawkPrefab, hit.point, Quaternion.FromToRotation(bullet.transform.up, hit.normal) * bullet.transform.rotation);
+                    Rigidbody rigidBody = hit.collider.gameObject.GetComponent<Rigidbody>();
+                    RopeTomahawk.Instance.SetTransformsToFollow(
+                    bullet.employer.transform,
+                    instance.transform);
+                    instance.transform.SetParent(hit.collider.gameObject.transform);
+                    rigidBody.AddForceAtPosition(bullet.GetComponent<Bullet>().velocity, hit.point);
+                    instance.transform.localScale = Vector3.one * meshScale;
+                }
+                else
+                {
+
+                    bullet.employer.gameObject.GetComponent<PlayerMovement>().hitRigidbody = false;
+                    GameObject instance = Instantiate(HitTomahawkPrefab, hit.point, Quaternion.FromToRotation(bullet.transform.up, hit.normal) * bullet.transform.rotation);
+                    RopeTomahawk.Instance.SetTransformsToFollow(
+                    bullet.employer.transform,
+                    instance.transform
+                    );
+                    instance.transform.localScale = Vector3.one * meshScale;
+
+                }
 
 
-            AudioManager.Instance.PlayAudioClip("hitGround", 0.34f);
-            RopeTomahawk.Instance.hit = true;
-            BulletManager.Instance.ReurnBulletToPool(bullet);
+                AudioManager.Instance.PlayAudioClip("hitGround", 0.34f);
+                RopeTomahawk.Instance.hit = true;
+                BulletManager.Instance.ReurnBulletToPool(bullet);
+            }
         }
     }
 

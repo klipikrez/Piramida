@@ -8,7 +8,7 @@ using UnityEngine.UI;
 using UnityEngine.Audio;
 using UnityEngine.Localization.Settings;
 using static Functions;
-using UnityEditor.PackageManager;
+
 public class MainMenu : MonoBehaviour
 {
     private void Awake()
@@ -18,7 +18,7 @@ public class MainMenu : MonoBehaviour
     }
     private void Start()
     {
-        Debug.Log("Stored:" + settings.language);
+
         options.UpdateSettingsValues(settings);
         if (SceneManager.GetActiveScene().buildIndex == 0)
         {

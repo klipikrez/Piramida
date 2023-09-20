@@ -64,57 +64,357 @@ MonoBehaviour:
     m_Localized: "Indijanac_D\u017Eons: ..."
     m_Metadata:
       m_Items:
-      - rid: 3149554794130309379
+      - rid: 3149554794130309537
   - m_Id: 1197364329156608
     m_Localized: "Ludi_ma\u010Dor_za_stare_ku\u0107e: *psst*"
     m_Metadata:
       m_Items:
-      - rid: 3149554794130309380
+      - rid: 3149554794130309538
   - m_Id: 1197364329156609
     m_Localized: "Ludi_ma\u010Dor_za_stare_ku\u0107e: Alo Druze!"
     m_Metadata:
       m_Items:
-      - rid: 3149554794130309381
+      - rid: 3149554794130309539
   - m_Id: 1197364329156610
     m_Localized: "Ludi_ma\u010Dor_za_stare_ku\u0107e: [normalWave]EEEEEEEEEEEE!!![/normalWave]"
     m_Metadata:
       m_Items:
-      - rid: 3149554794130309382
+      - rid: 3149554794130309540
   - m_Id: 1197364329156611
     m_Localized: "Ludi_ma\u010Dor_za_stare_ku\u0107e: Ovde dole bato!"
     m_Metadata:
       m_Items:
-      - rid: 3149554794130309383
+      - rid: 3149554794130309541
   - m_Id: 1197364329156612
-    m_Localized: "Ludi_ma\u010Dor_za_stare_ku\u0107e: Ono kao drugar, \u0161ta radis
+    m_Localized: "Ludi_ma\u010Dor_za_stare_ku\u0107e: Ono kao drugar, \u0161ta visis
       u-u mojoj rupetini, aa?"
     m_Metadata:
       m_Items:
-      - rid: 3149554794130309384
+      - rid: 3149554794130309542
   - m_Id: 1197364329156613
     m_Localized: "Ludi_ma\u010Dor_za_stare_ku\u0107e: Zr-Yar ne vidi\u0161 da radim
       ovde, Va\u017Ean poso..."
     m_Metadata:
       m_Items:
-      - rid: 3149554794130309385
+      - rid: 3149554794130309543
   - m_Id: 1197364329156614
     m_Localized: "Ludi_ma\u010Dor_za_stare_ku\u0107e: \u0160ta me gleda\u0161 ko
       tele u \u0161arena vrata?"
     m_Metadata:
       m_Items:
-      - rid: 3149554794130309386
+      - rid: 3149554794130309544
   - m_Id: 1226389877526528
-    m_Localized: "Ludi_ma\u010Dor_za_stare_ku\u0107e: Aaa, ma\u010Doru, el to proveravas
-      moje mi\u0161ice?"
+    m_Localized: "Ludi_ma\u010Dor_za_stare_ku\u0107e: Aaa, ma\u010Doru, el to zagledava\u0161
+      moje maskularne mi\u0161i\u0107e?"
     m_Metadata:
       m_Items:
-      - rid: 3149554794130309387
+      - rid: 3149554794130309545
   - m_Id: 1226389885915136
-    m_Localized: "Ludi_ma\u010Dor_za_stare_ku\u0107e: Malo sam poceo da idem u trtanu,
-      ako me kapiras!"
+    m_Localized: "Ludi_ma\u010Dor_za_stare_ku\u0107e: Malo sam poceo da idem u trtanu
+      i pijem oaj naturalni soki\u0107, ako me kapiras!"
     m_Metadata:
       m_Items:
-      - rid: 3149554794130309388
+      - rid: 3149554794130309546
+  - m_Id: 1282233017143296
+    m_Localized: "Ludi_ma\u010Dor_za_stare_ku\u0107e: ej, ina\u010De..."
+    m_Metadata:
+      m_Items:
+      - rid: 3149554794130309547
+  - m_Id: 1282233017143297
+    m_Localized: "Ludi_ma\u010Dor_za_stare_ku\u0107e: A mo\u017Ee\u0161 i ti tvoje
+      mi\u0161i\u0107e da aktivira\u0161 na digmi\u0107e: W A S D, i gladas pomerajem
+      mi\u0161a."
+    m_Metadata:
+      m_Items:
+      - rid: 3149554794130309548
+  - m_Id: 1282233017143298
+    m_Localized: Aha
+    m_Metadata:
+      m_Items:
+      - rid: 3149554794130309549
+  - m_Id: 1282233017143299
+    m_Localized: da
+    m_Metadata:
+      m_Items:
+      - rid: 3149554794130309550
+  - m_Id: 1282233021337600
+    m_Localized: ne
+    m_Metadata:
+      m_Items:
+      - rid: 3149554794130309551
+  - m_Id: 1282233021337601
+    m_Localized: tuga.png
+    m_Metadata:
+      m_Items:
+      - rid: 3149554794130309552
+  - m_Id: 1282233021337602
+    m_Localized: "Ludi_ma\u010Dor_za_stare_ku\u0107e: Nije va\u017Eno!"
+    m_Metadata:
+      m_Items:
+      - rid: 3149554794130309411
+  - m_Id: 1282233021337603
+    m_Localized: "Ludi_ma\u010Dor_za_stare_ku\u0107e: KUPI!"
+    m_Metadata:
+      m_Items:
+      - rid: 3149554794130309412
+  - m_Id: 1282233021337604
+    m_Localized: "Ludi_ma\u010Dor_za_stare_ku\u0107e: Ajde sad \u0161ibaj."
+    m_Metadata:
+      m_Items:
+      - rid: 3149554794130309413
+  - m_Id: 1282233021337605
+    m_Localized: "Ludi_ma\u010Dor_za_stare_ku\u0107e: Mo\u017E da se pomera\u0161
+      na W A S D, i gladas na mi\u0161."
+    m_Metadata:
+      m_Items:
+      - rid: 3149554794130309414
+  - m_Id: 1599743440556032
+    m_Localized: "Indijanac_D\u017Eons: ..."
+    m_Metadata:
+      m_Items:
+      - rid: 3149554826162995279
+  - m_Id: 1599743465721856
+    m_Localized: "Ludi_ma\u010Dor_za_stare_ku\u0107e: *psst*"
+    m_Metadata:
+      m_Items:
+      - rid: 3149554826162995280
+  - m_Id: 1599743469916160
+    m_Localized: "Ludi_ma\u010Dor_za_stare_ku\u0107e: Alo Druze!"
+    m_Metadata:
+      m_Items:
+      - rid: 3149554826162995281
+  - m_Id: 1599743469916161
+    m_Localized: "Ludi_ma\u010Dor_za_stare_ku\u0107e: [normalWave]EEEEEEEEEEEE!!![/normalWave]"
+    m_Metadata:
+      m_Items:
+      - rid: 3149554826162995282
+  - m_Id: 1599743469916162
+    m_Localized: "Ludi_ma\u010Dor_za_stare_ku\u0107e: Ovde dole bato!"
+    m_Metadata:
+      m_Items:
+      - rid: 3149554826162995283
+  - m_Id: 1599743469916163
+    m_Localized: "Ludi_ma\u010Dor_za_stare_ku\u0107e: Ono kao drugar, \u0161ta visis
+      u-u mojoj rupetini, aa?"
+    m_Metadata:
+      m_Items:
+      - rid: 3149554826162995284
+  - m_Id: 1599743469916164
+    m_Localized: "Ludi_ma\u010Dor_za_stare_ku\u0107e: Zr-Yar ne vidi\u0161 da radim
+      ovde, Va\u017Ean poso..."
+    m_Metadata:
+      m_Items:
+      - rid: 3149554826162995285
+  - m_Id: 1599743469916165
+    m_Localized: "Ludi_ma\u010Dor_za_stare_ku\u0107e: \u0160ta me gleda\u0161 ko
+      tele u \u0161arena vrata?"
+    m_Metadata:
+      m_Items:
+      - rid: 3149554826162995286
+  - m_Id: 1599743469916166
+    m_Localized: "Ludi_ma\u010Dor_za_stare_ku\u0107e: Aaa, ma\u010Doru, el to zagledava\u0161
+      moje maskularne mi\u0161i\u0107e?"
+    m_Metadata:
+      m_Items:
+      - rid: 3149554826162995287
+  - m_Id: 1599743469916167
+    m_Localized: "Ludi_ma\u010Dor_za_stare_ku\u0107e: Malo sam poceo da idem u trtanu
+      i pijem oaj naturalni soki\u0107, ako me kapiras!"
+    m_Metadata:
+      m_Items:
+      - rid: 3149554826162995288
+  - m_Id: 1599743469916168
+    m_Localized: "Ludi_ma\u010Dor_za_stare_ku\u0107e: ej, ina\u010De..."
+    m_Metadata:
+      m_Items:
+      - rid: 3149554826162995289
+  - m_Id: 1599743469916169
+    m_Localized: "Ludi_ma\u010Dor_za_stare_ku\u0107e: A mo\u017Ee\u0161 i ti tvoje
+      mi\u0161i\u0107e da aktivira\u0161 na digmi\u0107e: W A S D, i gladas pomerajem
+      mi\u0161a."
+    m_Metadata:
+      m_Items:
+      - rid: 3149554826162995290
+  - m_Id: 1599743469916170
+    m_Localized: Aha
+    m_Metadata:
+      m_Items:
+      - rid: 3149554826162995291
+  - m_Id: 1599743469916171
+    m_Localized: da
+    m_Metadata:
+      m_Items:
+      - rid: 3149554826162995292
+  - m_Id: 1599743469916172
+    m_Localized: ne
+    m_Metadata:
+      m_Items:
+      - rid: 3149554826162995293
+  - m_Id: 1599743469916173
+    m_Localized: tuga.png
+    m_Metadata:
+      m_Items:
+      - rid: 3149554826162995294
+  - m_Id: 1603946103803904
+    m_Localized: "Ludi_ma\u010Dor_za_stare_ku\u0107e: Bato treba proba\u0161 malo
+      ove ma\u010Dije trave,ova stvar UBIJA.~"
+    m_Metadata:
+      m_Items:
+      - rid: 3149554826162995295
+  - m_Id: 1603946107998208
+    m_Localized: Daj da probam.
+    m_Metadata:
+      m_Items:
+      - rid: 3149554826162995296
+  - m_Id: 1603946107998209
+    m_Localized: "Ludi_ma\u010Dor_za_stare_ku\u0107e: Mo\u017Ee brato, al ono kao..."
+    m_Metadata:
+      m_Items:
+      - rid: 3149554826162995297
+  - m_Id: 1603946107998210
+    m_Localized: "Ludi_ma\u010Dor_za_stare_ku\u0107e: Ne nudim ti moju. Dal smo na
+      istim frekvencijama?"
+    m_Metadata:
+      m_Items:
+      - rid: 3149554826162995298
+  - m_Id: 1603946107998211
+    m_Localized: "Ludi_ma\u010Dor_za_stare_ku\u0107e: Zna\u0161 kad si ve\u0107 tu..."
+    m_Metadata:
+      m_Items:
+      - rid: 3149554826162995299
+  - m_Id: 1603946107998212
+    m_Localized: "Ludi_ma\u010Dor_za_stare_ku\u0107e: Ima\u0161 upalja\u010D mo\u017Eda?"
+    m_Metadata:
+      m_Items:
+      - rid: 3149554826162995300
+  - m_Id: 1603946107998213
+    m_Localized: "Ludi_ma\u010Dor_za_stare_ku\u0107e: Moj se isprazni pa mora palim
+      plugu sa zrakom svetlosti..."
+    m_Metadata:
+      m_Items:
+      - rid: 3149554826162995301
+  - m_Id: 1603946107998214
+    m_Localized: "Ludi_ma\u010Dor_za_stare_ku\u0107e: Znas kako je... nema se."
+    m_Metadata:
+      m_Items:
+      - rid: 3149554826162995302
+  - m_Id: 1603946107998215
+    m_Localized: ne.
+    m_Metadata:
+      m_Items:
+      - rid: 3149554826162995303
+  - m_Id: 1603946107998216
+    m_Localized: ne.
+    m_Metadata:
+      m_Items:
+      - rid: 3149554826162995304
+  - m_Id: 1603946107998217
+    m_Localized: ne.
+    m_Metadata:
+      m_Items:
+      - rid: 3149554826162995305
+  - m_Id: 1603946107998218
+    m_Localized: ne.
+    m_Metadata:
+      m_Items:
+      - rid: 3149554826162995306
+  - m_Id: 1603946107998219
+    m_Localized: ne.
+    m_Metadata:
+      m_Items:
+      - rid: 3149554826162995307
+  - m_Id: 1603946107998220
+    m_Localized: "Ludi_ma\u010Dor_za_stare_ku\u0107e: HAahaha!"
+    m_Metadata:
+      m_Items:
+      - rid: 3149554826162995308
+  - m_Id: 1603946107998221
+    m_Localized: "Ludi_ma\u010Dor_za_stare_ku\u0107e: Mamino dete ne sme da proba."
+    m_Metadata:
+      m_Items:
+      - rid: 3149554826162995309
+  - m_Id: 1603946107998222
+    m_Localized: "Ludi_ma\u010Dor_za_stare_ku\u0107e: Vi\u0161e za mene."
+    m_Metadata:
+      m_Items:
+      - rid: 3149554826162995310
+  - m_Id: 1603946107998223
+    m_Localized: "Ludi_ma\u010Dor_za_stare_ku\u0107e: Nema veze."
+    m_Metadata:
+      m_Items:
+      - rid: 3149554826162995311
+  - m_Id: 1603946107998224
+    m_Localized: "Ludi_ma\u010Dor_za_stare_ku\u0107e:"
+    m_Metadata:
+      m_Items:
+      - rid: 3149554826162995312
+  - m_Id: 1603946107998225
+    m_Localized: "Ludi_ma\u010Dor_za_stare_ku\u0107e: Ono kao drugar, \u0161ta visis
+      u-u mojoj rupetini, aa?"
+    m_Metadata:
+      m_Items:
+      - rid: 3149554826162995313
+  - m_Id: 1603946107998226
+    m_Localized: "Ludi_ma\u010Dor_za_stare_ku\u0107e: Zr-Yar ne vidi\u0161 da radim
+      ovde, Va\u017Ean poso..."
+    m_Metadata:
+      m_Items:
+      - rid: 3149554826162995314
+  - m_Id: 1603946107998227
+    m_Localized: "Ludi_ma\u010Dor_za_stare_ku\u0107e: \u0160ta me gleda\u0161 ko
+      tele u \u0161arena vrata?"
+    m_Metadata:
+      m_Items:
+      - rid: 3149554826162995315
+  - m_Id: 1603946107998228
+    m_Localized: "Ludi_ma\u010Dor_za_stare_ku\u0107e: Aaa, ma\u010Doru, el to zagledava\u0161
+      moje maskularne mi\u0161i\u0107e?"
+    m_Metadata:
+      m_Items:
+      - rid: 3149554826162995316
+  - m_Id: 1603946107998229
+    m_Localized: "Ludi_ma\u010Dor_za_stare_ku\u0107e: Malo sam poceo da idem u trtanu
+      i pijem oaj naturalni soki\u0107, ako me kapiras!"
+    m_Metadata:
+      m_Items:
+      - rid: 3149554826162995317
+  - m_Id: 1603946107998230
+    m_Localized: "Ludi_ma\u010Dor_za_stare_ku\u0107e: ej, ina\u010De..."
+    m_Metadata:
+      m_Items:
+      - rid: 3149554826162995318
+  - m_Id: 1603946107998231
+    m_Localized: "Ludi_ma\u010Dor_za_stare_ku\u0107e: A mo\u017Ee\u0161 i ti tvoje
+      mi\u0161i\u0107e da aktivira\u0161 na digmi\u0107e: W A S D, i gladas pomerajem
+      mi\u0161a."
+    m_Metadata:
+      m_Items:
+      - rid: 3149554826162995319
+  - m_Id: 1603946107998232
+    m_Localized: Aha
+    m_Metadata:
+      m_Items:
+      - rid: 3149554826162995320
+  - m_Id: 1603946107998233
+    m_Localized: da
+    m_Metadata:
+      m_Items:
+      - rid: 3149554826162995321
+  - m_Id: 1603946107998234
+    m_Localized: ne
+    m_Metadata:
+      m_Items:
+      - rid: 3149554826162995322
+  - m_Id: 1603946107998235
+    m_Localized: tuga.png
+    m_Metadata:
+      m_Items:
+      - rid: 3149554826162995323
+  - m_Id: 1603946107998236
+    m_Localized: tuga.png
+    m_Metadata:
+      m_Items:
+      - rid: 3149554826162995276
   references:
     version: 2
     RefIds:
@@ -128,53 +428,338 @@ MonoBehaviour:
       data:
         nodeName: TutorialLMZSK1
         tags: []
-    - rid: 3149554794130309379
+    - rid: 3149554794130309411
       type: {class: LineMetadata, ns: Yarn.Unity.UnityLocalization, asm: YarnSpinner.Unity}
       data:
         nodeName: TutorialLMZSK1
         tags: []
-    - rid: 3149554794130309380
+    - rid: 3149554794130309412
       type: {class: LineMetadata, ns: Yarn.Unity.UnityLocalization, asm: YarnSpinner.Unity}
       data:
         nodeName: TutorialLMZSK1
         tags: []
-    - rid: 3149554794130309381
+    - rid: 3149554794130309413
       type: {class: LineMetadata, ns: Yarn.Unity.UnityLocalization, asm: YarnSpinner.Unity}
       data:
         nodeName: TutorialLMZSK1
         tags: []
-    - rid: 3149554794130309382
+    - rid: 3149554794130309414
       type: {class: LineMetadata, ns: Yarn.Unity.UnityLocalization, asm: YarnSpinner.Unity}
       data:
         nodeName: TutorialLMZSK1
         tags: []
-    - rid: 3149554794130309383
+    - rid: 3149554794130309537
       type: {class: LineMetadata, ns: Yarn.Unity.UnityLocalization, asm: YarnSpinner.Unity}
       data:
         nodeName: TutorialLMZSK1
         tags: []
-    - rid: 3149554794130309384
+    - rid: 3149554794130309538
       type: {class: LineMetadata, ns: Yarn.Unity.UnityLocalization, asm: YarnSpinner.Unity}
       data:
         nodeName: TutorialLMZSK1
         tags: []
-    - rid: 3149554794130309385
+    - rid: 3149554794130309539
       type: {class: LineMetadata, ns: Yarn.Unity.UnityLocalization, asm: YarnSpinner.Unity}
       data:
         nodeName: TutorialLMZSK1
         tags: []
-    - rid: 3149554794130309386
+    - rid: 3149554794130309540
       type: {class: LineMetadata, ns: Yarn.Unity.UnityLocalization, asm: YarnSpinner.Unity}
       data:
         nodeName: TutorialLMZSK1
         tags: []
-    - rid: 3149554794130309387
+    - rid: 3149554794130309541
       type: {class: LineMetadata, ns: Yarn.Unity.UnityLocalization, asm: YarnSpinner.Unity}
       data:
         nodeName: TutorialLMZSK1
         tags: []
-    - rid: 3149554794130309388
+    - rid: 3149554794130309542
       type: {class: LineMetadata, ns: Yarn.Unity.UnityLocalization, asm: YarnSpinner.Unity}
       data:
         nodeName: TutorialLMZSK1
+        tags: []
+    - rid: 3149554794130309543
+      type: {class: LineMetadata, ns: Yarn.Unity.UnityLocalization, asm: YarnSpinner.Unity}
+      data:
+        nodeName: TutorialLMZSK1
+        tags: []
+    - rid: 3149554794130309544
+      type: {class: LineMetadata, ns: Yarn.Unity.UnityLocalization, asm: YarnSpinner.Unity}
+      data:
+        nodeName: TutorialLMZSK1
+        tags: []
+    - rid: 3149554794130309545
+      type: {class: LineMetadata, ns: Yarn.Unity.UnityLocalization, asm: YarnSpinner.Unity}
+      data:
+        nodeName: TutorialLMZSK1
+        tags: []
+    - rid: 3149554794130309546
+      type: {class: LineMetadata, ns: Yarn.Unity.UnityLocalization, asm: YarnSpinner.Unity}
+      data:
+        nodeName: TutorialLMZSK1
+        tags: []
+    - rid: 3149554794130309547
+      type: {class: LineMetadata, ns: Yarn.Unity.UnityLocalization, asm: YarnSpinner.Unity}
+      data:
+        nodeName: TutorialLMZSK1
+        tags: []
+    - rid: 3149554794130309548
+      type: {class: LineMetadata, ns: Yarn.Unity.UnityLocalization, asm: YarnSpinner.Unity}
+      data:
+        nodeName: TutorialLMZSK1
+        tags:
+        - lastline
+    - rid: 3149554794130309549
+      type: {class: LineMetadata, ns: Yarn.Unity.UnityLocalization, asm: YarnSpinner.Unity}
+      data:
+        nodeName: TutorialLMZSK1
+        tags: []
+    - rid: 3149554794130309550
+      type: {class: LineMetadata, ns: Yarn.Unity.UnityLocalization, asm: YarnSpinner.Unity}
+      data:
+        nodeName: TutorialLMZSK1
+        tags: []
+    - rid: 3149554794130309551
+      type: {class: LineMetadata, ns: Yarn.Unity.UnityLocalization, asm: YarnSpinner.Unity}
+      data:
+        nodeName: TutorialLMZSK1
+        tags: []
+    - rid: 3149554794130309552
+      type: {class: LineMetadata, ns: Yarn.Unity.UnityLocalization, asm: YarnSpinner.Unity}
+      data:
+        nodeName: TutorialLMZSK1
+        tags: []
+    - rid: 3149554826162995276
+      type: {class: LineMetadata, ns: Yarn.Unity.UnityLocalization, asm: YarnSpinner.Unity}
+      data:
+        nodeName: TutorialLMZSK2
+        tags: []
+    - rid: 3149554826162995279
+      type: {class: LineMetadata, ns: Yarn.Unity.UnityLocalization, asm: YarnSpinner.Unity}
+      data:
+        nodeName: TutorialLMZSK1
+        tags: []
+    - rid: 3149554826162995280
+      type: {class: LineMetadata, ns: Yarn.Unity.UnityLocalization, asm: YarnSpinner.Unity}
+      data:
+        nodeName: TutorialLMZSK1
+        tags: []
+    - rid: 3149554826162995281
+      type: {class: LineMetadata, ns: Yarn.Unity.UnityLocalization, asm: YarnSpinner.Unity}
+      data:
+        nodeName: TutorialLMZSK1
+        tags: []
+    - rid: 3149554826162995282
+      type: {class: LineMetadata, ns: Yarn.Unity.UnityLocalization, asm: YarnSpinner.Unity}
+      data:
+        nodeName: TutorialLMZSK1
+        tags: []
+    - rid: 3149554826162995283
+      type: {class: LineMetadata, ns: Yarn.Unity.UnityLocalization, asm: YarnSpinner.Unity}
+      data:
+        nodeName: TutorialLMZSK1
+        tags: []
+    - rid: 3149554826162995284
+      type: {class: LineMetadata, ns: Yarn.Unity.UnityLocalization, asm: YarnSpinner.Unity}
+      data:
+        nodeName: TutorialLMZSK1
+        tags: []
+    - rid: 3149554826162995285
+      type: {class: LineMetadata, ns: Yarn.Unity.UnityLocalization, asm: YarnSpinner.Unity}
+      data:
+        nodeName: TutorialLMZSK1
+        tags: []
+    - rid: 3149554826162995286
+      type: {class: LineMetadata, ns: Yarn.Unity.UnityLocalization, asm: YarnSpinner.Unity}
+      data:
+        nodeName: TutorialLMZSK1
+        tags: []
+    - rid: 3149554826162995287
+      type: {class: LineMetadata, ns: Yarn.Unity.UnityLocalization, asm: YarnSpinner.Unity}
+      data:
+        nodeName: TutorialLMZSK1
+        tags: []
+    - rid: 3149554826162995288
+      type: {class: LineMetadata, ns: Yarn.Unity.UnityLocalization, asm: YarnSpinner.Unity}
+      data:
+        nodeName: TutorialLMZSK1
+        tags: []
+    - rid: 3149554826162995289
+      type: {class: LineMetadata, ns: Yarn.Unity.UnityLocalization, asm: YarnSpinner.Unity}
+      data:
+        nodeName: TutorialLMZSK1
+        tags: []
+    - rid: 3149554826162995290
+      type: {class: LineMetadata, ns: Yarn.Unity.UnityLocalization, asm: YarnSpinner.Unity}
+      data:
+        nodeName: TutorialLMZSK1
+        tags:
+        - lastline
+    - rid: 3149554826162995291
+      type: {class: LineMetadata, ns: Yarn.Unity.UnityLocalization, asm: YarnSpinner.Unity}
+      data:
+        nodeName: TutorialLMZSK1
+        tags: []
+    - rid: 3149554826162995292
+      type: {class: LineMetadata, ns: Yarn.Unity.UnityLocalization, asm: YarnSpinner.Unity}
+      data:
+        nodeName: TutorialLMZSK1
+        tags: []
+    - rid: 3149554826162995293
+      type: {class: LineMetadata, ns: Yarn.Unity.UnityLocalization, asm: YarnSpinner.Unity}
+      data:
+        nodeName: TutorialLMZSK1
+        tags: []
+    - rid: 3149554826162995294
+      type: {class: LineMetadata, ns: Yarn.Unity.UnityLocalization, asm: YarnSpinner.Unity}
+      data:
+        nodeName: TutorialLMZSK1
+        tags: []
+    - rid: 3149554826162995295
+      type: {class: LineMetadata, ns: Yarn.Unity.UnityLocalization, asm: YarnSpinner.Unity}
+      data:
+        nodeName: TutorialLMZSK2
+        tags:
+        - lastline
+    - rid: 3149554826162995296
+      type: {class: LineMetadata, ns: Yarn.Unity.UnityLocalization, asm: YarnSpinner.Unity}
+      data:
+        nodeName: TutorialLMZSK2
+        tags: []
+    - rid: 3149554826162995297
+      type: {class: LineMetadata, ns: Yarn.Unity.UnityLocalization, asm: YarnSpinner.Unity}
+      data:
+        nodeName: TutorialLMZSK2
+        tags: []
+    - rid: 3149554826162995298
+      type: {class: LineMetadata, ns: Yarn.Unity.UnityLocalization, asm: YarnSpinner.Unity}
+      data:
+        nodeName: TutorialLMZSK2
+        tags: []
+    - rid: 3149554826162995299
+      type: {class: LineMetadata, ns: Yarn.Unity.UnityLocalization, asm: YarnSpinner.Unity}
+      data:
+        nodeName: TutorialLMZSK2
+        tags: []
+    - rid: 3149554826162995300
+      type: {class: LineMetadata, ns: Yarn.Unity.UnityLocalization, asm: YarnSpinner.Unity}
+      data:
+        nodeName: TutorialLMZSK2
+        tags: []
+    - rid: 3149554826162995301
+      type: {class: LineMetadata, ns: Yarn.Unity.UnityLocalization, asm: YarnSpinner.Unity}
+      data:
+        nodeName: TutorialLMZSK2
+        tags: []
+    - rid: 3149554826162995302
+      type: {class: LineMetadata, ns: Yarn.Unity.UnityLocalization, asm: YarnSpinner.Unity}
+      data:
+        nodeName: TutorialLMZSK2
+        tags:
+        - lastline
+    - rid: 3149554826162995303
+      type: {class: LineMetadata, ns: Yarn.Unity.UnityLocalization, asm: YarnSpinner.Unity}
+      data:
+        nodeName: TutorialLMZSK2
+        tags: []
+    - rid: 3149554826162995304
+      type: {class: LineMetadata, ns: Yarn.Unity.UnityLocalization, asm: YarnSpinner.Unity}
+      data:
+        nodeName: TutorialLMZSK2
+        tags: []
+    - rid: 3149554826162995305
+      type: {class: LineMetadata, ns: Yarn.Unity.UnityLocalization, asm: YarnSpinner.Unity}
+      data:
+        nodeName: TutorialLMZSK2
+        tags: []
+    - rid: 3149554826162995306
+      type: {class: LineMetadata, ns: Yarn.Unity.UnityLocalization, asm: YarnSpinner.Unity}
+      data:
+        nodeName: TutorialLMZSK2
+        tags: []
+    - rid: 3149554826162995307
+      type: {class: LineMetadata, ns: Yarn.Unity.UnityLocalization, asm: YarnSpinner.Unity}
+      data:
+        nodeName: TutorialLMZSK2
+        tags: []
+    - rid: 3149554826162995308
+      type: {class: LineMetadata, ns: Yarn.Unity.UnityLocalization, asm: YarnSpinner.Unity}
+      data:
+        nodeName: TutorialLMZSK2
+        tags: []
+    - rid: 3149554826162995309
+      type: {class: LineMetadata, ns: Yarn.Unity.UnityLocalization, asm: YarnSpinner.Unity}
+      data:
+        nodeName: TutorialLMZSK2
+        tags: []
+    - rid: 3149554826162995310
+      type: {class: LineMetadata, ns: Yarn.Unity.UnityLocalization, asm: YarnSpinner.Unity}
+      data:
+        nodeName: TutorialLMZSK2
+        tags: []
+    - rid: 3149554826162995311
+      type: {class: LineMetadata, ns: Yarn.Unity.UnityLocalization, asm: YarnSpinner.Unity}
+      data:
+        nodeName: TutorialLMZSK2
+        tags: []
+    - rid: 3149554826162995312
+      type: {class: LineMetadata, ns: Yarn.Unity.UnityLocalization, asm: YarnSpinner.Unity}
+      data:
+        nodeName: TutorialLMZSK2
+        tags: []
+    - rid: 3149554826162995313
+      type: {class: LineMetadata, ns: Yarn.Unity.UnityLocalization, asm: YarnSpinner.Unity}
+      data:
+        nodeName: TutorialLMZSK2
+        tags: []
+    - rid: 3149554826162995314
+      type: {class: LineMetadata, ns: Yarn.Unity.UnityLocalization, asm: YarnSpinner.Unity}
+      data:
+        nodeName: TutorialLMZSK2
+        tags: []
+    - rid: 3149554826162995315
+      type: {class: LineMetadata, ns: Yarn.Unity.UnityLocalization, asm: YarnSpinner.Unity}
+      data:
+        nodeName: TutorialLMZSK2
+        tags: []
+    - rid: 3149554826162995316
+      type: {class: LineMetadata, ns: Yarn.Unity.UnityLocalization, asm: YarnSpinner.Unity}
+      data:
+        nodeName: TutorialLMZSK2
+        tags: []
+    - rid: 3149554826162995317
+      type: {class: LineMetadata, ns: Yarn.Unity.UnityLocalization, asm: YarnSpinner.Unity}
+      data:
+        nodeName: TutorialLMZSK2
+        tags: []
+    - rid: 3149554826162995318
+      type: {class: LineMetadata, ns: Yarn.Unity.UnityLocalization, asm: YarnSpinner.Unity}
+      data:
+        nodeName: TutorialLMZSK2
+        tags: []
+    - rid: 3149554826162995319
+      type: {class: LineMetadata, ns: Yarn.Unity.UnityLocalization, asm: YarnSpinner.Unity}
+      data:
+        nodeName: TutorialLMZSK2
+        tags:
+        - lastline
+    - rid: 3149554826162995320
+      type: {class: LineMetadata, ns: Yarn.Unity.UnityLocalization, asm: YarnSpinner.Unity}
+      data:
+        nodeName: TutorialLMZSK2
+        tags: []
+    - rid: 3149554826162995321
+      type: {class: LineMetadata, ns: Yarn.Unity.UnityLocalization, asm: YarnSpinner.Unity}
+      data:
+        nodeName: TutorialLMZSK2
+        tags: []
+    - rid: 3149554826162995322
+      type: {class: LineMetadata, ns: Yarn.Unity.UnityLocalization, asm: YarnSpinner.Unity}
+      data:
+        nodeName: TutorialLMZSK2
+        tags: []
+    - rid: 3149554826162995323
+      type: {class: LineMetadata, ns: Yarn.Unity.UnityLocalization, asm: YarnSpinner.Unity}
+      data:
+        nodeName: TutorialLMZSK2
         tags: []

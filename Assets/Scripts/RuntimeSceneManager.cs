@@ -4,6 +4,7 @@ using UnityEngine;
 using Tymski;
 using UnityEngine.SceneManagement;
 using static Functions;
+using UnityEngine.Rendering;
 public class RuntimeSceneManager : MonoBehaviour
 {
     public GameObject loadingScreen;
@@ -12,6 +13,7 @@ public class RuntimeSceneManager : MonoBehaviour
     public static RuntimeSceneManager Instance { get; private set; }
     public SceneReference mainMenu;
     public GameObject gameMenu;
+    public RenderPipelineAsset RenderingAsset;
 
     private void Awake()
     {
@@ -35,7 +37,7 @@ public class RuntimeSceneManager : MonoBehaviour
     private void ChangedActiveScene(Scene current, Scene next)
     {
         SetLoadingGizmos(false);
-
+        QualitySettings.renderPipeline = RenderingAsset;
         if (next.buildIndex != 0 && GameObject.FindGameObjectWithTag("GameMenu") == null)
         {
             Instantiate(gameMenu);

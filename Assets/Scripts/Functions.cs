@@ -127,12 +127,19 @@ public static class Functions
     public static Box CalculateBoxBounds(Vector3 currentPosition, Vector3 CalculatedPosition, Vector3 boxOriginalBounds)
     {
         Box box = new Box();
+        if (currentPosition != CalculatedPosition)
+        {
 
-        float DistanceAboutToBeTraveled = Vector3.Distance(currentPosition, CalculatedPosition);
-        box.rotation = Quaternion.LookRotation(CalculatedPosition - currentPosition);
-        box.bounds = new Vector3(boxOriginalBounds.x, boxOriginalBounds.y, DistanceAboutToBeTraveled);
-        box.center = currentPosition + new Vector3(0, 0, DistanceAboutToBeTraveled / 2);
 
+            float DistanceAboutToBeTraveled = Vector3.Distance(currentPosition, CalculatedPosition);
+            box.rotation = Quaternion.LookRotation(CalculatedPosition - currentPosition);
+            box.bounds = new Vector3(boxOriginalBounds.x, boxOriginalBounds.y, DistanceAboutToBeTraveled);
+            box.center = currentPosition + new Vector3(0, 0, DistanceAboutToBeTraveled / 2);
+        }
+        else
+        {
+            //Debug.Log("ISTI S'U");
+        }
         return box;
     }
     /*public static RaycastHit ReturnClosestHitOLD(Vector3 origin, SphereCollider sphere, float groundCheckRadious = 0.4f, int mask = 0)

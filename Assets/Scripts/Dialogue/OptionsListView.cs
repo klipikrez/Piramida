@@ -50,6 +50,8 @@ namespace Yarn.Unity
 
         public override void RunOptions(DialogueOption[] dialogueOptions, Action<int> onOptionSelected)
         {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
             // Hide all existing option views
             foreach (var optionView in optionViews)
             {
@@ -131,6 +133,8 @@ namespace Yarn.Unity
             /// </summary>
             void OptionViewWasSelected(DialogueOption option)
             {
+                Cursor.lockState = CursorLockMode.Locked;
+                Cursor.visible = false;
                 StartCoroutine(OptionViewWasSelectedInternal(option));
 
                 IEnumerator OptionViewWasSelectedInternal(DialogueOption selectedOption)

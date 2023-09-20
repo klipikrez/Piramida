@@ -581,7 +581,7 @@ Transform:
   - {fileID: 2417952305020714698}
   - {fileID: 2417952305500080120}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2417952306675834279
 MonoBehaviour:
@@ -603,6 +603,7 @@ MonoBehaviour:
     scenePath: Assets/Scenes/MainMenu.unity
   gameMenu: {fileID: 1941928277699957065, guid: ca31576359daa614eb0a7c54338f43e4,
     type: 3}
+  RenderingAsset: {fileID: 11400000, guid: 7b7fd9122c28c4d15b667c7040e3b3fd, type: 2}
 --- !u!1 &2417952306908599806
 GameObject:
   m_ObjectHideFlags: 0

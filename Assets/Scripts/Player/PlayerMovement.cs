@@ -180,7 +180,8 @@ public class PlayerMovement : MonoBehaviour
 
     public void SetFOV()
     {
-        PlayerCamera.fieldOfView = Mathf.Lerp(PlayerCamera.fieldOfView, !inDialogue ? DefaultFOV : CustomFOV, DeltaTimeLerp(0.5f));
+        //        Debug.Log(inDialogue + " " + CustomFOV);
+        PlayerCamera.fieldOfView = Mathf.Lerp(PlayerCamera.fieldOfView, !inDialogue ? DefaultFOV : CustomFOV, DeltaTimeLerp(0.06f));
     }
 
     public void Grapple()

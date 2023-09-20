@@ -5,7 +5,8 @@ using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using Yarn.Markup;
 using TMPro;
-using Yarn.Unity.Editor;
+using System;
+
 
 namespace Yarn.Unity.Example
 {
@@ -50,6 +51,8 @@ namespace Yarn.Unity.Example
         public static DialogueManager Instance;
         public bool onStartDialogue = false;
         public string scriptToLoadOnStart;
+        [System.NonSerialized]
+        public bool inDialogue = false;
         void Awake()
         {
             Instance = this;
@@ -73,7 +76,7 @@ namespace Yarn.Unity.Example
             // manually add all Yarn command handlers, so that we don't
             // have to type out game object names in Yarn scripts (also
             // gives us a performance increase by avoiding GameObject.Find)
-            runner.AddCommandHandler<string>("Scene", DoSceneChange);
+            runner.AddCommandHandler<string, float>("Scene", DoSceneChange);
             runner.AddCommandHandler<string, string, string, string, string>("Act", SetActor);
             runner.AddCommandHandler<string, string, string>("Draw", SetSpriteYarn);
 
@@ -111,15 +114,17 @@ namespace Yarn.Unity.Example
             // Load the program, along with all of its nodes. 
             // The string table will be selected based on the 
             // Dialogue Runner's text language variable.
-            runner.StartDialogue(startNode);
+
             playerMovement.CustomFOV = playerMovement.DefaultFOV;
             playerMovement.inDialogue = true;
             playerArms.inDialogue = true;
+            inDialogue = true;
             spriteGroup.gameObject.SetActive(true);
             bgImage.gameObject.SetActive(true);
             fadeBG.gameObject.SetActive(true);
             nameplateBG.gameObject.SetActive(true);
             genericSprite.gameObject.SetActive(true);
+            runner.StartDialogue(startNode);
         }
 
         public override void DialogueComplete()
@@ -127,6 +132,7 @@ namespace Yarn.Unity.Example
             //runner.Stop();
             playerMovement.inDialogue = false;
             playerArms.inDialogue = false;
+            inDialogue = false;
             spriteGroup.gameObject.SetActive(false);
             bgImage.gameObject.SetActive(false);
             fadeBG.gameObject.SetActive(false);
@@ -136,9 +142,10 @@ namespace Yarn.Unity.Example
         #region YarnCommands
 
         /// <summary>changes background image</summary>
-        public void DoSceneChange(string spriteName)
+        public void DoSceneChange(string spriteName, float alpha = 0.3f)
         {
             bgImage.sprite = FetchAsset<Sprite>(spriteName);
+            bgImage.color = new Color(1, 1, 1, alpha);
         }
 
         /// <summary>

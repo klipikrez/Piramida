@@ -1,0 +1,22 @@
+﻿title: TutorialLMZSK3
+tags:
+---
+<<Reset>>
+<<Scene black 0.85>>
+<<FOV 20>>
+<<Act Ludi_mačor_za_stare_kuće lmzsk 0.75 -0.3 #eb38af>>
+<<LookAt lmzsk>>
+Ludi_mačor_za_stare_kuće: Au, batice...
+<<PlayAudio lmzskTheme 0.3 loop>>
+Ludi_mačor_za_stare_kuće: A baš sam ja hteo da je smažem...
+Ludi_mačor_za_stare_kuće: Braćala, vdi šta si uradio malenoj ptičici.
+Ludi_mačor_za_stare_kuće: Osta od ptičice saaaaamo krila.
+Ludi_mačor_za_stare_kuće: A'si lud!
+Ludi_mačor_za_stare_kuće: Vau, ta sekirčuga ti je jezivo kul.
+Ludi_mačor_za_stare_kuće: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+Ludi_mačor_za_stare_kuće: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+Ludi_mačor_za_stare_kuće: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+<<StopAudioAll>>
+<<Reset>>
+<<stop>>
+===

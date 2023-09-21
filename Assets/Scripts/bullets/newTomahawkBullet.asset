@@ -16,8 +16,8 @@ MonoBehaviour:
   hitRadious: {x: 0.11, y: 1, z: 0.5}
   damage: 25
   speed: 60
-  mesh: {fileID: 4825836531149651790, guid: 01e15b7bc27f48244bd3df6f0a13030b, type: 3}
-  meshScale: 10
+  mesh: {fileID: 4825836531149651790, guid: cb5f34145e8e5dc4bbf57b71fb31d5d6, type: 3}
+  meshScale: 0.1
   materials:
   - {fileID: 2100000, guid: 8f854eb84212e0d46acc5e81d2fdc2f1, type: 2}
   - {fileID: 2100000, guid: 564e342a8bd11af4591ab1005f909f77, type: 2}

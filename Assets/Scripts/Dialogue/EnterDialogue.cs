@@ -31,6 +31,7 @@ public class EnterDialogue : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         DialogueManager.Instance.StartDialogue(startNode);
+        LMZSKPositionManager.positionIndex = 1;
         gameObject.SetActive(false);
     }
 }

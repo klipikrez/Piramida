@@ -238,6 +238,9 @@ public class RopeTomahawk : MonoBehaviour
 
     void HitWithPath()
     {
+        Transform T2WithOffset = T2.transform;
+        if (T2.transform.Find("T2") != null)
+            T2WithOffset = T2.transform.Find("T2").transform;
         airTime = 0;
 
         lineRenderer.positionCount = 2 + path.Count;
@@ -247,11 +250,11 @@ public class RopeTomahawk : MonoBehaviour
             for (int i = 0; i < path.Count; i++)
             {
 
-                Vector3 dir = (T2.position - T1.position + T1Offset).normalized;
+                Vector3 dir = (T2WithOffset.position - T1.position + T1Offset).normalized;
                 Vector3 offset = Quaternion.LookRotation(dir) * new Vector3(Mathf.Sin((i + Time.timeSinceLevelLoad * spinSpeed) / 4f), Mathf.Cos((i + Time.timeSinceLevelLoad * spinSpeed) / 4f), 0);
 
                 //ispravlja sve tacke u pravu liniju
-                path[i] = Vector3.Lerp(path[i], PointAtRatio(T1.position + T1Offset, T2.position, i + 1, lineRenderer.positionCount - (i + 1)), DeltaTimeLerp(Mathf.Min(hitTime * 3, 1)));
+                path[i] = Vector3.Lerp(path[i], PointAtRatio(T1.position + T1Offset, T2WithOffset.position, i + 1, lineRenderer.positionCount - (i + 1)), DeltaTimeLerp(Mathf.Min(hitTime * 3, 1)));
 
                 //kako se uze trese kad pogodi nesto
                 lineRenderer.SetPosition(i + 1, path[i] + (offset
@@ -264,14 +267,14 @@ public class RopeTomahawk : MonoBehaviour
         }
         //ovo postavi pozicije prvoj i poslednjoj tacki u LineRender
         lineRenderer.SetPosition(0, T1.position + T1Offset);
-        lineRenderer.SetPosition(lineRenderer.positionCount - 1, T2.position);
+        lineRenderer.SetPosition(lineRenderer.positionCount - 1, T2WithOffset.position);
 
         if (hit && movement != null)
         {
-            if (Vector3.Distance(movement.transform.position, T2.position) > maxRopeLenth
-            && Vector3.Distance(movement.transform.position, T2.position) < Vector3.Distance(movement.transform.position + movement.velocity, T2.position))
+            if (Vector3.Distance(movement.transform.position, T2WithOffset.position) > maxRopeLenth
+            && Vector3.Distance(movement.transform.position, T2WithOffset.position) < Vector3.Distance(movement.transform.position + movement.velocity, T2WithOffset.position))
             {
-                Vector3 limitedPosition = (movement.transform.position - T2.position).normalized * maxRopeLenth + T2.position;
+                Vector3 limitedPosition = (movement.transform.position - T2WithOffset.position).normalized * maxRopeLenth + T2WithOffset.position;
                 movement.body.position = limitedPosition;
             }
         }

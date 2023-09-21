@@ -8,7 +8,7 @@ position: NaN,NaN
 <<FOV 20>>
 Indijanac_Džons: ... #line:0032e0e 
 Ludi_mačor_za_stare_kuće: *psst* #line:0bb3627 
-Ludi_mačor_za_stare_kuće: Alo Druže! #line:061ae25 
+Ludi_mačor_za_stare_kuće: Alo Druze! #line:061ae25 
 <<Act Ludi_mačor_za_stare_kuće lmzsk 0.75 -0.3 #eb38af>>
 <<LookAt lmzsk>>
 <<PlayAudio lmzskTheme 0.3 loop>>
@@ -29,7 +29,7 @@ Ludi_mačor_za_stare_kuće: Malo sam poceo da idem u trtanu i pijem oaj naturaln
 <<Act Ludi_mačor_za_stare_kuće lmzsk 0.75 -0.3 #eb38af>>
 Ludi_mačor_za_stare_kuće: ej, inače... #line:0dd2637 
 <<Draw wasd center center>>
-Ludi_mačor_za_stare_kuće: Možeš i ti tvoje mišiće da aktiviraš na digmiće: W A S D, i gledas pomerajem miša. #line:0295e4d 
+Ludi_mačor_za_stare_kuće: Možeš i ti tvoje mišiće da aktiviraš na digmiće: W A S D, i skačeš na Space. #line:0295e4d 
 -> Ok... #line:06b1209 
 <<StopAudioAll>>
 <<Reset>>

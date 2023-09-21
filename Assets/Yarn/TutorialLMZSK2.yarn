@@ -55,8 +55,8 @@ title: Tutorial1lmzsk2Questions
     Ludi_mačor_za_stare_kuće: Vruće je... #line:085c436 
     <<jump Tutorial1lmzsk2Questions>>
 -> Aj ćao. #line:0f2de3b 
-    Ludi_mačor_za_stare_kuće: Ajd' braci.
-    Ludi_mačor_za_stare_kuće: Ako se negde zaglaviš, samo me nadji, biću blizu.
+    Ludi_mačor_za_stare_kuće: Ajd' braci. #line:0d16358 
+    Ludi_mačor_za_stare_kuće: Ako se negde zaglaviš, samo me nadji, biću blizu. #line:040a90c 
     <<StopAudioAll>>
     <<Reset>>
     <<stop>>

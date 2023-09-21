@@ -46,6 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   T1: {fileID: 0}
+  movement: {fileID: 0}
   T1Offset: {x: 0, y: 0.2, z: 0}
   T2: {fileID: 0}
   spinSpeed: 104
@@ -238,7 +239,7 @@ LineRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 564e342a8bd11af4591ab1005f909f77, type: 2}
+  - {fileID: 2100000, guid: b7efebef74d365f4cae275d60ffc3268, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -360,7 +361,7 @@ LineRenderer:
       m_NumColorKeys: 2
       m_NumAlphaKeys: 2
     numCornerVertices: 0
-    numCapVertices: 0
+    numCapVertices: 7
     alignment: 0
     textureMode: 0
     textureScale: {x: 1, y: 1}

@@ -1,0 +1,18 @@
+﻿title: TutorialLMZSK4
+tags:
+---
+<<Reset>>
+<<Scene black 0.85>>
+<<FOV 20>>
+<<Act Ludi_mačor_za_stare_kuće lmzsk 0.75 -0.3 #eb38af>>
+<<LookAt lmzsk>>
+<<PlayAudio lmzskTheme 0.3 loop>>
+Ludi_mačor_za_stare_kuće: smotan si. #line:05011bf 
+Ludi_mačor_za_stare_kuće: priblizi se. #line:0c4052f 
+<<LookAt TNT>>
+<<FOV 40>>
+Ludi_mačor_za_stare_kuće: ok? #line:08e2f9f 
+<<StopAudioAll>>
+<<Reset>>
+<<stop>>
+===

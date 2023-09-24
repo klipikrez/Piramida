@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1873524081046976737}
   m_Layer: 8
   m_Name: Bylet
-  m_TagString: Untagged
+  m_TagString: Bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -53,6 +53,8 @@ MonoBehaviour:
   meshFilter: {fileID: 1049460910116572218}
   employer: {fileID: 0}
   velocity: {x: 0, y: 0, z: 0}
+  previousLocation: {x: 0, y: 0, z: 0}
+  hitColliders: []
 --- !u!1 &6608364164495345086
 GameObject:
   m_ObjectHideFlags: 0

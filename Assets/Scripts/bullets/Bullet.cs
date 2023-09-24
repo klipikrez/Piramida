@@ -15,7 +15,6 @@ public class Bullet : MonoBehaviour
     public MeshFilter meshFilter;
     public PlayerArms employer;
     public Vector3 velocity = Vector3.zero;
-    public Vector3 previousLocation = Vector3.zero;
     public List<Collider> hitColliders; //ne smes da dvaput dilujes damage istom hitbox-u
     public void Initiate()
     {
@@ -24,13 +23,15 @@ public class Bullet : MonoBehaviour
     }
     void Update()
     {
-        bulletBase.DetectHit(this);
-        bulletBase.Move(this);
+        if (!GameMenu.Instance.paused)
+        {
+            bulletBase.DetectHit(this);
+            bulletBase.Move(this);
+        }
 
         timeAlive += Time.deltaTime;
         if (timeAlive > bulletBase.bulletLife)
             BulletManager.Instance.ReurnBulletToPool(this);
-        previousLocation = transform.position;
     }
     /*void OnDrawGizmos()
     {

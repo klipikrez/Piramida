@@ -4,34 +4,44 @@ position: NaN,NaN
 ---
 <<Reset>>
 <<Scene black 0.85>>
-
 <<FOV 20>>
-Indijanac_Džons: ... #line:0032e0e 
-Ludi_mačor_za_stare_kuće: *psst* #line:0bb3627 
-Ludi_mačor_za_stare_kuće: Alo Druze! #line:061ae25 
+Indijanac_Džons: ... #line:0457732 
+Ludi_mačor_za_stare_kuće: *psst*  #line:0d3eb87 
+Ludi_mačor_za_stare_kuće: Alo Kurčavela!  #line:03e6e83 
 <<Act Ludi_mačor_za_stare_kuće lmzsk 0.75 -0.3 #eb38af>>
 <<LookAt lmzsk>>
 <<PlayAudio lmzskTheme 0.3 loop>>
-Ludi_mačor_za_stare_kuće: [normalWave]EEEEEEEEEEEE!!![/normalWave] #line:044dfc1 
-Ludi_mačor_za_stare_kuće: Ovde dole bato! #line:0276ff3 
-Ludi_mačor_za_stare_kuće: Ono kao drugar, šta visiš u-u mojoj rupetini, aa? #line:01eb6fe 
+Ludi_mačor_za_stare_kuće: [normalWave]EeEeEeEeEeE!!![/normalWave]  #line:0490344 
+Ludi_mačor_za_stare_kuće: Ovde dole bato! #line:0485d58 
+Ludi_mačor_za_stare_kuće: Ono kao drugar, šta se trezniš u-u mojoj rupetini, aa? #line:038a126 
 <<Hide lmzsk>>
 <<Act Ludi_mačor_za_stare_kuće lmyskChill 0.2 0.2 #eb38af>>
-Ludi_mačor_za_stare_kuće: Zr-Zar ne vidiš da radim ovde, Važan poso... #line:0763cc0 
+Ludi_mačor_za_stare_kuće: Zr-Zar ne vidiš da radim ovde, V[normalWave]aaaaaaaaa[/normalWave]žan poso...  #line:0364a2b 
 <<Hide lmyskChill>>
 <<Act Ludi_mačor_za_stare_kuće lmzsk 0.75 -0.3 #eb38af>>
-Ludi_mačor_za_stare_kuće: Šta me gledaš ko tele u šarena vrata? #line:03d0f5f 
+Ludi_mačor_za_stare_kuće: Šta me gledaš ko tele u šarena vrata? #line:05d86fd 
+Ludi_mačor_za_stare_kuće: Šta je?? #line:08b9385 
+Ludi_mačor_za_stare_kuće: Šta si zin’o? Će ti uleti vrapče. #line:0445207 
+Ludi_mačor_za_stare_kuće: El igra bela mečka možda?! #line:0e9b6ac 
+
+
 <<Hide lmzsk>>
 <<Act Ludi_mačor_za_stare_kuće lmzskSajbatroniks 0.75 0.3 #eb38af>>
-Ludi_mačor_za_stare_kuće: Aaa, mačoru, el to zagledavaš moje maskularne mišiće? #line:019bb9b 
-Ludi_mačor_za_stare_kuće: Malo sam poceo da idem u trtanu i pijem oaj naturalni sokić, ako me kapiras! #line:0de9202 
+Ludi_mačor_za_stare_kuće: Aaa, mačoru, el to merkaš moje muževne MAČOr mišiće?  #line:05d6cf1 
+Ludi_mačor_za_stare_kuće: Malo sam počeo da pumpam u trtani i pijem ovaj naturalni sokić! #line:0daeeaa 
+Ludi_mačor_za_stare_kuće: Jebeno me radi ovo sranje! #line:02c2096 
+Ludi_mačor_za_stare_kuće: mRRRRRRRRRnjau!!! #line:0df0e1c 
 <<Hide lmzskSajbatroniks>>
 <<Act Ludi_mačor_za_stare_kuće lmzsk 0.75 -0.3 #eb38af>>
-Ludi_mačor_za_stare_kuće: ej, inače... #line:0dd2637 
+Ludi_mačor_za_stare_kuće: Izgledaš mi žgoljavo za jednog indijanca…  #line:047ad0a 
+Ludi_mačor_za_stare_kuće: Čime te hrane tamo u plemenu??  #line:0f83a43 
+Ludi_mačor_za_stare_kuće: Peskom? #line:013cda8 
 <<Draw wasd center center>>
-Ludi_mačor_za_stare_kuće: Možeš i ti tvoje mišiće da aktiviraš na digmiće: W A S D, i skačeš na Space. #line:0295e4d 
--> Ok... #line:06b1209 
+Ludi_mačor_za_stare_kuće: Daj malo aktiviraj te atrofirane mišiće… #line:0840e36 
+Ludi_mačor_za_stare_kuće: Ako si zaboravio da hodaš saću da te podsetim  🙂! Samo svojim neuronima pritiskaj: <sprite index=0><sprite index=1><sprite index=2><sprite index=3>, i skačeš na <sprite index=6>.  #line:092332b 
+-> Ok...  #line:056947c 
 <<StopAudioAll>>
 <<Reset>>
 <<stop>>
+
 ===

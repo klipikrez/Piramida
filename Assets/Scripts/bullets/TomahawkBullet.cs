@@ -116,7 +116,7 @@ public class TomahawkBullet : BulletBase
         {
             Vector3 fromHit = hit.point - bullet.transform.position;
             float dot = Vector3.Dot(bullet.velocity.normalized, fromHit.normalized);
-            if (dot > -0.1f)
+            if (dot > 0.0f)
             {
                 //kad se sekira lupi u zid 
                 if (hit.collider.gameObject.CompareTag("RigidbodyInteractable"))

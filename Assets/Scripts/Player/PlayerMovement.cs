@@ -453,7 +453,8 @@ public class PlayerMovement : MonoBehaviour
 
     public void LookAt(Transform lookAt)
     {
-        Vector3 center = lookAt.gameObject.GetComponent<Renderer>().bounds.center;
+        Renderer rend = lookAt.gameObject.GetComponent<Renderer>();
+        Vector3 center = rend != null ? rend.bounds.center : lookAt.transform.position;
         Vector3 targetDirectionY = (new Vector3(center.x, 0, center.z) - new Vector3(PlayerCamera.transform.position.x, 0, PlayerCamera.transform.position.z)).normalized;
         Quaternion lookAtRotationY = Quaternion.LookRotation(targetDirectionY);
         Vector3 targetDirection = (center - PlayerCamera.transform.position).normalized;

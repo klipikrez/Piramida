@@ -6,16 +6,24 @@ tags:
 <<FOV 20>>
 <<Act Ludi_mačor_za_stare_kuće lmzsk 0.75 -0.3 #eb38af>>
 <<LookAt lmzsk>>
-Ludi_mačor_za_stare_kuće: Au, batice...
+Ludi_mačor_za_stare_kuće: Au, batice... #line:02646ef 
 <<PlayAudio lmzskTheme 0.3 loop>>
-Ludi_mačor_za_stare_kuće: A baš sam ja hteo da je smažem...
-Ludi_mačor_za_stare_kuće: Braćala, vdi šta si uradio malenoj ptičici.
-Ludi_mačor_za_stare_kuće: Osta od ptičice saaaaamo krila.
-Ludi_mačor_za_stare_kuće: A'si lud!
-Ludi_mačor_za_stare_kuće: Vau, ta sekirčuga ti je jezivo kul.
-Ludi_mačor_za_stare_kuće: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-Ludi_mačor_za_stare_kuće: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-Ludi_mačor_za_stare_kuće: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+Ludi_mačor_za_stare_kuće: A baš sam ja hteo da je smažem... #line:0014ace 
+Ludi_mačor_za_stare_kuće: Braćala, vdi šta si uradio malenoj ptičici. #line:0493a78 
+Ludi_mačor_za_stare_kuće: Osta od ptičice saaaaamo krila. #line:00179f0 
+Ludi_mačor_za_stare_kuće: A'si lud! #line:06b3255 
+Ludi_mačor_za_stare_kuće: ... #line:0aa3b1f 
+Ludi_mačor_za_stare_kuće: Vau, ta sekirčuga ti je jezivo kul. #line:0e78d06 
+<<LookAt TNT>>
+Ludi_mačor_za_stare_kuće: Gladaj!!! #line:01c8c0d 
+Ludi_mačor_za_stare_kuće: DINAMIT!!! #line:0eb7aad 
+Ludi_mačor_za_stare_kuće: IDI GA LUPI!! #line:00712ed 
+Ludi_mačor_za_stare_kuće: Al pazi, cujem da je dinamit opasan po zivot... #line:0fdb444 
+Ludi_mačor_za_stare_kuće: Pa probaj mozda sa ove stene da ga pogodis. #line:0af4ae1 
+Ludi_mačor_za_stare_kuće: Isto, ako oces da pokupis sekiru kad si je bacio,koristiš <sprite index=5>. #line:0e63daf 
+<<LookAt  PiuPiu>>
+<<FOV 40>>
+Ludi_mačor_za_stare_kuće: Znaci, <sprite index=4>da je bacis, a <sprite index=5> da je pokupis. #line:052fc8a 
 <<StopAudioAll>>
 <<Reset>>
 <<stop>>

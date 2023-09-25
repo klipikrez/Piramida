@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: newLaser
   m_EditorClassIdentifier: 
   repeatAttack: 0
-  chillTimeBeforAttackStarts: 1
-  chillTimeAftrAttackEnds: 1
+  chillTimeBeforAttackStarts: 2
+  chillTimeAftrAttackEnds: 2
   laserWarmupTime: 1
   laserFireTime: 10.2
   damage: 250

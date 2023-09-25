@@ -26,6 +26,7 @@ public class PiuPiu : BaseEnemy
     {
         feathers.SendEvent("Start");
         AudioManager.Instance.PlayAudioClip("PiuPiu", 0.3f);
+        AudioManager.Instance.StopMusic();
         Bullet bullet = RopeTomahawk.Instance.T2.GetComponent<Bullet>();
         bullet.velocity = Vector3.down;
         bullet.transform.position = transform.position;

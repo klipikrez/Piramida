@@ -341,9 +341,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 654851b48c69bdf4e943e337422bfb27, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackDelay: 1.35
+  attackDelay: 1.65
   attackTime: 0.5
-  chillAroundTime: 15
+  chillAroundTime: 8
   returnTime: 1
   height: 70
   obj: {fileID: 4779414100048564315}

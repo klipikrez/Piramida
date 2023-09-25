@@ -1235,6 +1235,11 @@ PrefabInstance:
       objectReference: {fileID: 745670870}
     - target: {fileID: 7910335330499376895, guid: 4b2eca9dbe0c01642a71b1df9219072e,
         type: 3}
+      propertyPath: ChillBetweenAtacksGlobal
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7910335330499376895, guid: 4b2eca9dbe0c01642a71b1df9219072e,
+        type: 3}
       propertyPath: attackStates.Array.data[0]
       value: 
       objectReference: {fileID: 11400000, guid: 678b1c8f7de3cda4fab0773794f4250f,
@@ -1243,13 +1248,13 @@ PrefabInstance:
         type: 3}
       propertyPath: attackStates.Array.data[1]
       value: 
-      objectReference: {fileID: 11400000, guid: 5df6a359457ffd74d85f46e1ad7c8cae,
+      objectReference: {fileID: 11400000, guid: 822e888f942c9274e8c64a1c83e04904,
         type: 2}
     - target: {fileID: 7910335330499376895, guid: 4b2eca9dbe0c01642a71b1df9219072e,
         type: 3}
       propertyPath: attackStates.Array.data[2]
       value: 
-      objectReference: {fileID: 11400000, guid: 822e888f942c9274e8c64a1c83e04904,
+      objectReference: {fileID: 11400000, guid: 5df6a359457ffd74d85f46e1ad7c8cae,
         type: 2}
     - target: {fileID: 7910335330499376895, guid: 4b2eca9dbe0c01642a71b1df9219072e,
         type: 3}

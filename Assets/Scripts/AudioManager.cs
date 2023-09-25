@@ -31,15 +31,18 @@ public class AudioManager : MonoBehaviour
     public GameObject DDDSoundPrefab;
     public AudioMixerGroup DD;
     Coroutine voiceCorutine;
-
     AudioSource VoiceLineSource;
+    [System.NonSerialized]
+    public AudioSource musicSource;
+    public AudioMixerGroup musicGroup;
+    Coroutine switchMusicCorutine;
     //public Dictionary<string, AudioAudi> PlayingAudio = new Dictionary<string, AudioAudi>();
 
-    [UDictionary.Split(50, 50)]
+    /*[UDictionary.Split(50, 50)]
     public UDictionary2 PlayingAudio;
     [System.Serializable]
-    public class UDictionary2 : UDictionary<System.Guid, AudioAudi> { }
-
+    public class UDictionary2 : UDictionary<System.Guid, AudioAudi> { }*/
+    public Dictionary<System.Guid, AudioAudi> PlayingAudio = new Dictionary<System.Guid, AudioAudi>();
     public static AudioManager Instance { get; private set; }
 
 
@@ -69,8 +72,39 @@ public class AudioManager : MonoBehaviour
     IEnumerator delay()
     {
         yield return new WaitForSeconds(2f);
-        PlayAudioClipLooping("AshAndBone", 0.15f);
+        SetMainMusic("AshAndBone");
     }
+
+    public void SetMainMusic(string audioClipName)
+    {
+        if (musicSource == null)
+        {
+            musicSource = gameObject.AddComponent<AudioSource>();
+            musicSource.loop = true;
+            musicSource.clip = audioDictionary[audioClipName];
+            musicSource.volume = 1;
+            musicSource.priority = 200;
+            musicSource.outputAudioMixerGroup = musicGroup;
+            musicSource.Play();
+        }
+        else
+        {
+            if (musicSource.clip.name != audioClipName)
+            {
+                if (switchMusicCorutine != null)
+                {
+                    StopCoroutine(switchMusicCorutine);
+                }
+                switchMusicCorutine = StartCoroutine(c_SwitchMusic(audioDictionary[audioClipName], 1));
+            }
+        }
+    }
+
+    public void StopMusic()
+    {
+        Destroy(musicSource);
+    }
+
     public System.Guid PlayAudioClip(string audioClipName, float volume = 1, int priority = 128)
     {
         System.Guid id = System.Guid.NewGuid();
@@ -244,5 +278,32 @@ public class AudioManager : MonoBehaviour
         audioSource.Stop();
         Destroy(audioSource);
         PlayingAudio.Remove(id);
+    }
+
+    IEnumerator c_SwitchMusic(AudioClip switchTo, float time = 0.5f)
+    {
+        float timer = 0;
+        float currentVolume = musicSource.volume;
+        bool switched = false;
+        while (timer < time)
+        {
+            float amount = timer / time;
+            if (amount < 0.5f)
+            {
+                musicSource.volume = currentVolume - currentVolume * amount * 2;
+            }
+            else
+            {
+                if (!switched)
+                {
+                    switched = true;
+                    musicSource.clip = switchTo;
+                    musicSource.Play();
+                }
+                musicSource.volume = (amount - 0.5f) * 2;
+            }
+            yield return new WaitForEndOfFrame();
+            timer += Time.deltaTime;
+        }
     }
 }

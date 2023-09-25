@@ -6,6 +6,7 @@ using System.Text.RegularExpressions;
 using Yarn.Markup;
 using TMPro;
 using System;
+using UnityEngine.Audio;
 
 
 namespace Yarn.Unity.Example
@@ -37,6 +38,7 @@ namespace Yarn.Unity.Example
 
         // big lists to keep track of all instantiated objects
         List<AudioSource> sounds = new List<AudioSource>(); // big list of all instantiated sounds
+        public AudioMixerGroup audioGroup;
         List<Image> sprites = new List<Image>(); // big list of all instantianted sprites
 
         // store sprite references for "actors" (characters, etc.)
@@ -51,6 +53,7 @@ namespace Yarn.Unity.Example
         public string scriptToLoadOnStart;
         [System.NonSerialized]
         public bool inDialogue = false;
+        public AudioClip previousMusic;
         void Awake()
         {
             Instance = this;
@@ -87,6 +90,7 @@ namespace Yarn.Unity.Example
             runner.AddCommandHandler<string, float>("Shake", ShakeSprite);
 
             runner.AddCommandHandler<string, float, string>("PlayAudio", PlayAudio);
+            runner.AddCommandHandler<string>("PlayMusic", PlayMusic);
             runner.AddCommandHandler<string>("StopAudio", StopAudio);
             runner.AddCommandHandler("StopAudioAll", StopAudioAll);
 
@@ -112,6 +116,8 @@ namespace Yarn.Unity.Example
             // Load the program, along with all of its nodes. 
             // The string table will be selected based on the 
             // Dialogue Runner's text language variable.
+            if (AudioManager.Instance.musicSource != null)
+                previousMusic = AudioManager.Instance.musicSource.clip;
 
             playerMovement.CustomFOV = playerMovement.DefaultFOV;
             playerMovement.inDialogue = true;
@@ -128,6 +134,7 @@ namespace Yarn.Unity.Example
         public override void DialogueComplete()
         {
             //runner.Stop();
+            AudioManager.Instance.SetMainMusic(previousMusic.name);
             playerMovement.inDialogue = false;
             playerArms.inDialogue = false;
             inDialogue = false;
@@ -137,6 +144,7 @@ namespace Yarn.Unity.Example
             nameplateBG.gameObject.SetActive(false);
             genericSprite.gameObject.SetActive(false);
         }
+
         #region YarnCommands
 
         /// <summary>changes background image</summary>
@@ -353,6 +361,10 @@ namespace Yarn.Unity.Example
         /// if third parameter was word "loop" it would loop "volume" is a
         /// number from 0.0 to 1.0 "loop" is the word "loop" (or "true"),
         /// which tells the sound to loop over and over</summary>
+        public void PlayMusic(string soundName)
+        {
+            AudioManager.Instance.SetMainMusic(soundName);
+        }
         public void PlayAudio(string soundName, float volume = 1, string loop = "")
         {
 
@@ -375,6 +387,7 @@ namespace Yarn.Unity.Example
             newAudioSource.clip = audioClip;
             newAudioSource.volume *= volume;
             newAudioSource.loop = shouldLoop;
+            newAudioSource.outputAudioMixerGroup = audioGroup;
             newAudioSource.Play();
             sounds.Add(newAudioSource);
 

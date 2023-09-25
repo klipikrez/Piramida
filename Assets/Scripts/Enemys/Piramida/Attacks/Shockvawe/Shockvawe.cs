@@ -26,6 +26,8 @@ public class Shockvawe : BaseAttack
     [System.NonSerialized]
     public GameObject ShockvaweObject;
     public string playAudio = "";
+    public float upForce = 15f;
+    public float directionalForce = 90f;
 
     public override void EndAttack(Bas boss)
     {
@@ -58,7 +60,9 @@ public class Shockvawe : BaseAttack
         //ShockvaweCollider = Instantiate(new GameObject(), boss.transform.position, boss.transform.rotation).AddComponent<MeshCollider>();
         ShockvaweObject.AddComponent<MeshFilter>().mesh = mesh;
         ShockvaweObject.AddComponent<MeshRenderer>().material = material;
-
+        PushBack pushBack = ShockvaweObject.AddComponent<PushBack>();
+        pushBack.force = directionalForce;
+        pushBack.upForce = upForce;
         Keyframe[] tmp = kurvaZaPiramidu.keys;
         tmp[0].value = (/*boss.normalFloatHeight +*/ boss.GroundOffset + boss.mainObject.transform.localPosition.y) / multiplyKurvaPramida;
         //kurvaZaPiramidu.keys[0].value = boss.normalFloatHeight / multiplyKurvaPramida;

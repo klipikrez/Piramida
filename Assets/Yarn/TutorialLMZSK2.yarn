@@ -7,7 +7,7 @@ position: NaN,NaN
 <<FOV 20>>
 <<Act Ludi_mačor_za_stare_kuće lmzsk 0.75 -0.3 #eb38af>>
 <<LookAt lmzsk>>
-<<PlayAudio lmzskTheme 0.3 loop>>
+<<PlayMusic lmzskTheme>>
 Ludi_mačor_za_stare_kuće: Još si tu jebote?  #line:0605df0 
 Ludi_mačor_za_stare_kuće: Znaš batice, treba probaš malo ove mačije travice malenice, ‘nači stvar ODVALJUJE!~  #line:0bdfd81 
 Ludi_mačor_za_stare_kuće: B[smoothWave]uuuuuuuuuuu[/smoothWave]kvalno.  #line:03c49bb 

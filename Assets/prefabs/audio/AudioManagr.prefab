@@ -30,7 +30,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 17
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &3634348067889387267
 MonoBehaviour:
@@ -44,10 +44,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd3a5a482631a634987f381d9e0a1f23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audioClips:
-  - {fileID: 8300000, guid: 9c157d39443e3d542af596873ee3a688, type: 3}
-  - {fileID: 8300000, guid: 6fd51d56e0a2f4e489c3301cdbac4314, type: 3}
-  - {fileID: 8300000, guid: 2928aec134bd24a418baf2d10377252a, type: 3}
   DDDSoundPrefab: {fileID: 9209052394736347849, guid: 6c6451070d0d7754c9b7fbda7965465c,
     type: 3}
   DD: {fileID: -6476487507152180898, guid: 262aa2e979cd23a469fafe0fcf4fcad3, type: 2}
+  musicGroup: {fileID: -5301758470833049223, guid: 262aa2e979cd23a469fafe0fcf4fcad3,
+    type: 2}

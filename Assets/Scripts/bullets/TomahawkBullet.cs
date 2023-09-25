@@ -156,7 +156,7 @@ public class TomahawkBullet : BulletBase
 
     private void CheckIfReturnedToPlayer(Bullet bullet)
     {
-        if (Physics.CheckBox(bullet.transform.position, Vector3.one / 2f, bullet.transform.rotation, LayerMask.GetMask("Hitbox")))
+        if (Physics.CheckBox(bullet.transform.position, Vector3.one / 2f, bullet.transform.rotation, LayerMask.GetMask("Hitbox", "Player")))
         {
             bullet.employer.ammoPerArm[bullet.employer.selectedGun] = 1;
             bullet.employer.movement.grapple = false;

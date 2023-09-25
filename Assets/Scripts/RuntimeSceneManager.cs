@@ -52,6 +52,11 @@ public class RuntimeSceneManager : MonoBehaviour
 
     public void Load(SceneReference sceneRef)
     {
+        if (sceneRef == mainMenu)
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+        }
         SetLoadingGizmos(true);
         GameObject[] movements = GameObject.FindGameObjectsWithTag("Player");
         foreach (GameObject movement in movements)

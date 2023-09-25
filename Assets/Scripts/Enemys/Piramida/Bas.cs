@@ -14,6 +14,7 @@ public class Bas : BaseEnemy
     public GameObject mainObject;
     public Side[] pyramidSides;
     public BaseAttack[] attackStates;
+    public float ChillBetweenAtacksGlobal = 3f;
     public float timeSinceAttakStarted = 0;
     int selectedAttack = 0;
     int[] avalibeAttacks;
@@ -109,7 +110,7 @@ public class Bas : BaseEnemy
         avalibeAttacks = CalculateAvalibeAttacks(selectedAttack);
         int i = UnityEngine.Random.Range(0, attackStates.Length - 1);
         selectedAttack = avalibeAttacks[i];
-        yield return new WaitForSeconds(previousAttack.chillTimeBeforAttackStarts + attackStates[selectedAttack].chillTimeAftrAttackEnds);
+        yield return new WaitForSeconds(previousAttack.chillTimeBeforAttackStarts + attackStates[selectedAttack].chillTimeAftrAttackEnds + ChillBetweenAtacksGlobal);
 
         //        Debug.Log(i);
 

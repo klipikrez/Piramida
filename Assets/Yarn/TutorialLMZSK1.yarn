@@ -10,7 +10,7 @@ Ludi_mačor_za_stare_kuće: *psst* #line:0654ffc
 Ludi_mačor_za_stare_kuće: Alo Kurčavela! #line:01b9906 
 <<Act Ludi_mačor_za_stare_kuće lmzsk 0.75 -0.3 #eb38af>>
 <<LookAt lmzsk>>
-<<PlayAudio lmzskTheme 0.3 loop>>
+<<PlayMusic lmzskTheme>>
 Ludi_mačor_za_stare_kuće: [normalWave]EeEeEeEeEeE!!![/normalWave] #line:00330d1 
 Ludi_mačor_za_stare_kuće: Ovde dole bato! #line:045ef2c 
 Ludi_mačor_za_stare_kuće: Ono kao drugar, šta se trezniš u-u mojoj rupetini, aa? #line:0ebbc12 
@@ -36,7 +36,6 @@ Ludi_mačor_za_stare_kuće: [smoothWave]mRRRRRRRRRnjau!!![/smoothWave]  #line:0e
 Ludi_mačor_za_stare_kuće: Izgledaš mi žgoljavo za jednog indijanca…   #line:0e1b037 
 Ludi_mačor_za_stare_kuće: Čime te hrane tamo u plemenu??   #line:02c1f66 
 Ludi_mačor_za_stare_kuće: Peskom?  #line:05b2b2a 
-<<Draw wasd center center>>
 Ludi_mačor_za_stare_kuće: Daj malo aktiviraj te atrofirane mišiće... #line:07e8f11 
 Ludi_mačor_za_stare_kuće: Ako si zaboravio da hodaš saću da te podsetim! Samo svojim neuronima pritiskaj: <sprite index=0><sprite index=1><sprite index=2><sprite index=3>, i skačeš na <sprite index=6>.   #line:09a7645 
 -> Ok...   #line:0014746 

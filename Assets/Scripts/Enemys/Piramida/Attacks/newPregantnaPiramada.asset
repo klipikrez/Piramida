@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   repeatAttack: 0
   chillTimeBeforAttackStarts: 2
-  chillTimeAftrAttackEnds: 1
+  chillTimeAftrAttackEnds: 4
   shakeTime: 2
   shakeSpeed: 52
   shakeStrenth: 0.73

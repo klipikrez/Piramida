@@ -7,7 +7,7 @@ tags:
 <<Act Ludi_mačor_za_stare_kuće lmzsk 0.75 -0.3 #eb38af>>
 <<LookAt lmzsk>>
 Ludi_mačor_za_stare_kuće: Au, batice...  #line:0bc5fe8 
-<<PlayAudio lmzskTheme 0.3 loop>>
+<<PlayMusic lmzskTheme>>
 Ludi_mačor_za_stare_kuće: A baš sam ja hteo da je smažem...  #line:0195fae 
 Ludi_mačor_za_stare_kuće: Braćala, vdi šta si uradio malenoj ptičici.  #line:05531ba 
 Ludi_mačor_za_stare_kuće: Osta od ptičice saaaaamo krilca.  #line:08c1c17 

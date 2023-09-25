@@ -12,8 +12,6 @@ namespace Yarn.Unity.Example
 {
     public class DialogueManager : DialogueViewBase
     {
-
-        public TextMeshProUGUI nameplateText;
         [SerializeField] DialogueRunner runner;
 
         [Header("Assets"), Tooltip("you can manually assign various assets here if you don't want to use /Resources/ folder")]

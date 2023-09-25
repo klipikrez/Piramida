@@ -8,55 +8,66 @@ position: NaN,NaN
 <<Act Ludi_mačor_za_stare_kuće lmzsk 0.75 -0.3 #eb38af>>
 <<LookAt lmzsk>>
 <<PlayAudio lmzskTheme 0.3 loop>>
-Ludi_mačor_za_stare_kuće: Još si tu? #line:0b03af5 
-Ludi_mačor_za_stare_kuće: Znaš batice, treba probaš malo ove mačije travice malenice, stvar UBIJA.~ #line:04b92a2 
-Ludi_mačor_za_stare_kuće: Bukvalno. #line:0ad1494 
--> Daj da probam. #line:0e9fe24 
-    Ludi_mačor_za_stare_kuće: Može brato, al ono kao... #line:0cf6233 
+Ludi_mačor_za_stare_kuće: Još si tu jebote?  #line:0605df0 
+Ludi_mačor_za_stare_kuće: Znaš batice, treba probaš malo ove mačije travice malenice, ‘nači stvar ODVALJUJE!~  #line:0bdfd81 
+Ludi_mačor_za_stare_kuće: B[smoothWave]uuuuuuuuuuu[/smoothWave]kvalno.  #line:03c49bb 
+-> Daj ajjjjde.  #line:0be3f15 
+    Ludi_mačor_za_stare_kuće: Može brato, al ono kao...  #line:0898f43 
     <<Hide lmzsk>>
     <<Act Ludi_mačor_za_stare_kuće lmzskZen 0.83 0.3 #eb38af>>
-    Ludi_mačor_za_stare_kuće: Ne nudim ti moju, Ako hvataš moje frekvencije... #line:086e08c 
+    Ludi_mačor_za_stare_kuće: Ne nudim ti moju, Ako hvataš moje frekvencije...  #line:0d25c63 
     <<Hide lmzskZen>>
     <<Act Ludi_mačor_za_stare_kuće lmzsk 0.75 -0.3 #eb38af>>
-    Ludi_mačor_za_stare_kuće: Al kad si već tu... #line:0e6af60 
-    Ludi_mačor_za_stare_kuće: Imaš upaljač možda? #line:07aeb48 
-    Ludi_mačor_za_stare_kuće: Moj se isprazni pa mora palim plugu sa fokusiranim zrakom svetlosti... #line:0d8d5c3 
-    Ludi_mačor_za_stare_kuće: Znas kako je... (heh). #line:0834c62 
-    -> ne. #line:0ddded1 
-    -> ne. #line:0f24afd 
-    -> ne. #line:07c6b67 
-    -> ne, nemam. #line:0506175 
-    -> ne. #line:04336ab 
-    -> ne. #line:06b37af 
--> ne. #line:089621e 
-    Ludi_mačor_za_stare_kuće: HAahaha! #line:0040907 
-    Ludi_mačor_za_stare_kuće: Mamino dete ne sme da proba. #line:02917a6 
-    Ludi_mačor_za_stare_kuće: Više za mene. #line:0ca6c0f 
-Ludi_mačor_za_stare_kuće: Nema veze.  #line:0e4fbc7 
-Ludi_mačor_za_stare_kuće: Šta treba tebra? #line:0fe94a5 
+    Ludi_mačor_za_stare_kuće: Al kad si već tu...  #line:02efc9f 
+    Ludi_mačor_za_stare_kuće: Imaš upaljač možda?  #line:0cf429e 
+    Ludi_mačor_za_stare_kuće: Moj se isprazni pa mora palim plugu sa fokusiranim zrakom svetlosti...  #line:0e8bf1c 
+    Ludi_mačor_za_stare_kuće: Znas kako je... (heh).  #line:00b0cee 
+    -> ne.  #line:0351e4b 
+    -> ne nemam.  #line:0861b36 
+    -> ne nemam izvini.  #line:0d3e438 
+    -> ne nemam izvini stvarno mi je žao.  #line:06c3dce 
+    -> ne nemam izvini stvarno mi je žao al da imam dao bi ti odma.  #line:0e2f11b 
+    -> ne nemam izvini stvarno mi je žao al da imam dao bi ti odma… Imaš Upaljać? #line:040848b 
+		Ludi_mačor_za_stare_kuće: Au burazeru, pa ti si opako zveknuo tu tintaru... #line:073de66 
+-> ne.  #line:0520f41 
+    Ludi_mačor_za_stare_kuće: BAHAahaha!  #line:0094a82 
+    Ludi_mačor_za_stare_kuće: Mamina pićkica ne sme da proba. #line:048f414 
+    Ludi_mačor_za_stare_kuće: Bmk, više za mene. [smoothWave]mRRRRRRRnjau[/smoothWave]! #line:021716a 
+Ludi_mačor_za_stare_kuće: Nema veze.   #line:0a8dd1b 
+Ludi_mačor_za_stare_kuće: Šta treba tebra? Ja kao zaboravio da te pitam od ovolkog uzbuđenja.  #line:03e8f49 
 <<jump Tutorial1lmzsk2Questions>>
 
 ===
 
 title: Tutorial1lmzsk2Questions
 ---
--> Gde ti je krzno? #line:07e0dbb 
-    Ludi_mačor_za_stare_kuće: NEMA! #line:0e23aad 
-    Ludi_mačor_za_stare_kuće: Bato... ova pustinjska klima je doprela do dubine mog postojanja... #line:04ca2b3 
-    Ludi_mačor_za_stare_kuće: Pa sam se malo obrijao. #line:0fc52ab 
-    Ludi_mačor_za_stare_kuće: Ja mislim da mi ovako bolje stoji. #line:0d4f459 
-    Ludi_mačor_za_stare_kuće: Aaaa? #line:0e1b912 
+-> Gde ti je krzno?  #line:035329b 
+    <<HideAll>>
+    <<Act Ludi_mačor_za_stare_kuće lmzsk 0.75 -0.3 #eb38af>>
+    Ludi_mačor_za_stare_kuće: NEMA!  #line:0f77a87 
+    Ludi_mačor_za_stare_kuće: Bato... ova pustinjska vrućinčina mi pomerila bulju...  #line:07c4a84 
+    Ludi_mačor_za_stare_kuće: Pa sam se malo obrijao.  #line:0993ea3 
+    Ludi_mačor_za_stare_kuće: Ja mislim da mi ovako bolje stoji.  #line:0db2998 
+    <<Hide lmzsk>>
+    <<Act Ludi_mačor_za_stare_kuće lmzskBuff 0.83 0.4 #eb38af>>
+    Ludi_mačor_za_stare_kuće: Aaaa? Sam seeeesi?  #line:05a09af 
+    <<Hide lmzskBuff>>
+    <<Act Ludi_mačor_za_stare_kuće lmzskBuff 0.83 0 #eb38af>>
     <<jump Tutorial1lmzsk2Questions>>
--> Gde smo sad? #line:0e2020f 
-    Ludi_mačor_za_stare_kuće: Mi kasa su kasa, jk. mrš napolje. #line:0525a25 
-    Ludi_mačor_za_stare_kuće: Inace, trenutno dangubiš u Dangubiškoj pustinji. #line:0d00372 
-    Ludi_mačor_za_stare_kuće: Čim sam čuo kako se zove, odma sam doleteo ovde. #line:06b7709 
-    Ludi_mačor_za_stare_kuće: I mora priznam... #line:0e21c7b 
-    Ludi_mačor_za_stare_kuće: Vruće je... #line:085c436 
+-> Gde smo sad?  #line:08127f5 
+    <<HideAll>>
+    <<Act Ludi_mačor_za_stare_kuće lmzsk 0.75 -0.3 #eb38af>>
+    Ludi_mačor_za_stare_kuće: Mi kasa su kasa, jk. mrš napolje.  #line:014463c 
+    Ludi_mačor_za_stare_kuće: Inace, trenutno dangubiš u Kul Klimatizovanom Karavanskom Kanjonu u sred Dangubarske pustinje.  #line:0e01599 
+    Ludi_mačor_za_stare_kuće: Čim sam čuaa kako se zove, odma sam doleteo ovde.  #line:043559f 
+    Ludi_mačor_za_stare_kuće: I mora priznam...  #line:0b04c7f 
+    Ludi_mačor_za_stare_kuće: Vruće je...  #line:0d56e43 
     <<jump Tutorial1lmzsk2Questions>>
--> Aj ćao. #line:0f2de3b 
-    Ludi_mačor_za_stare_kuće: Ajd' braci. #line:0d16358 
-    Ludi_mačor_za_stare_kuće: Ako se negde zaglaviš, samo me nadji, biću blizu. #line:040a90c 
+-> Aj ćao.  #line:0a7527a 
+    <<HideAll>>
+    <<Act Ludi_mačor_za_stare_kuće lmzsk 0.75 -0.3 #eb38af>>
+    Ludi_mačor_za_stare_kuće: Aaaaajde...  #line:0df4f4a 
+    Ludi_mačor_za_stare_kuće: Ako se negde zaglaviš, samo me nadji, biću blizu.*prekrsti pritajno prste*  #line:044f1bc 
     <<StopAudioAll>>
     <<Reset>>
     <<stop>>

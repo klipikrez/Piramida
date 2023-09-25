@@ -1,0 +1,26 @@
+﻿title: TutorialLMZSK5
+tags:
+---
+<<declare $hook = "svoju kuku za penjanje">>
+<<Reset>>
+<<Scene black 0.85>>
+<<FOV 20>>
+<<Act Ludi_mačor_za_stare_kuće lmzsk 0.75 -0.3 #eb38af>>
+<<LookAt lmzsk>>
+<<PlayAudio lmzskTheme 0.3 loop>>
+Ludi_mačor_za_stare_kuće: Čuj, burazeru, ima još jedna fora stvar sa tvojom sekiricom.
+Ludi_mačor_za_stare_kuće: Možeš da je šikneš kao na neku koru kuke za penjanje.
+-> ...a, šta je kuka za penjanje?
+    <<set $hook to "svoj grappling hook">>
+    Ludi_mačor_za_stare_kuće: [normalWave]"GrApPlInG HoOk"[/normalWave].
+    Ludi_mačor_za_stare_kuće: Vi mladi samo Švajcarske izraze razumete, mater vam klošarsku!
+-> ok..?
+Ludi_mačor_za_stare_kuće: Samo drži <sprite index=7> dok skupljaš sekriče na  <sprite index=5>.
+Ludi_mačor_za_stare_kuće: Eto, imaš {$hook}!
+Ludi_mačor_za_stare_kuće: aj sad se popenji ovde gore.
+<<LookAt Drvo>>
+Ludi_mačor_za_stare_kuće: ono drvo izgleda ako dobro mesto de da zabodeš sekiru.
+<<StopAudioAll>>
+<<Reset>>
+<<stop>>
+===

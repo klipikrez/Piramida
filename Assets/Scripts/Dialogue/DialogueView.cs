@@ -328,6 +328,7 @@ public static class Effects
 /// </summary>
 public class DialogueView : DialogueViewBase
 {
+    public TextMeshProUGUI dialogueText;
     public TextAnimation[] meshAnimationsArray;
     Dictionary<string, TextAnimation> meshAnimations = new Dictionary<string, TextAnimation>();
     List<Par> currentAnimations = new List<Par>();
@@ -629,11 +630,14 @@ public class DialogueView : DialogueViewBase
     Coroutine animateCorutine;
     public override void RunLine(LocalizedLine dialogueLine, Action onDialogueLineFinished)
     {
+
         // Stop any coroutines currently running on this line view (for
         // example, any other RunLine that might be running)
         StopAllCoroutines();
         currentAnimations.Clear();
         // Set the current line to the line we're running.
+        dialogueText.ClearMesh();
+
         currentDialogueLine = dialogueLine;
         // Begin running the line as a coroutine.
         StartCoroutine(RunLineInternal(dialogueLine, onDialogueLineFinished));
@@ -641,7 +645,7 @@ public class DialogueView : DialogueViewBase
         List<MarkupAttribute> markups = dialogueLine.Text.Attributes;
         if (markups.Count != 0)
         {
-            animateCorutine = StartCoroutine(Animate());
+
             foreach (MarkupAttribute markup in markups)
             {
                 if (markup.Length != 0)
@@ -667,9 +671,9 @@ public class DialogueView : DialogueViewBase
                     }*/
                 }
             }
+            animateCorutine = StartCoroutine(Animate());
 
         }
-
 
     }
 
@@ -678,6 +682,7 @@ public class DialogueView : DialogueViewBase
         while (true)
         {
             UpdateAnimations();
+
             yield return new WaitForSeconds(0.03f);
         }
     }

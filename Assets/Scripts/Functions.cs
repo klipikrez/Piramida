@@ -63,26 +63,26 @@ public static class Functions
         Collider[] colliders = Physics.OverlapSphere(origin, CheckRadious, mask);
         foreach (Collider col in colliders)
         {
-            //if (!col.isTrigger)
-            //{
-
-            if (CheckSphereExtra(col, origin, CheckRadious, out Vector3 point, out Vector3 normal))
+            if (!col.isTrigger || col.transform.tag == "AlwaysDetectHit")
             {
-                float distance = Vector3.Distance(point, origin);
 
-                if (distance < hit.distance)
+                if (CheckSphereExtra(col, origin, CheckRadious, out Vector3 point, out Vector3 normal))
                 {
-                    hit.distance = distance;
+                    float distance = Vector3.Distance(point, origin);
 
-                    hit.point = point;
-                    hit.normal = normal;
-                    hit.collider = col;
+                    if (distance < hit.distance)
+                    {
+                        hit.distance = distance;
+
+                        hit.point = point;
+                        hit.normal = normal;
+                        hit.collider = col;
+                    }
+
+                    hit.hit = true;
+                    /*skaj*/
                 }
-
-                hit.hit = true;
-                /*skaj*/
             }
-            // }
         }
         return hit;
     }
@@ -96,30 +96,30 @@ public static class Functions
         Collider[] colliders = Physics.OverlapBox(origin, CheckBounds, rotation, mask);
         foreach (Collider col in colliders)
         {
-            //if (!col.isTrigger)
-            //{
-            if (!collidersToExclude.Contains(col))
+            if (!col.isTrigger || col.transform.tag == "AlwaysDetectHit")
             {
-                if (CheckSphereExtra(col, origin, CheckBounds.magnitude, out Vector3 point, out Vector3 normal))
+                if (!collidersToExclude.Contains(col))
                 {
-                    float distance = Vector3.Distance(point, origin);
-
-                    if (distance < hit.distance)
+                    if (CheckSphereExtra(col, origin, CheckBounds.magnitude, out Vector3 point, out Vector3 normal))
                     {
-                        hit.distance = distance;
+                        float distance = Vector3.Distance(point, origin);
 
-                        hit.point = point;
-                        hit.normal = normal;
-                        checkedColliders.Add(col);
-                        hit.collider = col;
+                        if (distance < hit.distance)
+                        {
+                            hit.distance = distance;
+
+                            hit.point = point;
+                            hit.normal = normal;
+                            checkedColliders.Add(col);
+                            hit.collider = col;
+                        }
+
+                        hit.hit = true;
+                        /*skaj*/
                     }
 
-                    hit.hit = true;
-                    /*skaj*/
                 }
-
             }
-            //}
         }
         return hit;
     }

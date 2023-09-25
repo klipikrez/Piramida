@@ -14,7 +14,7 @@ public class CheckIfBulletInside : MonoBehaviour
         Instance = this;
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerStay(Collider other)
     {
         if (other.tag == "Bullet")
         {
@@ -24,7 +24,7 @@ public class CheckIfBulletInside : MonoBehaviour
 
     private void Update()
     {
-        if (RopeTomahawk.Instance.T2 != null && IsInsideBoxCollider(coll, RopeTomahawk.Instance.T2.position))
+        if (RopeTomahawk.Instance.T2 != null && IsInsideBoxCollider(coll, RopeTomahawk.Instance.T2.position) && PiuPiu.Instance.killed)
         {
             bullet = true;
         }

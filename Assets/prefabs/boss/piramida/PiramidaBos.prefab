@@ -131,7 +131,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3458193618405635306}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -3.52, z: 0}
   m_LocalScale: {x: 7.07, y: 7.07, z: 7.07}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -366,7 +366,7 @@ Transform:
   m_Children:
   - {fileID: 2645346269394333264}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7910335330499376895
 MonoBehaviour:
@@ -389,22 +389,25 @@ MonoBehaviour:
   - {fileID: 3079468792357616217}
   attackStates:
   - {fileID: 11400000, guid: 678b1c8f7de3cda4fab0773794f4250f, type: 2}
-  - {fileID: 11400000, guid: 5df6a359457ffd74d85f46e1ad7c8cae, type: 2}
+  - {fileID: 11400000, guid: 822e888f942c9274e8c64a1c83e04904, type: 2}
   - {fileID: 11400000, guid: 6efaa2122ede0d94cba63561bcc46f6e, type: 2}
+  - {fileID: 11400000, guid: 5df6a359457ffd74d85f46e1ad7c8cae, type: 2}
   - {fileID: 11400000, guid: 579ae2bb44cabf44fba69daef55bf431, type: 2}
   timeSinceAttakStarted: 147.60338
   player: {fileID: 0}
-  normalFloatHeight: 2
+  playerMovment: {fileID: 0}
+  normalFloatHeight: 3
   returnToNormalFloatHeight: 1
   returnToNormalRotation: 1
   floatAmplitude: 1.7
   floatFrequency: 7
-  active: 1
   NormalVolume: {fileID: 0}
   FlashVolume: {fileID: 0}
   rotateSpeed: 0.2
   minRotateValue: 0
   maxRotateValue: 2.17
+  LaserTrailScripts:
+  - {fileID: 0}
 --- !u!95 &949647288
 Animator:
   serializedVersion: 4

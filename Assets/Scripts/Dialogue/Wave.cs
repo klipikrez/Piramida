@@ -14,7 +14,7 @@ public class Wave : TextAnimation
     public float JitterAngle = 10f;
 
 
-    TMP_TextInfo textInfo;
+
 
 
 
@@ -34,7 +34,7 @@ public class Wave : TextAnimation
 
     public override void AnimateAll(int start, int lenth, TextMeshProUGUI text)
     {
-        textInfo = text.textInfo;
+        TMP_TextInfo textInfo = text.textInfo;
         cachedMeshInfo = textInfo.CopyMeshInfoVertexData();
 
 
@@ -111,6 +111,13 @@ public class Wave : TextAnimation
         {
             textInfo.meshInfo[i].mesh.vertices = textInfo.meshInfo[i].vertices;
             text.UpdateGeometry(textInfo.meshInfo[i].mesh, i);
+        }
+        if (text.transform.childCount != 0)
+        {
+            //ovo izgleda mnogo smotano, al bez njega ne radi :(((((
+            GameObject child = text.transform.GetChild(0).gameObject;
+            child.SetActive(false);
+            child.SetActive(true);
         }
     }
     /*

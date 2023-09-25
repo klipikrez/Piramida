@@ -11,8 +11,13 @@ public class PiuPiu : BaseEnemy
     public GameObject[] hide;
     public string StartDialogueNodeName = "";
     public string StartDialogueNodeName2 = "";
-    bool killed = false;
+    public bool killed = false;
     bool secondDialogue = false;
+    public static PiuPiu Instance;
+    private void Awake()
+    {
+        Instance = this;
+    }
     private void Start()
     {
         feathers.SendEvent("Start");
@@ -33,7 +38,7 @@ public class PiuPiu : BaseEnemy
 
     IEnumerator Wait()
     {
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(1.5f);
         LMZSKPositionManager.positionIndex = 2;
         LMZSKPositionManager.Instance.ChangePosition();
         DialogueManager.Instance.StartDialogue(StartDialogueNodeName);
@@ -50,6 +55,7 @@ public class PiuPiu : BaseEnemy
             LMZSKPositionManager.positionIndex = 2;
             LMZSKPositionManager.Instance.ChangePosition();
             DialogueManager.Instance.StartDialogue(StartDialogueNodeName2);
+            LMZSKPositionManager.positionIndex = 3;
             CheckIfBulletInside.Instance.gameObject.SetActive(false);
             gameObject.SetActive(false);
         }

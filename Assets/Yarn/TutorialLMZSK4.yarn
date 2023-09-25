@@ -7,11 +7,12 @@ tags:
 <<Act Ludi_mačor_za_stare_kuće lmzsk 0.75 -0.3 #eb38af>>
 <<LookAt lmzsk>>
 <<PlayAudio lmzskTheme 0.3 loop>>
-Ludi_mačor_za_stare_kuće: smotan si. #line:05011bf 
-Ludi_mačor_za_stare_kuće: priblizi se. #line:0c4052f 
+Ludi_mačor_za_stare_kuće: A BATE! #line:0518230 
+Ludi_mačor_za_stare_kuće: glup si za trojicu… #line:0dfd5db 
+Ludi_mačor_za_stare_kuće: približi se, molim te. Nemooogu da gleedam ovo! #line:0b780d4 
 <<LookAt TNT>>
 <<FOV 40>>
-Ludi_mačor_za_stare_kuće: ok? #line:08e2f9f 
+Ludi_mačor_za_stare_kuće: ok, braci? #line:07f6e38 
 <<StopAudioAll>>
 <<Reset>>
 <<stop>>

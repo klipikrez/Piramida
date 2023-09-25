@@ -149,8 +149,9 @@ public class PlayerArms : MonoBehaviour
             if (!GameMenu.Instance.paused && !inDialogue)
             {
                 reloadTimer += Time.deltaTime;
-                yield return new WaitForEndOfFrame();
             }
+            yield return new WaitForEndOfFrame();
+
         }
         reloadCorutine = null;
     }
@@ -161,8 +162,9 @@ public class PlayerArms : MonoBehaviour
             if (!GameMenu.Instance.paused && !inDialogue)
             {
                 guns[selectedGun].Shoot(this);
-                yield return new WaitForSeconds(1 / guns[selectedGun].BPS);
             }
+            yield return new WaitForSeconds(1 / guns[selectedGun].BPS);
+
         }
         fireCorutine = null;
     }

@@ -23,7 +23,7 @@ public class Settings
 {
     public bool fullScreen = true;
     public int fps = 60;
-    public float[] volumes = { 1, 1, 1, 1 };
+    public float[] volumes = { 1, 1, 1 };
     public bool vsync = false;
     public string language = "bs";
     /*public float volume0 = 1;

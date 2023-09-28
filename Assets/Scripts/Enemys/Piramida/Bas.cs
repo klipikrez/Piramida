@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Data.Common;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Rendering;
@@ -80,6 +81,22 @@ public class Bas : BaseEnemy
             mainObject.transform.rotation = Quaternion.Slerp(mainObject.transform.rotation, Quaternion.Euler(0f, mainObject.transform.eulerAngles.y, 0f), DeltaTimeLerp(0.1f));
         }
 
+    }
+
+    public void CheckIfDead()
+    {
+        bool allDead = true;
+        foreach (Side side in pyramidSides)
+        {
+            if (!side.dead)
+            {
+                allDead = false;
+            }
+        }
+        if (allDead)
+        {
+            GameMenu.Instance.Win();
+        }
     }
 
     public void ChooseNewRandomState()

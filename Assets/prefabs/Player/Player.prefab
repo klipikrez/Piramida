@@ -1383,6 +1383,8 @@ MonoBehaviour:
   regen: 1.325
   diedTimes: 0
   text: {fileID: 6109952767653613809}
+  continuousDamageDounds:
+  - {fileID: 8300000, guid: 9778cae7d5d5aaf4e8bd0522054d1610, type: 3}
 --- !u!1 &6019180570214538986
 GameObject:
   m_ObjectHideFlags: 0

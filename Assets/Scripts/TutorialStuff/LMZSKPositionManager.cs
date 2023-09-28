@@ -39,7 +39,6 @@ public class LMZSKPositionManager : MonoBehaviour
         {
             return;
         }
-        Debug.Log(LMZSK.isSeenByPlayer);
         if (LMZSK.isSeenByPlayer)
         {
             RaycastHit ray;

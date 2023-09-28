@@ -116,26 +116,27 @@ public class AudioManager : MonoBehaviour
 
     public void StopAudio(System.Guid name)
     {
-        foreach (KeyValuePair<System.Guid, AudioAudi> emmiter in PlayingAudio)
-        {
-            if (name == emmiter.Key)
+        if (PlayingAudio.ContainsKey(name))
+            foreach (KeyValuePair<System.Guid, AudioAudi> emmiter in PlayingAudio)
             {
-                if (emmiter.Value.coroutine != null)
+                if (name == emmiter.Key)
                 {
-                    StopCoroutine(emmiter.Value.coroutine);
+                    if (emmiter.Value.coroutine != null)
+                    {
+                        StopCoroutine(emmiter.Value.coroutine);
+                    }
+                    if (emmiter.Value.source != null)
+                    {
+                        Destroy(emmiter.Value.source);
+                    }
+                    if (emmiter.Value.obj != null)
+                    {
+                        Destroy(emmiter.Value.obj);
+                    }
+                    PlayingAudio.Remove(emmiter.Key);
+                    break;
                 }
-                if (emmiter.Value.source != null)
-                {
-                    Destroy(emmiter.Value.source);
-                }
-                if (emmiter.Value.obj != null)
-                {
-                    Destroy(emmiter.Value.obj);
-                }
-                PlayingAudio.Remove(emmiter.Key);
-                break;
             }
-        }
     }
     public System.Guid PlayVoiceLine(string audioClipName, float volume = 1, int priority = 128)
     {

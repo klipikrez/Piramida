@@ -41,6 +41,7 @@ public class Side : BaseEnemy
     public GameObject sjebanoOko;
     public GameObject pushBack;
     public bool headOpen = false;
+    public bool dead = false;
     private void Start()
     {
         defaultRotation = eye.transform;
@@ -98,8 +99,10 @@ public class Side : BaseEnemy
         }
         else
         {
-            if (currentHealth != 0)
+            if (!dead)
             {
+                dead = true;
+
                 boss.SjebiOsvetljenjeFlicker(0.2f, 252f);
                 boss.ShakeCorutine(UnityEngine.Random.Range(0f, 52f), ShakeStrenthKill, ShakeSpeedKill, shakeTimeKill);
                 currentHealth = 0;
@@ -114,6 +117,7 @@ public class Side : BaseEnemy
                 pushBack.SetActive(false);
 
                 sjebanoOko.SetActive(true);
+                boss.CheckIfDead();
             }
         }
     }

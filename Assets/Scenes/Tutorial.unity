@@ -345,7 +345,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e850596e3740a1c4ba27cf96507b0830, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  name: Hathor
+  name: "\u017Dal"
 --- !u!65 &171648462
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1929,7 +1929,7 @@ MonoBehaviour:
   audioGroup: {fileID: 0}
   onStartDialogue: 1
   scriptToLoadOnStart: TutorialLMZSK1
-  previousMusic: {fileID: 8300000, guid: 5b2e1ef9aa83be8459b5656568de2e6a, type: 3}
+  previousMusic: {fileID: 8300000, guid: 8b822780c09108c498db1c7d409d20cc, type: 3}
 --- !u!4 &661434148
 Transform:
   m_ObjectHideFlags: 0
@@ -2830,7 +2830,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 42.28
+  m_Radius: 42.9
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!4 &1094477398
 Transform:
@@ -2840,7 +2840,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1094477395}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 92.3, y: 0, z: 11.6}
+  m_LocalPosition: {x: 50.8, y: 29.7, z: 25.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

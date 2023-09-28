@@ -22,11 +22,13 @@ Ludi_mačor_za_stare_kuće: IDI GA LUPI!!  #line:0bd5a1e
 <<LookAt lmzsk>>
 Ludi_mačor_za_stare_kuće: Ja sve ove godine nisam imo muda...  #line:0a12bac 
 <<LookAt TNT>>
-Ludi_mačor_za_stare_kuće: Pa probaj možda sa ovog kamena da ga pogodiš.  #line:0b840ff 
+Ludi_mačor_za_stare_kuće: Rekli su mi da je dinamit opasan po život... #line:0987b7f 
+Ludi_mačor_za_stare_kuće: Pa probaj možda sa [smoothWave]veeeeeeeelike[/smoothWave] daljine da ga pogodiš.  #line:0b840ff 
 Ludi_mačor_za_stare_kuće: Isto, ako oćes da pokupis sekiru kad si je bacio, koristiš <sprite index=5>.  #line:0091be8 
 <<LookAt  PiuPiu>>
 <<FOV 40>>
 Ludi_mačor_za_stare_kuće: Znaci, <sprite index=4>da je bacis, a <sprite index=5> da je pokupis.  #line:075448e 
+-> Ok... #line:0be5c4c 
 <<StopAudioAll>>
 <<Reset>>
 <<stop>>

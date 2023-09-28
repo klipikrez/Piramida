@@ -31,33 +31,14 @@ public class Options : MonoBehaviour
 
 
 
-    public static Options Instance { get; private set; }
-
-    public void UpdateSettingsValues(Settings settings)
-    {
-        fullScreenToggle.isOn = settings.fullScreen;
-        Fps.value = settings.fps;
-        int languageIndex = 0;
-        for (int i = 0; i < lanhuage.options.Count; i++)
-        {
-            Debug.Log(lanhuage.options[i].image.name);
-            if (settings.language == lanhuage.options[i].image.name)
-            {
-                languageIndex = i;
-            }
-        }
-        lanhuage.value = languageIndex;
-        SetLanguage(languageIndex);
-
-        for (int i = 0; i < VolumeSliders.Length; i++)
-        {
-            VolumeSliders[i].value = settings.volumes[i] * 100;
-        }
-
-    }
 
     void Start()
-    {/*
+    {
+        if (menu == null)
+        {
+            menu = transform.parent.parent.GetComponent<MainMenu>();
+        }
+        /*
         fullScreenToggle.isOn = settings.fullScreen;
         Fps.value = settings.fps;
         UpdateSettings(settings.fullScreen ? 1 : 0, settings.fps);
@@ -70,6 +51,29 @@ public class Options : MonoBehaviour
 */
     }
 
+    public void UpdateSettingsValues(Settings settings)
+    {
+        fullScreenToggle.isOn = settings.fullScreen;
+        Fps.value = settings.fps;
+        menu.FpsValue(settings.fps);
+        int languageIndex = 0;
+        for (int i = 0; i < lanhuage.options.Count; i++)
+        {
+            Debug.Log(lanhuage.options[i].image.name);
+            if (settings.language == lanhuage.options[i].image.name)
+            {
+                languageIndex = i;
+            }
+        }
+        lanhuage.value = languageIndex;
+        SetLanguage(languageIndex);
+
+        for (int i = 0; i < settings.volumes.Length; i++)
+        {
+            VolumeSliders[i].value = settings.volumes[i] * 100;
+        }
+
+    }
 
     public void FullScreenValue(bool value)
     {

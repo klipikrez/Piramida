@@ -5,6 +5,7 @@ position: NaN,NaN
 <<Reset>>
 <<Scene black 0.85>>
 <<FOV 20>>
+BOB: *Klikni <sprite index=6> da nastaviš* #line:039a91e 
 Indijanac_Džons: ... #line:035cc34 
 Ludi_mačor_za_stare_kuće: *psst* #line:0654ffc 
 Ludi_mačor_za_stare_kuće: Alo Kurčavela! #line:01b9906 
@@ -21,15 +22,15 @@ Ludi_mačor_za_stare_kuće: Zr-Zar ne vidiš da radim ovde, V[smoothWave]aaaaaaa
 <<Act Ludi_mačor_za_stare_kuće lmzsk 0.75 -0.3 #eb38af>>
 Ludi_mačor_za_stare_kuće: Šta me gledaš ko tele u šarena vrata?  #line:05b5eb5 
 Ludi_mačor_za_stare_kuće: Šta je??  #line:0be92c2 
-Ludi_mačor_za_stare_kuće: Šta si zin’o? Će ti uleti vrapče.  #line:01732b4 
-Ludi_mačor_za_stare_kuće: El igra bela mečka možda?!  #line:0ba6ccb 
+//Ludi_mačor_za_stare_kuće: Šta si zin’o? Će ti uleti vrapče.  #line:01732b4 
+//Ludi_mačor_za_stare_kuće: El igra bela mečka možda?!  #line:0ba6ccb 
 
 
 <<Hide lmzsk>>
 <<Act Ludi_mačor_za_stare_kuće lmzskSajbatroniks 0.75 0.3 #eb38af>>
-Ludi_mačor_za_stare_kuće: Aaa, mačoru, el to merkaš moje muževne MAČOr mišiće?   #line:0e02ef1 
+Ludi_mačor_za_stare_kuće: Aaa, mačoru, el to merkaš moje muževne MAČO mišiće?   #line:0e02ef1 
 Ludi_mačor_za_stare_kuće: Malo sam počeo da pumpam u trtani i pijem ovaj naturalni sokić!  #line:0eb783b 
-Ludi_mačor_za_stare_kuće: Jebeno me radi ovo sranje!  #line:02997ec 
+//Ludi_mačor_za_stare_kuće: Jebeno me radi ovo sranje!  #line:02997ec 
 Ludi_mačor_za_stare_kuće: [smoothWave]mRRRRRRRRRnjau!!![/smoothWave]  #line:0e53c79 
 <<Hide lmzskSajbatroniks>>
 <<Act Ludi_mačor_za_stare_kuće lmzsk 0.75 -0.3 #eb38af>>
@@ -37,7 +38,8 @@ Ludi_mačor_za_stare_kuće: Izgledaš mi žgoljavo za jednog indijanca…   #lin
 Ludi_mačor_za_stare_kuće: Čime te hrane tamo u plemenu??   #line:02c1f66 
 Ludi_mačor_za_stare_kuće: Peskom?  #line:05b2b2a 
 Ludi_mačor_za_stare_kuće: Daj malo aktiviraj te atrofirane mišiće... #line:07e8f11 
-Ludi_mačor_za_stare_kuće: Ako si zaboravio da hodaš saću da te podsetim! Samo svojim neuronima pritiskaj: <sprite index=0><sprite index=1><sprite index=2><sprite index=3>, i skačeš na <sprite index=6>.   #line:09a7645 
+Ludi_mačor_za_stare_kuće: Ako si zaboravio da hodaš saću da te podsetim! #line:0736c5d 
+Ludi_mačor_za_stare_kuće: Samo svojim neuronima pritiskaj: <sprite index=0><sprite index=1><sprite index=2><sprite index=3>, i skačeš na <sprite index=6>.   #line:09a7645 
 -> Ok...   #line:0014746 
 <<StopAudioAll>>
 <<Reset>>

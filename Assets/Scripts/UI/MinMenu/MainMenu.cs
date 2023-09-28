@@ -51,7 +51,10 @@ public class MainMenu : MonoBehaviour
             if (obj != null)
                 obj.SetActive(false);
         }
-        GameObjectUIPanels[i].SetActive(true);
+        if (i != -1)
+        {
+            GameObjectUIPanels[i].SetActive(true);
+        }
     }
 
     public void Exit()
@@ -121,17 +124,21 @@ public class MainMenu : MonoBehaviour
             {
                 case 0:
                     {
-                        name = "Master";
+                        name = "master";
+                        audioMixer.SetFloat(name, (Mathf.Log10(value) * 20) != float.NegativeInfinity ? Mathf.Log10(value) * 20 : -52);
                         break;
                     }
                 case 1:
                     {
                         name = "music";
+                        audioMixer.SetFloat(name, (Mathf.Log10(value) * 20) != float.NegativeInfinity ? Mathf.Log10(value) * 20 : -52);
                         break;
                     }
                 case 2:
                     {
                         name = "ddd";
+                        audioMixer.SetFloat("ddd", (Mathf.Log10(value) * 20) != float.NegativeInfinity ? Mathf.Log10(value) * 20 : -52);
+                        audioMixer.SetFloat("dd", (Mathf.Log10(value) * 20) != float.NegativeInfinity ? Mathf.Log10(value) * 20 : -52);
                         break;
                     }
                 case 3:
@@ -140,7 +147,7 @@ public class MainMenu : MonoBehaviour
                         break;
                     }
             }
-            audioMixer.SetFloat(name, (Mathf.Log10(value) * 20) != float.NegativeInfinity ? Mathf.Log10(value) * 20 : -52);
+
             UpdateSettings();
         }
     }

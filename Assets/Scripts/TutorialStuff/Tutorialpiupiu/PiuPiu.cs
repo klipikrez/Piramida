@@ -25,7 +25,7 @@ public class PiuPiu : BaseEnemy
     public override void Damage(float damage)
     {
         feathers.SendEvent("Start");
-        AudioManager.Instance.PlayAudioClip("PiuPiu", 0.3f);
+        AudioManager.Instance.PlayAudioClip("PiuPiu", 0.65f);
         AudioManager.Instance.StopMusic();
         Bullet bullet = RopeTomahawk.Instance.T2.GetComponent<Bullet>();
         bullet.velocity = Vector3.down;

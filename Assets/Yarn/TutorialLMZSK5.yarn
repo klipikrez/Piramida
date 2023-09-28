@@ -4,22 +4,25 @@ tags:
 <<declare $hook = "svoju kuku za penjanje">>
 <<Reset>>
 <<Scene black 0.85>>
-<<FOV 20>>
+<<FOV 10>>
 <<Act Ludi_mačor_za_stare_kuće lmzsk 0.75 -0.3 #eb38af>>
 <<LookAt lmzsk>>
 <<PlayMusic lmzskTheme>>
-Ludi_mačor_za_stare_kuće: Čuj, burazeru, ima još jedna fora stvar sa tvojom sekiricom.
-Ludi_mačor_za_stare_kuće: Možeš da je šikneš kao na foru neke kuke za penjanje.
--> ...a, šta je kuka za penjanje?
+Ludi_mačor_za_stare_kuće: Čuj, batice, ima još jedna opaka stvar koju te sekirice obično mogu da urade. #line:0bedbac 
+Ludi_mačor_za_stare_kuće: Slušaj ovo! #line:0ba9abd 
+Ludi_mačor_za_stare_kuće: Možeš da je frkneš na foru neke kuke za penjanje. #line:0f113a7 
+-> ...a, šta je kuka za penjanje? #line:09c3dbb 
     <<set $hook to "svoj grappling hook">>
-    Ludi_mačor_za_stare_kuće: "GrApPlInG HoOk".
-    Ludi_mačor_za_stare_kuće: Vi mladi samo Švajcarske izraze razumete, mater vam klošarsku!
--> ok..?
-Ludi_mačor_za_stare_kuće: Samo drži <sprite index=7> dok skupljaš sekriče isto držeći <sprite index=5>.
-Ludi_mačor_za_stare_kuće: Eto, imaš {$hook}!
-Ludi_mačor_za_stare_kuće: aj sad se popenji ovde gore.
+    Ludi_mačor_za_stare_kuće: "GrapPlinG Hook". #line:09aaf7f 
+    Ludi_mačor_za_stare_kuće: Vi mladi samo Švajcarske izraze razumete, mater vam klošarsku! #line:0ef080e 
+-> ok..? #line:0901dff 
+Ludi_mačor_za_stare_kuće: Kad ti se sekira negde zabode... #line:096d8b2 
+Ludi_mačor_za_stare_kuće: Samo svojim neuronima drži <sprite index=7> i <sprite index=5> u isto vreme. #line:097e3e7 
+Ludi_mačor_za_stare_kuće: I ALAV TI VERA, imaš {$hook} BATO! #line:04120ca 
+Ludi_mačor_za_stare_kuće: aj sad se popenji ovde gore. #line:04d6c66 
 <<LookAt Drvo>>
-Ludi_mačor_za_stare_kuće: ono drvo izgleda ako dobro mesto de da zabodeš sekiru.
+<<FOV 30>>
+Ludi_mačor_za_stare_kuće: ono drvo izgleda ako dobro mesto de da zabodeš sekiru. #line:021a98c 
 <<StopAudioAll>>
 <<Reset>>
 <<stop>>

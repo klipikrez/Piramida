@@ -13,11 +13,14 @@ public class PlayerStats : MonoBehaviour
     public float regen = 25f;
     public int diedTimes = 0;
     public Text text;
+    public AudioClip[] continuousDamageDounds;
     Camera PlayerCamera;
     float timeScreenShake = 0;
     Coroutine screenShakeCorutine;
     Coroutine screenShakeSourceCorutine;
     Dictionary<GameObject, float> timeSinceLastAttack = new Dictionary<GameObject, float>();
+    System.Guid continuousDamageId;
+    bool lost = false;
     private void Start()
     {
         if (PlayerCamera == null)
@@ -54,7 +57,21 @@ public class PlayerStats : MonoBehaviour
     private void Update()
     {
         float updatedHealth = health + regen * Time.deltaTime;
-        if (updatedHealth > 100 || updatedHealth < 0)
+
+        if (updatedHealth > 100)
+        {
+            health = 100;
+        }
+        else
+        {
+            if (updatedHealth < 0 && !lost)
+            {
+                lost = true;
+                Loose();
+            }
+            health = updatedHealth;
+        }
+        /*if (updatedHealth > 100 || updatedHealth < 0)
         {
             if (updatedHealth < 0)
             {
@@ -66,13 +83,20 @@ public class PlayerStats : MonoBehaviour
         else
         {
             health = updatedHealth;
-        }
+        }*/
         slider.value = health / 100f;
     }
+
+    private void Loose()
+    {
+        GameMenu.Instance.Lost();
+    }
+
     public void ContinuousDamage(float damage)
     {
         health -= damage * Time.deltaTime;
-        AudioManager.Instance.PlayAudioClip("uoh", 0.4f, 256);
+        if (!AudioManager.Instance.PlayingAudio.ContainsKey(continuousDamageId))
+            continuousDamageId = AudioManager.Instance.PlayAudioClip(continuousDamageDounds[Random.Range(0, continuousDamageDounds.Length)].name, 1.0f, 256);
         //AudioManager.Instance.PlayAudioClip("uoh", 1f);
         //StartCoroutine("c_InvincibilityFrames");
     }

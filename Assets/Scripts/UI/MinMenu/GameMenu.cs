@@ -69,7 +69,28 @@ public class GameMenu : MonoBehaviour
     public void Retry()
     {
         paused = false;
+        mainMenu.SetObjectsActive(-1);
         RuntimeSceneManager.Instance.Load(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    public void Lost()
+    {
+        paused = true;
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+        UI.SetActive(true);
+        Time.timeScale = 0.0f;
+        mainMenu.SetObjectsActive(2);
+    }
+
+    public void Win()
+    {
+        paused = true;
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+        UI.SetActive(true);
+        Time.timeScale = 0.0f;
+        mainMenu.SetObjectsActive(3);
     }
 
 }

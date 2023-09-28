@@ -59,7 +59,7 @@ title: Tutorial1lmzsk2Questions
     <<Act Ludi_mačor_za_stare_kuće lmzsk 0.75 -0.3 #eb38af>>
     Ludi_mačor_za_stare_kuće: Mi kasa su kasa, jk. mrš napolje.  #line:014463c 
     Ludi_mačor_za_stare_kuće: Inace, trenutno dangubiš u Kul Klimatizovanom Karavanskom Kanjonu u sred Dangubarske pustinje.  #line:0e01599 
-    Ludi_mačor_za_stare_kuće: Čim sam čuaa kako se zove, odma sam doleteo ovde.  #line:043559f 
+    Ludi_mačor_za_stare_kuće: Čim sam čuo kako se zove, odma sam doleteo ovde.  #line:043559f 
     Ludi_mačor_za_stare_kuće: I mora priznam...  #line:0b04c7f 
     Ludi_mačor_za_stare_kuće: Vruće je...  #line:0d56e43 
     <<jump Tutorial1lmzsk2Questions>>
@@ -67,7 +67,10 @@ title: Tutorial1lmzsk2Questions
     <<HideAll>>
     <<Act Ludi_mačor_za_stare_kuće lmzsk 0.75 -0.3 #eb38af>>
     Ludi_mačor_za_stare_kuće: Aaaaajde...  #line:0df4f4a 
-    Ludi_mačor_za_stare_kuće: Ako se negde zaglaviš, samo me nadji, biću blizu.*prekrsti pritajno prste*  #line:044f1bc 
+    Ludi_mačor_za_stare_kuće: Ako se negde zaglaviš, samo me nadji, biću blizu (heh).  #line:044f1bc 
+    <<HideAll>>
+    Indijanac_Džons: ... #line:01f9774 
+    Indijanac_Džons: neće da bude blizu... #line:0128fae 
     <<StopAudioAll>>
     <<Reset>>
     <<stop>>

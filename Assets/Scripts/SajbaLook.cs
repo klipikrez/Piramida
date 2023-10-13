@@ -1,8 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Mathematics;
-using Unity.VisualScripting;
-using UnityEditor.Localization.Plugins.XLIFF.V12;
 using UnityEngine;
 using static Functions;
 
@@ -11,18 +9,19 @@ public class SajbaLook : MonoBehaviour
     Camera cam;
     public float multiply = 7f;
     public GameObject[] set;
+    public GameObject tip;
     public Transform kapak;
     public Transform targetEye;
     public Vector3 addRotation;
     public float EyeLookAtMultyply = 52f;
     public float yeyZAdd = 5f;
     public Transform copyrotationToKapak;
+    public Transform end;
     public Vector2 timeBetweenBlinks = new Vector2(0, 12);
     public float blinkTime = 0.2f;
     public float stayBlinked = 0.05f;
     public SkinnedMeshRenderer kapakRendereer;
     public MeshRenderer eyeRenderer;
-    bool crazy = false;
     Coroutine blink;
     // Start is called before the first frame update
     void Start()
@@ -48,16 +47,19 @@ public class SajbaLook : MonoBehaviour
 
         point *= multiply;
         point.z = -3.63f + 3.5f;
+        tip.transform.position = Vector3.Lerp(tip.transform.position, point, DeltaTimeLerp(0.1f));
         foreach (GameObject obj in set)
         {
-            obj.transform.position = Vector3.Lerp(obj.transform.position, point, DeltaTimeLerp(0.1f));
+            obj.transform.position = end.position;
         }
 
 
         targetEye.LookAt(point * EyeLookAtMultyply + Vector3.forward * yeyZAdd, Vector3.back);
 
-        kapak.rotation = copyrotationToKapak.rotation;
-        kapak.rotation *= Quaternion.Euler(addRotation);
+        //kapak.rotation = copyrotationToKapak.rotation;
+        kapak.rotation = Quaternion.Lerp(kapak.rotation, copyrotationToKapak.rotation * Quaternion.Euler(addRotation), DeltaTimeLerp(0.2f));
+
+        //kapak.rotation *= Quaternion.Euler(addRotation);
     }
 
     IEnumerator c_Blink()

@@ -65,8 +65,8 @@ public class Bas : BaseEnemy
         if (currentAttackState != null)
         {
             currentAttackState.UpdateAttack(this);
-            timeSinceAttakStarted += Time.deltaTime;
         }
+        timeSinceAttakStarted += Time.deltaTime;
         if (returnToNormalFloatHeight)
         {
             heightOffset = (Mathf.Sin(timeSinceAttakStarted * floatFrequency) + 1) * floatAmplitude;

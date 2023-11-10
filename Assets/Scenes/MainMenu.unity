@@ -197,7 +197,7 @@ Light:
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 0
+    m_Type: 2
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 1
@@ -706,27 +706,27 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 4674352b56c968a429068ec202c4a400,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 1
+      value: 0.52
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4674352b56c968a429068ec202c4a400,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 1
+      value: 0.52
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4674352b56c968a429068ec202c4a400,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 1
+      value: 0.52
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4674352b56c968a429068ec202c4a400,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 7.34
+      value: 5.82
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4674352b56c968a429068ec202c4a400,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -8.86
+      value: -7.71
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4674352b56c968a429068ec202c4a400,
         type: 3}
@@ -1054,7 +1054,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Version: 1
-  m_UsePipelineSettings: 1
+  m_UsePipelineSettings: 0
   m_AdditionalLightsShadowResolutionTier: 2
   m_LightLayerMask: 1
   m_CustomShadowLayers: 0
@@ -1072,19 +1072,19 @@ Light:
   serializedVersion: 10
   m_Type: 1
   m_Shape: 0
-  m_Color: {r: 1, g: 0.89773375, b: 0.759434, a: 1}
+  m_Color: {r: 1, g: 0.9095912, b: 0.7877358, a: 1}
   m_Intensity: 1
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 0
+    m_Type: 2
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 1
-    m_Bias: 0.05
-    m_NormalBias: 0.4
+    m_Bias: 0.79
+    m_NormalBias: 1.4
     m_NearPlane: 0.2
     m_CullingMatrixOverride:
       e00: 1

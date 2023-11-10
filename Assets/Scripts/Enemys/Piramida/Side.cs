@@ -42,11 +42,15 @@ public class Side : BaseEnemy
     public GameObject pushBack;
     public bool headOpen = false;
     public bool dead = false;
+    Coroutine flickerCoroutine;
+    public ShieldStages shieldStages;
     private void Start()
     {
         defaultRotation = eye.transform;
         currentHealth = startingHealth;
         player = GameObject.FindGameObjectWithTag("Player");
+
+        UpdateMaterial();
     }
     private void Update()
     {
@@ -137,8 +141,34 @@ public class Side : BaseEnemy
                 bar.SetHealth(false);
             }
         }
+        UpdateMaterial();
+        if (flickerCoroutine != null)
+        {
+            StopCoroutine(flickerCoroutine);
+        }
+        flickerCoroutine = StartCoroutine(c_Flicker());
     }
+    void UpdateMaterial()
+    {
+        Debug.Log(1 - currentHealth / startingHealth);
+        shield.material.SetFloat("_fresnel", shieldStages.fresnel.Evaluate(1 - currentHealth / startingHealth));
+        shield.material.SetColor("_Color", shieldStages.color.Evaluate(1 - currentHealth / startingHealth));
+        shield.material.SetFloat("_timeSpeed", shieldStages.timeSpeed.Evaluate(1 - currentHealth / startingHealth));
+        shield.material.SetFloat("_cellDensity", shieldStages.cellDensity.Evaluate(1 - currentHealth / startingHealth));
+        shield.material.SetFloat("_offset", shieldStages.offset.Evaluate(1 - currentHealth / startingHealth));
+    }
+    IEnumerator c_Flicker()
+    {
+        float flickerTimer = 0;
+        while (flickerTimer < shieldStages.time)
+        {
+            shield.material.SetFloat("_flicker", shieldStages.kurvaZaFlicker.Evaluate(flickerTimer / shieldStages.time));
+            yield return new WaitForEndOfFrame();
+            flickerTimer += Time.deltaTime;
+        }
+        shield.material.SetFloat("_flicker", 0);
 
+    }
     public void SetSimsState(bool value)
     {
         headOpen = value;

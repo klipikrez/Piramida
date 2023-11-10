@@ -1,8 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Networking;
+using UnityEngine.VFX;
 using static Functions;
 
 [CreateAssetMenu(fileName = "newTomahawkBullet", menuName = "GunnStuf/Bullet/TomahawkBullet")]
@@ -14,6 +16,9 @@ public class TomahawkBullet : BulletBase
     public Vector3 startingVelocityAdd = Vector3.zero;
     [System.NonSerialized]
     public bool dead = false;
+
+    public VisualEffectAsset sparkle;
+
 
     public override void DetectHit(Bullet bullet)
     {
@@ -71,6 +76,11 @@ public class TomahawkBullet : BulletBase
                     BaseEnemy enemySript = col.gameObject.GetComponentInParent<BaseEnemy>();
                     if (enemySript != null)
                     {
+                        Debug.Log(hit.collider.gameObject.tag);
+                        if (hit.collider.gameObject.CompareTag("Shield"))
+                        {
+                            SparkleOnHit(hit.point, hit.normal, hit.collider.gameObject);
+                        }
                         col.gameObject.GetComponentInParent<BaseEnemy>().Damage(bullet.bulletBase.damage);
                     }
                     else
@@ -80,6 +90,10 @@ public class TomahawkBullet : BulletBase
                             enemySript = col.gameObject.transform.parent.GetComponentInParent<BaseEnemy>();
                             if (enemySript != null)
                             {
+                                if (hit.collider.gameObject.CompareTag("Shield"))
+                                {
+                                    SparkleOnHit(hit.point, hit.normal, hit.collider.gameObject.transform.GetChild(0).gameObject);
+                                }
                                 col.gameObject.GetComponentInParent<BaseEnemy>().Damage(bullet.bulletBase.damage);
                             }
                         }
@@ -151,7 +165,26 @@ public class TomahawkBullet : BulletBase
             }
         }
     }
+    void SparkleOnHit(Vector3 position, Vector3 normal, GameObject obj)
+    {
 
+        VisualEffect summonsObj;
+        MeshRenderer renderer = obj.GetComponent<MeshRenderer>();
+        if (renderer == null)
+            renderer = obj.transform.GetChild(0).gameObject.GetComponent<MeshRenderer>();
+
+        summonsObj = (new GameObject("summon").AddComponent<VisualEffect>());
+
+
+        summonsObj.visualEffectAsset = sparkle;
+        Vector4 color = renderer != null ? renderer.material.GetColor("_Color") : summonsObj.GetVector4("_Color");
+        summonsObj.SetVector4("_Color", color);
+        summonsObj.transform.position = position;
+        summonsObj.gameObject.transform.rotation = Quaternion.FromToRotation(summonsObj.gameObject.transform.up, normal);
+        summonsObj.Play();
+        summonsObj.SendEvent("Start");
+        summonsObj.AddComponent<DestroyAfterTime>().time = 1f;
+    }
 
 
     private void CheckIfReturnedToPlayer(Bullet bullet)

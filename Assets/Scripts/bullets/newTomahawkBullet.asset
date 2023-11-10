@@ -25,3 +25,4 @@ MonoBehaviour:
   HitTomahawkPrefab: {fileID: 1711241335650796605, guid: 56b910a971630eb42843f97fbbe904e7,
     type: 3}
   startingVelocityAdd: {x: 0, y: 7, z: 0}
+  sparkle: {fileID: 8926484042661614526, guid: 6edd817ce55ab044f9aa0d2f414603be, type: 3}

@@ -9,6 +9,8 @@ public class LoadSceneOnTriggerEnter : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
         RuntimeSceneManager.Instance.Load(scene);
     }
 }

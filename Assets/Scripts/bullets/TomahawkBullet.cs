@@ -165,6 +165,8 @@ public class TomahawkBullet : BulletBase
             }
         }
     }
+
+
     void SparkleOnHit(Vector3 position, Vector3 normal, GameObject obj)
     {
 

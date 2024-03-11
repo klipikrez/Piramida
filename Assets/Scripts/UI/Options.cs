@@ -29,6 +29,8 @@ public class Options : MonoBehaviour
     public Slider[] VolumeSliders = new Slider[4];
     public TMP_Dropdown lanhuage;
 
+    public Toggle ShadowToggle;
+
 
 
 
@@ -59,7 +61,7 @@ public class Options : MonoBehaviour
         int languageIndex = 0;
         for (int i = 0; i < lanhuage.options.Count; i++)
         {
-            Debug.Log(lanhuage.options[i].image.name);
+
             if (settings.language == lanhuage.options[i].image.name)
             {
                 languageIndex = i;
@@ -72,6 +74,8 @@ public class Options : MonoBehaviour
         {
             VolumeSliders[i].value = settings.volumes[i] * 100;
         }
+        ShadowToggle.isOn = settings.shadowDistance == 0 ? false : true;
+
 
     }
 
@@ -117,6 +121,10 @@ public class Options : MonoBehaviour
         menu.SetLanguage(lanhuage.options[value].image.name);
     }
 
+    public void SetShadows(bool value)
+    {
+        menu.SetShadows(value ? 152 : 0);
+    }
 
     /*
         public void FullScreen(bool value)

@@ -26,6 +26,7 @@ public class Settings
     public float[] volumes = { 1, 1, 1 };
     public bool vsync = false;
     public string language = "bs";
+    public int shadowDistance = 152;
     /*public float volume0 = 1;
     public float volume1 = 1;
     public float volume2 = 1;
@@ -134,7 +135,7 @@ public static class Functions
             float DistanceAboutToBeTraveled = Vector3.Distance(currentPosition, CalculatedPosition);
             box.rotation = Quaternion.LookRotation(CalculatedPosition - currentPosition);
             box.bounds = new Vector3(boxOriginalBounds.x, boxOriginalBounds.y, DistanceAboutToBeTraveled);
-            box.center = currentPosition + new Vector3(0, 0, DistanceAboutToBeTraveled / 2);
+            box.center = currentPosition ;// + new Vector3(0, 0, DistanceAboutToBeTraveled / 2);
         }
         else
         {

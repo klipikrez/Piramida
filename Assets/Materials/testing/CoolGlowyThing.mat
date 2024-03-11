@@ -7,19 +7,16 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: TinyPyramidShieldAttacl
-  m_Shader: {fileID: -6465566751694194690, guid: 22bc2b7d6d8dc0c40bbd34d485e5b0e9,
+  m_Name: CoolGlowyThing
+  m_Shader: {fileID: -6465566751694194690, guid: 574710c11c40ab14d9bd3d965bf97d4e,
     type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
-  m_InvalidKeywords:
-  - _ALPHAPREMULTIPLY_ON
-  - _EMISSION
-  - _SURFACE_TYPE_TRANSPARENT
-  m_LightmapFlags: 2
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 1
+  m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
   stringTagMap: {}
   disabledShaderPasses: []
@@ -28,7 +25,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _BaseMap:
-        m_Texture: {fileID: 10309, guid: 0000000000000000f000000000000000, type: 0}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
@@ -48,11 +45,11 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _EmissionMap:
-        m_Texture: {fileID: 10309, guid: 0000000000000000f000000000000000, type: 0}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 10309, guid: 0000000000000000f000000000000000, type: 0}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
@@ -65,10 +62,6 @@ Material:
         m_Offset: {x: 0, y: 0}
     - _ParallaxMap:
         m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _SampleTexture2D_59ce6ba99839462ca25c60d1d94998dd_Texture_1:
-        m_Texture: {fileID: 2800000, guid: 5e1c273bab0469a48b8f59ac2a942b8c, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _SpecGlossMap:
@@ -95,29 +88,20 @@ Material:
     - _BumpScale: 1
     - _ClearCoatMask: 0
     - _ClearCoatSmoothness: 0
-    - _Cull: 0
+    - _Cull: 2
     - _Cutoff: 0.5
-    - _Depth: 0
-    - _DepthDivide: 20
     - _DetailAlbedoMapScale: 1
     - _DetailNormalMapScale: 1
-    - _DstBlend: 10
-    - _DstBlendAlpha: 10
+    - _DstBlend: 0
+    - _DstBlendAlpha: 0
     - _EnvironmentReflections: 1
-    - _Float: 0.0625
-    - _Float_1: 1.32
-    - _Float_2: 0
-    - _Float_3: 16.38
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
+    - _GlowSpread: 1
     - _Metallic: 0
-    - _NoiseAdd: 0.1
-    - _NoiseDivide: 0.2
     - _OcclusionStrength: 1
     - _Parallax: 0.005
-    - _PointDivide: 1
-    - _PointSize: 0.125
     - _QueueControl: 0
     - _QueueOffset: 0
     - _ReceiveShadows: 1
@@ -126,17 +110,25 @@ Material:
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _SrcBlendAlpha: 1
-    - _Surface: 1
+    - _Surface: 0
     - _WorkflowMode: 1
-    - _ZWrite: 0
+    - _ZWrite: 1
+    - _glowSpread: 1
+    - _glowStrenth: 1
+    - _grungeScale: 10
+    - _refraction: 0.36
     m_Colors:
-    - _BaseColor: {r: 1, g: 1, b: 1, a: 0.7372549}
-    - _Color: {r: 59.017693, g: 5.252884, b: 0.9269794, a: 0}
-    - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
-    - _Point: {r: 3.4028235e+38, g: 3.4028235e+38, b: 3.4028235e+38, a: 0}
+    - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _GlowCenter: {r: 0, g: 0, b: 0, a: 0}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
+    - _baseCol: {r: 0, g: 0, b: 0, a: 0}
+    - _glowCenter: {r: 0, g: 0, b: 0, a: 0}
+    - _glowCol: {r: 1, g: 1, b: 1, a: 0}
+    - _remapGrunge: {r: 0.8, g: 1, b: 0, a: 0}
   m_BuildTextureStacks: []
---- !u!114 &9074665867971331805
+--- !u!114 &7849523726298235606
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}

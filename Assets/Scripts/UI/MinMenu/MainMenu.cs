@@ -8,6 +8,8 @@ using UnityEngine.UI;
 using UnityEngine.Audio;
 using UnityEngine.Localization.Settings;
 using static Functions;
+using UnityEngine.Rendering.Universal;
+using UnityEngine.Rendering;
 
 public class MainMenu : MonoBehaviour
 {
@@ -190,6 +192,25 @@ public class MainMenu : MonoBehaviour
 
         changingLanguage = false;
     }
+
+    public void SetShadows(int value)
+    {
+        if (settings != null)
+        {
+            // Locate the current URP Asset
+            UniversalRenderPipelineAsset data = GraphicsSettings.currentRenderPipeline as UniversalRenderPipelineAsset;
+
+            // Do nothing if Unity can't locate the URP Asset
+            if (!data) return;
+            settings.shadowDistance = value;
+            data.shadowDistance = value;
+            UpdateSettings();
+        }
+    }
+
+
+
+
 
     public void UpdateSettings(int fullScreen = -1, int hz = -1)
     {

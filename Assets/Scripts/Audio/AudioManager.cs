@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
 
+
 public class AudioManager : MonoBehaviour
 {
     [System.Serializable]
@@ -45,7 +46,11 @@ public class AudioManager : MonoBehaviour
     public Dictionary<System.Guid, AudioAudi> PlayingAudio = new Dictionary<System.Guid, AudioAudi>();
     public static AudioManager Instance { get; private set; }
 
+    [System.NonSerialized] public MusicSet musicSet;
+    Coroutine CycleMusicSetCoroutine;
 
+    string lastMusicSetName = "BOB ahahahAHAAHABOBBOBOBOOBB";
+    int lastSong = 0;
     private void Awake()
     {
         Instance = this;
@@ -100,9 +105,58 @@ public class AudioManager : MonoBehaviour
         }
     }
 
+
+
+    public void SetMainMusicSet(MusicSet set)
+    {
+        musicSet = set;
+        SetMainMusic(musicSet.PickRandomSongExclude().name);
+        if (CycleMusicSetCoroutine != null)
+        {
+            StopCoroutine(CycleMusicSetCoroutine);
+        }
+        switchMusicCorutine = StartCoroutine(c_CycleMusicSet(musicSource.clip.length));
+    }
+
+    public void PauseMusic()
+    {
+        if (musicSource == null) return;
+
+        musicSource.Pause();
+        if (CycleMusicSetCoroutine != null)
+        {
+            StopCoroutine(CycleMusicSetCoroutine);
+        }
+        switchMusicCorutine = StartCoroutine(c_CycleMusicSet(musicSource.clip.length));
+    }
+
+    public void ResumeMusic()
+    {
+        if (musicSource == null) return;
+
+        musicSource.UnPause();
+        if (CycleMusicSetCoroutine != null)
+        {
+            StopCoroutine(CycleMusicSetCoroutine);
+        }
+        switchMusicCorutine = StartCoroutine(c_CycleMusicSet(musicSource.clip.length - musicSource.time));
+    }
+
     public void StopMusic()
     {
         Destroy(musicSource);
+        if (CycleMusicSetCoroutine != null)
+        {
+            StopCoroutine(CycleMusicSetCoroutine);
+        }
+    }
+
+    public void StopCycle()
+    {
+        if (CycleMusicSetCoroutine != null)
+        {
+            StopCoroutine(CycleMusicSetCoroutine);
+        }
     }
 
     public System.Guid PlayAudioClip(string audioClipName, float volume = 1, int priority = 128)
@@ -283,6 +337,7 @@ public class AudioManager : MonoBehaviour
 
     IEnumerator c_SwitchMusic(AudioClip switchTo, float time = 0.5f)
     {
+
         float timer = 0;
         float currentVolume = musicSource.volume;
         bool switched = false;
@@ -306,5 +361,14 @@ public class AudioManager : MonoBehaviour
             yield return new WaitForEndOfFrame();
             timer += Time.deltaTime;
         }
+    }
+
+    IEnumerator c_CycleMusicSet(float waitFor)
+    {
+
+        yield return new WaitForSeconds(waitFor);
+        SetMainMusic(musicSet.PickRandomSongExclude().name);
+
+
     }
 }

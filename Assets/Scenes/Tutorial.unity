@@ -345,7 +345,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e850596e3740a1c4ba27cf96507b0830, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  name: "\u017Dal"
+  name: Vlatko Stefanovski  Sutka by night
+  musicset: {fileID: 11400000, guid: 99351b5850dbf8049b002b831d6cb096, type: 2}
 --- !u!65 &171648462
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1929,7 +1930,6 @@ MonoBehaviour:
   audioGroup: {fileID: 0}
   onStartDialogue: 1
   scriptToLoadOnStart: TutorialLMZSK1
-  previousMusic: {fileID: 8300000, guid: 8b822780c09108c498db1c7d409d20cc, type: 3}
 --- !u!4 &661434148
 Transform:
   m_ObjectHideFlags: 0

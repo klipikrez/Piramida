@@ -24,7 +24,7 @@ public class CheckIfBulletInside : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log(RopeTomahawk.Instance.T2 == null ? "null" : RopeTomahawk.Instance.T2 + "  -  " + coll.bounds.Contains(RopeTomahawk.Instance.T2.position));
+        //     Debug.Log(RopeTomahawk.Instance.T2 == null ? "null" : RopeTomahawk.Instance.T2 + "  -  " + coll.bounds.Contains(RopeTomahawk.Instance.T2.position));
         if (RopeTomahawk.Instance.T2 != null && coll.bounds.Contains(RopeTomahawk.Instance.T2.position) && PiuPiu.Instance.killed && !bullet)
         {
             bullet = true;

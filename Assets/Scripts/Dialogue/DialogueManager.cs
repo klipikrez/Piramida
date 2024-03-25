@@ -53,7 +53,7 @@ namespace Yarn.Unity.Example
         public string scriptToLoadOnStart;
         [System.NonSerialized]
         public bool inDialogue = false;
-        public AudioClip previousMusic;
+
         void Awake()
         {
             Instance = this;
@@ -116,8 +116,8 @@ namespace Yarn.Unity.Example
             // Load the program, along with all of its nodes. 
             // The string table will be selected based on the 
             // Dialogue Runner's text language variable.
-            if (AudioManager.Instance.musicSource != null)
-                previousMusic = AudioManager.Instance.musicSource.clip;
+            AudioManager.Instance.PauseMusic();
+
 
             playerMovement.CustomFOV = playerMovement.DefaultFOV;
             playerMovement.inDialogue = true;
@@ -134,7 +134,8 @@ namespace Yarn.Unity.Example
         public override void DialogueComplete()
         {
             //runner.Stop();
-            AudioManager.Instance.SetMainMusic(previousMusic.name);
+            if (AudioManager.Instance.musicSet != null)
+                AudioManager.Instance.SetMainMusicSet(AudioManager.Instance.musicSet);
             playerMovement.inDialogue = false;
             playerArms.inDialogue = false;
             inDialogue = false;
@@ -363,6 +364,7 @@ namespace Yarn.Unity.Example
         /// which tells the sound to loop over and over</summary>
         public void PlayMusic(string soundName)
         {
+            AudioManager.Instance.StopCycle();
             AudioManager.Instance.SetMainMusic(soundName);
         }
         public void PlayAudio(string soundName, float volume = 1, string loop = "")

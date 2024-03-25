@@ -5,10 +5,11 @@ using UnityEngine;
 public class SetMusicOnTriggerEnter : MonoBehaviour
 {
     public string name = "";
+    public MusicSet musicset;
     private void OnTriggerEnter(Collider other)
     {
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
-        AudioManager.Instance.SetMainMusic(name);
+        AudioManager.Instance.SetMainMusicSet(musicset);
     }
 }

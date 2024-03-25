@@ -18,7 +18,7 @@ Ludi_mačor_za_stare_kuće: Možeš da je frkneš na foru neke kuke za penjanje.
 -> ok..? #line:0901dff 
 Ludi_mačor_za_stare_kuće: Kad ti se sekira negde zabode... #line:096d8b2 
 Ludi_mačor_za_stare_kuće: Samo svojim neuronima drži <sprite index=7> i <sprite index=5> u isto vreme. #line:097e3e7 
-Ludi_mačor_za_stare_kuće: I ALAV TI VERA, imaš {$hook} BATO! #line:04120ca 
+Ludi_mačor_za_stare_kuće: I ALAH TI VERA, imaš {$hook} BATO! #line:04120ca 
 Ludi_mačor_za_stare_kuće: aj sad se popenji ovde gore. #line:04d6c66 
 <<LookAt Drvo>>
 <<FOV 30>>

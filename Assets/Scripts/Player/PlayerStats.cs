@@ -101,6 +101,7 @@ public class PlayerStats : MonoBehaviour
         //StartCoroutine("c_InvincibilityFrames");
     }
 
+    // Starts a regular screen shake that begins strong and fades out over time.
     public void Screenshake(float duration, float strenth, float speed)
     {
         if (screenShakeCorutine != null)
@@ -138,6 +139,7 @@ public class PlayerStats : MonoBehaviour
         } while (true);
     }
 
+    // Starts an inverse screen shake that begins weak and grows stronger over time.
     public void ScreenshakeInverse(float duration, float strenth, float speed)
     {
         if (screenShakeCorutine != null)
@@ -175,6 +177,7 @@ public class PlayerStats : MonoBehaviour
         } while (true);
     }
 
+    // Starts a distance-based screen shake originating from a specific Transform (source).
     public void ScreenshakeSource(float strenth, float speed, Transform source, float maxDistance)
     {
         if (screenShakeSourceCorutine != null)

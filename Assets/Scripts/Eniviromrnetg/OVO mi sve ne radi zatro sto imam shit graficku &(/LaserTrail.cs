@@ -151,7 +151,7 @@ public class LaserTrail : MonoBehaviour
         //tex.Apply();
     }
 
-    private void DrawFilledCircle(int x, int y, float radius)
+    private void DrawFilledCircle(int x, int y, float radious)
     {
         for (int i = 0; i < tex.height; i++)
         {

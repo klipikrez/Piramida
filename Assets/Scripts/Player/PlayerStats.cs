@@ -21,12 +21,14 @@ public class PlayerStats : MonoBehaviour
     Dictionary<GameObject, float> timeSinceLastAttack = new Dictionary<GameObject, float>();
     System.Guid continuousDamageId;
     bool lost = false;
+    public static PlayerStats Instance;
     private void Start()
     {
         if (PlayerCamera == null)
         {
             PlayerCamera = gameObject.GetComponentInChildren<Camera>();
         }
+        Instance = this;
     }
     public bool Damage(float damage, GameObject sender)
     {

@@ -6,7 +6,6 @@ using UnityEngine.SceneManagement;
 using System.IO;
 using UnityEngine.UI;
 using UnityEngine.Audio;
-using UnityEngine.Localization.Settings;
 using static Functions;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.Rendering;
@@ -154,45 +153,45 @@ public class MainMenu : MonoBehaviour
         }
     }
 
-    public void SetLanguage(string index)
-    {
-        if (changingLanguage)
-        {
-            return;
-        }
-        StartCoroutine(c_SetLanguage(index));
-    }
+    /* public void SetLanguage(string index)
+     {
+         if (changingLanguage)
+         {
+             return;
+         }
+         StartCoroutine(c_SetLanguage(index));
+     }
 
-    IEnumerator c_SetLanguage(string index)
-    {
-        changingLanguage = true;
-        yield return LocalizationSettings.InitializationOperation;
-        UnityEngine.Localization.Locale[] locales = LocalizationSettings.AvailableLocales.Locales.ToArray();
-        bool selectedSomething = false;
-        foreach (UnityEngine.Localization.Locale locale in locales)
-        {
+     IEnumerator c_SetLanguage(string index)
+     {
+         changingLanguage = true;
+         yield return LocalizationSettings.InitializationOperation;
+         UnityEngine.Localization.Locale[] locales = LocalizationSettings.AvailableLocales.Locales.ToArray();
+         bool selectedSomething = false;
+         foreach (UnityEngine.Localization.Locale locale in locales)
+         {
 
-            if (locale.Identifier.Code == index)
-            {
-                selectedSomething = true;
-                LocalizationSettings.SelectedLocale = locale;
-                Debug.Log(LocalizationSettings.SelectedLocale.Identifier.Code);
-                settings.language = LocalizationSettings.SelectedLocale.Identifier.Code;
+             if (locale.Identifier.Code == index)
+             {
+                 selectedSomething = true;
+                 LocalizationSettings.SelectedLocale = locale;
+                 Debug.Log(LocalizationSettings.SelectedLocale.Identifier.Code);
+                 settings.language = LocalizationSettings.SelectedLocale.Identifier.Code;
 
-            }
-        }
-        if (!selectedSomething)
-        {
-            Debug.LogError("Nije dobar jezik");
-        }
-        else
-        {
-            UpdateSettings();
-        }
+             }
+         }
+         if (!selectedSomething)
+         {
+             Debug.LogError("Nije dobar jezik");
+         }
+         else
+         {
+             UpdateSettings();
+         }
 
-        changingLanguage = false;
-    }
-
+         changingLanguage = false;
+     }
+ */
     public void SetShadows(int value)
     {
         if (settings != null)

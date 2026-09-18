@@ -15,14 +15,19 @@ public class Bullet : MonoBehaviour
     public MeshFilter meshFilter;
     public PlayerArms employer;
     public Vector3 velocity = Vector3.zero;
+    public bool isStuck = false;
     public List<Collider> hitColliders; //ne smes da dvaput dilujes damage istom hitbox-u
     public void Initiate()
     {
+        isStuck = false;
         hitColliders.Clear();
         bulletBase.Initiate(this);
     }
     void Update()
     {
+        if (isStuck)
+            return;
+
         if (!GameMenu.Instance.paused)
         {
             bulletBase.DetectHit(this);

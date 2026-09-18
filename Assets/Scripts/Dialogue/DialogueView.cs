@@ -292,13 +292,15 @@ public static class Effects
         // the requested speed.
         var accumulator = Time.deltaTime;
 
+        float textDelayTime = 0.05f;
+
         while (text.maxVisibleCharacters < characterCount)
         {
             if (stopToken?.WasInterrupted ?? false)
             {
                 yield break;
             }
-
+            //SoundManager.Instance.PlayTalkSound(charName);
             // We need to show as many letters as we have accumulated
             // time for.
             while (accumulator >= secondsPerLetter)
@@ -307,9 +309,11 @@ public static class Effects
                 onCharacterTyped?.Invoke();
                 accumulator -= secondsPerLetter;
             }
-            accumulator += Time.deltaTime;
+            accumulator += Time.deltaTime + textDelayTime;
 
-            yield return null;
+
+            yield return new WaitForSeconds(textDelayTime);
+
         }
 
         // We either finished displaying everything, or were
@@ -1123,6 +1127,10 @@ public class DialogueView : DialogueViewBase
             // Stop the current animation, and skip to the end of whatever
             // started it.
             currentStopToken.Interrupt();
+
+            // Consume this input so the line is not skipped while it is
+            // still being presented.
+            return;
         }
         // No animation is now running. Signal that we want to
         // interrupt the line instead.

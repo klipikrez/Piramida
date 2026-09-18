@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0353a89b1f911e48b9e16bdc9f2e058, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  version: 6
+  version: 7
 --- !u!21 &2100000
 Material:
   serializedVersion: 8
@@ -39,6 +39,22 @@ Material:
     m_TexEnvs:
     - _Image:
         m_Texture: {fileID: 2800000, guid: d350f7aa18f6cf543bb5c9de36973cd5, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_4d6c6bdf097b44659155beae1461ae2f_Texture_1_Texture2D:
+        m_Texture: {fileID: 2800000, guid: 6c7e000a4dd688d4fbfb33136eb12991, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_996d316268444383a731b273fc7d690a_Texture_1_Texture2D:
+        m_Texture: {fileID: 2800000, guid: ecfcee39d2a632641a7e64080352065f, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_cfa8d5136946453da59dfaeefd03a586_Texture_1_Texture2D:
+        m_Texture: {fileID: 2800000, guid: 33b87a4f7aa5ccc41b0e439132965f6c, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_f647d964a22e4788b0672890ec8a2b99_Texture_1_Texture2D:
+        m_Texture: {fileID: 2800000, guid: 5abf02656e9b9334489fd357f4cd76a4, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Ints: []

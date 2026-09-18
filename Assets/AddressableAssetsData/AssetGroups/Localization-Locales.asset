@@ -16,22 +16,30 @@ MonoBehaviour:
   m_Data:
     m_SerializedData: []
   m_GUID: d29d3535a765e1945bba9085a6b8ebea
-  m_SerializeEntries:
-  - m_GUID: abd9847309a226f4193f86bbaf5e1aae
-    m_Address: English (en)
-    m_ReadOnly: 1
-    m_SerializedLabels:
-    - Locale
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 134dfafb56c302548916d7a1e8d6f513
-    m_Address: Bosnian (bs)
-    m_ReadOnly: 1
-    m_SerializedLabels:
-    - Locale
-    FlaggedDuringContentUpdateRestriction: 0
+  m_SerializeEntries: []
   m_ReadOnly: 1
   m_Settings: {fileID: 11400000, guid: 1eb108c7794bbbf419b9c5384cf73a43, type: 2}
   m_SchemaSet:
     m_Schemas:
     - {fileID: 11400000, guid: 6aaa072d58fbc6143a35b281a31b0d6a, type: 2}
     - {fileID: 11400000, guid: ca763f38d9b6f2041827033637c7e377, type: 2}
+  m_FolderEntryCache: []
+  m_AssetCollectionEntryCache: []
+  <FlaggedDuringContentUpdateRestriction>k__BackingField: 0
+  m_CurrentHash:
+    bytes[0]: 253
+    bytes[1]: 81
+    bytes[2]: 252
+    bytes[3]: 119
+    bytes[4]: 124
+    bytes[5]: 75
+    bytes[6]: 49
+    bytes[7]: 132
+    bytes[8]: 66
+    bytes[9]: 81
+    bytes[10]: 194
+    bytes[11]: 244
+    bytes[12]: 12
+    bytes[13]: 73
+    bytes[14]: 38
+    bytes[15]: 173

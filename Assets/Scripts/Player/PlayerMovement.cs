@@ -25,6 +25,10 @@ public class PlayerMovement : MonoBehaviour
     public bool jump = false;
     [System.NonSerialized]
     public bool initiatedJumpByPlayer = false;//ovo ti je kad skocis i pustis dugme za skakanje, da program zna da josuvek nisi zavrsio skok
+    [SerializeField]
+    private float coyoteTime = 0.12f;
+    [System.NonSerialized]
+    private float coyoteTimer = 0f;
     public float jumpForce = 1f;
     public float jumpPush = 20f;
     public float jumpSpeedBoostMultiply = 2f;
@@ -146,7 +150,12 @@ public class PlayerMovement : MonoBehaviour
         grounded = Physics.CheckSphere(transform.position + new Vector3(0, groundCheckoffset, 0), groundCheckRadious, ~excludePlayer);
         if (grounded)
         {
+            coyoteTimer = coyoteTime;
             wasGrappling = false;
+        }
+        else
+        {
+            coyoteTimer = Mathf.Max(0f, coyoteTimer - Time.deltaTime);
         }
 
         if (!inDialogue && !GameMenu.Instance.paused)
@@ -371,15 +380,15 @@ public class PlayerMovement : MonoBehaviour
     {
         if (jump)
         {
-            if (grounded)
+            if (grounded || coyoteTimer > 0f)
             {
                 Hit hit = ReturnClosestHitSphere(transform.position + Vector3.up * groundCheckoffsetForRaycast, groundCheckRadious, ~excludePlayer);
                 float jumpMultiplyer = 1;// ako je strmo previse, nema skaces bre
-                if (hit.hit)
+                if (hit.hit || grounded || coyoteTimer > 0f)
                 {
-                    float angle = (Vector3.Angle(hit.normal, Vector3.up));
+                    float angle = hit.hit ? (Vector3.Angle(hit.normal, Vector3.up)) : 0f;
                     //Debug.Log(angle);
-                    jumpMultiplyer = 1 - ((Mathf.Max(Mathf.Min(angle, maxWalkAngle), normalWalkAngle) - normalWalkAngle) / (maxWalkAngle - normalWalkAngle));
+                    jumpMultiplyer = hit.hit ? (1 - ((Mathf.Max(Mathf.Min(angle, maxWalkAngle), normalWalkAngle) - normalWalkAngle) / (maxWalkAngle - normalWalkAngle))) : 1f;
                     //Debug.Log(jumpMultiplyer);
                     if (jumpMultiplyer > 0.01f)
                     {
@@ -397,8 +406,12 @@ public class PlayerMovement : MonoBehaviour
                         //Debug.Log("mali skok");
                         initiatedJumpByPlayer = true;
                         grounded = false;
+                        coyoteTimer = 0f;
 
-                        transform.position += hit.normal * 0.14f;// nemam pojma zasto, al ako ovo maknes sve se pokvari....
+                        if (hit.hit)
+                        {
+                            transform.position += hit.normal * 0.14f;// nemam pojma zasto, al ako ovo maknes sve se pokvari....
+                        }
                     }
                 }
 

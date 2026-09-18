@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
@@ -124,7 +125,23 @@ public class TomahawkBullet : BulletBase
             return;
         }
 
-        hit = ReturnClosestHitBoxExclude(box.center, bullet.hitColliders, out checkedColliders, box.rotation, box.bounds, ~LayerMask.GetMask("Hitbox", "Player", "Ignore Raycast", "Bullet", "EnemyHitbox", "EnemyCollider", "Attack", "Ford", "Mazda"));
+        TryStickToWall(box, bullet, out checkedColliders);
+    }
+
+    public void StickToWallRadious(Bullet bullet, Collider[] ignoredColliders, float radious = 3f)
+    {
+        bullet.velocity = Vector3.down;
+        Box box = new Box() { center = bullet.transform.position, bounds = Vector3.one * radious, rotation = quaternion.identity };
+        Box.DrawBox(box, 1f);
+        List<Collider> colliders = new List<Collider>();
+        colliders.AddRange(ignoredColliders);
+        TryStickToWall(box, bullet, out colliders);
+    }
+
+
+    public void TryStickToWall(Box box, Bullet bullet, out List<Collider> checkedColliders)
+    {
+        Hit hit = ReturnClosestHitBoxExclude(box.center, bullet.hitColliders, out checkedColliders, box.rotation, box.bounds, ~LayerMask.GetMask("Hitbox", "Player", "Ignore Raycast", "Bullet", "EnemyHitbox", "EnemyCollider", "Attack", "Ford", "Mazda"));
 
         if (hit.hit)
         {

@@ -68,7 +68,7 @@ public class Options : MonoBehaviour
             }
         }
         lanhuage.value = languageIndex;
-        SetLanguage(languageIndex);
+        // SetLanguage(languageIndex);
 
         for (int i = 0; i < settings.volumes.Length; i++)
         {
@@ -115,11 +115,11 @@ public class Options : MonoBehaviour
     {
         menu.VolumeValue(value, index);
     }
-    public void SetLanguage(int value)
-    {
+    /* public void SetLanguage(int value)
+     {
 
-        menu.SetLanguage(lanhuage.options[value].image.name);
-    }
+         menu.SetLanguage(lanhuage.options[value].image.name);
+     }*/
 
     public void SetShadows(bool value)
     {

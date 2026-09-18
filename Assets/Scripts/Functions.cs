@@ -17,6 +17,44 @@ public class Box
     public Vector3 center;
     public Vector3 bounds;
     public quaternion rotation;
+    public static void DrawBox(Box box, float duration = 0f)
+    {
+        Vector3 half = box.bounds * 0.5f;
+
+        Quaternion rot = box.rotation;
+
+        Vector3[] corners =
+        {
+            box.center + rot * new Vector3(-half.x, -half.y, -half.z),
+            box.center + rot * new Vector3( half.x, -half.y, -half.z),
+            box.center + rot * new Vector3( half.x,  half.y, -half.z),
+            box.center + rot * new Vector3(-half.x,  half.y, -half.z),
+
+            box.center + rot * new Vector3(-half.x, -half.y,  half.z),
+            box.center + rot * new Vector3( half.x, -half.y,  half.z),
+            box.center + rot * new Vector3( half.x,  half.y,  half.z),
+            box.center + rot * new Vector3(-half.x,  half.y,  half.z),
+        };
+
+        // Bottom
+        Debug.DrawLine(corners[0], corners[1], Color.green, duration);
+        Debug.DrawLine(corners[1], corners[2], Color.green, duration);
+        Debug.DrawLine(corners[2], corners[3], Color.green, duration);
+        Debug.DrawLine(corners[3], corners[0], Color.green, duration);
+
+        // Top
+        Debug.DrawLine(corners[4], corners[5], Color.green, duration);
+        Debug.DrawLine(corners[5], corners[6], Color.green, duration);
+        Debug.DrawLine(corners[6], corners[7], Color.green, duration);
+        Debug.DrawLine(corners[7], corners[4], Color.green, duration);
+
+        // Vertical edges
+        Debug.DrawLine(corners[0], corners[4], Color.green, duration);
+        Debug.DrawLine(corners[1], corners[5], Color.green, duration);
+        Debug.DrawLine(corners[2], corners[6], Color.green, duration);
+        Debug.DrawLine(corners[3], corners[7], Color.green, duration);
+    }
+
 }
 
 public class Settings
@@ -103,8 +141,9 @@ public static class Functions
                 {
                     if (CheckSphereExtra(col, origin, CheckBounds.magnitude, out Vector3 point, out Vector3 normal))
                     {
+                        Debug.DrawLine(point, origin, Color.green, 1);
                         float distance = Vector3.Distance(point, origin);
-
+                        Debug.Log(col.gameObject.name + ":" + col.gameObject.layer + " - " + distance);
                         if (distance < hit.distance)
                         {
                             hit.distance = distance;
@@ -122,6 +161,10 @@ public static class Functions
                 }
             }
         }
+        Debug.Log("-------><");
+        if (hit.hit == true)
+            Debug.Log(hit.collider.gameObject.name + ":" + hit.collider.gameObject.layer + " - " + hit.distance);
+
         return hit;
     }
 
@@ -135,7 +178,7 @@ public static class Functions
             float DistanceAboutToBeTraveled = Vector3.Distance(currentPosition, CalculatedPosition);
             box.rotation = Quaternion.LookRotation(CalculatedPosition - currentPosition);
             box.bounds = new Vector3(boxOriginalBounds.x, boxOriginalBounds.y, DistanceAboutToBeTraveled);
-            box.center = currentPosition ;// + new Vector3(0, 0, DistanceAboutToBeTraveled / 2);
+            box.center = currentPosition;// + new Vector3(0, 0, DistanceAboutToBeTraveled / 2);
         }
         else
         {

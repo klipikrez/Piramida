@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.VFX;
@@ -28,8 +29,9 @@ public class PiuPiu : BaseEnemy
         AudioManager.Instance.PlayAudioClip("PiuPiu", 0.65f);
         AudioManager.Instance.StopMusic();
         Bullet bullet = RopeTomahawk.Instance.T2.GetComponent<Bullet>();
-        bullet.velocity = Vector3.down;
         bullet.transform.position = transform.position;
+        bullet.velocity = Vector3.down;
+        ((TomahawkBullet)bullet.bulletBase).StickToWallRadious(bullet, GetComponents<Collider>(), 4);
         foreach (GameObject obj in hide)
         {
             obj.SetActive(false);

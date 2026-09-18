@@ -6,29 +6,29 @@ tags:
 <<FOV 20>>
 <<Act Ludi_mačor_za_stare_kuće lmzsk 0.75 -0.3 #eb38af>>
 <<LookAt lmzsk>>
-Ludi_mačor_za_stare_kuće: Au, batice...  #line:0bc5fe8 
+Ludi_mačor_za_stare_kuće: Au, batice...  
 <<PlayMusic lmzskTheme>>
-Ludi_mačor_za_stare_kuće: A baš sam ja hteo da je smažem...  #line:0195fae 
-Ludi_mačor_za_stare_kuće: Braćala, vdi šta si uradio malenoj ptičici.  #line:05531ba 
-Ludi_mačor_za_stare_kuće: Osta od ptičice saaaaamo krilca.  #line:08c1c17 
-Ludi_mačor_za_stare_kuće: A'si lud!  #line:0d5d3a5 
+Ludi_mačor_za_stare_kuće: A baš sam ja hteo da je smažem...  
+Ludi_mačor_za_stare_kuće: Braćala, vdi šta si uradio malenoj ptičici.  
+Ludi_mačor_za_stare_kuće: Osta od ptičice saaaaamo krilca.  
+Ludi_mačor_za_stare_kuće: A'si lud!  
 <<LookAt  PiuPiu>>
-Ludi_mačor_za_stare_kuće: ...  #line:00c25c5 
-Ludi_mačor_za_stare_kuće: Vau, ta sekirčuga ti je jeeeeeezivo kul.  #line:0854e80 
+Ludi_mačor_za_stare_kuće: ...  
+Ludi_mačor_za_stare_kuće: Vau, ta sekirčuga ti je jeeeeeezivo kul.  
 <<LookAt TNT>>
-Ludi_mačor_za_stare_kuće: Gledaj!!!  #line:05a13ba 
-Ludi_mačor_za_stare_kuće: DINAMIT!!!  #line:0179403 
-Ludi_mačor_za_stare_kuće: IDI GA LUPI!!  #line:0bd5a1e 
+Ludi_mačor_za_stare_kuće: Gledaj!!!  
+Ludi_mačor_za_stare_kuće: DINAMIT!!!  
+Ludi_mačor_za_stare_kuće: IDI GA LUPI!!  
 <<LookAt lmzsk>>
-Ludi_mačor_za_stare_kuće: Ja sve ove godine nisam imo muda...  #line:0a12bac 
+Ludi_mačor_za_stare_kuće: Ja sve ove godine nisam imo muda...  
 <<LookAt TNT>>
-Ludi_mačor_za_stare_kuće: Rekli su mi da je dinamit opasan po život... #line:0987b7f 
-Ludi_mačor_za_stare_kuće: Pa probaj možda sa [smoothWave]veeeeeeeelike[/smoothWave] daljine da ga pogodiš.  #line:0b840ff 
-Ludi_mačor_za_stare_kuće: Isto, ako oćes da pokupis sekiru kad si je bacio, koristiš <sprite index=5>.  #line:0091be8 
+Ludi_mačor_za_stare_kuće: Rekli su mi da je dinamit opasan po život... 
+Ludi_mačor_za_stare_kuće: Pa probaj možda sa [smoothWave]veeeeeeeelike[/smoothWave] daljine da ga pogodiš.  
+Ludi_mačor_za_stare_kuće: Isto, ako oćes da pokupis sekiru kad si je bacio, koristiš <sprite index=5>.  
 <<LookAt  PiuPiu>>
 <<FOV 40>>
-Ludi_mačor_za_stare_kuće: Znaci, <sprite index=4>da je bacis, a <sprite index=5> da je pokupis.  #line:075448e 
--> Ok... #line:0be5c4c 
+Ludi_mačor_za_stare_kuće: Znaci, <sprite index=4>da je bacis, a <sprite index=5> da je pokupis.  
+-> Ok... 
 <<StopAudioAll>>
 <<Reset>>
 <<stop>>

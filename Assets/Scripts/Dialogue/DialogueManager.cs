@@ -98,7 +98,7 @@ namespace Yarn.Unity.Example
             runner.AddCommandHandler<float>("FadeIn", SetFadeIn);
             runner.AddCommandHandler<string, string, float>("CamOffset", SetCameraOffset);
 
-            runner.AddCommandHandler<string>("LookAt", SetCameraLook);
+            runner.AddCommandHandler<string, float>("LookAt", SetCameraLook);
             runner.AddCommandHandler<float>("FOV", SetCameraFOV);
 
             // runner.onDialogueComplete.AddListener(DialogueComplete);
@@ -495,9 +495,10 @@ namespace Yarn.Unity.Example
             StartCoroutine(MoveCoroutine(parent, newPos, moveTime));
         }
 
-        public void SetCameraLook(string name)
+        public void SetCameraLook(string name, float verticalOffset = 0)
         {
             playerMovement.lookAt = GameObject.Find(name).transform;
+            playerMovement.verticalOffset = verticalOffset;
         }
 
         public void SetCameraFOV(float value)

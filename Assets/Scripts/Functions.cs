@@ -161,9 +161,9 @@ public static class Functions
                 }
             }
         }
-        Debug.Log("-------><");
-        if (hit.hit == true)
-            Debug.Log(hit.collider.gameObject.name + ":" + hit.collider.gameObject.layer + " - " + hit.distance);
+        //Debug.Log("-------><");
+        //if (hit.hit == true)
+        //    Debug.Log(hit.collider.gameObject.name + ":" + hit.collider.gameObject.layer + " - " + hit.distance);
 
         return hit;
     }

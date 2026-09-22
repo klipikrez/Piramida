@@ -30,7 +30,7 @@ public class Side : BaseEnemy
     public Transform SIMSshield;
     public float SIMSshieldMaxRotation = 60f;
     public Coroutine SimsCorutine;
-    public Bas boss;
+    public Boss boss;
     public float ShakeStrenth = 10f;
     public float ShakeSpeed = 50f;
     public float shakeTime = 1f;
@@ -99,7 +99,7 @@ public class Side : BaseEnemy
         {
             currentHealth -= damage;
             UpdateHealthbar();
-            boss.ShakeCorutine(UnityEngine.Random.Range(0f, 52f), ShakeStrenth, ShakeSpeed, shakeTime);
+            ((PiramidaBoss)boss).ShakeCorutine(UnityEngine.Random.Range(0f, 52f), ShakeStrenth, ShakeSpeed, shakeTime);
         }
         else
         {
@@ -107,8 +107,8 @@ public class Side : BaseEnemy
             {
                 dead = true;
 
-                boss.SjebiOsvetljenjeFlicker(0.2f, 252f);
-                boss.ShakeCorutine(UnityEngine.Random.Range(0f, 52f), ShakeStrenthKill, ShakeSpeedKill, shakeTimeKill);
+                ((PiramidaBoss)boss).SjebiOsvetljenjeFlicker(0.2f, 252f);
+                ((PiramidaBoss)boss).ShakeCorutine(UnityEngine.Random.Range(0f, 52f), ShakeStrenthKill, ShakeSpeedKill, shakeTimeKill);
                 currentHealth = 0;
                 UpdateHealthbar();
                 AudioManager.Instance.PlayVoiceLine("PiramidaEyeLoss");
@@ -121,7 +121,7 @@ public class Side : BaseEnemy
                 pushBack.SetActive(false);
 
                 sjebanoOko.SetActive(true);
-                boss.CheckIfDead();
+                ((PiramidaBoss)boss).CheckIfDead();
             }
         }
     }

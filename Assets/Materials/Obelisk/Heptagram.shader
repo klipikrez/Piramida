@@ -37,7 +37,7 @@ Shader "Heptagram"
         Blend SrcAlpha OneMinusSrcAlpha, One OneMinusSrcAlpha
         ZTest LEqual
         ZWrite Off
-        Offset -22, -22
+        Offset -32, -32
         // Debug
         // <None>
         

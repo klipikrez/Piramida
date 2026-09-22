@@ -1,0 +1,101 @@
+﻿title: Level1-1
+tags:
+---
+<<Reset>>
+<<Scene black 1.00>>
+<<FOV 1>>
+
+<<Act Dariot dariot -75 -33 #c99402>>
+<<Act Daved daved -75 -33 #be2c08>>
+Dariot: Brate...
+Dariot: ...keve mi... 
+Dariot: ...ja ne znam što si ti uopšte došao ovde.
+Dariot: Vidiš da nema ništa. Samo pesak, kamenje, gušteri i na sve to šef koji me smara.
+Daved: Ne zbori tako, brate moj. 
+Daved: Dođoh da te obiđem, jer krv nas vezuje jače no gvozdeni lanac...
+Daved: ...a srce moje bejaše nemirno dok ne videh jesi li živ, ili u kakvoj nevolji .
+Daved: Pak otkako si napusio naše domovine...
+Dariot: Dobro, dobro, skonto sam. Al' mogao si da pošalješ poruku, buraz.
+Dariot: "Brate, jesi živ?"
+Dariot: Ja: "Jesam."
+Dariot: Ti: "Super."
+Dariot: Ne moraš da prelaziš pola sveta u tim tvojim pidžamama.
+Daved: ...
+Daved: Ne diraj moje ruho, Dariote!
+Daved: Ovo behu pantale naših predaka.
+Dariot: Brate, u njima izgledaš kao da si pobegao iz cirkusa.
+Daved: A ti, pak, izgledaš kao da si pobegao iz teretane nakon što ti je ponestalo članarine.
+Dariot: Hahahaha! E, to je već moj brat!
+
+<<Scene black 0.85>>
+<<Hide Dariot>>
+<<Hide Daved>>
+<<Act Indijanac_Džons  lmzsk -75 -33 #4a6741>>
+<<Act Dariot dariot 0.75 -0.1 #c99402>>
+<<Act Daved daved -0.15 -0.3 #be2c08>>
+<<FOV 40>>
+Indijanac_Džons: ...izvinite...
+Indijanac_Džons: ...ja... tražim…
+Indijanac_Džons: ...izlaz? 
+<<FOV 30>>
+<<LookAt Dariot>>
+Dariot: [smoothWave]Au jebote prepade me čovek![/smoothWave] 
+Dariot: Otkud ti ovde, brate?
+<<LookAt Daved 0.8>>
+Daved: Gle, gle... stranac u našim krajevima.
+<<LookAt Dariot>>
+Dariot: Buraz, ovaj lik ko da je pao s marsa.
+<<FOV 40>>
+Indijanac_Džons: Ja... ne razumem... dobro...
+<<FOV 30>>
+Dariot: Ti’s Švajcarac, a?
+<<FOV 40>>
+Indijanac_Džons: Da…
+<<FOV 30>>
+<<LookAt Daved 0.8>>
+Daved: Švajcarski čovek u pustinji? 
+Daved: Čudni behu putevi Gospodnji...
+Daved: …prijatelju tuđine, ne boj se. 
+Daved: Mi smo domaćini gostoljubivi.
+<<LookAt Dariot>>
+Dariot: Nemoj čoveka da plašiš odmah.
+<<LookAt Daved 0.8>>
+Daved: Ja ga ne plašim.
+<<LookAt Dariot>>
+Dariot: Zvučiš k'o da mu čitaš presudu.
+<<LookAt Daved 0.8>>
+Daved: Govorim dostojanstveno.
+<<LookAt Dariot>>
+Dariot: Govoriš k'o da ćeš da ga prokuneš do sedmog kolena.
+<<FOV 40>>
+Indijanac_Džons: ...
+<<FOV 30>>
+Dariot: Đe si krenuo uopšte? Ova pustinja nije za turiste.
+<<FOV 40>>
+Indijanac_Džons: ...avantura... 
+Indijanac_Džons: ...relikvije...
+<<FOV 30>>
+Dariot: [normalWave]Relikvije?![/normalWave] 
+Dariot: Buraz, pa ti si iz moje ekipe!
+<<LookAt Daved 0.8>>
+Daved: Dariote, ne govori tako. Čovek je izgubljen.
+<<LookAt Dariot>>
+Dariot: Ma kakvi izgubljen, ovaj je isti ko ja kad sam došao.
+Dariot: Slušaj, Švajcarac...
+Dariot: Kada vidiš neku pizdariju od prepreke, samo nam bani bratonga.
+<<LookAt Daved 0.8>>
+Daved: Tako je. Premda je ovaj kraj surov i nemilosrdan, mi poznajemo njegove puteve.
+<<LookAt Dariot>>
+Dariot: Ja znam pustinju k'o svoj džep.
+<<LookAt Daved 0.8>>
+Daved: A u džepu tvome behu samo tri kamena i pola keksa.
+<<LookAt Dariot>>
+Dariot: To je bilo juče, ne seri.
+<<FOV 40>>
+Indijanac_Džons: (Ja ću samo da ih ostavim da se svađaju…)
+
+
+<<StopAudioAll>>
+<<Reset>>
+<<stop>>
+===

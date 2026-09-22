@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayAnimationOnTriggerEnter : MonoBehaviour
+public class PlayAnimationOnTriggerEnter : BaseEnemy
 {
     bool triggerEnter = false;
     public GameObject[] ActivateOnEnter;
@@ -14,17 +14,16 @@ public class PlayAnimationOnTriggerEnter : MonoBehaviour
             obj.SetActive(false);
         }
     }
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.layer == LayerMask.NameToLayer("Player"))
-            if (!triggerEnter)
-            {
-                triggerEnter = true;
-                foreach (GameObject obj in ActivateOnEnter)
-                {
-                    obj.SetActive(true);
-                }
-            }
-    }
 
+    public override void Damage(float damage)
+    {
+
+
+        foreach (GameObject obj in ActivateOnEnter)
+        {
+            obj.SetActive(true);
+        }
+        Destroy(gameObject);
+
+    }
 }

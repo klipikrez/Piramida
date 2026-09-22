@@ -1,0 +1,243 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Data.Common;
+using Unity.Mathematics;
+using UnityEngine;
+using UnityEngine.Rendering;
+using static Functions;
+
+public class PiramidaBoss : Boss
+{
+    public float health = 520;
+
+
+    public GameObject mainObject;
+    public Side[] pyramidSides;
+
+
+
+    public float normalFloatHeight = 2f;
+    public float GroundOffset = 0f;
+    public bool returnToNormalFloatHeight = true;
+    public bool returnToNormalRotation = true;
+    [System.NonSerialized]
+
+    public float floatAmplitude = 3f;
+    public float floatFrequency = 0.5f;
+    [System.NonSerialized]
+    public float heightOffset;
+    [NonSerialized]
+    public Coroutine sjebiOsvetljenjeCorutine = null;
+    public Volume NormalVolume;
+    public Volume FlashVolume;
+    public float rotateSpeed = 2;
+    //public float rotateStrenth = 2f;
+    private int seed = 0;
+    public float minRotateValue = 0;
+    public float maxRotateValue = 1;
+    Coroutine shakeCorutine;
+
+    public LaserTrail[] LaserTrailScripts;
+
+    private void Start()
+    {
+        Initialize();
+        GroundOffset = GetGroundHeihtOffset();
+        //mainObject.transform.position = new Vector3(transform.position.x, normalFloatHeight, transform.position.z);
+
+        seed = UnityEngine.Random.Range(0, 152);
+
+        AudioManager.Instance.StartCorutineBre();
+        SetHeadOpen(false);
+    }
+
+    private void Update()
+    {
+        base.Update();
+
+        if (returnToNormalFloatHeight)
+        {
+            heightOffset = (Mathf.Sin(timeSinceAttakStarted * floatFrequency) + 1) * floatAmplitude;
+            mainObject.transform.position = Vector3.Lerp(
+                                                        new Vector3(mainObject.transform.position.x, mainObject.transform.position.y, mainObject.transform.position.z),
+                                                        new Vector3(transform.position.x, normalFloatHeight + heightOffset - GroundOffset, transform.position.z),
+                                                        DeltaTimeLerp(0.09f));
+        }
+        if (returnToNormalRotation)
+        {
+            mainObject.transform.Rotate(new Vector3(0, Functions.Remap(1f - Mathf.PerlinNoise(seed, Time.time * rotateSpeed), 0, 1, minRotateValue, maxRotateValue) * Time.deltaTime * 60f, 0));
+            mainObject.transform.rotation = Quaternion.Slerp(mainObject.transform.rotation, Quaternion.Euler(0f, mainObject.transform.eulerAngles.y, 0f), DeltaTimeLerp(0.1f));
+        }
+
+    }
+
+    public void CheckIfDead()
+    {
+        bool allDead = true;
+        foreach (Side side in pyramidSides)
+        {
+            if (!side.dead)
+            {
+                allDead = false;
+            }
+        }
+        if (allDead)
+        {
+            GameMenu.Instance.Win();
+        }
+    }
+
+
+
+
+
+
+
+    /**public float LocalFloatHeightToWorld(float floatHeiht)
+    {
+        RaycastHit hit;
+        if (Physics.Raycast(transform.position + Vector3.up * 5f, Vector3.down, out hit, LayerMask.GetMask("Ground")))
+        {
+            return hit.point.y + floatHeiht - 5f;
+        }
+        return floatHeiht;
+    }*/
+
+    public void SetHeadOpen(bool value)
+    {
+        foreach (Side side in pyramidSides)
+        {
+            side.SetSimsState(value);
+        }
+    }
+
+    public float GetGroundHeihtOffset()
+    {
+        RaycastHit hit;
+        if (Physics.Raycast(new Vector3(transform.position.x, 52f, transform.position.z), Vector3.down, out hit, 52f * 2f, LayerMask.GetMask("Ground")))
+        {
+            return -hit.point.y;
+        }
+        return 0;
+
+    }
+
+
+    public void SjebiOsvetljenje(float time = 0)
+    {
+        if (NormalVolume != null && FlashVolume != null)
+        {
+            if (sjebiOsvetljenjeCorutine == null)
+                sjebiOsvetljenjeCorutine = StartCoroutine(c_SjebiOsvetljenje(time));
+        }
+    }
+
+    public IEnumerator c_SjebiOsvetljenje(float time = 0)
+    {
+        NormalVolume.enabled = false;
+        FlashVolume.enabled = true;
+
+        yield return new WaitForEndOfFrame();
+
+        yield return new WaitForSeconds(time);
+
+        NormalVolume.enabled = true;
+        FlashVolume.enabled = false;
+        sjebiOsvetljenjeCorutine = null;
+    }
+
+
+    public void SjebiOsvetljenjeFlicker(float time = 0, float sineSpeed = 1)
+    {
+        if (NormalVolume != null && FlashVolume != null)
+        {
+            if (sjebiOsvetljenjeCorutine == null)
+                sjebiOsvetljenjeCorutine = StartCoroutine(c_SjebiOsvetljenjeFlicker(time, sineSpeed));
+        }
+    }
+
+    public IEnumerator c_SjebiOsvetljenjeFlicker(float time = 0, float sineSpeed = 1)
+    {
+        float timer = 0;
+        while (time > timer)
+        {
+            if (Mathf.Sin(timer * sineSpeed) > 0)
+            {
+                NormalVolume.enabled = false;
+                FlashVolume.enabled = true;
+            }
+            else
+            {
+                NormalVolume.enabled = true;
+                FlashVolume.enabled = false;
+            }
+
+            yield return new WaitForEndOfFrame();
+            timer += Time.deltaTime;
+        }
+
+
+
+        NormalVolume.enabled = true;
+        FlashVolume.enabled = false;
+        sjebiOsvetljenjeCorutine = null;
+    }
+    public void ShakeCorutine(float seed, float strenth, float speed, float duration)
+    {
+        if (shakeCorutine != null)
+        {
+            StopCoroutine(shakeCorutine);
+        }
+        StartCoroutine(c_Shake(seed, strenth, speed, duration));
+    }
+
+    IEnumerator c_Shake(float seed, float strenth, float speed, float duration)
+    {
+        float timer = 0;
+        while (timer < duration)
+        {
+            Shake(seed, strenth, speed);
+            timer += Time.deltaTime;
+            yield return new WaitForEndOfFrame();
+        }
+    }
+
+    public void Shake(float seed, float strenth, float speed)
+    {
+        mainObject.transform.Rotate(Time.deltaTime * 200f * new Vector3(
+            (0.4665f - Mathf.PerlinNoise(seed, timeSinceAttakStarted * speed)) * strenth,
+            (0.4665f - Mathf.PerlinNoise(seed + 52, timeSinceAttakStarted * speed)) * strenth,
+            (0.4665f - Mathf.PerlinNoise(seed + 152, timeSinceAttakStarted * speed)) * strenth));
+        mainObject.transform.position += (Time.deltaTime * 200f * new Vector3(
+        (0.4665f - Mathf.PerlinNoise(seed, timeSinceAttakStarted * speed)) * strenth,
+        (0.4665f - Mathf.PerlinNoise(seed + 52, timeSinceAttakStarted * speed)) * strenth,
+        (0.4665f - Mathf.PerlinNoise(seed + 152, timeSinceAttakStarted * speed)) * strenth));
+    }
+
+    public void SetTrailPoint(GameObject obj, Vector2 uvPoint)
+    {
+        //Ovo ne radi, zato sto imam shit graficku :(
+        /*foreach (LaserTrail trail in LaserTrailScripts)
+        {
+            if (obj == trail.gameObject)
+            {
+                trail.AddTrailAtPoint(uvPoint);
+            }
+        }*/
+    }
+
+    public override void Damage(float damage)
+    {
+        if (currentAttackState != null && pyramidSides[0].headOpen)
+        {
+            health -= damage;
+            AudioManager.Instance.PlayVoiceLine("PiramidaHurt");
+            currentAttackState.EndAttack(this);
+            foreach (Side side in pyramidSides)
+            {
+                side.Damage(25f);
+            }
+        }
+    }
+}

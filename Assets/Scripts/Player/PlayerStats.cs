@@ -106,6 +106,7 @@ public class PlayerStats : MonoBehaviour
     // Starts a regular screen shake that begins strong and fades out over time.
     public void Screenshake(float duration, float strenth, float speed)
     {
+        if (PlayerCamera == null) return;
         if (screenShakeCorutine != null)
         {
             StopCoroutine(screenShakeCorutine);

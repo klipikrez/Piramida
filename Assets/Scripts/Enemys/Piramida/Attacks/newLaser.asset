@@ -17,11 +17,11 @@ MonoBehaviour:
   chillTimeAftrAttackEnds: 2
   laserWarmupTime: 1
   laserFireTime: 10.2
-  damage: 250
+  damage: 100
   laserWidth: 4
   laserStartOffset: {x: 0, y: 30, z: 0}
   laserMaterial: {fileID: 2100000, guid: 493774b74b3fb6045a4db4956d8954a6, type: 2}
-  laserDrag: 5.505
+  laserDrag: 3.67
   laserSpeed: 25
   laserHitPointMesh: {fileID: -8937424248046968402, guid: 9777ab49b58ed3940b6e1ec2e9ef6fe2,
     type: 3}

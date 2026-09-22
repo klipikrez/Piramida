@@ -58,8 +58,8 @@ public class Options : MonoBehaviour
         fullScreenToggle.isOn = settings.fullScreen;
         Fps.value = settings.fps;
         menu.FpsValue(settings.fps);
-        int languageIndex = 0;
-        for (int i = 0; i < lanhuage.options.Count; i++)
+        /*int languageIndex = 0;
+       /* for (int i = 0; i < lanhuage.options.Count; i++)
         {
 
             if (settings.language == lanhuage.options[i].image.name)
@@ -67,7 +67,7 @@ public class Options : MonoBehaviour
                 languageIndex = i;
             }
         }
-        lanhuage.value = languageIndex;
+        lanhuage.value = languageIndex;*/
         // SetLanguage(languageIndex);
 
         for (int i = 0; i < settings.volumes.Length; i++)

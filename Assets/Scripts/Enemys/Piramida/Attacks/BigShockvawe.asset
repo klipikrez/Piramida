@@ -84,7 +84,7 @@ MonoBehaviour:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0.04142741
+      value: 0.046086747
       inSlope: 0.0046790894
       outSlope: 0.0046790894
       tangentMode: 0
@@ -115,7 +115,7 @@ MonoBehaviour:
   multiplyKurvaShockvawe: 10
   startingShockvaweScale: 10
   multiplyKurvaPramida: 120
-  damage: 90
+  damage: 50
   timeShockvawe: 2
   timePiramida: 7
   expandSpeed: 152

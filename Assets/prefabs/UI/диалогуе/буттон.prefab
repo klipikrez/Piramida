@@ -15,7 +15,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1949258100856074432
 RectTransform:
   m_ObjectHideFlags: 0
@@ -30,7 +30,6 @@ RectTransform:
   m_Children:
   - {fileID: 9065366591286469561}
   m_Father: {fileID: 0}
-  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -42,7 +41,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    serializedVersion: 2
+    serializedVersion: 3
     m_TransformParent: {fileID: 1949258100856074432}
     m_Modifications:
     - target: {fileID: 1101522605729752161, guid: 823952924d4ca714682cfb407ffd81e7,
@@ -88,7 +87,7 @@ PrefabInstance:
     - target: {fileID: 1101522605729752161, guid: 823952924d4ca714682cfb407ffd81e7,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 108.383484
+      value: 150.94
       objectReference: {fileID: 0}
     - target: {fileID: 1101522605729752161, guid: 823952924d4ca714682cfb407ffd81e7,
         type: 3}
@@ -155,8 +154,87 @@ PrefabInstance:
       propertyPath: m_Name
       value: Button
       objectReference: {fileID: 0}
+    - target: {fileID: 1630362873407003101, guid: 823952924d4ca714682cfb407ffd81e7,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4223478962613553863, guid: 823952924d4ca714682cfb407ffd81e7,
+        type: 3}
+      propertyPath: m_fontSize
+      value: 69.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 4223478962613553863, guid: 823952924d4ca714682cfb407ffd81e7,
+        type: 3}
+      propertyPath: m_margin.z
+      value: -63.830048
+      objectReference: {fileID: 0}
+    - target: {fileID: 4223478962613553863, guid: 823952924d4ca714682cfb407ffd81e7,
+        type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 2f39736e28125424c94640a2e3886802,
+        type: 2}
+    - target: {fileID: 4223478962613553863, guid: 823952924d4ca714682cfb407ffd81e7,
+        type: 3}
+      propertyPath: m_fontStyle
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4223478962613553863, guid: 823952924d4ca714682cfb407ffd81e7,
+        type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 4300560684774513340, guid: 2f39736e28125424c94640a2e3886802,
+        type: 2}
+    - target: {fileID: 4223478962613553863, guid: 823952924d4ca714682cfb407ffd81e7,
+        type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4278190080
+      objectReference: {fileID: 0}
+    - target: {fileID: 4223478962613553863, guid: 823952924d4ca714682cfb407ffd81e7,
+        type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7777711793563958299, guid: 823952924d4ca714682cfb407ffd81e7,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 06b53d7ddd0edab4195d5c62bb551a67,
+        type: 3}
+    - target: {fileID: 7881903846618166763, guid: 823952924d4ca714682cfb407ffd81e7,
+        type: 3}
+      propertyPath: m_Transition
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7881903846618166763, guid: 823952924d4ca714682cfb407ffd81e7,
+        type: 3}
+      propertyPath: m_SpriteState.m_PressedSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 27be243c07e28754a8ccd388d61db68a,
+        type: 3}
+    - target: {fileID: 7881903846618166763, guid: 823952924d4ca714682cfb407ffd81e7,
+        type: 3}
+      propertyPath: m_SpriteState.m_DisabledSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 06b53d7ddd0edab4195d5c62bb551a67,
+        type: 3}
+    - target: {fileID: 7881903846618166763, guid: 823952924d4ca714682cfb407ffd81e7,
+        type: 3}
+      propertyPath: m_SpriteState.m_SelectedSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 6cf4a19d2f7308e42b292bca656dfc70,
+        type: 3}
+    - target: {fileID: 7881903846618166763, guid: 823952924d4ca714682cfb407ffd81e7,
+        type: 3}
+      propertyPath: m_SpriteState.m_HighlightedSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 6cf4a19d2f7308e42b292bca656dfc70,
+        type: 3}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
     m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 823952924d4ca714682cfb407ffd81e7, type: 3}
 --- !u!224 &9065366591286469561 stripped
 RectTransform:

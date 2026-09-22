@@ -29,21 +29,37 @@ public class Shockvawe : BaseAttack
     public float upForce = 15f;
     public float directionalForce = 90f;
 
-    public override void EndAttack(Bas boss)
+    public override void EndAttack(Boss boss)
     {
-        //        Debug.Log("gotovo");
-        Destroy(ShockvaweObject);
-        boss.ChooseNewRandomState();
+        EndAttack(AttackContext.FromBoss(boss));
     }
 
-    public override void StartAttack(Bas boss)
+    public override void EndAttack(AttackContext context)
+    {
+        if (ShockvaweObject != null)
+        {
+            Destroy(ShockvaweObject);
+        }
+        if (context != null && context.HasPyramidBoss() && context.boss != null)
+        {
+            context.boss.ChooseNewRandomState();
+        }
+    }
+
+    public override void StartAttack(Boss boss)
+    {
+        StartAttack(AttackContext.FromBoss(boss));
+    }
+
+    public override void StartAttack(AttackContext context)
     {
         ShockvaweObject = new GameObject("Shockvawe");
 
-        if (playAudio != "" && boss.attackRepeted == 1)
+        if (playAudio != "" && context != null && context.boss != null && context.boss.attackRepeted == 1)
         {
             AudioManager.Instance.PlayVoiceLine(playAudio, 0.5f);
         }
+
 
         ShockvaweObject.layer = LayerMask.NameToLayer("Attack");
         foreach (Mesh mesh in hitboxMeshes)
@@ -53,63 +69,100 @@ public class Shockvawe : BaseAttack
             coll.isTrigger = true;
             coll.sharedMesh = mesh;
         }
+
         DamagePlayerOnEnterTrigger trigger = ShockvaweObject.AddComponent<DamagePlayerOnEnterTrigger>();
         trigger.damage = damage;
-        ShockvaweObject.transform.position = boss.transform.position + Vector3.down * 552f;
-        ShockvaweObject.transform.rotation = boss.transform.rotation;
-        //ShockvaweCollider = Instantiate(new GameObject(), boss.transform.position, boss.transform.rotation).AddComponent<MeshCollider>();
+        ShockvaweObject.transform.position = context.GetOriginPosition() + Vector3.down * 552f;
+        ShockvaweObject.transform.rotation = context.HasPyramidBoss() ? context.boss.transform.rotation : Quaternion.identity;
         ShockvaweObject.AddComponent<MeshFilter>().mesh = mesh;
         ShockvaweObject.AddComponent<MeshRenderer>().material = material;
+
         PushBack pushBack = ShockvaweObject.AddComponent<PushBack>();
         pushBack.force = directionalForce;
         pushBack.upForce = upForce;
-        Keyframe[] tmp = kurvaZaPiramidu.keys;
-        tmp[0].value = (/*boss.normalFloatHeight +*/ boss.GroundOffset + boss.mainObject.transform.localPosition.y) / multiplyKurvaPramida;
-        //kurvaZaPiramidu.keys[0].value = boss.normalFloatHeight / multiplyKurvaPramida;
 
-        kurvaZaPiramidu.keys = tmp;
-    }
-
-    public override void UpdateAttack(Bas boss)
-    {
-
-        if (boss.timeSinceAttakStarted < timePiramida)
+        if (context.HasPyramidBoss())
         {
-            boss.returnToNormalFloatHeight = false;
-            boss.mainObject.transform.position = /*Vector3.Lerp(*/new Vector3(boss.mainObject.transform.position.x,
-                                                             kurvaZaPiramidu.Evaluate(boss.timeSinceAttakStarted / timePiramida) * multiplyKurvaPramida - boss.GroundOffset,
-                                                             boss.mainObject.transform.position.z)/*,
-                                                             boss.mainObject.transform.position, DeltaTimeLerp(0.95f))*/;
+            Keyframe[] tmp = kurvaZaPiramidu.keys;
+            tmp[0].value = (context.GetPyramidBoss().GroundOffset + context.GetPyramidBoss().mainObject.transform.localPosition.y) / multiplyKurvaPramida;
+            kurvaZaPiramidu.keys = tmp;
         }
         else
         {
-            if (boss.returnToNormalFloatHeight == false)
+            if (context.player != null)
             {
-                AudioManager.Instance.PlayAudioClip("shockvaweHit", 1f);
-                boss.player.Screenshake(0.2f, 7f, 45f);
-                boss.mainObject.transform.position = new Vector3(
-                    boss.mainObject.transform.position.x,
-                    -boss.GroundOffset,
-                    boss.mainObject.transform.position.z
-                );
+                context.player.Screenshake(0.2f, 7f, 45f);
             }
-            boss.returnToNormalFloatHeight = true;
-            if (boss.timeSinceAttakStarted - timePiramida < timeShockvawe)
-            {
-                ShockvaweObject.transform.position = new Vector3(ShockvaweObject.transform.position.x,
-                                                                 multiplyKurvaShockvawe * kurvaZaShockvawe.Evaluate((boss.timeSinceAttakStarted - timePiramida) / timeShockvawe) - boss.GroundOffset,
-                                                                 ShockvaweObject.transform.position.z);
+            AudioManager.Instance.PlayAudioClip("shockvaweHit", 1f);
+        }
+    }
 
-                ShockvaweObject.transform.localScale = Vector3.one * (boss.timeSinceAttakStarted - timePiramida) * expandSpeed + Vector3.one * startingShockvaweScale;
+    public override void UpdateAttack(Boss boss)
+    {
+        UpdateAttack(AttackContext.FromBoss(boss));
+    }
+
+    public override void UpdateAttack(AttackContext context)
+    {
+        if (context == null || ShockvaweObject == null)
+        {
+            return;
+        }
+
+        if (context.HasPyramidBoss())
+        {
+            if (context.timeSinceAttackStarted < timePiramida)
+            {
+                context.SetReturnToNormalFloatHeight(false);
+                context.SetPyramidPosition(new Vector3(context.GetPyramidBoss().mainObject.transform.position.x,
+                    kurvaZaPiramidu.Evaluate(context.timeSinceAttackStarted / timePiramida) * multiplyKurvaPramida - context.GetPyramidBoss().GroundOffset,
+                    context.GetPyramidBoss().mainObject.transform.position.z));
+            }
+            else
+            {
+                if (context.GetPyramidBoss().returnToNormalFloatHeight == false)
+                {
+                    AudioManager.Instance.PlayAudioClip("shockvaweHit", 1f);
+                    if (context.player != null)
+                    {
+                        context.player.Screenshake(0.2f, 7f, 45f);
+                    }
+                    context.SetPyramidPosition(new Vector3(
+                        context.GetPyramidBoss().mainObject.transform.position.x,
+                        -context.GetPyramidBoss().GroundOffset,
+                        context.GetPyramidBoss().mainObject.transform.position.z));
+                }
+                context.SetReturnToNormalFloatHeight(true);
+                if (context.timeSinceAttackStarted - timePiramida < timeShockvawe)
+                {
+                    ShockvaweObject.transform.position = new Vector3(ShockvaweObject.transform.position.x,
+                        multiplyKurvaShockvawe * kurvaZaShockvawe.Evaluate((context.timeSinceAttackStarted - timePiramida) / timeShockvawe) - context.GetPyramidBoss().GroundOffset,
+                        ShockvaweObject.transform.position.z);
+                    ShockvaweObject.transform.localScale = Vector3.one * (context.timeSinceAttackStarted - timePiramida) * expandSpeed + Vector3.one * startingShockvaweScale;
+                }
+                else
+                {
+                    EndAttack(context);
+                }
+            }
+        }
+        else
+        {
+            if (context.timeSinceAttackStarted < timeShockvawe)
+            {
+                ShockvaweObject.transform.position = new Vector3(context.GetOriginPosition().x,
+                    multiplyKurvaShockvawe * kurvaZaShockvawe.Evaluate(context.timeSinceAttackStarted / timeShockvawe),
+                    context.GetOriginPosition().z);
+                ShockvaweObject.transform.localScale = Vector3.one * context.timeSinceAttackStarted * expandSpeed + Vector3.one * startingShockvaweScale;
             }
             else
             {
 
-                EndAttack(boss);
+                EndAttack(context);
             }
         }
     }
-    /*
+}    /*
         public void DamagePlayer(Collider coll)
         {
             PlayerStats player = coll.gameObject.GetComponent<PlayerStats>();
@@ -119,4 +172,4 @@ public class Shockvawe : BaseAttack
             }
         }*/
 
-}
+

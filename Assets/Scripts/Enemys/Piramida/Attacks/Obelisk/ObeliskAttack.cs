@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 using UnityEngine.VFX;
 
 public class ObeliskAttack : MonoBehaviour
@@ -21,8 +22,11 @@ public class ObeliskAttack : MonoBehaviour
     public VisualEffect obeliskShock;
     public GameObject attackCollider;
     System.Guid septagramTesteraAudioId;
+    public LayerMask groudLayer;
+    public DecalProjector decalProjector;
     private void Start()
     {
+        SetRotationToFace();
         heptagramMaterial = heptahram.material;
         heptagramMaterial.SetFloat("_Fade", 1);
         laserHeptagramAnimation.enabled = true;
@@ -33,6 +37,18 @@ public class ObeliskAttack : MonoBehaviour
         laserHeptagramAnimation.speed = 1 / attackDelay;
         attackCollider.SetActive(false);
         StartCoroutine(c_Attack());
+    }
+
+    private void SetRotationToFace()
+    {
+        if (Physics.Raycast(transform.position + Vector3.up, Vector3.down, out RaycastHit hit, 10f, groudLayer))
+        {
+            // 1. Calculate the rotation required to align Vector3.up with the surface normal
+            Quaternion surfaceRotation = Quaternion.FromToRotation(Vector3.up, hit.normal);
+
+            // 2. Apply it to the other object (multiplied by its current Y rotation to maintain direction)
+            heptahram.gameObject.transform.rotation = surfaceRotation * Quaternion.Euler(0, heptahram.gameObject.transform.eulerAngles.y, 0);
+        }
     }
     public IEnumerator c_Attack()
     {
@@ -48,10 +64,13 @@ public class ObeliskAttack : MonoBehaviour
         {
             obj.localPosition = new Vector3(0, -(1 - kurvaZaObelisk.Evaluate(timer / attackTime)) * height, 0);
             heptagramMaterial.SetFloat("_Fade", 1 - (timer / attackTime));
+            decalProjector.fadeFactor = 1 - (timer / attackTime);
 
             yield return new WaitForEndOfFrame();
             timer += Time.deltaTime;
         }
+
+
 
         attackCollider.SetActive(false);
 

@@ -46,43 +46,88 @@ public class Laser : BaseAttack
     public float maxHitDistance = 252f;
     [System.NonSerialized]
     public Transform hitPoint;
-    public override void EndAttack(Bas boss)
+    [System.NonSerialized]
+    private GameObject laserOwner;
+    public override void EndAttack(Boss boss)
     {
-        Destroy(lightningObj.gameObject);
-        Destroy(hitPoint.gameObject);
-        Destroy(line);
-        Destroy(hitObj);
-        boss.SetHeadOpen(false);
-        foreach (Side side in boss.pyramidSides)
-        {
-            side.SetCrazyEyeMode(false);
-        }
-        boss.ChooseNewRandomState();
+        EndAttack(AttackContext.FromBoss(boss));
     }
 
-    public override void StartAttack(Bas boss)
+    public override void EndAttack(AttackContext context)
     {
-        boss.SetHeadOpen(true);
+        if (lightningObj != null)
+        {
+            Destroy(lightningObj.gameObject);
+        }
+        if (hitPoint != null)
+        {
+            Destroy(hitPoint.gameObject);
+        }
+        if (line != null)
+        {
+            Destroy(line.gameObject);
+        }
+        if (laserOwner != null)
+        {
+            Destroy(laserOwner);
+        }
+        if (hitObj != null)
+        {
+            Destroy(hitObj);
+        }
+
+        if (context != null && context.HasPyramidBoss())
+        {
+            context.SetHeadOpen(false);
+            context.SetCrazyEyes(false);
+            if (context.boss != null)
+            {
+                context.boss.ChooseNewRandomState();
+            }
+        }
+    }
+
+    public override void StartAttack(Boss boss)
+    {
+        StartAttack(AttackContext.FromBoss(boss));
+    }
+
+    public override void StartAttack(AttackContext context)
+    {
+        if (context == null)
+        {
+            return;
+        }
+
+        if (context.HasPyramidBoss())
+        {
+            context.SetHeadOpen(true);
+        }
+
         laserVelocity = Vector3.zero;
         Distance = float.MaxValue;
         laserFollowPlayerTimer = 0;
         attackStart = true;
-        line = boss.gameObject.AddComponent<LineRenderer>();
+
+        laserOwner = new GameObject("LaserOwner");
+        if (context.HasPyramidBoss() && context.GetPyramidBoss().mainObject != null)
+        {
+            laserOwner.transform.SetParent(context.GetPyramidBoss().mainObject.transform, false);
+        }
+
+        line = laserOwner.AddComponent<LineRenderer>();
         line.startWidth = laserWidth;
         line.endWidth = laserWidth;
         line.numCapVertices = 15;
         line.material = laserMaterial;
         line.positionCount = 2;
 
-        taretPos = new Vector3(boss.player.transform.position.x, 0, boss.player.transform.position.z);
-
+        taretPos = new Vector3(context.GetPlayerPosition().x, 0f, context.GetPlayerPosition().z);
 
         hitObj = new GameObject("Laser");
         hitPoint = new GameObject("LaserHitPoint").transform;
         hitPoint.position = taretPos;
-
         hitObj.transform.localScale = Vector3.zero;
-
         hitObj.layer = LayerMask.NameToLayer("Attack");
 
         MeshCollider coll = hitObj.AddComponent<MeshCollider>();
@@ -93,82 +138,102 @@ public class Laser : BaseAttack
         DamagePlayerOnStayTrigger trigger = hitObj.AddComponent<DamagePlayerOnStayTrigger>();
         trigger.damage = damage;
 
-        hitObj.transform.position = boss.mainObject.transform.position + laserStartOffset;
-
+        hitObj.transform.position = context.GetOriginPosition() + laserStartOffset;
         hitObj.AddComponent<MeshFilter>().mesh = laserHitPointMesh;
         hitObj.AddComponent<MeshRenderer>().material = laserMaterial;
 
-        AudioManager.Instance.PlayAudioClip("LaserWarmup", 0.6f);
-
+        if (context.boss != null)
+        {
+            AudioManager.Instance.PlayAudioClip("LaserWarmup", 0.6f);
+        }
 
         energyOrbesObj = new GameObject("LaserEnergyOrbes").AddComponent<VisualEffect>();
         energyOrbesObj.visualEffectAsset = energyOrbes;
-        energyOrbesObj.transform.position = boss.mainObject.transform.position + laserStartOffset;
+        energyOrbesObj.transform.position = context.GetOriginPosition() + laserStartOffset;
         energyOrbesObj.Play();
-
-
     }
 
-    public override void UpdateAttack(Bas boss)
+    public override void UpdateAttack(Boss boss)
     {
-        line.SetPosition(0, boss.mainObject.transform.position + laserStartOffset);
-        if (boss.timeSinceAttakStarted < laserWarmupTime)
+        UpdateAttack(AttackContext.FromBoss(boss));
+    }
+
+    public override void UpdateAttack(AttackContext context)
+    {
+        if (context == null || context.player == null || line == null)
         {
-            line.SetPosition(line.positionCount - 1, boss.mainObject.transform.position + laserStartOffset);
-            energyOrbesObj.transform.LookAt(boss.player.transform.position);
-            energyOrbesObj.transform.position = boss.mainObject.transform.position + laserStartOffset;
+            return;
+        }
+
+        line.SetPosition(0, context.GetOriginPosition() + laserStartOffset);
+        if (context.timeSinceAttackStarted < laserWarmupTime)
+        {
+            line.SetPosition(line.positionCount - 1, context.GetOriginPosition() + laserStartOffset);
+            if (energyOrbesObj != null)
+            {
+                energyOrbesObj.transform.LookAt(context.player.transform.position);
+                energyOrbesObj.transform.position = context.GetOriginPosition() + laserStartOffset;
+            }
         }
         else
         {
-            Vector3 start = boss.mainObject.transform.position + laserStartOffset;
+            Vector3 start = context.GetOriginPosition() + laserStartOffset;
             if (attackStart)
             {
-                foreach (Side side in boss.pyramidSides)
+                if (context.HasPyramidBoss())
                 {
-                    side.SetCrazyEyeMode(true);
+                    context.SetCrazyEyes(true);
                 }
-                boss.player.ScreenshakeSource(3f, 65f, hitPoint, 5f);
+                if (context.boss != null && context.boss.player != null)
+                {
+                    context.boss.player.ScreenshakeSource(3f, 65f, hitPoint, 5f);
+                }
                 attackStart = false;
-                AudioManager.Instance.PlayAudioDDDClipDynamic("laser", hitObj.transform, 0.7f);
+                if (context.boss != null)
+                {
+                    AudioManager.Instance.PlayAudioDDDClipDynamic("laser", hitObj.transform, 0.7f);
+                }
                 lightningObj = new GameObject("LaserLightning").AddComponent<VisualEffect>();
                 lightningObj.visualEffectAsset = lightning;
-                lightningObj.transform.position = boss.mainObject.transform.position + laserStartOffset;
+                lightningObj.transform.position = context.GetOriginPosition() + laserStartOffset;
                 lightningObj.Play();
-                Destroy(energyOrbesObj.gameObject);
-                boss.SjebiOsvetljenjeFlicker(0.15f, 252f);
-
+                if (energyOrbesObj != null)
+                {
+                    Destroy(energyOrbesObj.gameObject);
+                }
+                if (context.HasPyramidBoss())
+                {
+                    context.GetPyramidBoss().SjebiOsvetljenjeFlicker(0.15f, 152f);
+                }
             }
-            if (boss.timeSinceAttakStarted - laserFireTime < laserFireTime)
+
+            if (context.timeSinceAttackStarted - laserFireTime < laserFireTime)
             {
-                Vector3 player = boss.player.transform.position;
+                Vector3 player = context.player.transform.position;
                 Distance = Vector3.Distance(taretPos, player);
                 laserFollowPlayerTimer += Time.deltaTime;
-                float timeScaledSpeed = laserSpeed * ((Mathf.Pow(9, laserFollowPlayerTimer) - 1f) / 8f) + 0.1f;//funkcija u desmosu imas
+                float timeScaledSpeed = laserSpeed * ((Mathf.Pow(9, laserFollowPlayerTimer) - 1f) / 8f) + 0.1f;
                 laserVelocity += (player - taretPos).normalized * timeScaledSpeed * Time.deltaTime;
                 if (Vector3.Distance(taretPos, player) < Vector3.Distance(taretPos + laserVelocity * Time.deltaTime, player))
                 {
                     laserFollowPlayerTimer = 0;
                     laserVelocity -= laserVelocity * laserDrag * Time.deltaTime;
-                    laserVelocity += (player - taretPos).normalized * timeScaledSpeed * Time.deltaTime * 10;//ovo ti je da se brze ubrza kad skroz stane laserr
-
+                    laserVelocity += (player - taretPos).normalized * timeScaledSpeed * Time.deltaTime * 10f;
                 }
                 taretPos += laserVelocity * Time.deltaTime;
-                //taretPos = new Vector3(taretPos.x, boss.player.transform.position.y, taretPos.z);
+
                 RaycastHit hit;
                 float distance = maxHitDistance;
-
                 fireTimer += Time.deltaTime;
 
-                if (Physics.Raycast(boss.mainObject.transform.position + laserStartOffset, (taretPos - start).normalized, out hit, maxHitDistance, laserCanPassTrough))
+                if (Physics.Raycast(context.GetOriginPosition() + laserStartOffset, (taretPos - start).normalized, out hit, maxHitDistance, laserCanPassTrough))
                 {
-                    distance = Vector3.Distance((boss.mainObject.transform.position + laserStartOffset), hit.point);
+                    distance = Vector3.Distance(context.GetOriginPosition() + laserStartOffset, hit.point);
                     line.SetPosition(line.positionCount - 1, hit.point);
-                    hitPoint.position = hit.point;
-
-
-                    //Ovo ne radi inace :(
-                    boss.SetTrailPoint(hit.collider.gameObject, hit.textureCoord);
-
+                    if (hitPoint != null)
+                    {
+                        hitPoint.position = hit.point;
+                    }
 
                     if (fireTimer * laserVelocity.magnitude > fireSpawnTime)
                     {
@@ -178,31 +243,26 @@ public class Laser : BaseAttack
                             Instantiate(fire, hit.point + hit.normal * 0.3f, Quaternion.LookRotation(hit.normal) * Quaternion.Euler(90, 0, 0));
                         }
                     }
-
                 }
                 else
                 {
                     line.SetPosition(line.positionCount - 1, (taretPos - start).normalized * maxHitDistance + start);
-                    hitPoint.position = (taretPos - start).normalized * maxHitDistance + start;
+                    if (hitPoint != null)
+                    {
+                        hitPoint.position = (taretPos - start).normalized * maxHitDistance + start;
+                    }
                 }
 
-                Debug.DrawRay(boss.mainObject.transform.position + laserStartOffset,
-                 distance * (taretPos - start).normalized,
-                  Color.black,
-                   0.1f);
-
-                //hitObj.transform.position = (taretPos - (boss.mainObject.transform.position + laserStartOffset)) / 2 + (boss.mainObject.transform.position + laserStartOffset);
-                hitObj.transform.position = boss.mainObject.transform.position + laserStartOffset;
-                hitObj.transform.rotation = Quaternion.LookRotation((start - taretPos).normalized) * Quaternion.Euler(addRotation);
-                hitObj.transform.localScale = new Vector3(laserWidth, distance + 4f, laserWidth);
-
-
-
-
+                if (hitObj != null)
+                {
+                    hitObj.transform.position = context.GetOriginPosition() + laserStartOffset;
+                    hitObj.transform.rotation = Quaternion.LookRotation((start - taretPos).normalized) * Quaternion.Euler(addRotation);
+                    hitObj.transform.localScale = new Vector3(laserWidth, distance + 4f, laserWidth);
+                }
             }
             else
             {
-                EndAttack(boss);
+                EndAttack(context);
             }
         }
     }

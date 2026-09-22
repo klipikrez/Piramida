@@ -7,7 +7,7 @@ using UnityEngine;
 using UnityEngine.Rendering;
 using static Functions;
 
-public class Bas : BaseEnemy
+public class Bas : Boss
 {
     public float health = 520;
     [System.NonSerialized]

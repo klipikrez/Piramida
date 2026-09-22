@@ -58,6 +58,7 @@ public class PlayerMovement : MonoBehaviour
     public float grappleTimer = 0f;
     public bool inDialogue = false;
     public Transform lookAt;
+    public float verticalOffset = 0;
     public float DefaultFOV = 70f;
     [System.NonSerialized]
     public float CustomFOV = 52f;
@@ -468,6 +469,7 @@ public class PlayerMovement : MonoBehaviour
     {
         Renderer rend = lookAt.gameObject.GetComponent<Renderer>();
         Vector3 center = rend != null ? rend.bounds.center : lookAt.transform.position;
+        center += Vector3.up * verticalOffset;
         Vector3 targetDirectionY = (new Vector3(center.x, 0, center.z) - new Vector3(PlayerCamera.transform.position.x, 0, PlayerCamera.transform.position.z)).normalized;
         Quaternion lookAtRotationY = Quaternion.LookRotation(targetDirectionY);
         Vector3 targetDirection = (center - PlayerCamera.transform.position).normalized;

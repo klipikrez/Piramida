@@ -3,8 +3,14 @@ tags:
 position: NaN,NaN
 ---
 <<Reset>>
-//<<Scene black 0.85>>
-BOB: *Klikni space da nastaviš* 
+<<Scene black 1.0>>
+BOB: Pustinje su mirna mesta...
+BOB: Tako surova okolina teško dopušta bilo kakav vid života.
+BOB: Ali život je, sam po sebi, mnogo uporniji od bilo kakve prepreke na ovom svetu.
+BOB: Dangubiška pustinja je najveća pustinja na celom kontinentu Terora.
+BOB: Mnogi se pitaju koliko je ona zapravo prirodna... ili je neka drevna magija održava ovakvom.
+BOB: A onda se, s vremena na vreme, nađu i oni koji odluče da te priče provere lično...
+<<Scene black 0.85>>
 <<Act Indijanac_Džons lmzsk -75 -33 #7a0202>>
 Indijanac_Džons: ...
 Indijanac_Džons: ...ugh...
